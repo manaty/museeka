@@ -3,7 +3,13 @@
   import { loadScene } from "../data/loadScene";
   import type { IslandScene } from "../core/types";
   import { MuseekaRenderer } from "../graphics/MuseekaRenderer";
-  import { MuseekaRuntime, type RuntimeSnapshot } from "../runtime/MuseekaRuntime";
+  import { MuseekaRuntime, type RuntimeMode, type RuntimeSnapshot } from "../runtime/MuseekaRuntime";
+  import type { InputDriver } from "../runtime/inputs/InputDriver";
+  import { PointerLockDriver } from "../runtime/inputs/PointerLockDriver";
+  import { DragLookDriver } from "../runtime/inputs/DragLookDriver";
+  import { ClickToGoDriver } from "../runtime/inputs/ClickToGoDriver";
+
+  type DriverKey = "pointerlock" | "drag" | "click";
 
   let host: HTMLDivElement;
   let scene: IslandScene | null = null;
@@ -21,6 +27,10 @@
   let volume = 0.78;
   let frame = 0;
   let lastTime = performance.now();
+  let mode: RuntimeMode = "path";
+  let driverKey: DriverKey = "pointerlock";
+  let activeDriver: InputDriver | null = null;
+  let driverHint = "";
 
   onMount(async () => {
     try {
@@ -47,6 +57,7 @@
 
   onDestroy(() => {
     cancelAnimationFrame(frame);
+    detachDriver();
     renderer?.dispose();
     runtime?.dispose();
   });
@@ -56,6 +67,10 @@
     lastTime = now;
 
     if (runtime && renderer) {
+      if (mode === "freefly" && activeDriver) {
+        runtime.setFreeFlyInput(activeDriver.consume());
+        driverHint = activeDriver.needsUiHint();
+      }
       snapshot = runtime.update(dt);
       renderer.render(snapshot);
     }
@@ -96,6 +111,55 @@
   function changeDebug() {
     renderer?.setDebug(debug);
   }
+
+  function buildDriver(key: DriverKey): InputDriver {
+    if (key === "drag") return new DragLookDriver();
+    if (key === "click") return new ClickToGoDriver();
+    return new PointerLockDriver();
+  }
+
+  function attachDriver() {
+    if (!renderer || activeDriver) return;
+    activeDriver = buildDriver(driverKey);
+    activeDriver.attach({
+      canvas: renderer.getCanvas(),
+      getCameraDirection: () => ({ yaw: runtime?.freeFly.getYaw() ?? 0, pitch: runtime?.freeFly.getPitch() ?? 0 }),
+      raycastToTerrain: (x, y) => renderer?.raycastToTerrain(x, y) ?? null
+    });
+    driverHint = activeDriver.needsUiHint();
+  }
+
+  function detachDriver() {
+    activeDriver?.detach();
+    activeDriver = null;
+    driverHint = "";
+  }
+
+  function enterFreeFly() {
+    if (!runtime) return;
+    runtime.setMode("freefly");
+    mode = "freefly";
+    attachDriver();
+  }
+
+  function exitFreeFly() {
+    if (!runtime) return;
+    detachDriver();
+    runtime.setMode("path");
+    mode = "path";
+  }
+
+  function changeDriver() {
+    if (mode !== "freefly") return;
+    detachDriver();
+    attachDriver();
+  }
+
+  function holdVerticalButton(direction: "up" | "down", pressed: boolean) {
+    if (activeDriver instanceof ClickToGoDriver) {
+      activeDriver.setVerticalButton(direction, pressed);
+    }
+  }
 </script>
 
 <main class="app-shell">
@@ -128,27 +192,54 @@
     <section class="hud" aria-label="Contrôles Museeka">
       <div class="brand">
         <span>Museeka</span>
-        <small>{scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
+        <small>{mode === "freefly" ? "Mode libre" : scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
       </div>
 
-      <label>
-        Parcours
-        <select bind:value={selectedPathId} on:change={changePath} data-testid="path-select">
-          {#each scene.paths as path}
-            <option value={path.id}>{path.name}</option>
-          {/each}
-        </select>
-      </label>
-
-      <div class="button-row">
-        <button on:click={togglePlay} disabled={!started}>{snapshot?.playing ? "Pause" : "Play"}</button>
-        <button on:click={restart} disabled={!started}>Restart</button>
+      <div class="mode-switch">
+        <button class:active={mode === "path"} on:click={exitFreeFly} data-testid="mode-path">Parcours</button>
+        <button class:active={mode === "freefly"} on:click={enterFreeFly} data-testid="mode-freefly">Vol libre</button>
       </div>
 
-      <label>
-        Vitesse
-        <input type="range" min="0.35" max="2" step="0.05" bind:value={speed} on:input={changeSpeed} />
-      </label>
+      {#if mode === "path"}
+        <label>
+          Parcours
+          <select bind:value={selectedPathId} on:change={changePath} data-testid="path-select">
+            {#each scene.paths as path}
+              <option value={path.id}>{path.name}</option>
+            {/each}
+          </select>
+        </label>
+
+        <div class="button-row">
+          <button on:click={togglePlay} disabled={!started}>{snapshot?.playing ? "Pause" : "Play"}</button>
+          <button on:click={restart} disabled={!started}>Restart</button>
+        </div>
+
+        <label>
+          Vitesse
+          <input type="range" min="0.35" max="2" step="0.05" bind:value={speed} on:input={changeSpeed} />
+        </label>
+      {:else}
+        <label>
+          Contrôles
+          <select bind:value={driverKey} on:change={changeDriver} data-testid="driver-select">
+            <option value="pointerlock">Souris + clavier (FPS)</option>
+            <option value="drag">Clic-glisser + clavier</option>
+            <option value="click">Tap-pour-aller (mobile)</option>
+          </select>
+        </label>
+
+        {#if driverKey === "click"}
+          <div class="vertical-pad">
+            <button on:pointerdown={() => holdVerticalButton("up", true)} on:pointerup={() => holdVerticalButton("up", false)} on:pointerleave={() => holdVerticalButton("up", false)}>▲</button>
+            <button on:pointerdown={() => holdVerticalButton("down", true)} on:pointerup={() => holdVerticalButton("down", false)} on:pointerleave={() => holdVerticalButton("down", false)}>▼</button>
+          </div>
+        {/if}
+
+        {#if driverHint}
+          <p class="driver-hint" data-testid="driver-hint">{driverHint}</p>
+        {/if}
+      {/if}
 
       <label>
         Volume
@@ -168,7 +259,7 @@
 
     {#if debug && snapshot}
       <aside class="debug-panel" data-testid="debug-panel">
-        <b>{snapshot.time.toFixed(1)} / {snapshot.duration.toFixed(1)}s</b>
+        <b>{mode === "freefly" ? "vol libre" : `${snapshot.time.toFixed(1)} / ${snapshot.duration.toFixed(1)}s`}</b>
         <span>position {snapshot.player.position.map((value) => value.toFixed(1)).join(", ")}</span>
         <span>vitesse {snapshot.player.speed.toFixed(2)}</span>
         <span>objets actifs {snapshot.activeObjects.length}</span>

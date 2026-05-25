@@ -2,21 +2,31 @@ import type { Encounter, IslandScene, Path3D, SoundObject } from "../core/types"
 import { computeEncounters } from "../core/encounter";
 import { AudioEngine, type SampleLoadProgress } from "../audio/AudioEngine";
 import { PlaybackController } from "./PlaybackController";
+import { FreeFlyController, type FreeFlyInput } from "./FreeFlyController";
+
+export type RuntimeMode = "path" | "freefly";
 
 export type RuntimeSnapshot = {
   time: number;
   duration: number;
   playing: boolean;
+  mode: RuntimeMode;
   player: ReturnType<PlaybackController["getState"]>;
   activeObjects: string[];
   recentTriggers: string[];
   encounters: Encounter[];
+  freeFlyYaw?: number;
+  freeFlyPitch?: number;
 };
 
 export class MuseekaRuntime {
   readonly audio = new AudioEngine();
+  readonly freeFly = new FreeFlyController();
   private scene: IslandScene;
   private playback: PlaybackController;
+  private mode: RuntimeMode = "path";
+  private freeFlyInput: FreeFlyInput | null = null;
+  private accumulatedTime = 0;
   private activeObjects: string[] = [];
   private recentTriggers: string[] = [];
   private previousActive = new Set<string>();
@@ -25,6 +35,26 @@ export class MuseekaRuntime {
     this.scene = scene;
     this.playback = new PlaybackController(this.currentPath());
     this.audio.setMasterVolume(scene.settings.audio.masterVolume);
+  }
+
+  getMode(): RuntimeMode {
+    return this.mode;
+  }
+
+  setMode(mode: RuntimeMode) {
+    if (mode === this.mode) return;
+    this.mode = mode;
+    if (mode === "freefly") {
+      const current = this.playback.getState();
+      this.freeFly.initialize(current.position);
+    }
+    this.audio.reset();
+    this.previousActive.clear();
+    this.recentTriggers = [];
+  }
+
+  setFreeFlyInput(input: FreeFlyInput) {
+    this.freeFlyInput = input;
   }
 
   currentPath(): Path3D {
@@ -66,9 +96,26 @@ export class MuseekaRuntime {
   }
 
   update(dt: number): RuntimeSnapshot {
-    const player = this.playback.update(dt);
+    let player;
+    let time: number;
+    let duration: number;
+    let playing: boolean;
+
+    if (this.mode === "freefly") {
+      this.accumulatedTime += dt;
+      player = this.freeFly.update(dt, this.freeFlyInput ?? undefined);
+      time = this.accumulatedTime;
+      duration = 0;
+      playing = true;
+    } else {
+      player = this.playback.update(dt);
+      time = this.playback.getTime();
+      duration = this.currentPath().duration;
+      playing = this.playback.isPlaying();
+    }
+
     const encounters = computeEncounters(player, this.scene.soundObjects);
-    this.audio.update(this.scene.soundObjects, encounters, this.playback.getTime());
+    this.audio.update(this.scene.soundObjects, encounters, time);
 
     const currentActive = new Set(encounters.filter((encounter) => encounter.field.intensity >= 0.2).map((encounter) => encounter.objectId));
     this.activeObjects = [...currentActive];
@@ -78,15 +125,17 @@ export class MuseekaRuntime {
     }
     this.previousActive = currentActive;
 
-    const path = this.currentPath();
     return {
-      time: this.playback.getTime(),
-      duration: path.duration,
-      playing: this.playback.isPlaying(),
+      time,
+      duration,
+      playing,
+      mode: this.mode,
       player,
       activeObjects: this.activeObjects,
       recentTriggers: this.recentTriggers,
-      encounters
+      encounters,
+      freeFlyYaw: this.mode === "freefly" ? this.freeFly.getYaw() : undefined,
+      freeFlyPitch: this.mode === "freefly" ? this.freeFly.getPitch() : undefined
     };
   }
 

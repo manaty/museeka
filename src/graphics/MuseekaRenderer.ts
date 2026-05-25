@@ -229,6 +229,16 @@ export class MuseekaRenderer {
 
   private updatePlayerAvatar(snapshot: RuntimeSnapshot) {
     if (!this.playerAvatar || !this.trailGeometry || !this.trailPositions || !this.trailColors) return;
+
+    const visible = snapshot.mode !== "freefly";
+    this.playerAvatar.visible = visible;
+    if (!visible) {
+      this.trailGeometry.setDrawRange(0, 0);
+      this.trailFilled = 0;
+      this.trailHead = 0;
+      return;
+    }
+
     const [px, py, pz] = snapshot.player.position;
     const wobble = Math.sin(this.animationTime * 7) * 0.08;
     this.playerAvatar.position.set(px, py + wobble, pz);
@@ -294,6 +304,35 @@ export class MuseekaRenderer {
     window.removeEventListener("resize", this.resize);
     this.renderer.dispose();
     this.container.replaceChildren();
+  }
+
+  getCanvas(): HTMLCanvasElement {
+    return this.renderer.domElement;
+  }
+
+  raycastToTerrain(ndcX: number, ndcY: number): [number, number, number] | null {
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(ndcX, ndcY), this.camera);
+    const origin = raycaster.ray.origin;
+    const direction = raycaster.ray.direction;
+    if (Math.abs(direction.y) < 0.0001) return null;
+    // Approximate intersection with island surface using groundY iteration
+    let t = (0.5 - origin.y) / direction.y;
+    if (t < 0) t = 50;
+    for (let iter = 0; iter < 8; iter += 1) {
+      const x = origin.x + direction.x * t;
+      const z = origin.z + direction.z * t;
+      const ground = groundY(x, z, this.scene);
+      const targetY = ground;
+      const newT = (targetY - origin.y) / direction.y;
+      if (newT <= 0 || Math.abs(newT - t) < 0.05) {
+        t = newT > 0 ? newT : t;
+        break;
+      }
+      t = newT;
+    }
+    const point: [number, number, number] = [origin.x + direction.x * t, origin.y + direction.y * t, origin.z + direction.z * t];
+    return Number.isFinite(point[0]) && Number.isFinite(point[1]) && Number.isFinite(point[2]) ? point : null;
   }
 
   private resize = () => {
@@ -708,6 +747,18 @@ export class MuseekaRenderer {
 
   private updateCamera(snapshot: RuntimeSnapshot) {
     const position = snapshot.player.position;
+
+    if (snapshot.mode === "freefly") {
+      const yaw = snapshot.freeFlyYaw ?? 0;
+      const pitch = snapshot.freeFlyPitch ?? 0;
+      const cosPitch = Math.cos(pitch);
+      const look = new THREE.Vector3(Math.sin(yaw) * cosPitch, Math.sin(pitch), -Math.cos(yaw) * cosPitch);
+      this.camera.position.set(position[0], position[1], position[2]);
+      const target = this.camera.position.clone().add(look);
+      this.camera.lookAt(target);
+      return;
+    }
+
     const velocity = snapshot.player.velocity;
     const cameraTarget = new THREE.Vector3(position[0], position[1], position[2]);
     const offset = new THREE.Vector3(-velocity[0] * 0.45, 7, -velocity[2] * 0.45);

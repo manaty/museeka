@@ -187,6 +187,59 @@ h2 {
   backdrop-filter: blur(16px);
 }
 
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.mode-switch button {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(238, 248, 240, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mode-switch button.active {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.5);
+  color: #fff1a8;
+  font-weight: 800;
+}
+
+.driver-hint {
+  margin: 0;
+  font-size: 11px;
+  color: rgba(238, 248, 240, 0.72);
+  line-height: 1.4;
+  padding: 6px 8px;
+  background: rgba(10, 17, 19, 0.55);
+  border-radius: 5px;
+}
+
+.vertical-pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.vertical-pad button {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff1a8;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 0;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.vertical-pad button:active {
+  background: rgba(255, 241, 168, 0.2);
+}
+
 .hud-links {
   display: flex;
   gap: 12px;

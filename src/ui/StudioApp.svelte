@@ -12,7 +12,11 @@
   import { parseMidiFile } from "../music/midi";
   import { velocityToGain } from "../music/velocity";
   import { MuseekaRenderer } from "../graphics/MuseekaRenderer";
-  import { MuseekaRuntime } from "../runtime/MuseekaRuntime";
+  import { MuseekaRuntime, type RuntimeMode } from "../runtime/MuseekaRuntime";
+  import type { InputDriver } from "../runtime/inputs/InputDriver";
+  import { PointerLockDriver } from "../runtime/inputs/PointerLockDriver";
+  import { DragLookDriver } from "../runtime/inputs/DragLookDriver";
+  import { ClickToGoDriver } from "../runtime/inputs/ClickToGoDriver";
   import { downloadJson, loadStudioScene, saveStudioScene } from "../studio/storage";
 
   type VisualMidiNote = {
@@ -79,6 +83,12 @@
   let foldingPlayTimer = 0;
   let analysisOnlyErrors = true;
   const ANALYSIS_DISPLAY_LIMIT = 80;
+
+  type DriverKey = "pointerlock" | "drag" | "click";
+  let runtimeMode: RuntimeMode = "path";
+  let driverKey: DriverKey = "pointerlock";
+  let activeDriver: InputDriver | null = null;
+  let driverHint = "";
   let midiPlaying = false;
   let midiPlaybackProgress = 0;
   let midiPlaybackCursor = 0;
@@ -155,6 +165,7 @@
     cancelAnimationFrame(frame);
     stopMidiPlayback();
     stopFoldingPlayback();
+    detachDriver();
     renderer?.dispose();
     runtime?.dispose();
     if (audioRecordingUrl) URL.revokeObjectURL(audioRecordingUrl);
@@ -185,6 +196,8 @@
     }
 
     stopFoldingPlayback();
+    detachDriver();
+    runtimeMode = "path";
     renderer?.dispose();
     renderer = null;
     runtime?.dispose();
@@ -347,12 +360,67 @@
     lastTime = now;
 
     if (runtime && renderer) {
-      runtime.setPlaying(studioPlaying);
+      if (runtimeMode === "path") {
+        runtime.setPlaying(studioPlaying);
+      }
+      if (runtimeMode === "freefly" && activeDriver) {
+        runtime.setFreeFlyInput(activeDriver.consume());
+        driverHint = activeDriver.needsUiHint();
+      }
       const snapshot = runtime.update(dt);
       renderer.render(snapshot);
     }
 
     frame = requestAnimationFrame(loop);
+  }
+
+  function buildDriver(key: DriverKey): InputDriver {
+    if (key === "drag") return new DragLookDriver();
+    if (key === "click") return new ClickToGoDriver();
+    return new PointerLockDriver();
+  }
+
+  function attachDriver() {
+    if (!renderer || activeDriver) return;
+    activeDriver = buildDriver(driverKey);
+    activeDriver.attach({
+      canvas: renderer.getCanvas(),
+      getCameraDirection: () => ({ yaw: runtime?.freeFly.getYaw() ?? 0, pitch: runtime?.freeFly.getPitch() ?? 0 }),
+      raycastToTerrain: (x, y) => renderer?.raycastToTerrain(x, y) ?? null
+    });
+    driverHint = activeDriver.needsUiHint();
+  }
+
+  function detachDriver() {
+    activeDriver?.detach();
+    activeDriver = null;
+    driverHint = "";
+  }
+
+  function enterFreeFly() {
+    if (!runtime) return;
+    runtime.setMode("freefly");
+    runtimeMode = "freefly";
+    attachDriver();
+  }
+
+  function exitFreeFly() {
+    if (!runtime) return;
+    detachDriver();
+    runtime.setMode("path");
+    runtimeMode = "path";
+  }
+
+  function changeDriver() {
+    if (runtimeMode !== "freefly") return;
+    detachDriver();
+    attachDriver();
+  }
+
+  function holdVerticalButton(direction: "up" | "down", pressed: boolean) {
+    if (activeDriver instanceof ClickToGoDriver) {
+      activeDriver.setVerticalButton(direction, pressed);
+    }
   }
 
   function setScene(next: IslandScene, message: string) {
@@ -1117,10 +1185,35 @@
       </section>
 
       {#if studioStage === "spatial-fold"}
-      <label class="inline">
-        <input type="checkbox" bind:checked={studioPlaying} />
-        Prévisualiser
-      </label>
+      <div class="mode-switch">
+        <button class:active={runtimeMode === "path"} on:click={exitFreeFly}>Parcours</button>
+        <button class:active={runtimeMode === "freefly"} on:click={enterFreeFly} data-testid="studio-mode-freefly">Vol libre</button>
+      </div>
+
+      {#if runtimeMode === "path"}
+        <label class="inline">
+          <input type="checkbox" bind:checked={studioPlaying} />
+          Prévisualiser
+        </label>
+      {:else}
+        <label>
+          Contrôles
+          <select bind:value={driverKey} on:change={changeDriver}>
+            <option value="pointerlock">Souris + clavier (FPS)</option>
+            <option value="drag">Clic-glisser + clavier</option>
+            <option value="click">Tap-pour-aller</option>
+          </select>
+        </label>
+        {#if driverKey === "click"}
+          <div class="vertical-pad">
+            <button on:pointerdown={() => holdVerticalButton("up", true)} on:pointerup={() => holdVerticalButton("up", false)} on:pointerleave={() => holdVerticalButton("up", false)}>▲</button>
+            <button on:pointerdown={() => holdVerticalButton("down", true)} on:pointerup={() => holdVerticalButton("down", false)} on:pointerleave={() => holdVerticalButton("down", false)}>▼</button>
+          </div>
+        {/if}
+        {#if driverHint}
+          <p class="driver-hint">{driverHint}</p>
+        {/if}
+      {/if}
 
       <label class="inline">
         <input type="checkbox" bind:checked={debug} on:change={() => renderer?.setDebug(debug)} />
