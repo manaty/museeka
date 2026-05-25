@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_BASE_PATH: /museeka/
+          VITE_BASE_PATH: /
         run: npm run build
 
       - name: Disable Jekyll
