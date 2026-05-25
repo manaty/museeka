@@ -8,8 +8,19 @@
   import { PointerLockDriver } from "../runtime/inputs/PointerLockDriver";
   import { DragLookDriver } from "../runtime/inputs/DragLookDriver";
   import { ClickToGoDriver } from "../runtime/inputs/ClickToGoDriver";
+  import { TouchJoystickDriver } from "../runtime/inputs/TouchJoystickDriver";
 
-  type DriverKey = "pointerlock" | "drag" | "click";
+  type DriverKey = "pointerlock" | "drag" | "click" | "joystick";
+
+  function isTouchPrimary(): boolean {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia?.("(pointer: coarse)").matches ?? false;
+  }
+
+  function isNarrowViewport(): boolean {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 900;
+  }
 
   let host: HTMLDivElement;
   let scene: IslandScene | null = null;
@@ -28,9 +39,10 @@
   let frame = 0;
   let lastTime = performance.now();
   let mode: RuntimeMode = "path";
-  let driverKey: DriverKey = "pointerlock";
+  let driverKey: DriverKey = isTouchPrimary() ? "joystick" : "pointerlock";
   let activeDriver: InputDriver | null = null;
   let driverHint = "";
+  let hudCollapsed = isNarrowViewport();
 
   onMount(async () => {
     try {
@@ -115,6 +127,7 @@
   function buildDriver(key: DriverKey): InputDriver {
     if (key === "drag") return new DragLookDriver();
     if (key === "click") return new ClickToGoDriver();
+    if (key === "joystick") return new TouchJoystickDriver();
     return new PointerLockDriver();
   }
 
@@ -189,7 +202,11 @@
   {/if}
 
   {#if scene && runtime && samplesReady}
-    <section class="hud" aria-label="Contrôles Museeka">
+    <section class="hud" class:collapsed={hudCollapsed} aria-label="Contrôles Museeka">
+      <button class="hud-toggle" on:click={() => (hudCollapsed = !hudCollapsed)} aria-label={hudCollapsed ? "Déployer le menu" : "Replier le menu"} data-testid="hud-toggle">
+        {hudCollapsed ? "≡" : "×"}
+      </button>
+
       <div class="brand">
         <span>Museeka</span>
         <small>{mode === "freefly" ? "Mode libre" : scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
@@ -225,7 +242,8 @@
           <select bind:value={driverKey} on:change={changeDriver} data-testid="driver-select">
             <option value="pointerlock">Souris + clavier (FPS)</option>
             <option value="drag">Clic-glisser + clavier</option>
-            <option value="click">Tap-pour-aller (mobile)</option>
+            <option value="joystick">Joysticks tactiles</option>
+            <option value="click">Tap-pour-aller</option>
           </select>
         </label>
 

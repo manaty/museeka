@@ -187,6 +187,119 @@ h2 {
   backdrop-filter: blur(16px);
 }
 
+.joystick-pad {
+  position: fixed;
+  bottom: 24px;
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background: rgba(13, 21, 24, 0.42);
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.joystick-left {
+  left: 24px;
+}
+
+.joystick-right {
+  right: 24px;
+}
+
+.joystick-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: rgba(255, 241, 168, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  transition: transform 0.06s linear;
+}
+
+.joystick-alt {
+  position: fixed;
+  bottom: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(13, 21, 24, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  color: #fff1a8;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 999;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.joystick-alt-up {
+  left: 50%;
+  bottom: 96px;
+  transform: translateX(-50%);
+}
+
+.joystick-alt-down {
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+}
+
+.joystick-alt:active {
+  background: rgba(255, 241, 168, 0.4);
+}
+
+.hud-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(238, 248, 240, 0.85);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.hud-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hud.collapsed {
+  width: auto;
+  padding: 8px 10px;
+  gap: 4px;
+}
+
+.hud.collapsed > :not(.brand):not(.hud-toggle) {
+  display: none;
+}
+
+.hud.collapsed .brand small {
+  display: none;
+}
+
 .mode-switch {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -17,6 +17,7 @@
   import { PointerLockDriver } from "../runtime/inputs/PointerLockDriver";
   import { DragLookDriver } from "../runtime/inputs/DragLookDriver";
   import { ClickToGoDriver } from "../runtime/inputs/ClickToGoDriver";
+  import { TouchJoystickDriver } from "../runtime/inputs/TouchJoystickDriver";
   import { downloadJson, loadStudioScene, saveStudioScene } from "../studio/storage";
 
   type VisualMidiNote = {
@@ -84,7 +85,7 @@
   let analysisOnlyErrors = true;
   const ANALYSIS_DISPLAY_LIMIT = 80;
 
-  type DriverKey = "pointerlock" | "drag" | "click";
+  type DriverKey = "pointerlock" | "drag" | "click" | "joystick";
   let runtimeMode: RuntimeMode = "path";
   let driverKey: DriverKey = "pointerlock";
   let activeDriver: InputDriver | null = null;
@@ -377,6 +378,7 @@
   function buildDriver(key: DriverKey): InputDriver {
     if (key === "drag") return new DragLookDriver();
     if (key === "click") return new ClickToGoDriver();
+    if (key === "joystick") return new TouchJoystickDriver();
     return new PointerLockDriver();
   }
 
@@ -1201,6 +1203,7 @@
           <select bind:value={driverKey} on:change={changeDriver}>
             <option value="pointerlock">Souris + clavier (FPS)</option>
             <option value="drag">Clic-glisser + clavier</option>
+            <option value="joystick">Joysticks tactiles</option>
             <option value="click">Tap-pour-aller</option>
           </select>
         </label>
