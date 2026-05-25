@@ -225,44 +225,6 @@ h2 {
   transition: transform 0.06s linear;
 }
 
-.joystick-alt {
-  position: fixed;
-  bottom: 30px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(13, 21, 24, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.32);
-  color: #fff1a8;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  z-index: 999;
-  touch-action: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(8px);
-}
-
-.joystick-alt-up {
-  left: 50%;
-  bottom: 96px;
-  transform: translateX(-50%);
-}
-
-.joystick-alt-down {
-  left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%);
-}
-
-.joystick-alt:active {
-  background: rgba(255, 241, 168, 0.4);
-}
-
 .hud-toggle {
   position: absolute;
   top: 8px;

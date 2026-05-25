@@ -23,23 +23,10 @@ function createPad(side: "left" | "right"): { pad: HTMLDivElement; knob: HTMLDiv
   return { pad, knob };
 }
 
-function createAltButton(label: string, className: string): HTMLButtonElement {
-  const button = document.createElement("button");
-  button.className = `joystick-alt ${className}`;
-  button.type = "button";
-  button.textContent = label;
-  button.setAttribute("aria-label", className === "joystick-alt-up" ? "Monter" : "Descendre");
-  return button;
-}
-
 export class TouchJoystickDriver implements InputDriver {
   private context: InputDriverContext | null = null;
   private left: StickState | null = null;
   private right: StickState | null = null;
-  private upButton: HTMLButtonElement | null = null;
-  private downButton: HTMLButtonElement | null = null;
-  private upHeld = false;
-  private downHeld = false;
   private lastConsumeTime = performance.now();
 
   private handlePointerDown = (event: PointerEvent) => {
@@ -104,30 +91,8 @@ export class TouchJoystickDriver implements InputDriver {
     this.left = { pad: leftCreated.pad, knob: leftCreated.knob, pointerId: -1, centerX: 0, centerY: 0, radius: 0, x: 0, y: 0 };
     this.right = { pad: rightCreated.pad, knob: rightCreated.knob, pointerId: -1, centerX: 0, centerY: 0, radius: 0, x: 0, y: 0 };
 
-    this.upButton = createAltButton("▲", "joystick-alt-up");
-    this.downButton = createAltButton("▼", "joystick-alt-down");
-    const guards = (event: PointerEvent, set: (value: boolean) => void) => {
-      event.preventDefault();
-      event.stopPropagation();
-      set(true);
-    };
-    const release = (event: PointerEvent, set: (value: boolean) => void) => {
-      event.preventDefault();
-      set(false);
-    };
-    this.upButton.addEventListener("pointerdown", (e) => guards(e, (v) => (this.upHeld = v)));
-    this.upButton.addEventListener("pointerup", (e) => release(e, (v) => (this.upHeld = v)));
-    this.upButton.addEventListener("pointerleave", () => (this.upHeld = false));
-    this.upButton.addEventListener("pointercancel", () => (this.upHeld = false));
-    this.downButton.addEventListener("pointerdown", (e) => guards(e, (v) => (this.downHeld = v)));
-    this.downButton.addEventListener("pointerup", (e) => release(e, (v) => (this.downHeld = v)));
-    this.downButton.addEventListener("pointerleave", () => (this.downHeld = false));
-    this.downButton.addEventListener("pointercancel", () => (this.downHeld = false));
-
     document.body.appendChild(this.left.pad);
     document.body.appendChild(this.right.pad);
-    document.body.appendChild(this.upButton);
-    document.body.appendChild(this.downButton);
 
     document.addEventListener("pointerdown", this.handlePointerDown);
     document.addEventListener("pointermove", this.handlePointerMove);
@@ -142,14 +107,8 @@ export class TouchJoystickDriver implements InputDriver {
     document.removeEventListener("pointercancel", this.handlePointerUp);
     this.left?.pad.remove();
     this.right?.pad.remove();
-    this.upButton?.remove();
-    this.downButton?.remove();
     this.left = null;
     this.right = null;
-    this.upButton = null;
-    this.downButton = null;
-    this.upHeld = false;
-    this.downHeld = false;
     this.context = null;
   }
 
@@ -158,15 +117,19 @@ export class TouchJoystickDriver implements InputDriver {
     const dt = Math.min(0.1, (now - this.lastConsumeTime) / 1000);
     this.lastConsumeTime = now;
 
-    const forward = this.left ? -this.left.y : 0;
-    const right = this.left ? this.left.x : 0;
+    const stickForward = this.left ? -this.left.y : 0;
+    const stickRight = this.left ? this.left.x : 0;
     const lookDx = this.right ? this.right.x * LOOK_RATE * dt : 0;
     const lookDy = this.right ? -this.right.y * LOOK_RATE * dt : 0;
-    const up = this.upHeld ? 1 : this.downHeld ? -1 : 0;
-    return { forward, right, up, lookDx, lookDy, targetPoint: null, sprint: false };
+
+    // Forward follows the camera direction: looking up + push forward → ascend.
+    const pitch = this.context?.getCameraDirection().pitch ?? 0;
+    const forward = stickForward * Math.cos(pitch);
+    const up = stickForward * Math.sin(pitch);
+    return { forward, right: stickRight, up, lookDx, lookDy, targetPoint: null, sprint: false };
   }
 
   needsUiHint(): string {
-    return "Pouce gauche : avancer · pouce droit : regarder · ▲▼ : altitude";
+    return "Pouce gauche : voler · pouce droit : regarder · vise vers le haut pour monter";
   }
 }
