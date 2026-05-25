@@ -1,0 +1,516 @@
+{
+  "version": "0.1",
+  "reports": [
+    {
+      "scoreId": "path_01_ode_to_joy",
+      "pathId": "path-01-ode-to-joy",
+      "clusters": [
+        {
+          "clusterId": "pc_E_glass_bell",
+          "objectId": "pc_E_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            -8.999999999999996,
+            21.16955861403998,
+            15.588457268119896
+          ],
+          "reuseScore": 5
+        },
+        {
+          "clusterId": "pc_F_glass_bell",
+          "objectId": "pc_F_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            -15.588457268119896,
+            22.11216492834424,
+            8.999999999999998
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_G_glass_bell",
+          "objectId": "pc_G_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            -15.588457268119894,
+            21.5858757174154,
+            -9.000000000000002
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_D_glass_bell",
+          "objectId": "pc_D_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            9.000000000000002,
+            17.4708504560075,
+            15.588457268119894
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_C_glass_bell",
+          "objectId": "pc_C_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            18,
+            21.423706101362164,
+            0
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_E_flute",
+          "objectId": "pc_E_flute",
+          "eventIds": [],
+          "anchor": [
+            -10.999999999999995,
+            19.36234230445338,
+            19.052558883257653
+          ],
+          "reuseScore": 3
+        },
+        {
+          "clusterId": "pc_F_flute",
+          "objectId": "pc_F_flute",
+          "eventIds": [],
+          "anchor": [
+            -19.052558883257653,
+            20.50519734689872,
+            10.999999999999998
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_G_flute",
+          "objectId": "pc_G_flute",
+          "eventIds": [],
+          "anchor": [
+            -19.05255888325765,
+            19.033099111119125,
+            -11.000000000000002
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "motif_1",
+          "objectId": "motif_1",
+          "eventIds": [
+            "ode_2",
+            "ode_3",
+            "ode_4",
+            "ode_5",
+            "ode_10",
+            "ode_11",
+            "ode_12",
+            "ode_13"
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "reuseScore": 4
+        }
+      ]
+    },
+    {
+      "scoreId": "path_02_pachelbel",
+      "pathId": "path-02-pachelbel",
+      "clusters": []
+    },
+    {
+      "scoreId": "path_03_frere_jacques",
+      "pathId": "path-03-frere-jacques",
+      "clusters": [
+        {
+          "clusterId": "pc_C_pluck",
+          "objectId": "pc_C_pluck",
+          "eventIds": [],
+          "anchor": [
+            26,
+            16.221464145147465,
+            0
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_D_pluck",
+          "objectId": "pc_D_pluck",
+          "eventIds": [],
+          "anchor": [
+            13.000000000000004,
+            12.851671537729704,
+            22.516660498395403
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_E_pluck",
+          "objectId": "pc_E_pluck",
+          "eventIds": [],
+          "anchor": [
+            -12.999999999999995,
+            17.41090920402292,
+            22.516660498395407
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_E_flute",
+          "objectId": "pc_E_flute",
+          "eventIds": [],
+          "anchor": [
+            -10.999999999999995,
+            19.36234230445338,
+            19.052558883257653
+          ],
+          "reuseScore": 3
+        },
+        {
+          "clusterId": "pc_F_flute",
+          "objectId": "pc_F_flute",
+          "eventIds": [],
+          "anchor": [
+            -19.052558883257653,
+            20.50519734689872,
+            10.999999999999998
+          ],
+          "reuseScore": 3
+        },
+        {
+          "clusterId": "pc_G_flute",
+          "objectId": "pc_G_flute",
+          "eventIds": [],
+          "anchor": [
+            -19.05255888325765,
+            19.033099111119125,
+            -11.000000000000002
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_A_flute",
+          "objectId": "pc_A_flute",
+          "eventIds": [],
+          "anchor": [
+            -4.0413344371862654e-15,
+            21.136368276584736,
+            -22
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_C_flute",
+          "objectId": "pc_C_flute",
+          "eventIds": [],
+          "anchor": [
+            22,
+            18.94681772209125,
+            0
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "motif_1",
+          "objectId": "motif_1",
+          "eventIds": [
+            "frere_a_0",
+            "frere_a_1",
+            "frere_a_2",
+            "frere_a_3",
+            "frere_a_4",
+            "frere_a_5",
+            "frere_a_6",
+            "frere_a_7"
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "motif_2",
+          "objectId": "motif_2",
+          "eventIds": [
+            "frere_b",
+            "frere_b",
+            "frere_b",
+            "frere_c",
+            "frere_c",
+            "frere_c"
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "reuseScore": 3
+        }
+      ]
+    },
+    {
+      "scoreId": "path_04_bach_prelude",
+      "pathId": "path-04-bach-prelude",
+      "clusters": [
+        {
+          "clusterId": "pc_C_crystal",
+          "objectId": "pc_C_crystal",
+          "eventIds": [],
+          "anchor": [
+            30,
+            14.198722367754849,
+            0
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_E_crystal",
+          "objectId": "pc_E_crystal",
+          "eventIds": [],
+          "anchor": [
+            -14.999999999999993,
+            15.95958888641028,
+            25.98076211353316
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_G_crystal",
+          "objectId": "pc_G_crystal",
+          "eventIds": [],
+          "anchor": [
+            -25.980762113533157,
+            14.750051973057282,
+            -15.000000000000004
+          ],
+          "reuseScore": 6
+        },
+        {
+          "clusterId": "pc_D_crystal",
+          "objectId": "pc_D_crystal",
+          "eventIds": [],
+          "anchor": [
+            15.000000000000004,
+            11.140258226159537,
+            25.980762113533157
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "pc_F_crystal",
+          "objectId": "pc_F_crystal",
+          "eventIds": [],
+          "anchor": [
+            -25.98076211353316,
+            18.10584579429656,
+            14.999999999999998
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_A_crystal",
+          "objectId": "pc_A_crystal",
+          "eventIds": [],
+          "anchor": [
+            -5.510910596163089e-15,
+            15.398468906514825,
+            -30
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_B_crystal",
+          "objectId": "pc_B_crystal",
+          "eventIds": [],
+          "anchor": [
+            25.980762113533153,
+            18.229838961234673,
+            -15.000000000000014
+          ],
+          "reuseScore": 4
+        },
+        {
+          "clusterId": "motif_1",
+          "objectId": "motif_1",
+          "eventIds": [
+            "bach_arpeggio_01",
+            "bach_arpeggio_01",
+            "bach_arpeggio_01",
+            "bach_arpeggio_01",
+            "bach_arpeggio_01",
+            "bach_arpeggio_03",
+            "bach_arpeggio_03",
+            "bach_arpeggio_03",
+            "bach_arpeggio_03",
+            "bach_arpeggio_03",
+            "bach_arpeggio_04",
+            "bach_arpeggio_04",
+            "bach_arpeggio_04",
+            "bach_arpeggio_04",
+            "bach_arpeggio_04",
+            "bach_arpeggio_05",
+            "bach_arpeggio_05",
+            "bach_arpeggio_05",
+            "bach_arpeggio_05",
+            "bach_arpeggio_05"
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "reuseScore": 15
+        }
+      ]
+    },
+    {
+      "scoreId": "path_05_greensleeves",
+      "pathId": "path-05-greensleeves",
+      "clusters": [
+        {
+          "clusterId": "pc_A_glass_bell",
+          "objectId": "pc_A_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            -3.3065463576978533e-15,
+            23.774214518552725,
+            -18
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_C_glass_bell",
+          "objectId": "pc_C_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            18,
+            22.023706101362166,
+            0
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_D_glass_bell",
+          "objectId": "pc_D_glass_bell",
+          "eventIds": [],
+          "anchor": [
+            9.000000000000002,
+            18.070850456007502,
+            15.588457268119894
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_E_flute",
+          "objectId": "pc_E_flute",
+          "eventIds": [],
+          "anchor": [
+            -10.999999999999995,
+            19.962342304453383,
+            19.052558883257653
+          ],
+          "reuseScore": 3
+        },
+        {
+          "clusterId": "pc_F_flute",
+          "objectId": "pc_F_flute",
+          "eventIds": [],
+          "anchor": [
+            -19.052558883257653,
+            21.10519734689872,
+            10.999999999999998
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_D_flute",
+          "objectId": "pc_D_flute",
+          "eventIds": [],
+          "anchor": [
+            11.000000000000002,
+            15.593885275287072,
+            19.05255888325765
+          ],
+          "reuseScore": 3
+        },
+        {
+          "clusterId": "pc_B_crystal",
+          "objectId": "pc_B_crystal",
+          "eventIds": [],
+          "anchor": [
+            25.980762113533153,
+            18.229838961234673,
+            -15.000000000000014
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_G_crystal",
+          "objectId": "pc_G_crystal",
+          "eventIds": [],
+          "anchor": [
+            -25.980762113533157,
+            14.750051973057282,
+            -15.000000000000004
+          ],
+          "reuseScore": 1
+        },
+        {
+          "clusterId": "pc_A_flute",
+          "objectId": "pc_A_flute",
+          "eventIds": [],
+          "anchor": [
+            -4.0413344371862654e-15,
+            21.136368276584736,
+            -22
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_B_flute",
+          "objectId": "pc_B_flute",
+          "eventIds": [],
+          "anchor": [
+            19.052558883257646,
+            22.382511989180518,
+            -11.00000000000001
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "pc_C_flute",
+          "objectId": "pc_C_flute",
+          "eventIds": [],
+          "anchor": [
+            22,
+            19.54681772209125,
+            0
+          ],
+          "reuseScore": 2
+        },
+        {
+          "clusterId": "motif_1",
+          "objectId": "motif_1",
+          "eventIds": [
+            "green_04",
+            "green_04",
+            "green_04",
+            "green_08",
+            "green_08",
+            "green_08"
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "reuseScore": 3
+        }
+      ]
+    }
+  ]
+}
