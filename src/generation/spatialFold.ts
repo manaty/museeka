@@ -111,6 +111,9 @@ export type SpatialFoldOptions = {
   /** Suffix added to anchor ids so different scores get distinct anchor
    * objects even at overlapping pitch classes. */
   anchorIdSuffix?: string;
+  /** V2 hook: skip the per-score deflection pass so the V2 orchestrator
+   * can run one global pass against the shared object pool instead. */
+  skipDeflection?: boolean;
 };
 
 type Waypoint = {
@@ -746,6 +749,88 @@ function deflectAndMoveForExtras(
   return { waypoints: current, objects: currentObjects };
 }
 
+/**
+ * Public entry point for V2: take an existing Path3D and run a path-only
+ * deflection pass against an arbitrary object pool. Unlike `deflectAndMoveForExtras`,
+ * this version NEVER moves objects (V2 needs to leave shared objects in
+ * place because they're used by other paths). It only inserts deflection
+ * waypoints to steer the current path around brushes.
+ */
+export function runDeflectionPass(input: {
+  path: Path3D;
+  score: MusicScore;
+  terrain: IslandScene["terrain"];
+  objects: SoundObject[];
+}): Path3D {
+  const { path, score, terrain, objects } = input;
+  const MAX_ITER = 6;
+  const DEFLECT_MARGIN = 3.5;
+  const window = 0.25;
+  // Start from the existing path's waypoints (just t+p pairs); reconstruct
+  // as a Waypoint list with a synthetic source so the dedup priority logic
+  // keeps anchor/aggregate points if any happen to share a time.
+  const baseWaypoints: Waypoint[] = path.points.map((p) => ({
+    t: p.t,
+    p: [...p.p] as Vec3,
+    source: "anchor" // treat existing points as high-priority so deflections don't override
+  }));
+  let current = baseWaypoints;
+  const audibleSuffix = path.audibleSuffix ?? "";
+
+  for (let iter = 0; iter < MAX_ITER; iter += 1) {
+    let candidate = waypointsToPath(current, path.id, path.name, path.duration, audibleSuffix);
+    candidate = liftAboveTerrain(candidate, terrain);
+    const sim = simulateParcours(candidate, objects);
+    const cmp = compareProduced(score, sim.produced);
+    if (cmp.extra.length === 0) return candidate;
+
+    const visitsByObject = new Map<string, number[]>();
+    for (const extra of cmp.extra) {
+      const arr = visitsByObject.get(extra.sourceObjectId) ?? [];
+      arr.push(extra.time);
+      visitsByObject.set(extra.sourceObjectId, arr);
+    }
+    const episodes: Array<{ objectId: string; time: number }> = [];
+    for (const [objId, times] of visitsByObject) {
+      times.sort((a, b) => a - b);
+      let lastT = -Infinity;
+      for (const t of times) {
+        if (t - lastT > 0.5) episodes.push({ objectId: objId, time: t });
+        lastT = t;
+      }
+    }
+
+    let modified = false;
+    for (const episode of episodes) {
+      const obj = objects.find((o) => o.id === episode.objectId);
+      if (!obj) continue;
+      const pathState = samplePathAtTime(candidate, episode.time);
+      const objPos = obj.transform.position;
+      let dx = pathState[0] - objPos[0];
+      let dz = pathState[2] - objPos[2];
+      const len = Math.hypot(dx, dz);
+      const ux = len > 0.001 ? dx / len : 1;
+      const uz = len > 0.001 ? dz / len : 0;
+      const fieldR = fieldRadiusXZ(obj.field);
+      const dist = fieldR + DEFLECT_MARGIN;
+      const px = objPos[0] + ux * dist;
+      const pz = objPos[2] + uz * dist;
+      const ground = terrainGroundY(px, pz, terrain);
+      const py = Math.max(pathState[1], ground + 1.8);
+      // Single tight deflection waypoint at the brush moment. Multiple
+      // closely-spaced points would make the Catmull-Rom curve jagged and
+      // can move it away from legitimate downstream visits.
+      const t = Math.max(0.001, Math.min(path.duration - 0.001, episode.time));
+      current.push({ t, p: [px, py, pz], source: "deflection", refId: `v2deflect_${episode.objectId}_${t.toFixed(3)}` });
+      modified = true;
+    }
+    if (!modified) break;
+  }
+  let finalPath = waypointsToPath(current, path.id, path.name, path.duration, audibleSuffix);
+  finalPath = liftAboveTerrain(finalPath, terrain);
+  return finalPath;
+}
+
 function fieldRadiusXZ(field: SoundField): number {
   if (field.shape === "sphere") return field.params.radius;
   if (field.shape === "ellipsoid") return Math.max(field.params.radius[0], field.params.radius[2]);
@@ -991,22 +1076,25 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
 
   // Re-route the path around any object that the simulator says fires as an
   // extra. Tries waypoint deflection first; falls back to moving the object
-  // when deflection doesn't clear the brush.
-  const deflected = deflectAndMoveForExtras(
-    waypoints,
-    score,
-    score.id,
-    score.name,
-    score.duration,
-    terrain,
-    idSuffix,
-    objectsCollected
-  );
-  waypoints.length = 0;
-  waypoints.push(...deflected.waypoints);
-  if (deflected.objects !== objectsCollected) {
-    objectsCollected.length = 0;
-    objectsCollected.push(...deflected.objects);
+  // when deflection doesn't clear the brush. V2 sets skipDeflection so the
+  // global multi-path deflection can run on the full shared pool instead.
+  if (!options.skipDeflection) {
+    const deflected = deflectAndMoveForExtras(
+      waypoints,
+      score,
+      score.id,
+      score.name,
+      score.duration,
+      terrain,
+      idSuffix,
+      objectsCollected
+    );
+    waypoints.length = 0;
+    waypoints.push(...deflected.waypoints);
+    if (deflected.objects !== objectsCollected) {
+      objectsCollected.length = 0;
+      objectsCollected.push(...deflected.objects);
+    }
   }
 
   let path = waypointsToPath(waypoints, score.id, score.name, score.duration, idSuffix);
