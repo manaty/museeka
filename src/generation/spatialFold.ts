@@ -32,7 +32,7 @@ const ANCHOR_RING_STEP = 4;
 const ANCHOR_FIELD_RADIUS = 3.2;
 const ANCHOR_FIELD_ALTITUDE = 7;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
-const AGGREGATE_OFFSET = 11;
+const AGGREGATE_OFFSET = 7;
 const AGGREGATE_ANGLE_SEQUENCE = [
   Math.PI / 2,
   -Math.PI / 2,
@@ -364,7 +364,7 @@ function fieldForAggregate(event: MusicEvent): SoundField {
   if (event.kind === "chord") {
     return {
       shape: "sphere",
-      params: { radius: 4.5 },
+      params: { radius: 3 },
       falloff: { distance: { type: "smoothstep" } }
     };
   }
@@ -384,7 +384,7 @@ function fieldForAggregate(event: MusicEvent): SoundField {
 
 function aggregateFieldRadiusY(event: MusicEvent): number {
   if (event.kind === "drone") return 5;
-  if (event.kind === "chord") return 4.5;
+  if (event.kind === "chord") return 3;
   if (event.kind === "phrase") return 5;
   return 3.0;
 }
@@ -643,8 +643,8 @@ function aggregatePositionAlongPath(
   // Try the angle rotation sequence at increasing distances. Separation between
   // field boundaries prevents the path entering one aggregate from grazing a
   // neighbour's and firing extras.
-  const AGG_SEPARATION = 2.5;
-  const distanceMultipliers = [1.0, 1.3, 1.6, 2.0];
+  const AGG_SEPARATION = 1.5;
+  const distanceMultipliers = [1.0, 1.25, 1.5];
   let bestPos: Vec3 | null = null;
   let bestClearance = -Infinity;
   for (const distMult of distanceMultipliers) {

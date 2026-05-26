@@ -137,7 +137,7 @@ export function parseMidiArrayBuffer(buffer: ArrayBuffer, name = "Imported MIDI"
   };
 }
 
-export function groupMidiNotes(notes: MusicEvent[], chordWindow = 0.045, phraseGap = 0.18): MusicEvent[] {
+export function groupMidiNotes(notes: MusicEvent[], chordWindow = 0.05, phraseGap = 0.18): MusicEvent[] {
   const sorted = [...notes].sort((a, b) => a.time - b.time || a.notes[0].localeCompare(b.notes[0]));
   const grouped: MusicEvent[] = [];
   let index = 0;
