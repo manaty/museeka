@@ -46,7 +46,7 @@ export class MuseekaRenderer {
   private readonly pathGroup = new THREE.Group();
   private readonly fieldGroup = new THREE.Group();
   private readonly waveGroup = new THREE.Group();
-  private seaGeometry: THREE.PlaneGeometry | null = null;
+  private seaGeometry: THREE.BufferGeometry | null = null;
   private seaVertices: WaveVertex[] = [];
   private readonly cloudGroup = new THREE.Group();
   private clouds: CloudRecord[] = [];
@@ -422,24 +422,65 @@ export class MuseekaRenderer {
   }
 
   private createSea() {
+    const seaRadius = this.scene.terrain.radius * 4.5;
+    const geometry = this.buildSeaDiskGeometry(seaRadius, 28, 96);
     const sea = new THREE.Mesh(
-      new THREE.PlaneGeometry(this.scene.terrain.radius * 5.2, this.scene.terrain.radius * 5.2, 96, 96),
+      geometry,
       new THREE.MeshStandardMaterial({ color: "#1f7fb8", roughness: 0.36, metalness: 0.18, transparent: true, opacity: 0.92 })
     );
-    sea.rotation.x = -Math.PI / 2;
     sea.position.y = -0.42;
     this.scene3d.add(sea);
-    this.seaGeometry = sea.geometry as THREE.PlaneGeometry;
+    this.seaGeometry = geometry;
     const positions = this.seaGeometry.attributes.position;
     this.seaVertices = [];
 
     for (let index = 0; index < positions.count; index += 1) {
       const x = positions.getX(index);
-      const z = positions.getY(index);
+      const z = positions.getZ(index);
       this.seaVertices.push({ x, z, phase: Math.sin(x * 0.07 + z * 0.05) });
     }
 
     this.createWaveCrests();
+  }
+
+  /**
+   * Tessellated disk in the XZ plane (Y = 0), with concentric rings of vertices
+   * so wave displacement on Y looks smooth across the whole surface.
+   */
+  private buildSeaDiskGeometry(radius: number, rings: number, sectors: number): THREE.BufferGeometry {
+    const positions: number[] = [0, 0, 0]; // centre
+    const indices: number[] = [];
+    for (let r = 1; r <= rings; r += 1) {
+      const ringRadius = (r / rings) * radius;
+      for (let s = 0; s < sectors; s += 1) {
+        const angle = (s / sectors) * Math.PI * 2;
+        positions.push(Math.cos(angle) * ringRadius, 0, Math.sin(angle) * ringRadius);
+      }
+    }
+    // Inner fan: centre → first ring
+    for (let s = 0; s < sectors; s += 1) {
+      const a = 1 + s;
+      const b = 1 + ((s + 1) % sectors);
+      indices.push(0, a, b);
+    }
+    // Outer rings: quads between consecutive rings
+    for (let r = 2; r <= rings; r += 1) {
+      const prevStart = 1 + (r - 2) * sectors;
+      const currStart = 1 + (r - 1) * sectors;
+      for (let s = 0; s < sectors; s += 1) {
+        const a = prevStart + s;
+        const b = prevStart + ((s + 1) % sectors);
+        const c = currStart + s;
+        const d = currStart + ((s + 1) % sectors);
+        indices.push(a, c, d);
+        indices.push(a, d, b);
+      }
+    }
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    geom.setIndex(indices);
+    geom.computeVertexNormals();
+    return geom;
   }
 
   private updateSea() {
@@ -452,7 +493,7 @@ export class MuseekaRenderer {
         Math.sin(vertex.x * 0.08 + this.animationTime * 1.4 + vertex.phase) * 0.18 +
         Math.cos(vertex.z * 0.065 + this.animationTime * 1.1) * 0.12 +
         Math.sin((vertex.x + vertex.z) * 0.035 + this.animationTime * 0.72) * 0.08;
-      positions.setZ(index, wave);
+      positions.setY(index, wave);
     }
     positions.needsUpdate = true;
     this.seaGeometry.computeVertexNormals();
