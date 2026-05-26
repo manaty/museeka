@@ -102,6 +102,13 @@ export type SpatialFoldOptions = {
   seed?: number;
   /** Optional override of object positions, keyed by object id. Used by the relaxer. */
   positionOverrides?: Map<string, Vec3>;
+  /** Extra radius (m) added to anchor ring radius so each score occupies its
+   * own concentric band — prevents paths from one score brushing through
+   * another score's anchors when they share the scene. */
+  ringRadiusOffset?: number;
+  /** Suffix added to anchor ids so different scores get distinct anchor
+   * objects even at overlapping pitch classes. */
+  anchorIdSuffix?: string;
 };
 
 type Waypoint = {
@@ -221,8 +228,8 @@ export function tokenizeScore(score: MusicScore, terrain?: IslandScene["terrain"
   return { tokens, aggregates };
 }
 
-function ringRadiusFor(instrument: InstrumentId): number {
-  return ANCHOR_BASE_RADIUS + (INSTRUMENT_RING_INDEX[instrument] ?? 0) * ANCHOR_RING_STEP;
+function ringRadiusFor(instrument: InstrumentId, ringOffset = 0): number {
+  return ANCHOR_BASE_RADIUS + (INSTRUMENT_RING_INDEX[instrument] ?? 0) * ANCHOR_RING_STEP + ringOffset;
 }
 
 function placeAnchorPosition(
@@ -230,9 +237,10 @@ function placeAnchorPosition(
   instrument: InstrumentId,
   octave: number,
   lowestOctave: number,
-  terrain: IslandScene["terrain"]
+  terrain: IslandScene["terrain"],
+  ringOffset = 0
 ): Vec3 {
-  const ringRadius = ringRadiusFor(instrument);
+  const ringRadius = ringRadiusFor(instrument, ringOffset);
   const angle = (pitchClass / 12) * Math.PI * 2;
   const x = Math.cos(angle) * ringRadius;
   const z = Math.sin(angle) * ringRadius;
@@ -244,7 +252,12 @@ function placeAnchorPosition(
   return [x, y, z];
 }
 
-export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene["terrain"]): { anchors: PitchClassAnchor[]; minGapById: Map<string, number> } {
+export function buildPitchClassAnchors(
+  tokens: NoteToken[],
+  terrain: IslandScene["terrain"],
+  ringOffset = 0,
+  idSuffix = ""
+): { anchors: PitchClassAnchor[]; minGapById: Map<string, number> } {
   const groups = new Map<string, NoteToken[]>();
   let lowestOctave = Number.POSITIVE_INFINITY;
   for (const token of tokens) {
@@ -262,7 +275,7 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
     list.sort((a, b) => a.time - b.time);
     const first = list[0];
     const octave = first.octave;
-    const id = `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}_o${octave}`;
+    const id = `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}_o${octave}${idSuffix}`;
     let minGap = Number.POSITIVE_INFINITY;
     for (let i = 1; i < list.length; i += 1) {
       const gap = list[i].time - list[i - 1].time;
@@ -273,7 +286,7 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
       pitchClass: first.pitchClass,
       octave,
       instrument: first.instrument,
-      position: placeAnchorPosition(first.pitchClass, first.instrument, octave, lowestOctave, terrain),
+      position: placeAnchorPosition(first.pitchClass, first.instrument, octave, lowestOctave, terrain, ringOffset),
       baseOctave: octave,
       visits: list.length
     });
@@ -283,8 +296,8 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
   return { anchors, minGapById };
 }
 
-function anchorIdFor(token: NoteToken): string {
-  return `pc_${pitchClassName(token.pitchClass).replace("#", "s")}_${token.instrument}_o${token.octave}`;
+function anchorIdFor(token: NoteToken, idSuffix = ""): string {
+  return `pc_${pitchClassName(token.pitchClass).replace("#", "s")}_${token.instrument}_o${token.octave}${idSuffix}`;
 }
 
 function altitudeForToken(_token: NoteToken, anchor: PitchClassAnchor): number {
@@ -410,8 +423,10 @@ function triggerForAggregate(event: MusicEvent) {
   }
   const sustainCooldown = Math.max(MIN_COOLDOWN, event.duration);
   if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown: sustainCooldown, retrigger: true };
-  if (event.kind === "phrase") return { mode: "peak" as const, threshold: 0.42, cooldown: sustainCooldown, retrigger: true };
-  return { mode: "peak" as const, threshold: 0.42, cooldown: sustainCooldown, retrigger: true };
+  if (event.kind === "phrase") return { mode: "peak" as const, threshold: 0.56, cooldown: sustainCooldown, retrigger: true };
+  // Chord aggregates use a higher trigger threshold than anchors so a
+  // passing brush doesn't fire — only a direct centre-visit can trigger.
+  return { mode: "peak" as const, threshold: 0.56, cooldown: sustainCooldown, retrigger: true };
 }
 
 function colorForAggregate(event: MusicEvent): string {
@@ -421,11 +436,11 @@ function colorForAggregate(event: MusicEvent): string {
   return "#a4b0ff";
 }
 
-function buildEntryWaypoint(firstToken: NoteToken | null, anchors: Map<string, PitchClassAnchor>, terrain: IslandScene["terrain"]): Waypoint {
+function buildEntryWaypoint(firstToken: NoteToken | null, anchors: Map<string, PitchClassAnchor>, terrain: IslandScene["terrain"], idSuffix = ""): Waypoint {
   if (!firstToken) {
     return { t: 0, p: [0, 14, -30], source: "entry" };
   }
-  const anchor = anchors.get(anchorIdFor(firstToken));
+  const anchor = anchors.get(anchorIdFor(firstToken, idSuffix));
   if (!anchor) {
     return { t: 0, p: [0, 14, -30], source: "entry" };
   }
@@ -438,11 +453,11 @@ function buildEntryWaypoint(firstToken: NoteToken | null, anchors: Map<string, P
   return { t: 0, p: [x, Math.max(ground + 12, 14), z], source: "entry" };
 }
 
-function buildExitWaypoint(lastToken: NoteToken | null, anchors: Map<string, PitchClassAnchor>, terrain: IslandScene["terrain"], duration: number): Waypoint {
+function buildExitWaypoint(lastToken: NoteToken | null, anchors: Map<string, PitchClassAnchor>, terrain: IslandScene["terrain"], duration: number, idSuffix = ""): Waypoint {
   if (!lastToken) {
     return { t: duration, p: [0, 14, 30], source: "exit" };
   }
-  const anchor = anchors.get(anchorIdFor(lastToken));
+  const anchor = anchors.get(anchorIdFor(lastToken, idSuffix));
   if (!anchor) {
     return { t: duration, p: [0, 14, 30], source: "exit" };
   }
@@ -455,8 +470,8 @@ function buildExitWaypoint(lastToken: NoteToken | null, anchors: Map<string, Pit
   return { t: duration, p: [x, Math.max(ground + 12, 14), z], source: "exit" };
 }
 
-function waypointForToken(token: NoteToken, anchors: Map<string, PitchClassAnchor>): Waypoint | null {
-  const anchor = anchors.get(anchorIdFor(token));
+function waypointForToken(token: NoteToken, anchors: Map<string, PitchClassAnchor>, idSuffix = ""): Waypoint | null {
+  const anchor = anchors.get(anchorIdFor(token, idSuffix));
   if (!anchor) return null;
   return {
     t: token.time,
@@ -562,7 +577,7 @@ const SOURCE_PRIORITY: Record<string, number> = {
   exit: 2
 };
 
-function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: string, duration: number): Path3D {
+function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: string, duration: number, audibleSuffix = ""): Path3D {
   const sorted = [...waypoints].sort((a, b) => a.t - b.t);
   const dedup: Waypoint[] = [];
   for (const wp of sorted) {
@@ -589,7 +604,8 @@ function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: stri
     speedScale: 1,
     constraints: { maxSpeed: MAX_PATH_SPEED, maxAcceleration: 18, maxCurvature: 1.6, minGroundClearance: 1.5, maxGroundClearance: 60 },
     points,
-    interpolation: "catmull-rom"
+    interpolation: "catmull-rom",
+    audibleSuffix
   };
 }
 
@@ -715,10 +731,10 @@ function aggregatePositionAlongPath(
   return bestPos!;
 }
 
-function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number): SoundObject {
+function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number, idSuffix = ""): SoundObject {
   const visualModel = AGGREGATE_VISUAL_BY_KIND[event.kind] ?? "crystal";
   return {
-    id: `aggregate_${event.id}_${index}`,
+    id: `aggregate_${event.id}_${index}${idSuffix}`,
     kind: `${event.kind}_aggregate`,
     transform: { position, rotation: [0, (index * 47) % 360, 0], scale: event.kind === "drone" ? [1.4, 1.4, 1.4] : [1.05, 1.05, 1.05] },
     field: fieldForAggregate(event),
@@ -747,8 +763,10 @@ function snapshotObjects(objects: SoundObject[]): SoundObject[] {
 
 export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], options: SpatialFoldOptions = {}): { path: Path3D; objects: SoundObject[]; plan: FoldingPlan } {
   const overrides = options.positionOverrides ?? new Map<string, Vec3>();
+  const ringOffset = options.ringRadiusOffset ?? 0;
+  const idSuffix = options.anchorIdSuffix ?? "";
   const { tokens, aggregates } = tokenizeScore(score, terrain);
-  const { anchors: rawAnchors, minGapById } = buildPitchClassAnchors(tokens, terrain);
+  const { anchors: rawAnchors, minGapById } = buildPitchClassAnchors(tokens, terrain, ringOffset, idSuffix);
   const anchors = rawAnchors.map((anchor) => {
     const override = overrides.get(anchor.id);
     return override ? { ...anchor, position: override } : anchor;
@@ -762,8 +780,8 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
 
   const firstToken = tokens[0] ?? null;
   const lastToken = tokens[tokens.length - 1] ?? null;
-  const entry = buildEntryWaypoint(firstToken, anchorMap, terrain);
-  const exit = buildExitWaypoint(lastToken, anchorMap, terrain, score.duration);
+  const entry = buildEntryWaypoint(firstToken, anchorMap, terrain, idSuffix);
+  const exit = buildExitWaypoint(lastToken, anchorMap, terrain, score.duration, idSuffix);
 
   const waypoints: Waypoint[] = [entry, exit];
   const steps: FoldingStep[] = [];
@@ -782,10 +800,10 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     const addedIds: string[] = [];
     for (const occurrence of motif.occurrences) {
       for (const token of occurrence.tokens) {
-        const wp = waypointForToken(token, anchorMap);
+        const wp = waypointForToken(token, anchorMap, idSuffix);
         if (!wp) continue;
         waypoints.push(wp);
-        addedIds.push(anchorIdFor(token));
+        addedIds.push(anchorIdFor(token, idSuffix));
       }
     }
     steps.push({
@@ -803,10 +821,10 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
   if (residualTokens.length > 0) {
     const addedIds: string[] = [];
     for (const token of residualTokens) {
-      const wp = waypointForToken(token, anchorMap);
+      const wp = waypointForToken(token, anchorMap, idSuffix);
       if (!wp) continue;
       waypoints.push(wp);
-      addedIds.push(anchorIdFor(token));
+      addedIds.push(anchorIdFor(token, idSuffix));
     }
     steps.push({
       index: steps.length,
@@ -835,9 +853,9 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     }));
     aggregates.forEach((event, index) => {
       const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed, placedAnchors);
-      const objectId = `aggregate_${event.id}_${index}`;
+      const objectId = `aggregate_${event.id}_${index}${idSuffix}`;
       const position = overrides.get(objectId) ?? naturalPos;
-      const object = buildAggregateSoundObject(event, position, index);
+      const object = buildAggregateSoundObject(event, position, index, idSuffix);
       placed.push({ position, field: object.field });
       aggregateObjects.push(object);
       objectsCollected.push(object);
@@ -859,7 +877,7 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     waypoints.push(...withAggReleases);
   }
 
-  let path = waypointsToPath(waypoints, score.id, score.name, score.duration);
+  let path = waypointsToPath(waypoints, score.id, score.name, score.duration, idSuffix);
   const speedAnalysis = annotateSpeeds(path);
   path = speedAnalysis.path;
 

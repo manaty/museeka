@@ -2,6 +2,8 @@ import type { FoldingPlan, GenerationReport, IslandScene, MusicScore, SoundObjec
 import { terrainGroundY } from "../core/terrain";
 import { spatialFold, spatialFoldReport } from "./spatialFold";
 import { relaxScenes } from "./sceneRelaxer";
+import { simulateParcours } from "./scoreSimulator";
+import { compareProduced } from "./scoreCompare";
 
 export type SceneGenerationResult = {
   scene: IslandScene;
@@ -17,9 +19,15 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     seed
   };
 
-  const initial = scores.map((score) => {
+  // Each score uses a unique anchor/aggregate id suffix so the runtime can
+  // filter sound objects to only the active parcours — guarantees no other
+  // score's objects can fire spurious notes while a given path plays.
+  const initial = scores.map((score, index) => {
     const t = Date.now();
-    const result = spatialFold(score, terrain, { seed });
+    const result = spatialFold(score, terrain, {
+      seed,
+      anchorIdSuffix: `_s${index}`
+    });
     console.log(`  spatialFold ${score.id}: ${((Date.now() - t) / 1000).toFixed(1)}s`);
     return { score, ...result };
   });
@@ -61,6 +69,26 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
       }
     }
   };
+
+  // Re-run analysis against the FILTERED object set the runtime will play:
+  // only objects whose id ends with this path's audibleSuffix.
+  for (const item of generated) {
+    const suffix = item.path.audibleSuffix ?? "";
+    const activeObjects = suffix
+      ? scene.soundObjects.filter((object) => object.id.endsWith(suffix))
+      : scene.soundObjects;
+    const sim = simulateParcours(item.path, activeObjects);
+    const cmp = compareProduced(item.score, sim.produced);
+    item.plan.analysis = {
+      produced: sim.produced,
+      expected: cmp.expected,
+      matches: cmp.matches,
+      missing: cmp.missing,
+      extra: cmp.extra,
+      counts: cmp.counts,
+      accuracy: cmp.accuracy
+    };
+  }
 
   return {
     scene,

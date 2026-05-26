@@ -9,7 +9,7 @@ import { clusterSpatialEvents, toSpatialScore } from "../../src/generation/clust
 import { parseMidiArrayBuffer } from "../../src/music/midi";
 import { velocityToGain } from "../../src/music/velocity";
 
-describe("generation pipeline", () => {
+describe("generation pipeline", { timeout: 60_000 }, () => {
   it("generates deterministic valid scenes", () => {
     const first = generateSceneFromScores(demoScores, 12345);
     const second = generateSceneFromScores(demoScores, 12345);

@@ -176,6 +176,10 @@ export type Path3D = {
   };
   points: PathPoint[];
   interpolation: "catmull-rom";
+  /** Suffix used to namespace this path's anchors and aggregates. Runtime
+   * filters soundObjects to those ending with this suffix when playing this
+   * parcours, so other scores' objects can't fire spurious extras. */
+  audibleSuffix?: string;
 };
 
 export type IslandScene = {

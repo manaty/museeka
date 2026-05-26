@@ -6,8 +6,8 @@
       "pathId": "path-ode-to-joy",
       "clusters": [
         {
-          "clusterId": "pc_D_piano_o3",
-          "objectId": "pc_D_piano_o3",
+          "clusterId": "pc_D_piano_o3_s0",
+          "objectId": "pc_D_piano_o3_s0",
           "eventIds": [],
           "anchor": [
             23.000000000000004,
@@ -17,8 +17,8 @@
           "reuseScore": 7
         },
         {
-          "clusterId": "pc_A_piano_o2",
-          "objectId": "pc_A_piano_o2",
+          "clusterId": "pc_A_piano_o2_s0",
+          "objectId": "pc_A_piano_o2_s0",
           "eventIds": [],
           "anchor": [
             -8.450062914116736e-15,
@@ -58,8 +58,8 @@
       "pathId": "path-pachelbel-canon",
       "clusters": [
         {
-          "clusterId": "pc_Fs_piano_o4",
-          "objectId": "pc_Fs_piano_o4",
+          "clusterId": "pc_Fs_piano_o4_s1",
+          "objectId": "pc_Fs_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             -46,
@@ -69,8 +69,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_G_piano_o4",
-          "objectId": "pc_G_piano_o4",
+          "clusterId": "pc_G_piano_o4_s1",
+          "objectId": "pc_G_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             -39.837168574084174,
@@ -80,8 +80,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_D_piano_o4",
-          "objectId": "pc_D_piano_o4",
+          "clusterId": "pc_D_piano_o4_s1",
+          "objectId": "pc_D_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             23.000000000000004,
@@ -91,8 +91,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_E_piano_o4",
-          "objectId": "pc_E_piano_o4",
+          "clusterId": "pc_E_piano_o4_s1",
+          "objectId": "pc_E_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             -22.99999999999999,
@@ -102,8 +102,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_B_piano_o3",
-          "objectId": "pc_B_piano_o3",
+          "clusterId": "pc_B_piano_o3_s1",
+          "objectId": "pc_B_piano_o3_s1",
           "eventIds": [],
           "anchor": [
             39.83716857408417,
@@ -113,8 +113,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_A_piano_o4",
-          "objectId": "pc_A_piano_o4",
+          "clusterId": "pc_A_piano_o4_s1",
+          "objectId": "pc_A_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             -8.450062914116736e-15,
@@ -124,8 +124,8 @@
           "reuseScore": 1
         },
         {
-          "clusterId": "pc_B_piano_o4",
-          "objectId": "pc_B_piano_o4",
+          "clusterId": "pc_B_piano_o4_s1",
+          "objectId": "pc_B_piano_o4_s1",
           "eventIds": [],
           "anchor": [
             39.83716857408417,
@@ -141,8 +141,8 @@
       "pathId": "path-frere-jacques",
       "clusters": [
         {
-          "clusterId": "pc_G_piano_o4",
-          "objectId": "pc_G_piano_o4",
+          "clusterId": "pc_G_piano_o4_s2",
+          "objectId": "pc_G_piano_o4_s2",
           "eventIds": [],
           "anchor": [
             -39.837168574084174,
@@ -152,8 +152,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_A_piano_o4",
-          "objectId": "pc_A_piano_o4",
+          "clusterId": "pc_A_piano_o4_s2",
+          "objectId": "pc_A_piano_o4_s2",
           "eventIds": [],
           "anchor": [
             -8.450062914116736e-15,
@@ -163,8 +163,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_F_piano_o4",
-          "objectId": "pc_F_piano_o4",
+          "clusterId": "pc_F_piano_o4_s2",
+          "objectId": "pc_F_piano_o4_s2",
           "eventIds": [],
           "anchor": [
             -39.83716857408418,
@@ -174,8 +174,8 @@
           "reuseScore": 4
         },
         {
-          "clusterId": "pc_As_piano_o4",
-          "objectId": "pc_As_piano_o4",
+          "clusterId": "pc_As_piano_o4_s2",
+          "objectId": "pc_As_piano_o4_s2",
           "eventIds": [],
           "anchor": [
             23.000000000000004,
@@ -185,8 +185,8 @@
           "reuseScore": 4
         },
         {
-          "clusterId": "pc_C_piano_o5",
-          "objectId": "pc_C_piano_o5",
+          "clusterId": "pc_C_piano_o5_s2",
+          "objectId": "pc_C_piano_o5_s2",
           "eventIds": [],
           "anchor": [
             46,
@@ -196,8 +196,8 @@
           "reuseScore": 4
         },
         {
-          "clusterId": "pc_D_piano_o5",
-          "objectId": "pc_D_piano_o5",
+          "clusterId": "pc_D_piano_o5_s2",
+          "objectId": "pc_D_piano_o5_s2",
           "eventIds": [],
           "anchor": [
             23.000000000000004,
@@ -207,8 +207,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_C_piano_o4",
-          "objectId": "pc_C_piano_o4",
+          "clusterId": "pc_C_piano_o4_s2",
+          "objectId": "pc_C_piano_o4_s2",
           "eventIds": [],
           "anchor": [
             46,
@@ -267,8 +267,8 @@
       "pathId": "path-greensleeves",
       "clusters": [
         {
-          "clusterId": "pc_A_piano_o4",
-          "objectId": "pc_A_piano_o4",
+          "clusterId": "pc_A_piano_o4_s4",
+          "objectId": "pc_A_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             -8.450062914116736e-15,
@@ -278,8 +278,8 @@
           "reuseScore": 21
         },
         {
-          "clusterId": "pc_D_piano_o5",
-          "objectId": "pc_D_piano_o5",
+          "clusterId": "pc_D_piano_o5_s4",
+          "objectId": "pc_D_piano_o5_s4",
           "eventIds": [],
           "anchor": [
             23.000000000000004,
@@ -289,8 +289,8 @@
           "reuseScore": 3
         },
         {
-          "clusterId": "pc_E_piano_o5",
-          "objectId": "pc_E_piano_o5",
+          "clusterId": "pc_E_piano_o5_s4",
+          "objectId": "pc_E_piano_o5_s4",
           "eventIds": [],
           "anchor": [
             -22.99999999999999,
@@ -300,8 +300,8 @@
           "reuseScore": 8
         },
         {
-          "clusterId": "pc_F_piano_o5",
-          "objectId": "pc_F_piano_o5",
+          "clusterId": "pc_F_piano_o5_s4",
+          "objectId": "pc_F_piano_o5_s4",
           "eventIds": [],
           "anchor": [
             -39.83716857408418,
@@ -311,8 +311,8 @@
           "reuseScore": 3
         },
         {
-          "clusterId": "pc_B_piano_o4",
-          "objectId": "pc_B_piano_o4",
+          "clusterId": "pc_B_piano_o4_s4",
+          "objectId": "pc_B_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             39.83716857408417,
@@ -322,8 +322,8 @@
           "reuseScore": 12
         },
         {
-          "clusterId": "pc_G_piano_o4",
-          "objectId": "pc_G_piano_o4",
+          "clusterId": "pc_G_piano_o4_s4",
+          "objectId": "pc_G_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             -39.837168574084174,
@@ -333,8 +333,8 @@
           "reuseScore": 11
         },
         {
-          "clusterId": "pc_E_piano_o4",
-          "objectId": "pc_E_piano_o4",
+          "clusterId": "pc_E_piano_o4_s4",
+          "objectId": "pc_E_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             -22.99999999999999,
@@ -344,8 +344,8 @@
           "reuseScore": 3
         },
         {
-          "clusterId": "pc_Fs_piano_o4",
-          "objectId": "pc_Fs_piano_o4",
+          "clusterId": "pc_Fs_piano_o4_s4",
+          "objectId": "pc_Fs_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             -46,
@@ -355,8 +355,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_Gs_piano_o4",
-          "objectId": "pc_Gs_piano_o4",
+          "clusterId": "pc_Gs_piano_o4_s4",
+          "objectId": "pc_Gs_piano_o4_s4",
           "eventIds": [],
           "anchor": [
             -23.00000000000002,
@@ -366,8 +366,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_G_piano_o5",
-          "objectId": "pc_G_piano_o5",
+          "clusterId": "pc_G_piano_o5_s4",
+          "objectId": "pc_G_piano_o5_s4",
           "eventIds": [],
           "anchor": [
             -39.837168574084174,
@@ -377,8 +377,8 @@
           "reuseScore": 2
         },
         {
-          "clusterId": "pc_Fs_piano_o5",
-          "objectId": "pc_Fs_piano_o5",
+          "clusterId": "pc_Fs_piano_o5_s4",
+          "objectId": "pc_Fs_piano_o5_s4",
           "eventIds": [],
           "anchor": [
             -46,

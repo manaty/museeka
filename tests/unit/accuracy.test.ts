@@ -10,7 +10,7 @@ import { generateSceneFromScores } from "../../src/generation/sceneGenerator";
  * These tuning changes are net positive for real MIDI but cost a few % on the
  * synthetic fixtures.
  */
-describe("render accuracy on demo scores", () => {
+describe("render accuracy on demo scores", { timeout: 60_000 }, () => {
   const { plans } = generateSceneFromScores(demoScores, 12345);
 
   for (const score of demoScores) {

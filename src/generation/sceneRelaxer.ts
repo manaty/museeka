@@ -18,16 +18,20 @@ type Measure = {
   extraBySource: Map<string, number>;
 };
 
-const MAX_ITERATIONS = 12;
-const ANGLE_OFFSETS_DEG = [25, -25, 50, -50, 80, -80, 110, -110];
-const RADIAL_VARIATIONS = [0, 4, -3, 7];
+const MAX_ITERATIONS = 100;
+const ANGLE_OFFSETS_DEG = [10, -10, 20, -20, 35, -35, 55, -55, 80, -80, 110, -110, 150, -150];
+const RADIAL_VARIATIONS = [0, 2, -2, 4, -4, 7, -7];
 /** Above this many expected notes, the relaxer regeneration cost dwarfs any
  * accuracy gain and we skip the relaxer for that score's culprits. We still
  * run it on the smaller scenes alongside. */
 const RELAXER_SKIP_EXPECTED_THRESHOLD = 500;
 
-function measure(scene: GeneratedScene): Measure {
-  const sim = simulateParcours(scene.path, scene.objects);
+function measure(scene: GeneratedScene, _allObjects: SoundObject[]): Measure {
+  // The runtime filters to objects with the path's suffix at playback time,
+  // so simulate the same filtered set — exactly what the runtime will play.
+  const suffix = scene.path.audibleSuffix ?? "";
+  const activeObjects = suffix ? scene.objects.filter((o) => o.id.endsWith(suffix)) : scene.objects;
+  const sim = simulateParcours(scene.path, activeObjects);
   const cmp = compareProduced(scene.score, sim.produced);
   const extraBySource = new Map<string, number>();
   for (const extra of cmp.extra) {
@@ -39,6 +43,16 @@ function measure(scene: GeneratedScene): Measure {
     extras: cmp.counts.extra,
     extraBySource
   };
+}
+
+function mergeObjects(scenes: GeneratedScene[]): SoundObject[] {
+  const byId = new Map<string, SoundObject>();
+  for (const scene of scenes) {
+    for (const object of scene.objects) {
+      if (!byId.has(object.id)) byId.set(object.id, object);
+    }
+  }
+  return [...byId.values()];
 }
 
 function generateCandidates(currentPos: Vec3, terrain: IslandScene["terrain"]): Vec3[] {
@@ -118,7 +132,7 @@ function regenerateScene(scene: GeneratedScene, terrain: IslandScene["terrain"],
 export function relaxScenes(scenes: GeneratedScene[], terrain: IslandScene["terrain"], opts: { verbose?: boolean } = {}): GeneratedScene[] {
   const log = (msg: string) => { if (opts.verbose) console.log("[relaxer] " + msg); };
   let current = scenes.map((scene) => ({ ...scene }));
-  let baseline = current.map(measure);
+  let baseline = current.map((scene) => measure(scene, mergeObjects(current)));
   const expectedSizes = current.map((scene) => scene.plan.analysis?.counts.expected ?? 0);
   const triedPositions = new Set<string>();
   let triesSinceProgress = 0;
@@ -162,7 +176,8 @@ export function relaxScenes(scenes: GeneratedScene[], terrain: IslandScene["terr
         return regenerateScene(worstScene, terrain, overrides);
       })();
       const trial = current.map((scene, i) => (i === worstIdx ? newScene : scene));
-      const trialMeasure = current.map((scene, i) => (i === worstIdx ? measure(newScene) : baseline[i]));
+      const trialMerged = mergeObjects(trial);
+      const trialMeasure = trial.map((scene) => measure(scene, trialMerged));
       if (trialMeasure[worstIdx].extras < bestCandidateExtras) bestCandidateExtras = trialMeasure[worstIdx].extras;
 
       const regression = !nonRegression(trialMeasure, baseline);
@@ -181,7 +196,7 @@ export function relaxScenes(scenes: GeneratedScene[], terrain: IslandScene["terr
     if (!accepted) {
       log(`  no candidate improved (best would have been ${bestCandidateExtras}, but regression blocked or no gain)`);
       triesSinceProgress += 1;
-      if (triesSinceProgress >= 2) break;
+      if (triesSinceProgress >= 4) break;
     }
   }
 

@@ -237,29 +237,29 @@
         {
           "t": 5.5644935,
           "p": [
-            17.871813615036096,
+            13.184558502850876,
             27.940000486480088,
-            -11.4050682406302
+            -16.66965940518843
           ],
-          "speed": 67.0110121621758
+          "speed": 49.06021665827195
         },
         {
           "t": 5.806428,
           "p": [
-            23.408280566621954,
-            17.52885666912021,
-            -2.5837295495993726
+            16.705290470744124,
+            22.288424549709905,
+            -10.15642664065936
           ],
-          "speed": 60.868461117645474
+          "speed": 38.49968052451699
         },
         {
           "t": 6.16932975,
           "p": [
-            28.16614948178566,
-            21.02885666912021,
-            1.9660886797906096
+            24.787278664716162,
+            25.788424549709905,
+            -2.946244608224407
           ],
-          "speed": 20.54480846889476
+          "speed": 31.36450656325297
         },
         {
           "t": 6.5322315,
@@ -268,7 +268,7 @@
             16.704547325787964,
             5.680301217022688
           ],
-          "speed": 25.333601146476873
+          "speed": 36.10052063431014
         },
         {
           "t": 6.65319875,
@@ -471,47 +471,47 @@
         {
           "t": 12.338659499999999,
           "p": [
-            3.647230471370034,
-            13.087090986390304,
-            -51.3147521187891
+            -6.820584027569657,
+            12.16603943214413,
+            -53.52707533758609
           ],
-          "speed": 45.91567973917977
+          "speed": 22.43341392317202
         },
         {
           "t": 12.580594,
           "p": [
-            12.5058769211043,
-            9.587090986390304,
-            -40.20930038464178
+            -6.062177826491079,
+            8.66603943214413,
+            -44.7
           ],
-          "speed": 60.4737060093745
+          "speed": 39.37380812905144
         },
         {
           "t": 12.8225285,
           "p": [
-            -0.8103803427637838,
-            13.087090986390304,
-            -48.20703627498735
+            -9.554658987497736e-15,
+            12.16603943214413,
+            -51.3248
           ],
-          "speed": 65.81462797046915
+          "speed": 39.836570589272135
         },
         {
           "t": 13.064463,
           "p": [
-            -13.924941109130675,
-            7.797230217674727,
-            -44.20646734661391
+            6.062177826491062,
+            8.013453310016581,
+            -45.949600000000004
           ],
-          "speed": 60.74462309976787
+          "speed": 37.63091194675533
         },
         {
           "t": 13.3063975,
           "p": [
-            -2.8626677166003223,
-            11.297230217674727,
-            -56.089164484273816
+            8.302996417704563,
+            11.513453310016581,
+            -56.905664647022554
           ],
-          "speed": 68.64627098820102
+          "speed": 48.43373214280149
         },
         {
           "t": 13.548332,
@@ -520,7 +520,7 @@
             6.652149133442767,
             -55.9874602981884
           ],
-          "speed": 51.93366282999637
+          "speed": 20.556390155702488
         },
         {
           "t": 13.790266500000001,
@@ -552,47 +552,47 @@
         {
           "t": 14.39510275,
           "p": [
-            9.884888869585394,
-            10.684727404817933,
-            -56.091877523503236
+            -2.7847881307306785,
+            10.658262373149274,
+            -59.96454917453445
           ],
-          "speed": 174.9831187313392
+          "speed": 92.34783093966692
         },
         {
           "t": 14.51607,
           "p": [
-            28.436939825202714,
-            7.184727404817933,
-            -47.40854771794926
+            5.736901974863133,
+            6.691134322856014,
+            -54.984706047028055
           ],
-          "speed": 171.78609185214776
+          "speed": 87.93692268623546
         },
         {
           "t": 14.999939,
           "p": [
-            30.157022818161483,
-            11.624329378233092,
-            -50.886558370892416
+            5.825955769268502,
+            10.79007367469114,
+            -58.86379266972084
           ],
-          "speed": 12.185553187052824
+          "speed": 11.664645741545177
         },
         {
           "t": 15.483808,
           "p": [
-            25.759173049073457,
-            8.124329378233092,
-            -44.04125082089935
+            4.733102255185246,
+            7.290073674691141,
+            -50.801225507692635
           ],
-          "speed": 18.30487583080369
+          "speed": 18.304875830803688
         },
         {
           "t": 15.725742499999999,
           "p": [
-            9.741599374356854,
+            -2.185085544235479,
             12.43939024371463,
-            -49.212390043141916
+            -52.70143401271511
           ],
-          "speed": 71.82082107697288
+          "speed": 36.501852622162666
         },
         {
           "t": 15.967677,
@@ -601,7 +601,7 @@
             8.93939024371463,
             -42.611943621901254
           ],
-          "speed": 81.88376474470428
+          "speed": 51.50592641983532
         },
         {
           "t": 16.2096115,
@@ -1038,38 +1038,38 @@
         {
           "t": 27.096664,
           "p": [
-            13.391983660969364,
-            8.40661112330194,
-            -45.28261272236727
+            -7.000000000000009,
+            8.281300296933232,
+            -46.69968138370505
           ],
-          "speed": 55.50021345744953
+          "speed": 29.161504125430483
         },
         {
           "t": 27.3385985,
           "p": [
-            16.264621087942324,
-            11.90661112330194,
-            -54.17313075406548
+            -8.153801607132138,
+            11.781300296933232,
+            -55.97125614262148
           ],
           "speed": 41.239020097852546
         },
         {
           "t": 27.580533,
           "p": [
-            15.686615584406894,
-            7.685706545590133,
-            -51.57047414312764
+            -7.577722283113848,
+            7.329326064459214,
+            -53.3681725079654
           ],
-          "speed": 20.635291503432477
+          "speed": 21.448856118285892
         },
         {
           "t": 27.822467500000002,
           "p": [
-            14.562576250231572,
-            11.185706545590133,
-            -57.658090624771525
+            1.627303710490377,
+            10.829326064459213,
+            -58.737315184679744
           ],
-          "speed": 29.394059905204724
+          "speed": 46.36178163822323
         },
         {
           "t": 28.064402,
@@ -1078,7 +1078,7 @@
             7.291956475461489,
             -52.11106053709605
           ],
-          "speed": 32.66009926575544
+          "speed": 48.0509685049937
         },
         {
           "t": 28.3063365,
@@ -1144,7 +1144,8 @@
           "speed": 59.048180404061036
         }
       ],
-      "interpolation": "catmull-rom"
+      "interpolation": "catmull-rom",
+      "audibleSuffix": "_s0"
     },
     {
       "id": "path-pachelbel-canon",
@@ -1728,7 +1729,8 @@
           "speed": 24.253628574682804
         }
       ],
-      "interpolation": "catmull-rom"
+      "interpolation": "catmull-rom",
+      "audibleSuffix": "_s1"
     },
     {
       "id": "path-frere-jacques",
@@ -1909,11 +1911,11 @@
         {
           "t": 9.818172,
           "p": [
-            14.703370253991825,
-            21.82233510327333,
-            -16.514320235550898
+            6.346525645098059,
+            20.449883957925763,
+            -21.18096980556863
           ],
-          "speed": 102.17939905166578
+          "speed": 100.8122069502829
         },
         {
           "t": 10.363626,
@@ -1922,7 +1924,7 @@
             10.486834326524876,
             22.999999999999996
           ],
-          "speed": 125.21216762206649
+          "speed": 118.5893538114899
         },
         {
           "t": 10.90908,
@@ -2051,7 +2053,8 @@
           "speed": 12.992155688904859
         }
       ],
-      "interpolation": "catmull-rom"
+      "interpolation": "catmull-rom",
+      "audibleSuffix": "_s2"
     },
     {
       "id": "path-bach-prelude-c",
@@ -3058,7 +3061,8 @@
           "speed": 35.53285497856056
         }
       ],
-      "interpolation": "catmull-rom"
+      "interpolation": "catmull-rom",
+      "audibleSuffix": "_s3"
     },
     {
       "id": "path-greensleeves",
@@ -3176,11 +3180,11 @@
         {
           "t": 4.7272615,
           "p": [
-            42.6479728241116,
-            11.862588947009368,
-            -18.67003342056783
+            30.761892800978625,
+            10.246875501918309,
+            -34.944608814985756
           ],
-          "speed": 14.198740790523555
+          "speed": 41.52067064091465
         },
         {
           "t": 5.4545325,
@@ -3189,7 +3193,7 @@
             7.746580743894833,
             -46
           ],
-          "speed": 69.878285313799
+          "speed": 45.07761510388006
         },
         {
           "t": 5.63635025,
@@ -3752,11 +3756,11 @@
         {
           "t": 32.2372375,
           "p": [
-            -15.898504597366667,
-            7.154891652004251,
-            -46.05988189486579
+            -31.09388582932915,
+            7.934984454290874,
+            -32.15016572721746
           ],
-          "speed": 43.75156942892401
+          "speed": 93.60866882061953
         },
         {
           "t": 32.78269075,
@@ -3765,16 +3769,16 @@
             10.797823767824344,
             5.633375276077825e-15
           ],
-          "speed": 101.09795517487555
+          "speed": 65.18079495839457
         },
         {
           "t": 32.800872999999996,
           "p": [
-            -22.803255572771377,
-            10.65489165200425,
-            -53.65866344642366
+            -31.4322780759418,
+            11.434984454290873,
+            -46.1404789565491
           ],
-          "speed": 1169.1640679508514
+          "speed": 967.7950804042797
         },
         {
           "t": 32.964508499999994,
@@ -3783,7 +3787,7 @@
             6.385218025942403,
             -39.83716857408417
           ],
-          "speed": 88.4116963373872
+          "speed": 71.35533250474072
         },
         {
           "t": 33.36450849999999,
@@ -4002,12 +4006,13 @@
           "speed": 25.540679752270844
         }
       ],
-      "interpolation": "catmull-rom"
+      "interpolation": "catmull-rom",
+      "audibleSuffix": "_s4"
     }
   ],
   "soundObjects": [
     {
-      "id": "pc_D_piano_o3",
+      "id": "pc_D_piano_o3_s0",
       "kind": "pitch_D",
       "transform": {
         "position": [
@@ -4090,7 +4095,7 @@
       "pitchClass": 2
     },
     {
-      "id": "pc_A_piano_o2",
+      "id": "pc_A_piano_o2_s0",
       "kind": "pitch_A",
       "transform": {
         "position": [
@@ -4173,7 +4178,7 @@
       "pitchClass": 9
     },
     {
-      "id": "aggregate_chord_0_D3_D4_F#4_0",
+      "id": "aggregate_chord_0_D3_D4_F#4_0_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4205,7 +4210,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.483869,
         "retrigger": true
       },
@@ -4252,7 +4257,7 @@
       }
     },
     {
-      "id": "aggregate_chord_1_D4_F#4_1",
+      "id": "aggregate_chord_1_D4_F#4_1_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4284,7 +4289,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.483869,
         "retrigger": true
       },
@@ -4330,7 +4335,7 @@
       }
     },
     {
-      "id": "aggregate_chord_3_D3_E4_G4_2",
+      "id": "aggregate_chord_3_D3_E4_G4_2_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4362,7 +4367,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000001,
         "retrigger": true
       },
@@ -4409,7 +4414,7 @@
       }
     },
     {
-      "id": "aggregate_chord_4_A4_F#4_3",
+      "id": "aggregate_chord_4_A4_F#4_3_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4441,7 +4446,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838689999999999,
         "retrigger": true
       },
@@ -4487,7 +4492,7 @@
       }
     },
     {
-      "id": "aggregate_chord_6_A2_A4_F#4_4",
+      "id": "aggregate_chord_6_A2_A4_F#4_4_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4519,7 +4524,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838689999999999,
         "retrigger": true
       },
@@ -4566,7 +4571,7 @@
       }
     },
     {
-      "id": "aggregate_chord_7_E4_G4_5",
+      "id": "aggregate_chord_7_E4_G4_5_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4598,7 +4603,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -4644,7 +4649,7 @@
       }
     },
     {
-      "id": "aggregate_chord_9_A2_D4_F#4_6",
+      "id": "aggregate_chord_9_A2_D4_F#4_6_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4676,7 +4681,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838689999999999,
         "retrigger": true
       },
@@ -4723,7 +4728,7 @@
       }
     },
     {
-      "id": "aggregate_chord_10_A3_E4_7",
+      "id": "aggregate_chord_10_A3_E4_7_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4755,7 +4760,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838689999999999,
         "retrigger": true
       },
@@ -4801,7 +4806,7 @@
       }
     },
     {
-      "id": "aggregate_chord_12_D3_D4_F#3_8",
+      "id": "aggregate_chord_12_D3_D4_F#3_8_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4833,7 +4838,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -4880,7 +4885,7 @@
       }
     },
     {
-      "id": "aggregate_chord_13_D4_F#3_9",
+      "id": "aggregate_chord_13_D4_F#3_9_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4912,7 +4917,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999944,
         "retrigger": true
       },
@@ -4958,7 +4963,7 @@
       }
     },
     {
-      "id": "aggregate_chord_14_A3_E4_10",
+      "id": "aggregate_chord_14_A3_E4_10_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -4990,7 +4995,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5036,7 +5041,7 @@
       }
     },
     {
-      "id": "aggregate_chord_15_D3_D4_F#4_11",
+      "id": "aggregate_chord_15_D3_D4_F#4_11_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5068,7 +5073,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5115,13 +5120,13 @@
       }
     },
     {
-      "id": "aggregate_chord_16_A2_D4_F#4_12",
+      "id": "aggregate_chord_16_A2_D4_F#4_12_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          23.408280566621954,
-          17.52885666912021,
-          -2.5837295495993726
+          16.705290470744124,
+          22.288424549709905,
+          -10.15642664065936
         ],
         "rotation": [
           0,
@@ -5147,7 +5152,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7258034999999996,
         "retrigger": true
       },
@@ -5194,7 +5199,7 @@
       }
     },
     {
-      "id": "aggregate_chord_17_A3_E4_13",
+      "id": "aggregate_chord_17_A3_E4_13_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5226,7 +5231,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193450000000016,
         "retrigger": true
       },
@@ -5272,7 +5277,7 @@
       }
     },
     {
-      "id": "aggregate_chord_18_A2_A3_E4_14",
+      "id": "aggregate_chord_18_A2_A3_E4_14_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5304,7 +5309,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.9677379999999998,
         "retrigger": true
       },
@@ -5351,7 +5356,7 @@
       }
     },
     {
-      "id": "aggregate_chord_19_D3_D4_F#4_15",
+      "id": "aggregate_chord_19_D3_D4_F#4_15_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5383,7 +5388,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5430,7 +5435,7 @@
       }
     },
     {
-      "id": "aggregate_chord_20_D4_F#4_16",
+      "id": "aggregate_chord_20_D4_F#4_16_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5462,7 +5467,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5508,7 +5513,7 @@
       }
     },
     {
-      "id": "aggregate_chord_22_D3_E4_G4_17",
+      "id": "aggregate_chord_22_D3_E4_G4_17_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5540,7 +5545,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -5587,7 +5592,7 @@
       }
     },
     {
-      "id": "aggregate_chord_23_A4_F#4_18",
+      "id": "aggregate_chord_23_A4_F#4_18_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5619,7 +5624,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5665,7 +5670,7 @@
       }
     },
     {
-      "id": "aggregate_chord_25_A2_A4_F#4_19",
+      "id": "aggregate_chord_25_A2_A4_F#4_19_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5697,7 +5702,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5744,7 +5749,7 @@
       }
     },
     {
-      "id": "aggregate_chord_26_E4_G4_20",
+      "id": "aggregate_chord_26_E4_G4_20_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5776,7 +5781,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5822,7 +5827,7 @@
       }
     },
     {
-      "id": "aggregate_chord_28_A2_D4_F#4_21",
+      "id": "aggregate_chord_28_A2_D4_F#4_21_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5854,7 +5859,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5901,7 +5906,7 @@
       }
     },
     {
-      "id": "aggregate_chord_29_A3_E4_22",
+      "id": "aggregate_chord_29_A3_E4_22_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -5933,7 +5938,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -5979,7 +5984,7 @@
       }
     },
     {
-      "id": "aggregate_chord_31_D3_D4_F#3_23",
+      "id": "aggregate_chord_31_D3_D4_F#3_23_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6011,7 +6016,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -6058,7 +6063,7 @@
       }
     },
     {
-      "id": "aggregate_chord_32_D4_F#3_24",
+      "id": "aggregate_chord_32_D4_F#3_24_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6090,7 +6095,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -6136,13 +6141,13 @@
       }
     },
     {
-      "id": "aggregate_chord_33_A3_E4_25",
+      "id": "aggregate_chord_33_A3_E4_25_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          12.5058769211043,
-          9.587090986390304,
-          -40.20930038464178
+          -6.062177826491079,
+          8.66603943214413,
+          -44.7
         ],
         "rotation": [
           0,
@@ -6168,7 +6173,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -6214,13 +6219,13 @@
       }
     },
     {
-      "id": "aggregate_chord_34_D3_D4_F#4_26",
+      "id": "aggregate_chord_34_D3_D4_F#4_26_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          -13.924941109130675,
-          7.797230217674727,
-          -44.20646734661391
+          6.062177826491062,
+          8.013453310016581,
+          -45.949600000000004
         ],
         "rotation": [
           0,
@@ -6246,7 +6251,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -6293,7 +6298,7 @@
       }
     },
     {
-      "id": "aggregate_chord_35_A2_A3_E4_27",
+      "id": "aggregate_chord_35_A2_A3_E4_27_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6325,7 +6330,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7258034999999996,
         "retrigger": true
       },
@@ -6372,7 +6377,7 @@
       }
     },
     {
-      "id": "aggregate_chord_36_D4_F#3_28",
+      "id": "aggregate_chord_36_D4_F#3_28_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6404,7 +6409,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -6450,13 +6455,13 @@
       }
     },
     {
-      "id": "aggregate_chord_37_D3_D4_F#3_29",
+      "id": "aggregate_chord_37_D3_D4_F#3_29_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          28.436939825202714,
-          7.184727404817933,
-          -47.40854771794926
+          5.736901974863133,
+          6.691134322856014,
+          -54.984706047028055
         ],
         "rotation": [
           0,
@@ -6482,7 +6487,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.9677380000000007,
         "retrigger": true
       },
@@ -6529,13 +6534,13 @@
       }
     },
     {
-      "id": "aggregate_chord_38_A2_C#4_E4_30",
+      "id": "aggregate_chord_38_A2_C#4_E4_30_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          25.759173049073457,
-          8.124329378233092,
-          -44.04125082089935
+          4.733102255185246,
+          7.290073674691141,
+          -50.801225507692635
         ],
         "rotation": [
           0,
@@ -6561,7 +6566,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -6608,7 +6613,7 @@
       }
     },
     {
-      "id": "aggregate_chord_39_C#4_E4_31",
+      "id": "aggregate_chord_39_C#4_E4_31_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6640,7 +6645,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000003,
         "retrigger": true
       },
@@ -6686,7 +6691,7 @@
       }
     },
     {
-      "id": "aggregate_chord_41_A2_D4_F#4_32",
+      "id": "aggregate_chord_41_A2_D4_F#4_32_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6718,7 +6723,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -6765,7 +6770,7 @@
       }
     },
     {
-      "id": "aggregate_chord_42_A3_D3_D4_33",
+      "id": "aggregate_chord_42_A3_D3_D4_33_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6797,7 +6802,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -6844,7 +6849,7 @@
       }
     },
     {
-      "id": "aggregate_chord_43_A2_C#4_E4_34",
+      "id": "aggregate_chord_43_A2_C#4_E4_34_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6876,7 +6881,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -6923,7 +6928,7 @@
       }
     },
     {
-      "id": "aggregate_chord_44_D4_F#4_35",
+      "id": "aggregate_chord_44_D4_F#4_35_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -6955,7 +6960,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -7001,7 +7006,7 @@
       }
     },
     {
-      "id": "aggregate_chord_45_A2_E4_G4_36",
+      "id": "aggregate_chord_45_A2_E4_G4_36_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7033,7 +7038,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -7080,7 +7085,7 @@
       }
     },
     {
-      "id": "aggregate_chord_46_A2_D4_F#4_37",
+      "id": "aggregate_chord_46_A2_D4_F#4_37_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7112,7 +7117,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -7159,7 +7164,7 @@
       }
     },
     {
-      "id": "aggregate_chord_47_A3_D3_D4_38",
+      "id": "aggregate_chord_47_A3_D3_D4_38_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7191,7 +7196,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -7238,7 +7243,7 @@
       }
     },
     {
-      "id": "aggregate_chord_48_A2_C#4_E4_39",
+      "id": "aggregate_chord_48_A2_C#4_E4_39_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7270,7 +7275,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -7317,7 +7322,7 @@
       }
     },
     {
-      "id": "aggregate_chord_49_D4_F#4_40",
+      "id": "aggregate_chord_49_D4_F#4_40_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7349,7 +7354,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -7395,7 +7400,7 @@
       }
     },
     {
-      "id": "aggregate_chord_50_A2_E4_G4_41",
+      "id": "aggregate_chord_50_A2_E4_G4_41_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7427,7 +7432,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -7474,7 +7479,7 @@
       }
     },
     {
-      "id": "aggregate_chord_51_A#2_C#4_F#4_42",
+      "id": "aggregate_chord_51_A#2_C#4_F#4_42_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7506,7 +7511,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -7553,7 +7558,7 @@
       }
     },
     {
-      "id": "aggregate_chord_52_C#4_E4_F#3_43",
+      "id": "aggregate_chord_52_C#4_E4_F#3_43_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7585,7 +7590,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -7632,7 +7637,7 @@
       }
     },
     {
-      "id": "aggregate_chord_53_B2_B3_D4_44",
+      "id": "aggregate_chord_53_B2_B3_D4_44_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7664,7 +7669,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -7711,7 +7716,7 @@
       }
     },
     {
-      "id": "aggregate_chord_54_E3_E4_G#3_45",
+      "id": "aggregate_chord_54_E3_E4_G#3_45_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7743,7 +7748,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -7790,7 +7795,7 @@
       }
     },
     {
-      "id": "aggregate_chord_55_A2_A3_E3_46",
+      "id": "aggregate_chord_55_A2_A3_E3_46_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7822,7 +7827,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.9677380000000007,
         "retrigger": true
       },
@@ -7869,7 +7874,7 @@
       }
     },
     {
-      "id": "aggregate_chord_56_D4_F#4_47",
+      "id": "aggregate_chord_56_D4_F#4_47_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7901,7 +7906,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.9677380000000007,
         "retrigger": true
       },
@@ -7947,7 +7952,7 @@
       }
     },
     {
-      "id": "aggregate_chord_58_D4_F#4_48",
+      "id": "aggregate_chord_58_D4_F#4_48_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -7979,7 +7984,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8025,7 +8030,7 @@
       }
     },
     {
-      "id": "aggregate_chord_60_D3_E4_G4_49",
+      "id": "aggregate_chord_60_D3_E4_G4_49_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8057,7 +8062,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -8104,7 +8109,7 @@
       }
     },
     {
-      "id": "aggregate_chord_61_A4_F#4_50",
+      "id": "aggregate_chord_61_A4_F#4_50_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8136,7 +8141,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8182,7 +8187,7 @@
       }
     },
     {
-      "id": "aggregate_chord_63_A2_A4_F#4_51",
+      "id": "aggregate_chord_63_A2_A4_F#4_51_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8214,7 +8219,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -8261,7 +8266,7 @@
       }
     },
     {
-      "id": "aggregate_chord_64_E4_G4_52",
+      "id": "aggregate_chord_64_E4_G4_52_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8293,7 +8298,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8339,7 +8344,7 @@
       }
     },
     {
-      "id": "aggregate_chord_66_A2_D4_F#4_53",
+      "id": "aggregate_chord_66_A2_D4_F#4_53_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8371,7 +8376,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8418,7 +8423,7 @@
       }
     },
     {
-      "id": "aggregate_chord_67_A3_E4_54",
+      "id": "aggregate_chord_67_A3_E4_54_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8450,7 +8455,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -8496,13 +8501,13 @@
       }
     },
     {
-      "id": "aggregate_chord_69_D3_D4_F#3_55",
+      "id": "aggregate_chord_69_D3_D4_F#3_55_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          13.391983660969364,
-          8.40661112330194,
-          -45.28261272236727
+          -7.000000000000009,
+          8.281300296933232,
+          -46.69968138370505
         ],
         "rotation": [
           0,
@@ -8528,7 +8533,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8575,13 +8580,13 @@
       }
     },
     {
-      "id": "aggregate_chord_70_D4_F#3_56",
+      "id": "aggregate_chord_70_D4_F#3_56_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          15.686615584406894,
-          7.685706545590133,
-          -51.57047414312764
+          -7.577722283113848,
+          7.329326064459214,
+          -53.3681725079654
         ],
         "rotation": [
           0,
@@ -8607,7 +8612,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.4838690000000021,
         "retrigger": true
       },
@@ -8653,7 +8658,7 @@
       }
     },
     {
-      "id": "aggregate_chord_71_A3_E4_57",
+      "id": "aggregate_chord_71_A3_E4_57_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8685,7 +8690,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8731,7 +8736,7 @@
       }
     },
     {
-      "id": "aggregate_chord_72_D3_D4_F#4_58",
+      "id": "aggregate_chord_72_D3_D4_F#4_58_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8763,7 +8768,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.48386899999999855,
         "retrigger": true
       },
@@ -8810,7 +8815,7 @@
       }
     },
     {
-      "id": "aggregate_chord_73_A2_A3_E4_59",
+      "id": "aggregate_chord_73_A2_A3_E4_59_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8842,7 +8847,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7258035000000014,
         "retrigger": true
       },
@@ -8889,7 +8894,7 @@
       }
     },
     {
-      "id": "aggregate_chord_74_D4_F#3_60",
+      "id": "aggregate_chord_74_D4_F#3_60_s0",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -8921,7 +8926,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.24193449999999928,
         "retrigger": true
       },
@@ -8967,7 +8972,7 @@
       }
     },
     {
-      "id": "pc_Fs_piano_o4",
+      "id": "pc_Fs_piano_o4_s1",
       "kind": "pitch_F#",
       "transform": {
         "position": [
@@ -9050,7 +9055,7 @@
       "pitchClass": 6
     },
     {
-      "id": "pc_G_piano_o4",
+      "id": "pc_G_piano_o4_s1",
       "kind": "pitch_G",
       "transform": {
         "position": [
@@ -9133,7 +9138,7 @@
       "pitchClass": 7
     },
     {
-      "id": "pc_D_piano_o4",
+      "id": "pc_D_piano_o4_s1",
       "kind": "pitch_D",
       "transform": {
         "position": [
@@ -9216,7 +9221,7 @@
       "pitchClass": 2
     },
     {
-      "id": "pc_E_piano_o4",
+      "id": "pc_E_piano_o4_s1",
       "kind": "pitch_E",
       "transform": {
         "position": [
@@ -9299,7 +9304,7 @@
       "pitchClass": 4
     },
     {
-      "id": "pc_B_piano_o3",
+      "id": "pc_B_piano_o3_s1",
       "kind": "pitch_B",
       "transform": {
         "position": [
@@ -9382,7 +9387,7 @@
       "pitchClass": 11
     },
     {
-      "id": "pc_A_piano_o4",
+      "id": "pc_A_piano_o4_s1",
       "kind": "pitch_A",
       "transform": {
         "position": [
@@ -9465,7 +9470,7 @@
       "pitchClass": 9
     },
     {
-      "id": "pc_B_piano_o4",
+      "id": "pc_B_piano_o4_s1",
       "kind": "pitch_B",
       "transform": {
         "position": [
@@ -9548,7 +9553,7 @@
       "pitchClass": 11
     },
     {
-      "id": "aggregate_chord_0_A3_D3_D3_D5_F#4_0",
+      "id": "aggregate_chord_0_A3_D3_D3_D5_F#4_0_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9580,7 +9585,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416666,
         "retrigger": true
       },
@@ -9629,7 +9634,7 @@
       }
     },
     {
-      "id": "aggregate_chord_1_A2_A2_A4_C#5_E3_1",
+      "id": "aggregate_chord_1_A2_A2_A4_C#5_E3_1_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9661,7 +9666,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416668,
         "retrigger": true
       },
@@ -9710,7 +9715,7 @@
       }
     },
     {
-      "id": "aggregate_chord_2_B2_B2_B4_D4_F#3_2",
+      "id": "aggregate_chord_2_B2_B2_B4_D4_F#3_2_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9742,7 +9747,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416666,
         "retrigger": true
       },
@@ -9791,7 +9796,7 @@
       }
     },
     {
-      "id": "aggregate_chord_3_A4_C#3_F#2_F#2_F#4_3",
+      "id": "aggregate_chord_3_A4_C#3_F#2_F#2_F#4_3_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9823,7 +9828,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416661,
         "retrigger": true
       },
@@ -9872,7 +9877,7 @@
       }
     },
     {
-      "id": "aggregate_chord_4_B3_D3_G2_G2_G4_4",
+      "id": "aggregate_chord_4_B3_D3_G2_G2_G4_4_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9904,7 +9909,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416661,
         "retrigger": true
       },
@@ -9953,7 +9958,7 @@
       }
     },
     {
-      "id": "aggregate_chord_5_A4_D2_D2_D3_F#4_5",
+      "id": "aggregate_chord_5_A4_D2_D2_D3_F#4_5_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -9985,7 +9990,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416661,
         "retrigger": true
       },
@@ -10034,7 +10039,7 @@
       }
     },
     {
-      "id": "aggregate_chord_6_B4_D4_G2_G2_G3_6",
+      "id": "aggregate_chord_6_B4_D4_G2_G2_G3_6_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10066,7 +10071,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -10115,7 +10120,7 @@
       }
     },
     {
-      "id": "aggregate_chord_7_A2_A2_A3_C#5_E4_7",
+      "id": "aggregate_chord_7_A2_A2_A3_C#5_E4_7_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10147,7 +10152,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.3556543552083333,
         "retrigger": true
       },
@@ -10196,7 +10201,7 @@
       }
     },
     {
-      "id": "aggregate_chord_8_A4_D3_D3_D5_F#4_F#5_8",
+      "id": "aggregate_chord_8_A4_D3_D3_D5_F#4_F#5_8_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10228,7 +10233,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.456844801041667,
         "retrigger": true
       },
@@ -10278,7 +10283,7 @@
       }
     },
     {
-      "id": "aggregate_chord_9_A2_A2_A4_C#5_E4_E5_9",
+      "id": "aggregate_chord_9_A2_A2_A4_C#5_E4_E5_9_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10310,7 +10315,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.456844801041667,
         "retrigger": true
       },
@@ -10360,7 +10365,7 @@
       }
     },
     {
-      "id": "aggregate_chord_10_B2_B2_B4_D4_D5_F#4_10",
+      "id": "aggregate_chord_10_B2_B2_B4_D4_D5_F#4_10_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10392,7 +10397,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.456844801041667,
         "retrigger": true
       },
@@ -10442,7 +10447,7 @@
       }
     },
     {
-      "id": "aggregate_chord_11_A4_C#4_C#5_F#2_F#2_F#4_11",
+      "id": "aggregate_chord_11_A4_C#4_C#5_F#2_F#2_F#4_11_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10474,7 +10479,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -10524,7 +10529,7 @@
       }
     },
     {
-      "id": "aggregate_chord_12_B3_B4_D4_G2_G2_G4_12",
+      "id": "aggregate_chord_12_B3_B4_D4_G2_G2_G4_12_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10556,7 +10561,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -10606,7 +10611,7 @@
       }
     },
     {
-      "id": "aggregate_chord_13_A3_A4_D2_D2_D4_F#4_13",
+      "id": "aggregate_chord_13_A3_A4_D2_D2_D4_F#4_13_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10638,7 +10643,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -10688,7 +10693,7 @@
       }
     },
     {
-      "id": "aggregate_chord_14_B3_B4_D4_G2_G2_G4_14",
+      "id": "aggregate_chord_14_B3_B4_D4_G2_G2_G4_14_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10720,7 +10725,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -10770,7 +10775,7 @@
       }
     },
     {
-      "id": "aggregate_chord_15_A2_A2_A4_C#4_C#5_E4_15",
+      "id": "aggregate_chord_15_A2_A2_A4_C#4_C#5_E4_15_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10802,7 +10807,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.3556543552083369,
         "retrigger": true
       },
@@ -10852,7 +10857,7 @@
       }
     },
     {
-      "id": "aggregate_chord_16_D3_D3_D5_F#4_F#5_F#5_16",
+      "id": "aggregate_chord_16_D3_D3_D5_F#4_F#5_F#5_16_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10884,7 +10889,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -10934,7 +10939,7 @@
       }
     },
     {
-      "id": "aggregate_chord_17_A2_A2_C#5_E4_E5_E5_17",
+      "id": "aggregate_chord_17_A2_A2_C#5_E4_E5_E5_17_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -10966,7 +10971,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -11016,7 +11021,7 @@
       }
     },
     {
-      "id": "aggregate_chord_18_B2_B2_B4_D4_D5_D5_18",
+      "id": "aggregate_chord_18_B2_B2_B4_D4_D5_D5_18_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11048,7 +11053,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -11098,7 +11103,7 @@
       }
     },
     {
-      "id": "aggregate_chord_19_A4_C#4_C#5_C#5_F#2_F#2_19",
+      "id": "aggregate_chord_19_A4_C#4_C#5_C#5_F#2_F#2_19_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11130,7 +11135,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -11180,7 +11185,7 @@
       }
     },
     {
-      "id": "aggregate_chord_20_B3_B4_B4_G2_G2_G4_20",
+      "id": "aggregate_chord_20_B3_B4_B4_G2_G2_G4_20_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11212,7 +11217,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -11262,7 +11267,7 @@
       }
     },
     {
-      "id": "aggregate_chord_21_A3_A4_A4_D2_D2_F#4_21",
+      "id": "aggregate_chord_21_A3_A4_A4_D2_D2_F#4_21_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11294,7 +11299,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416652,
         "retrigger": true
       },
@@ -11344,7 +11349,7 @@
       }
     },
     {
-      "id": "aggregate_chord_22_B3_B4_B4_G2_G2_G4_22",
+      "id": "aggregate_chord_22_B3_B4_B4_G2_G2_G4_22_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11376,7 +11381,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -11426,7 +11431,7 @@
       }
     },
     {
-      "id": "aggregate_chord_23_A2_A2_C#4_C#5_C#5_E4_23",
+      "id": "aggregate_chord_23_A2_A2_C#4_C#5_C#5_E4_23_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11458,7 +11463,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.3556543552083369,
         "retrigger": true
       },
@@ -11508,7 +11513,7 @@
       }
     },
     {
-      "id": "aggregate_chord_24_D3_D3_D4_D5_D5_F#5_F#5_24",
+      "id": "aggregate_chord_24_D3_D3_D4_D5_D5_F#5_F#5_24_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11540,7 +11545,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416617,
         "retrigger": true
       },
@@ -11591,7 +11596,7 @@
       }
     },
     {
-      "id": "aggregate_chord_26_A2_A2_A4_C#5_C#5_E5_E5_25",
+      "id": "aggregate_chord_26_A2_A2_A4_C#5_C#5_E5_E5_25_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11623,7 +11628,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -11674,7 +11679,7 @@
       }
     },
     {
-      "id": "aggregate_chord_28_B2_B2_B4_B4_D5_D5_F#4_26",
+      "id": "aggregate_chord_28_B2_B2_B4_B4_D5_D5_F#4_26_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11706,7 +11711,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -11757,7 +11762,7 @@
       }
     },
     {
-      "id": "aggregate_chord_30_A4_A4_C#5_C#5_F#2_F#2_F#4_27",
+      "id": "aggregate_chord_30_A4_A4_C#5_C#5_F#2_F#2_F#4_27_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11789,7 +11794,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416617,
         "retrigger": true
       },
@@ -11840,7 +11845,7 @@
       }
     },
     {
-      "id": "aggregate_chord_32_B4_B4_D4_G2_G2_G4_G4_28",
+      "id": "aggregate_chord_32_B4_B4_D4_G2_G2_G4_G4_28_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11872,7 +11877,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -11923,7 +11928,7 @@
       }
     },
     {
-      "id": "aggregate_chord_34_A4_A4_D2_D2_D4_F#4_F#4_29",
+      "id": "aggregate_chord_34_A4_A4_D2_D2_D4_F#4_F#4_29_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -11955,7 +11960,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -12006,7 +12011,7 @@
       }
     },
     {
-      "id": "aggregate_chord_36_B4_B4_G2_G2_G4_G4_G4_30",
+      "id": "aggregate_chord_36_B4_B4_G2_G2_G4_G4_G4_30_s1",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12038,7 +12043,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.4568448010416688,
         "retrigger": true
       },
@@ -12089,7 +12094,173 @@
       }
     },
     {
-      "id": "pc_F_piano_o4",
+      "id": "pc_G_piano_o4_s2",
+      "kind": "pitch_G",
+      "transform": {
+        "position": [
+          -39.837168574084174,
+          8.319452954363435,
+          -23.000000000000004
+        ],
+        "rotation": [
+          0,
+          210,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.8,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "G4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 7
+    },
+    {
+      "id": "pc_A_piano_o4_s2",
+      "kind": "pitch_A",
+      "transform": {
+        "position": [
+          -8.450062914116736e-15,
+          7.746580743894833,
+          -46
+        ],
+        "rotation": [
+          0,
+          270,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.8,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "A4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 9
+    },
+    {
+      "id": "pc_F_piano_o4_s2",
       "kind": "pitch_F",
       "transform": {
         "position": [
@@ -12172,7 +12343,7 @@
       "pitchClass": 5
     },
     {
-      "id": "pc_As_piano_o4",
+      "id": "pc_As_piano_o4_s2",
       "kind": "pitch_A#",
       "transform": {
         "position": [
@@ -12255,7 +12426,7 @@
       "pitchClass": 10
     },
     {
-      "id": "pc_C_piano_o5",
+      "id": "pc_C_piano_o5_s2",
       "kind": "pitch_C",
       "transform": {
         "position": [
@@ -12338,7 +12509,7 @@
       "pitchClass": 0
     },
     {
-      "id": "pc_D_piano_o5",
+      "id": "pc_D_piano_o5_s2",
       "kind": "pitch_D",
       "transform": {
         "position": [
@@ -12421,7 +12592,7 @@
       "pitchClass": 2
     },
     {
-      "id": "pc_C_piano_o4",
+      "id": "pc_C_piano_o4_s2",
       "kind": "pitch_C",
       "transform": {
         "position": [
@@ -12504,7 +12675,7 @@
       "pitchClass": 0
     },
     {
-      "id": "aggregate_chord_0_F3_F4_0",
+      "id": "aggregate_chord_0_F3_F4_0_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12536,7 +12707,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.0731513359375,
         "retrigger": true
       },
@@ -12582,7 +12753,7 @@
       }
     },
     {
-      "id": "aggregate_chord_4_F3_F4_1",
+      "id": "aggregate_chord_4_F3_F4_1_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12614,7 +12785,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.0731513359375,
         "retrigger": true
       },
@@ -12660,7 +12831,7 @@
       }
     },
     {
-      "id": "aggregate_chord_8_A4_F3_2",
+      "id": "aggregate_chord_8_A4_F3_2_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12692,7 +12863,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.0731513359375002,
         "retrigger": true
       },
@@ -12738,7 +12909,7 @@
       }
     },
     {
-      "id": "aggregate_chord_11_A4_F3_3",
+      "id": "aggregate_chord_11_A4_F3_3_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12770,7 +12941,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.0731513359374993,
         "retrigger": true
       },
@@ -12816,7 +12987,7 @@
       }
     },
     {
-      "id": "aggregate_chord_14_C3_C5_4",
+      "id": "aggregate_chord_14_C3_C5_4_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -12848,7 +13019,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -12894,13 +13065,13 @@
       }
     },
     {
-      "id": "aggregate_chord_18_A4_F3_5",
+      "id": "aggregate_chord_18_A4_F3_5_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          14.703370253991825,
-          21.82233510327333,
-          -16.514320235550898
+          6.346525645098059,
+          20.449883957925763,
+          -21.18096980556863
         ],
         "rotation": [
           0,
@@ -12926,7 +13097,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -12972,7 +13143,7 @@
       }
     },
     {
-      "id": "aggregate_chord_20_C3_C5_6",
+      "id": "aggregate_chord_20_C3_C5_6_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13004,7 +13175,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -13050,7 +13221,7 @@
       }
     },
     {
-      "id": "aggregate_chord_24_A4_F3_7",
+      "id": "aggregate_chord_24_A4_F3_7_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13082,7 +13253,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -13128,7 +13299,7 @@
       }
     },
     {
-      "id": "aggregate_chord_26_C3_G4_8",
+      "id": "aggregate_chord_26_C3_G4_8_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13160,7 +13331,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -13206,7 +13377,7 @@
       }
     },
     {
-      "id": "aggregate_chord_28_F3_F4_9",
+      "id": "aggregate_chord_28_F3_F4_9_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13238,7 +13409,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -13284,7 +13455,7 @@
       }
     },
     {
-      "id": "aggregate_chord_29_C3_G4_10",
+      "id": "aggregate_chord_29_C3_G4_10_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13316,7 +13487,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.037641007812498,
         "retrigger": true
       },
@@ -13362,7 +13533,7 @@
       }
     },
     {
-      "id": "aggregate_chord_31_F3_F4_11",
+      "id": "aggregate_chord_31_F3_F4_11_s2",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -13394,7 +13565,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0376410078124998,
         "retrigger": true
       },
@@ -13440,7 +13611,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_0_C4_E4_G4_C5_E5_0",
+      "id": "aggregate_phrase_0_C4_E4_G4_C5_E5_0_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -13476,7 +13647,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8152150000000001,
         "retrigger": true
       },
@@ -13548,7 +13719,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_1_G4_C5_E5_C4_E4_1",
+      "id": "aggregate_phrase_1_G4_C5_E5_C4_E4_1_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -13584,7 +13755,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.776128,
         "retrigger": true
       },
@@ -13656,7 +13827,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_2_G4_C5_E5_G4_C5_2",
+      "id": "aggregate_phrase_2_G4_C5_E5_G4_C5_2_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -13692,7 +13863,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978699999999999,
         "retrigger": true
       },
@@ -13764,7 +13935,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_3_E5_C4_D4_A4_D5_3",
+      "id": "aggregate_phrase_3_E5_C4_D4_A4_D5_3_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -13800,7 +13971,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8152150000000002,
         "retrigger": true
       },
@@ -13872,7 +14043,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_4_F5_A4_D5_F5_C4_4",
+      "id": "aggregate_phrase_4_F5_A4_D5_F5_C4_4_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -13908,7 +14079,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9339492500000004,
         "retrigger": true
       },
@@ -13980,7 +14151,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_5_D4_A4_D5_F5_A4_5",
+      "id": "aggregate_phrase_5_D4_A4_D5_F5_A4_5_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14016,7 +14187,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978699999999996,
         "retrigger": true
       },
@@ -14088,7 +14259,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_6_D5_F5_B3_D4_G4_6",
+      "id": "aggregate_phrase_6_D5_F5_B3_D4_G4_6_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14124,7 +14295,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.804735,
         "retrigger": true
       },
@@ -14196,7 +14367,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_7_D5_F5_G4_D5_F5_7",
+      "id": "aggregate_phrase_7_D5_F5_G4_D5_F5_7_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14232,7 +14403,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000003,
         "retrigger": true
       },
@@ -14304,7 +14475,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_8_B3_D4_G4_D5_F5_8",
+      "id": "aggregate_phrase_8_B3_D4_G4_D5_F5_8_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14340,7 +14511,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512499999994,
         "retrigger": true
       },
@@ -14412,7 +14583,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_9_G4_D5_F5_C4_E4_9",
+      "id": "aggregate_phrase_9_G4_D5_F5_C4_E4_9_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14448,7 +14619,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.7882147499999999,
         "retrigger": true
       },
@@ -14520,7 +14691,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_10_G4_C5_E5_G4_C5_10",
+      "id": "aggregate_phrase_10_G4_C5_E5_G4_C5_10_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14556,7 +14727,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8152150000000002,
         "retrigger": true
       },
@@ -14628,7 +14799,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_11_E5_C4_E4_G4_C5_11",
+      "id": "aggregate_phrase_11_E5_C4_E4_G4_C5_11_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14664,7 +14835,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8082770000000004,
         "retrigger": true
       },
@@ -14736,7 +14907,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_12_E5_G4_C5_E5_C4_12",
+      "id": "aggregate_phrase_12_E5_G4_C5_E5_C4_12_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14772,7 +14943,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9286448164062495,
         "retrigger": true
       },
@@ -14844,7 +15015,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_13_E4_A4_E5_A5_A4_13",
+      "id": "aggregate_phrase_13_E4_A4_E5_A5_A4_13_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14880,7 +15051,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000003,
         "retrigger": true
       },
@@ -14952,7 +15123,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_14_E5_A5_C4_E4_A4_14",
+      "id": "aggregate_phrase_14_E5_A5_C4_E4_A4_14_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -14988,7 +15159,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8030187499999997,
         "retrigger": true
       },
@@ -15060,7 +15231,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_15_E5_A5_A4_E5_A5_15",
+      "id": "aggregate_phrase_15_E5_A5_A4_E5_A5_15_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15096,7 +15267,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7995862500000008,
         "retrigger": true
       },
@@ -15168,7 +15339,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_16_C4_D4_F#4_A4_D5_16",
+      "id": "aggregate_phrase_16_C4_D4_F#4_A4_D5_16_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15204,7 +15375,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000003,
         "retrigger": true
       },
@@ -15276,7 +15447,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_17_F#4_A4_D5_C4_D4_17",
+      "id": "aggregate_phrase_17_F#4_A4_D5_C4_D4_17_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15312,7 +15483,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.7638952499999991,
         "retrigger": true
       },
@@ -15384,7 +15555,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_18_F#4_A4_D5_F#4_A4_18",
+      "id": "aggregate_phrase_18_F#4_A4_D5_F#4_A4_18_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15420,7 +15591,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978699999999996,
         "retrigger": true
       },
@@ -15492,7 +15663,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_19_D5_B3_D4_G4_D5_19",
+      "id": "aggregate_phrase_19_D5_B3_D4_G4_D5_19_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15528,7 +15699,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8047350000000009,
         "retrigger": true
       },
@@ -15600,7 +15771,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_20_G5_G4_D5_G5_B3_20",
+      "id": "aggregate_phrase_20_G5_G4_D5_G5_B3_20_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15636,7 +15807,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9354830000000014,
         "retrigger": true
       },
@@ -15708,7 +15879,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_21_D4_G4_D5_G5_G4_21",
+      "id": "aggregate_phrase_21_D4_G4_D5_G5_G4_21_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15744,7 +15915,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000021,
         "retrigger": true
       },
@@ -15816,7 +15987,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_22_D5_G5_B3_C4_E4_22",
+      "id": "aggregate_phrase_22_D5_G5_B3_C4_E4_22_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15852,7 +16023,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8082405000000001,
         "retrigger": true
       },
@@ -15924,7 +16095,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_23_G4_C5_E4_G4_C5_23",
+      "id": "aggregate_phrase_23_G4_C5_E4_G4_C5_23_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -15960,7 +16131,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7995862500000008,
         "retrigger": true
       },
@@ -16032,7 +16203,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_24_B3_C4_E4_G4_C5_24",
+      "id": "aggregate_phrase_24_B3_C4_E4_G4_C5_24_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16068,7 +16239,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.801302500000002,
         "retrigger": true
       },
@@ -16140,7 +16311,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_25_E4_G4_C5_A3_C4_25",
+      "id": "aggregate_phrase_25_E4_G4_C5_A3_C4_25_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16176,7 +16347,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.7743564531249945,
         "retrigger": true
       },
@@ -16248,7 +16419,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_26_E4_G4_C5_E4_G4_26",
+      "id": "aggregate_phrase_26_E4_G4_C5_E4_G4_26_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16284,7 +16455,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8082039999999999,
         "retrigger": true
       },
@@ -16356,7 +16527,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_27_C5_A3_C4_E4_G4_27",
+      "id": "aggregate_phrase_27_C5_A3_C4_E4_G4_27_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16392,7 +16563,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8047349999999973,
         "retrigger": true
       },
@@ -16464,7 +16635,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_28_C5_E4_G4_C5_D3_28",
+      "id": "aggregate_phrase_28_C5_E4_G4_C5_D3_28_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16500,7 +16671,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9286180000000002,
         "retrigger": true
       },
@@ -16572,7 +16743,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_29_A3_D4_F#4_C5_D4_29",
+      "id": "aggregate_phrase_29_A3_D4_F#4_C5_D4_29_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16608,7 +16779,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512499999985,
         "retrigger": true
       },
@@ -16680,7 +16851,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_30_F#4_C5_D3_A3_D4_30",
+      "id": "aggregate_phrase_30_F#4_C5_D3_A3_D4_30_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16716,7 +16887,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8047350000000009,
         "retrigger": true
       },
@@ -16788,7 +16959,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_31_F#4_C5_D4_F#4_C5_31",
+      "id": "aggregate_phrase_31_F#4_C5_D4_F#4_C5_31_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16824,7 +16995,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978699999999996,
         "retrigger": true
       },
@@ -16896,7 +17067,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_32_G3_B3_D4_G4_B4_32",
+      "id": "aggregate_phrase_32_G3_B3_D4_G4_B4_32_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -16932,7 +17103,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978699999999996,
         "retrigger": true
       },
@@ -17004,7 +17175,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_33_D4_G4_B4_G3_B3_33",
+      "id": "aggregate_phrase_33_D4_G4_B4_G3_B3_33_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17040,7 +17211,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.755368203125002,
         "retrigger": true
       },
@@ -17112,7 +17283,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_34_D4_G4_B4_D4_G4_34",
+      "id": "aggregate_phrase_34_D4_G4_B4_D4_G4_34_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17148,7 +17319,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978700000000032,
         "retrigger": true
       },
@@ -17220,7 +17391,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_35_B4_G3_A#3_E4_G4_35",
+      "id": "aggregate_phrase_35_B4_G3_A#3_E4_G4_35_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17256,7 +17427,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8118002031249993,
         "retrigger": true
       },
@@ -17328,7 +17499,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_36_C#5_E4_G4_C#5_G3_36",
+      "id": "aggregate_phrase_36_C#5_E4_G4_C#5_G3_36_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17364,7 +17535,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9372357499999993,
         "retrigger": true
       },
@@ -17436,7 +17607,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_37_A#3_E4_G4_C#5_E4_37",
+      "id": "aggregate_phrase_37_A#3_E4_G4_C#5_E4_37_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17472,7 +17643,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512499999985,
         "retrigger": true
       },
@@ -17544,7 +17715,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_38_G4_C#5_F3_A3_D4_38",
+      "id": "aggregate_phrase_38_G4_C#5_F3_A3_D4_38_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17580,7 +17751,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000021,
         "retrigger": true
       },
@@ -17652,7 +17823,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_39_A4_D5_D4_A4_D5_39",
+      "id": "aggregate_phrase_39_A4_D5_D4_A4_D5_39_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17688,7 +17859,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512499999985,
         "retrigger": true
       },
@@ -17760,7 +17931,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_40_F3_A3_D4_A4_D5_40",
+      "id": "aggregate_phrase_40_F3_A3_D4_A4_D5_40_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17796,7 +17967,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000021,
         "retrigger": true
       },
@@ -17868,7 +18039,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_41_D4_A4_D5_F3_G#3_41",
+      "id": "aggregate_phrase_41_D4_A4_D5_F3_G#3_41_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -17904,7 +18075,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.7882147500000016,
         "retrigger": true
       },
@@ -17976,7 +18147,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_42_D4_F4_B4_D4_F4_42",
+      "id": "aggregate_phrase_42_D4_F4_B4_D4_F4_42_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18012,7 +18183,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.815215000000002,
         "retrigger": true
       },
@@ -18084,7 +18255,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_43_B4_F3_G#3_D4_F4_43",
+      "id": "aggregate_phrase_43_B4_F3_G#3_D4_F4_43_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18120,7 +18291,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8099567500000049,
         "retrigger": true
       },
@@ -18192,7 +18363,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_44_B4_D4_F4_B4_E3_44",
+      "id": "aggregate_phrase_44_B4_D4_F4_B4_E3_44_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18228,7 +18399,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9251854999999978,
         "retrigger": true
       },
@@ -18300,7 +18471,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_45_G3_C4_G4_C5_C4_45",
+      "id": "aggregate_phrase_45_G3_C4_G4_C5_C4_45_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18336,7 +18507,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7995862499999902,
         "retrigger": true
       },
@@ -18408,7 +18579,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_46_G4_C5_E3_G3_C4_46",
+      "id": "aggregate_phrase_46_G4_C5_E3_G3_C4_46_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18444,7 +18615,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.7978700000000032,
         "retrigger": true
       },
@@ -18516,7 +18687,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_47_G4_C5_C4_G4_C5_47",
+      "id": "aggregate_phrase_47_G4_C5_C4_G4_C5_47_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18552,7 +18723,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8030187499999997,
         "retrigger": true
       },
@@ -18624,7 +18795,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_48_E3_F3_A3_C4_F4_48",
+      "id": "aggregate_phrase_48_E3_F3_A3_C4_F4_48_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18660,7 +18831,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8241737499999999,
         "retrigger": true
       },
@@ -18732,7 +18903,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_49_A3_C4_F4_E3_F3_49",
+      "id": "aggregate_phrase_49_A3_C4_F4_E3_F3_49_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18768,7 +18939,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.7919426367187512,
         "retrigger": true
       },
@@ -18840,7 +19011,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_50_A3_C4_F4_A3_C4_50",
+      "id": "aggregate_phrase_50_A3_C4_F4_A3_C4_50_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18876,7 +19047,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000021,
         "retrigger": true
       },
@@ -18948,7 +19119,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_51_F4_D3_F3_A3_C4_51",
+      "id": "aggregate_phrase_51_F4_D3_F3_A3_C4_51_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -18984,7 +19155,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8134896367187494,
         "retrigger": true
       },
@@ -19056,7 +19227,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_52_F4_A3_C4_F4_D3_52",
+      "id": "aggregate_phrase_52_F4_A3_C4_F4_D3_52_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -19092,7 +19263,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.9443021328125027,
         "retrigger": true
       },
@@ -19164,7 +19335,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_53_F3_A3_C4_F4_A3_53",
+      "id": "aggregate_phrase_53_F3_A3_C4_F4_A3_53_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -19200,7 +19371,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8064512500000021,
         "retrigger": true
       },
@@ -19272,7 +19443,7 @@
       }
     },
     {
-      "id": "aggregate_phrase_54_C4_F4_G2_D3_G3_54",
+      "id": "aggregate_phrase_54_C4_F4_G2_D3_G3_54_s3",
       "kind": "phrase_aggregate",
       "transform": {
         "position": [
@@ -19308,7 +19479,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 0.8171401328124972,
         "retrigger": true
       },
@@ -19380,7 +19551,173 @@
       }
     },
     {
-      "id": "pc_E_piano_o5",
+      "id": "pc_A_piano_o4_s4",
+      "kind": "pitch_A",
+      "transform": {
+        "position": [
+          -8.450062914116736e-15,
+          7.746580743894833,
+          -46
+        ],
+        "rotation": [
+          0,
+          270,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.16363597500000002,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "A4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 9
+    },
+    {
+      "id": "pc_D_piano_o5_s4",
+      "kind": "pitch_D",
+      "transform": {
+        "position": [
+          23.000000000000004,
+          13.442421748297877,
+          39.837168574084174
+        ],
+        "rotation": [
+          0,
+          60,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.8,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "D5",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 2
+    },
+    {
+      "id": "pc_E_piano_o5_s4",
       "kind": "pitch_E",
       "transform": {
         "position": [
@@ -19463,7 +19800,7 @@
       "pitchClass": 4
     },
     {
-      "id": "pc_F_piano_o5",
+      "id": "pc_F_piano_o5_s4",
       "kind": "pitch_F",
       "transform": {
         "position": [
@@ -19546,7 +19883,339 @@
       "pitchClass": 5
     },
     {
-      "id": "pc_Gs_piano_o4",
+      "id": "pc_B_piano_o4_s4",
+      "kind": "pitch_B",
+      "transform": {
+        "position": [
+          39.83716857408417,
+          11.957742335660289,
+          -23.00000000000002
+        ],
+        "rotation": [
+          0,
+          330,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.4090899375000002,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "B4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 11
+    },
+    {
+      "id": "pc_G_piano_o4_s4",
+      "kind": "pitch_G",
+      "transform": {
+        "position": [
+          -39.837168574084174,
+          8.319452954363435,
+          -23.000000000000004
+        ],
+        "rotation": [
+          0,
+          210,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.5727259124999983,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "G4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 7
+    },
+    {
+      "id": "pc_E_piano_o4_s4",
+      "kind": "pitch_E",
+      "transform": {
+        "position": [
+          -22.99999999999999,
+          8.08241012567757,
+          39.83716857408418
+        ],
+        "rotation": [
+          0,
+          120,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.8,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "E4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 4
+    },
+    {
+      "id": "pc_Fs_piano_o4_s4",
+      "kind": "pitch_F#",
+      "transform": {
+        "position": [
+          -46,
+          10.797823767824344,
+          5.633375276077825e-15
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "field": {
+        "shape": "ellipsoid",
+        "params": {
+          "radius": [
+            3.2,
+            2.5,
+            3.2
+          ]
+        },
+        "falloff": {
+          "distance": {
+            "type": "smoothstep"
+          },
+          "altitude": {
+            "type": "linear"
+          }
+        }
+      },
+      "trigger": {
+        "mode": "peak",
+        "threshold": 0.42,
+        "cooldown": 0.8,
+        "retrigger": true
+      },
+      "audio": {
+        "generator": "note",
+        "instrument": "piano",
+        "baseNote": "F#4",
+        "duration": 0.5,
+        "velocity": 0.8
+      },
+      "mappings": [
+        {
+          "input": "field.intensity",
+          "output": "volume",
+          "curve": {
+            "type": "smoothstep"
+          },
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "encounter.approachSpeed",
+          "output": "brightness",
+          "curve": {
+            "type": "exponential",
+            "k": 1.4
+          },
+          "range": [
+            0.3,
+            1
+          ]
+        }
+      ],
+      "visual": {
+        "model": "statue",
+        "color": "#ecd9b5",
+        "activeGlow": true
+      },
+      "pitchClass": 6
+    },
+    {
+      "id": "pc_Gs_piano_o4_s4",
       "kind": "pitch_G#",
       "transform": {
         "position": [
@@ -19629,7 +20298,7 @@
       "pitchClass": 8
     },
     {
-      "id": "pc_G_piano_o5",
+      "id": "pc_G_piano_o5_s4",
       "kind": "pitch_G",
       "transform": {
         "position": [
@@ -19712,7 +20381,7 @@
       "pitchClass": 7
     },
     {
-      "id": "pc_Fs_piano_o5",
+      "id": "pc_Fs_piano_o5_s4",
       "kind": "pitch_F#",
       "transform": {
         "position": [
@@ -19795,7 +20464,7 @@
       "pitchClass": 6
     },
     {
-      "id": "aggregate_chord_1_A3_C5_E4_0",
+      "id": "aggregate_chord_1_A3_C5_E4_0_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -19827,7 +20496,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813,
         "retrigger": true
       },
@@ -19874,7 +20543,7 @@
       }
     },
     {
-      "id": "aggregate_chord_6_D4_D5_G3_1",
+      "id": "aggregate_chord_6_D4_D5_G3_1_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -19906,7 +20575,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813,
         "retrigger": true
       },
@@ -19953,13 +20622,13 @@
       }
     },
     {
-      "id": "aggregate_chord_11_A3_C5_E4_2",
+      "id": "aggregate_chord_11_A3_C5_E4_2_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          42.6479728241116,
-          11.862588947009368,
-          -18.67003342056783
+          30.761892800978625,
+          10.246875501918309,
+          -34.944608814985756
         ],
         "rotation": [
           0,
@@ -19985,7 +20654,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813,
         "retrigger": true
       },
@@ -20032,7 +20701,7 @@
       }
     },
     {
-      "id": "aggregate_chord_16_B3_B4_E3_3",
+      "id": "aggregate_chord_16_B3_B4_E3_3_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20064,7 +20733,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.209257,
         "retrigger": true
       },
@@ -20111,7 +20780,7 @@
       }
     },
     {
-      "id": "aggregate_chord_20_A3_C5_E4_4",
+      "id": "aggregate_chord_20_A3_C5_E4_4_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20143,7 +20812,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818129999999982,
         "retrigger": true
       },
@@ -20190,7 +20859,7 @@
       }
     },
     {
-      "id": "aggregate_chord_25_D4_D5_G3_5",
+      "id": "aggregate_chord_25_D4_D5_G3_5_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20222,7 +20891,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813000000002,
         "retrigger": true
       },
@@ -20269,7 +20938,7 @@
       }
     },
     {
-      "id": "aggregate_chord_30_A3_C5_E4_6",
+      "id": "aggregate_chord_30_A3_C5_E4_6_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20301,7 +20970,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0909064999999991,
         "retrigger": true
       },
@@ -20348,7 +21017,7 @@
       }
     },
     {
-      "id": "aggregate_chord_33_B3_E3_G#4_7",
+      "id": "aggregate_chord_33_B3_E3_G#4_7_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20380,7 +21049,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0909064999999991,
         "retrigger": true
       },
@@ -20427,7 +21096,7 @@
       }
     },
     {
-      "id": "aggregate_chord_36_A3_A4_E4_8",
+      "id": "aggregate_chord_36_A3_A4_E4_8_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20459,7 +21128,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.308541999999999,
         "retrigger": true
       },
@@ -20506,7 +21175,7 @@
       }
     },
     {
-      "id": "aggregate_chord_38_C4_G4_G5_9",
+      "id": "aggregate_chord_38_C4_G4_G5_9_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20538,7 +21207,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.2020149999999994,
         "retrigger": true
       },
@@ -20585,7 +21254,7 @@
       }
     },
     {
-      "id": "aggregate_chord_42_D4_D5_G3_10",
+      "id": "aggregate_chord_42_D4_D5_G3_10_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20617,7 +21286,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813000000002,
         "retrigger": true
       },
@@ -20664,7 +21333,7 @@
       }
     },
     {
-      "id": "aggregate_chord_47_A3_C5_E4_11",
+      "id": "aggregate_chord_47_A3_C5_E4_11_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20696,7 +21365,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818129999999982,
         "retrigger": true
       },
@@ -20743,7 +21412,7 @@
       }
     },
     {
-      "id": "aggregate_chord_52_B3_B4_E3_12",
+      "id": "aggregate_chord_52_B3_B4_E3_12_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20775,7 +21444,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.2447514999999996,
         "retrigger": true
       },
@@ -20822,7 +21491,7 @@
       }
     },
     {
-      "id": "aggregate_chord_55_C4_G4_G5_13",
+      "id": "aggregate_chord_55_C4_G4_G5_13_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20854,7 +21523,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.181813000000002,
         "retrigger": true
       },
@@ -20901,7 +21570,7 @@
       }
     },
     {
-      "id": "aggregate_chord_59_D4_D5_G3_14",
+      "id": "aggregate_chord_59_D4_D5_G3_14_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -20933,7 +21602,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818129999999982,
         "retrigger": true
       },
@@ -20980,7 +21649,7 @@
       }
     },
     {
-      "id": "aggregate_chord_64_A3_C5_E4_15",
+      "id": "aggregate_chord_64_A3_C5_E4_15_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -21012,7 +21681,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.0909065000000027,
         "retrigger": true
       },
@@ -21059,13 +21728,13 @@
       }
     },
     {
-      "id": "aggregate_chord_67_B3_E3_G#4_16",
+      "id": "aggregate_chord_67_B3_E3_G#4_16_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
-          -15.898504597366667,
-          7.154891652004251,
-          -46.05988189486579
+          -31.09388582932915,
+          7.934984454290874,
+          -32.15016572721746
         ],
         "rotation": [
           0,
@@ -21091,7 +21760,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 1.1272709999999933,
         "retrigger": true
       },
@@ -21138,7 +21807,7 @@
       }
     },
     {
-      "id": "aggregate_chord_70_A3_A4_E4_17",
+      "id": "aggregate_chord_70_A3_A4_E4_17_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -21170,7 +21839,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.5333320000000015,
         "retrigger": true
       },
@@ -21217,7 +21886,7 @@
       }
     },
     {
-      "id": "aggregate_chord_73_A3_C5_E4_18",
+      "id": "aggregate_chord_73_A3_C5_E4_18_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -21249,7 +21918,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818129999999982,
         "retrigger": true
       },
@@ -21296,7 +21965,7 @@
       }
     },
     {
-      "id": "aggregate_chord_78_D4_D5_G3_19",
+      "id": "aggregate_chord_78_D4_D5_G3_19_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -21328,7 +21997,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818129999999982,
         "retrigger": true
       },
@@ -21375,7 +22044,7 @@
       }
     },
     {
-      "id": "aggregate_chord_83_A3_C5_E4_20",
+      "id": "aggregate_chord_83_A3_C5_E4_20_s4",
       "kind": "chord_aggregate",
       "transform": {
         "position": [
@@ -21407,7 +22076,7 @@
       },
       "trigger": {
         "mode": "peak",
-        "threshold": 0.42,
+        "threshold": 0.56,
         "cooldown": 2.1818130000000053,
         "retrigger": true
       },
