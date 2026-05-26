@@ -37,6 +37,30 @@ import xylophoneC5 from "tonejs-instrument-xylophone-mp3/C5.mp3?url";
 import xylophoneC6 from "tonejs-instrument-xylophone-mp3/C6.mp3?url";
 import xylophoneG4 from "tonejs-instrument-xylophone-mp3/G4.mp3?url";
 import xylophoneG5 from "tonejs-instrument-xylophone-mp3/G5.mp3?url";
+import pianoF2 from "tonejs-instrument-piano-mp3/F2.mp3?url";
+import pianoA2 from "tonejs-instrument-piano-mp3/A2.mp3?url";
+import pianoE2 from "tonejs-instrument-piano-mp3/E2.mp3?url";
+import pianoC6 from "tonejs-instrument-piano-mp3/C6.mp3?url";
+import violinG3 from "tonejs-instrument-violin-mp3/G3.mp3?url";
+import violinC4 from "tonejs-instrument-violin-mp3/C4.mp3?url";
+import violinG4 from "tonejs-instrument-violin-mp3/G4.mp3?url";
+import violinA4 from "tonejs-instrument-violin-mp3/A4.mp3?url";
+import violinC5 from "tonejs-instrument-violin-mp3/C5.mp3?url";
+import violinE5 from "tonejs-instrument-violin-mp3/E5.mp3?url";
+import violinG5 from "tonejs-instrument-violin-mp3/G5.mp3?url";
+import violinA5 from "tonejs-instrument-violin-mp3/A5.mp3?url";
+import violinC6 from "tonejs-instrument-violin-mp3/C6.mp3?url";
+import violinE6 from "tonejs-instrument-violin-mp3/E6.mp3?url";
+import celloC2 from "tonejs-instrument-cello-mp3/C2.mp3?url";
+import celloE2 from "tonejs-instrument-cello-mp3/E2.mp3?url";
+import celloA2 from "tonejs-instrument-cello-mp3/A2.mp3?url";
+import celloC3 from "tonejs-instrument-cello-mp3/C3.mp3?url";
+import celloE3 from "tonejs-instrument-cello-mp3/E3.mp3?url";
+import celloA3 from "tonejs-instrument-cello-mp3/A3.mp3?url";
+import celloC4 from "tonejs-instrument-cello-mp3/C4.mp3?url";
+import celloE4 from "tonejs-instrument-cello-mp3/E4.mp3?url";
+import celloA4 from "tonejs-instrument-cello-mp3/A4.mp3?url";
+import celloC5 from "tonejs-instrument-cello-mp3/C5.mp3?url";
 
 type TriggerState = {
   lastIntensity: number;
@@ -157,6 +181,48 @@ function createSampleMap(instrument: InstrumentId): Record<string, string> | nul
         C5: xylophoneC5,
         G5: xylophoneG5
       };
+    case "piano":
+      return {
+        E2: pianoE2,
+        F2: pianoF2,
+        A2: pianoA2,
+        C2: pianoC2,
+        G2: pianoG2,
+        C3: pianoC3,
+        E3: pianoE3,
+        G3: pianoG3,
+        C4: pianoC4,
+        E4: pianoE4,
+        G4: pianoG4,
+        C5: pianoC5,
+        C6: pianoC6
+      };
+    case "violin":
+      return {
+        G3: violinG3,
+        C4: violinC4,
+        G4: violinG4,
+        A4: violinA4,
+        C5: violinC5,
+        E5: violinE5,
+        G5: violinG5,
+        A5: violinA5,
+        C6: violinC6,
+        E6: violinE6
+      };
+    case "cello":
+      return {
+        C2: celloC2,
+        E2: celloE2,
+        A2: celloA2,
+        C3: celloC3,
+        E3: celloE3,
+        A3: celloA3,
+        C4: celloC4,
+        E4: celloE4,
+        A4: celloA4,
+        C5: celloC5
+      };
     default:
       return null;
   }
@@ -194,7 +260,7 @@ export class AudioEngine {
   private samplePreparation: Promise<void> | null = null;
   private loadedSampleInstruments = new Set<InstrumentId>();
   private sampleProgressListeners = new Set<(progress: SampleLoadProgress) => void>();
-  private readonly sampleInstrumentIds: InstrumentId[] = ["glass_bell", "warm_pad", "flute", "woodblock", "low_pad", "pluck", "crystal"];
+  private readonly sampleInstrumentIds: InstrumentId[] = ["glass_bell", "warm_pad", "flute", "woodblock", "low_pad", "pluck", "crystal", "piano", "violin", "cello"];
 
   constructor() {
     this.output.toDestination();

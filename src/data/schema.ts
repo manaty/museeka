@@ -49,7 +49,7 @@ const transformSchema = z.object({
   scale: vec3Schema
 });
 
-const instrumentSchema = z.enum(["glass_bell", "warm_pad", "flute", "woodblock", "low_pad", "pluck", "crystal"]);
+const instrumentSchema = z.enum(["glass_bell", "warm_pad", "flute", "woodblock", "low_pad", "pluck", "crystal", "piano", "violin", "cello"]);
 
 const audioSchema = z.discriminatedUnion("generator", [
   z.object({ generator: z.literal("note"), instrument: instrumentSchema, baseNote: z.string(), duration: z.number().positive(), velocity: z.number().min(0).max(1) }),

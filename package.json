@@ -18,9 +18,11 @@
     "three": "^0.184.0",
     "tone": "^15.1.22",
     "tonejs-instrument-bass-electric-mp3": "^1.1.2",
+    "tonejs-instrument-cello-mp3": "^1.1.1",
     "tonejs-instrument-flute-mp3": "^1.1.2",
     "tonejs-instrument-harp-mp3": "^1.1.1",
     "tonejs-instrument-piano-mp3": "^1.1.2",
+    "tonejs-instrument-violin-mp3": "^1.1.1",
     "tonejs-instrument-xylophone-mp3": "^1.1.2",
     "zod": "^4.4.3"
   },

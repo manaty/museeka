@@ -71,7 +71,10 @@ export type InstrumentId =
   | "woodblock"
   | "low_pad"
   | "pluck"
-  | "crystal";
+  | "crystal"
+  | "piano"
+  | "violin"
+  | "cello";
 
 export type AudioGenerator =
   | {

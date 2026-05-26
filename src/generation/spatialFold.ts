@@ -57,7 +57,10 @@ const VISUAL_BY_INSTRUMENT: Record<InstrumentId, SoundObjectVisual["model"]> = {
   woodblock: "rock",
   low_pad: "crystal",
   pluck: "tree",
-  crystal: "crystal"
+  crystal: "crystal",
+  piano: "statue",
+  violin: "bird",
+  cello: "tree"
 };
 
 const COLOR_BY_INSTRUMENT: Record<InstrumentId, string> = {
@@ -67,7 +70,10 @@ const COLOR_BY_INSTRUMENT: Record<InstrumentId, string> = {
   woodblock: "#f6c98f",
   low_pad: "#b89dff",
   pluck: "#8ff0d2",
-  crystal: "#d2d7ff"
+  crystal: "#d2d7ff",
+  piano: "#ecd9b5",
+  violin: "#ff9a5a",
+  cello: "#c97746"
 };
 
 const INSTRUMENT_RING_INDEX: Record<InstrumentId, number> = {
@@ -77,7 +83,10 @@ const INSTRUMENT_RING_INDEX: Record<InstrumentId, number> = {
   crystal: 3,
   warm_pad: 4,
   woodblock: 5,
-  low_pad: 6
+  low_pad: 6,
+  piano: 7,
+  violin: 8,
+  cello: 9
 };
 
 const AGGREGATE_VISUAL_BY_KIND: Record<string, SoundObjectVisual["model"]> = {

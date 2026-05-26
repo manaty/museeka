@@ -17,8 +17,16 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     seed
   };
 
-  const initial = scores.map((score) => ({ score, ...spatialFold(score, terrain, { seed }) }));
+  const initial = scores.map((score) => {
+    const t = Date.now();
+    const result = spatialFold(score, terrain, { seed });
+    console.log(`  spatialFold ${score.id}: ${((Date.now() - t) / 1000).toFixed(1)}s`);
+    return { score, ...result };
+  });
+  console.log("Running relaxer...");
+  const tRelax = Date.now();
   const generated = relaxScenes(initial, terrain);
+  console.log(`  relaxer: ${((Date.now() - tRelax) / 1000).toFixed(1)}s`);
 
   const scene: IslandScene = {
     version: "0.1",

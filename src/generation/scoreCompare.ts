@@ -218,6 +218,70 @@ function hungarian(cost: number[][]): number[] {
   return assignment;
 }
 
+const HUNGARIAN_WINDOW_SECONDS = 3;
+const HUNGARIAN_WINDOW_OVERLAP_SECONDS = TIME_TOLERANCE; // ensures any candidate within tolerance is in some window
+
+/**
+ * Run Hungarian per overlapping time window so we don't pay O(n^3) on
+ * scores with thousands of notes. Windows overlap by TIME_TOLERANCE so any
+ * cross-window matching candidate is still considered exactly once (the
+ * window that contains the expected note's centre wins).
+ */
+function windowedAssignment(expected: ExpectedNote[], produced: ProducedNote[]): number[] {
+  const N = expected.length;
+  const M = produced.length;
+  const assignment = new Array<number>(N).fill(-1);
+  if (N === 0 || M === 0) return assignment;
+
+  const tStart = Math.min(expected[0].time, produced[0]?.time ?? 0);
+  const tEnd = Math.max(expected[N - 1].time, produced[M - 1]?.time ?? 0);
+
+  const expectedConsumed = new Array<boolean>(N).fill(false);
+  const producedConsumed = new Array<boolean>(M).fill(false);
+
+  // Two pointers per window for efficient slicing
+  let expStart = 0;
+  let prodStart = 0;
+
+  for (let winStart = tStart; winStart <= tEnd; winStart += HUNGARIAN_WINDOW_SECONDS) {
+    const winEnd = winStart + HUNGARIAN_WINDOW_SECONDS;
+    const winEndPadded = winEnd + HUNGARIAN_WINDOW_OVERLAP_SECONDS;
+    const winStartPadded = winStart - HUNGARIAN_WINDOW_OVERLAP_SECONDS;
+
+    while (expStart < N && expected[expStart].time < winStart - HUNGARIAN_WINDOW_OVERLAP_SECONDS) expStart += 1;
+    while (prodStart < M && produced[prodStart].time < winStartPadded) prodStart += 1;
+
+    // Collect window candidates (with overlap padding for produced)
+    const localExp: number[] = [];
+    for (let i = expStart; i < N && expected[i].time < winEnd; i += 1) {
+      if (!expectedConsumed[i]) localExp.push(i);
+    }
+    const localProd: number[] = [];
+    for (let j = prodStart; j < M && produced[j].time < winEndPadded; j += 1) {
+      if (!producedConsumed[j]) localProd.push(j);
+    }
+    if (localExp.length === 0 || localProd.length === 0) continue;
+
+    const cost: number[][] = localExp.map((i) => localProd.map((j) => pairCost(expected[i], produced[j])));
+    const localAssign = hungarian(cost);
+
+    for (let li = 0; li < localExp.length; li += 1) {
+      const lj = localAssign[li];
+      if (lj < 0) continue;
+      const expIdx = localExp[li];
+      const prodIdx = localProd[lj];
+      // Only commit if the expected note's centre is inside the window (not in the padded overlap zone)
+      const inThisWindow = expected[expIdx].time >= winStart && expected[expIdx].time < winEnd;
+      if (!inThisWindow) continue;
+      assignment[expIdx] = prodIdx;
+      expectedConsumed[expIdx] = true;
+      producedConsumed[prodIdx] = true;
+    }
+  }
+
+  return assignment;
+}
+
 export function compareProduced(score: MusicScore, produced: ProducedNote[]): ComparisonResult {
   const expected = buildExpectedNotes(score);
 
@@ -234,28 +298,31 @@ export function compareProduced(score: MusicScore, produced: ProducedNote[]): Co
 
   const N = expected.length;
   const M = produced.length;
+  const sortedExpected = [...expected].sort((a, b) => a.time - b.time);
+  const sortedProduced = [...produced].sort((a, b) => a.time - b.time);
 
-  let assignment: number[];
-  if (M === 0) {
-    assignment = new Array(N).fill(-1);
-  } else {
-    const cost: number[][] = expected.map((exp) => produced.map((prod) => pairCost(exp, prod)));
-    assignment = hungarian(cost);
-  }
+  const assignment = windowedAssignment(sortedExpected, sortedProduced);
+
+  // Map back to original (unsorted) indices
+  const expIndexMap = new Map<ExpectedNote, number>();
+  expected.forEach((e, i) => expIndexMap.set(e, i));
+  const prodIndexMap = new Map<ProducedNote, number>();
+  produced.forEach((p, i) => prodIndexMap.set(p, i));
 
   const matches: NoteMatch[] = [];
   const missing: ExpectedNote[] = [];
   const consumed = new Set<number>();
 
-  for (let i = 0; i < N; i += 1) {
-    const j = assignment[i];
-    if (j < 0) {
-      missing.push(expected[i]);
+  for (let sortedI = 0; sortedI < N; sortedI += 1) {
+    const exp = sortedExpected[sortedI];
+    const sortedJ = assignment[sortedI];
+    if (sortedJ < 0) {
+      missing.push(exp);
       continue;
     }
-    consumed.add(j);
-    const prod = produced[j];
-    const exp = expected[i];
+    const prod = sortedProduced[sortedJ];
+    const origJ = prodIndexMap.get(prod);
+    if (origJ !== undefined) consumed.add(origJ);
     const midiDelta = prod.midi - exp.midi;
     const timeDelta = prod.time - exp.time;
     const pitchOk = exp.kind === "percussion" || prod.midi === exp.midi;

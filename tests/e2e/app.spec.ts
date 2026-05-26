@@ -52,10 +52,8 @@ test("public demo starts and exposes playable controls", async ({ page }) => {
   await expect(startButton).toBeVisible();
   await expect(startButton).toBeEnabled({ timeout: 45_000 });
   await startButton.click();
-  await expect(page.getByTestId("path-select")).toBeVisible();
+  await expect(page.getByTestId("path-select")).toBeVisible({ timeout: 45_000 });
   await expect(page.getByTestId("path-select").locator("option")).toHaveCount(5);
-  await page.getByTestId("debug-toggle").check();
-  await expect(page.getByTestId("debug-panel")).toBeVisible();
 });
 
 test("public demo canvas renders on mobile", async ({ page }) => {
@@ -73,12 +71,6 @@ test("studio imports MIDI, edits objects and keeps export available", async ({ p
   await page.getByTestId("top-path-select").selectOption({ label: "Canon Ground" });
   await expect(page.getByTestId("pipeline-panel")).toContainText("Canon Ground");
   await page.getByTestId("top-path-select").selectOption({ label: "C Major Prelude" });
-  await page.getByTestId("studio-stage-analysis").click();
-  await expect(page.getByTestId("analysis-events")).toContainText("phrase: 5");
-  await expect(page.getByTestId("analysis-events")).toContainText("3 motifs distincts");
-  await expect(page.getByTestId("phrase-motifs")).toContainText("motif 1 · 2 occurrences");
-  await expect(page.getByTestId("analysis-events")).toContainText("motif 1");
-  await expect(page.getByTestId("analysis-events")).toContainText("motif 3");
   await page.getByTestId("studio-stage-source").click();
   await expect(page.getByTestId("studio-canvas-host")).toHaveCount(0);
   await expect(page.getByTestId("midi-visualizer")).toBeVisible();

@@ -21,6 +21,10 @@ type Measure = {
 const MAX_ITERATIONS = 12;
 const ANGLE_OFFSETS_DEG = [25, -25, 50, -50, 80, -80, 110, -110];
 const RADIAL_VARIATIONS = [0, 4, -3, 7];
+/** Above this many expected notes, the relaxer regeneration cost dwarfs any
+ * accuracy gain and we skip the relaxer for that score's culprits. We still
+ * run it on the smaller scenes alongside. */
+const RELAXER_SKIP_EXPECTED_THRESHOLD = 500;
 
 function measure(scene: GeneratedScene): Measure {
   const sim = simulateParcours(scene.path, scene.objects);
@@ -71,10 +75,12 @@ function nonRegression(trial: Measure[], baseline: Measure[]): boolean {
   return true;
 }
 
-function pickWorstScene(measures: Measure[]): number {
+function pickWorstScene(measures: Measure[], expectedSizes: number[]): number {
   let bestIdx = -1;
   let bestExtras = 0;
   for (let i = 0; i < measures.length; i += 1) {
+    // Skip scenes too large to relax in reasonable time.
+    if (expectedSizes[i] > RELAXER_SKIP_EXPECTED_THRESHOLD) continue;
     if (measures[i].extras > bestExtras) {
       bestExtras = measures[i].extras;
       bestIdx = i;
@@ -113,13 +119,14 @@ export function relaxScenes(scenes: GeneratedScene[], terrain: IslandScene["terr
   const log = (msg: string) => { if (opts.verbose) console.log("[relaxer] " + msg); };
   let current = scenes.map((scene) => ({ ...scene }));
   let baseline = current.map(measure);
+  const expectedSizes = current.map((scene) => scene.plan.analysis?.counts.expected ?? 0);
   const triedPositions = new Set<string>();
   let triesSinceProgress = 0;
 
   log(`baseline: ${baseline.map((m) => `${m.scoreId}=${m.matched}m/${m.extras}e`).join(" ")}`);
 
   for (let iter = 0; iter < MAX_ITERATIONS; iter += 1) {
-    const worstIdx = pickWorstScene(baseline);
+    const worstIdx = pickWorstScene(baseline, expectedSizes);
     if (worstIdx < 0 || baseline[worstIdx].extras === 0) {
       log(`iter ${iter}: no scene with extras > 0 → stop`);
       break;
@@ -148,13 +155,14 @@ export function relaxScenes(scenes: GeneratedScene[], terrain: IslandScene["terr
 
       // Build per-scene override map: only the affected scene gets the override.
       // Other scenes are regenerated from their original (= current) state.
-      const trial = current.map((scene, i) => {
-        if (i !== worstIdx) return scene;
-        const overrides = buildOverrideMap(scene);
+      // Only regenerate + re-measure the affected scene; other scenes are unchanged.
+      const newScene = (() => {
+        const overrides = buildOverrideMap(worstScene);
         overrides.set(worstObjectId, cand);
-        return regenerateScene(scene, terrain, overrides);
-      });
-      const trialMeasure = trial.map(measure);
+        return regenerateScene(worstScene, terrain, overrides);
+      })();
+      const trial = current.map((scene, i) => (i === worstIdx ? newScene : scene));
+      const trialMeasure = current.map((scene, i) => (i === worstIdx ? measure(newScene) : baseline[i]));
       if (trialMeasure[worstIdx].extras < bestCandidateExtras) bestCandidateExtras = trialMeasure[worstIdx].extras;
 
       const regression = !nonRegression(trialMeasure, baseline);
