@@ -51,10 +51,17 @@ export class PointerLockDriver implements InputDriver {
 
   consume(): FreeFlyInput {
     const kb = this.keyboard.state();
+    // W follows the camera direction (look up + W → ascend), matching the
+    // mobile joystick behaviour. Space/Ctrl provide additional pure vertical.
+    const pitch = this.context?.getCameraDirection().pitch ?? 0;
+    const cosP = Math.cos(pitch);
+    const sinP = Math.sin(pitch);
+    const forwardHorizontal = kb.forward * cosP;
+    const verticalFromForward = kb.forward * sinP;
     const input: FreeFlyInput = {
-      forward: kb.forward,
+      forward: forwardHorizontal,
       right: kb.right,
-      up: kb.up,
+      up: verticalFromForward + kb.up,
       lookDx: this.lookDx,
       lookDy: this.lookDy,
       targetPoint: null,
@@ -62,7 +69,9 @@ export class PointerLockDriver implements InputDriver {
     };
     this.lookDx = 0;
     this.lookDy = 0;
-    return this.locked ? input : { ...emptyInput(), forward: kb.forward, right: kb.right, up: kb.up, sprint: kb.sprint };
+    return this.locked
+      ? input
+      : { ...emptyInput(), forward: forwardHorizontal, right: kb.right, up: verticalFromForward + kb.up, sprint: kb.sprint };
   }
 
   needsUiHint(): string {

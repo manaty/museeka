@@ -63,10 +63,15 @@ export class DragLookDriver implements InputDriver {
 
   consume(): FreeFlyInput {
     const kb = this.keyboard.state();
+    // W follows the camera direction (look up + W → ascend), matching the
+    // mobile joystick behaviour. Space/Ctrl provide additional pure vertical.
+    const pitch = this.context?.getCameraDirection().pitch ?? 0;
+    const forwardHorizontal = kb.forward * Math.cos(pitch);
+    const verticalFromForward = kb.forward * Math.sin(pitch);
     const input: FreeFlyInput = {
-      forward: kb.forward,
+      forward: forwardHorizontal,
       right: kb.right,
-      up: kb.up,
+      up: verticalFromForward + kb.up,
       lookDx: this.lookDx,
       lookDy: this.lookDy,
       targetPoint: null,
