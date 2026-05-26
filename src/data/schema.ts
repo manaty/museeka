@@ -116,7 +116,8 @@ const pathSchema = z.object({
     maxGroundClearance: z.number().positive()
   }),
   points: z.array(z.object({ t: z.number().min(0), p: vec3Schema })).min(2),
-  interpolation: z.literal("catmull-rom")
+  interpolation: z.literal("catmull-rom"),
+  audibleSuffix: z.string().optional()
 });
 
 export const islandSceneSchema = z.object({
