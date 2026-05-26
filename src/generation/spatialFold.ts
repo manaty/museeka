@@ -167,13 +167,16 @@ function ringRadiusFor(instrument: InstrumentId): number {
   return ANCHOR_BASE_RADIUS + (INSTRUMENT_RING_INDEX[instrument] ?? 0) * ANCHOR_RING_STEP;
 }
 
-function placeAnchorPosition(pitchClass: number, instrument: InstrumentId, baseOctave: number, terrain: IslandScene["terrain"]): Vec3 {
+function placeAnchorPosition(pitchClass: number, instrument: InstrumentId, _baseOctave: number, terrain: IslandScene["terrain"]): Vec3 {
   const ringRadius = ringRadiusFor(instrument);
   const angle = (pitchClass / 12) * Math.PI * 2;
   const x = Math.cos(angle) * ringRadius;
   const z = Math.sin(angle) * ringRadius;
   const ground = terrainGroundY(x, z, terrain);
-  const y = Math.max(ground + 3, 6) + baseOctave * 0.6;
+  // Place the field centre one Y-radius above the ground so the bottom of the audio
+  // ellipsoid exactly touches the visual (which is rendered on the terrain). The
+  // base note is encoded by `baseNote` directly, so we no longer offset Y per octave.
+  const y = ground + ANCHOR_FIELD_ALTITUDE;
   return [x, y, z];
 }
 
@@ -288,6 +291,12 @@ function fieldForAggregate(event: MusicEvent): SoundField {
   };
 }
 
+function aggregateFieldRadiusY(event: MusicEvent): number {
+  if (event.kind === "drone") return 5;
+  if (event.kind === "chord") return 5.5;
+  return 3.8;
+}
+
 function triggerForAggregate(event: MusicEvent) {
   if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown: 0.5, retrigger: true };
   if (event.kind === "percussion") return { mode: "peak" as const, threshold: 0.5, cooldown: 0.35, retrigger: true };
@@ -393,7 +402,8 @@ function liftAboveTerrain(path: Path3D, terrain: IslandScene["terrain"]): Path3D
   return { ...path, points: lifted };
 }
 
-function aggregatePositionAlongPath(time: number, basePath: Path3D, offsetSign: number, terrain: IslandScene["terrain"], hasTokens: boolean, aggregateIndex: number, aggregateCount: number): Vec3 {
+function aggregatePositionAlongPath(event: MusicEvent, basePath: Path3D, offsetSign: number, terrain: IslandScene["terrain"], hasTokens: boolean, aggregateIndex: number, aggregateCount: number): Vec3 {
+  const fieldRy = aggregateFieldRadiusY(event);
   if (!hasTokens || basePath.points.length < 3) {
     // No melody to follow: distribute aggregates on a wide ring so they don't pile up on the entry.
     const angle = aggregateCount > 0 ? (aggregateIndex / aggregateCount) * Math.PI * 1.6 - Math.PI * 0.8 : 0;
@@ -401,17 +411,20 @@ function aggregatePositionAlongPath(time: number, basePath: Path3D, offsetSign: 
     const x = Math.cos(angle) * radius;
     const z = Math.sin(angle) * radius;
     const ground = terrainGroundY(x, z, terrain);
-    return [x, Math.max(ground + 4, 8), z];
+    return [x, ground + fieldRy, z];
   }
-  const sample = samplePathAtTime(basePath, time);
-  const next = samplePathAtTime(basePath, Math.min(basePath.duration, time + 0.4));
-  const previous = samplePathAtTime(basePath, Math.max(0, time - 0.4));
+  const sample = samplePathAtTime(basePath, event.time);
+  const next = samplePathAtTime(basePath, Math.min(basePath.duration, event.time + 0.4));
+  const previous = samplePathAtTime(basePath, Math.max(0, event.time - 0.4));
   const tangent: Vec3 = [next[0] - previous[0], 0, next[2] - previous[2]];
   const tangentLen = Math.hypot(tangent[0], tangent[2]) || 1;
   const lateral: Vec3 = [-tangent[2] / tangentLen, 0, tangent[0] / tangentLen];
-  const offsetPos: Vec3 = [sample[0] + lateral[0] * AGGREGATE_OFFSET * offsetSign, sample[1] - 1.5, sample[2] + lateral[2] * AGGREGATE_OFFSET * offsetSign];
-  const ground = terrainGroundY(offsetPos[0], offsetPos[2], terrain);
-  return [offsetPos[0], Math.max(ground + 0.8, offsetPos[1]), offsetPos[2]];
+  const x = sample[0] + lateral[0] * AGGREGATE_OFFSET * offsetSign;
+  const z = sample[2] + lateral[2] * AGGREGATE_OFFSET * offsetSign;
+  const ground = terrainGroundY(x, z, terrain);
+  // Center the audio field one Y-radius above the ground so its bottom touches the
+  // visual (which is grounded by the renderer) — the object now sits inside its zone.
+  return [x, ground + fieldRy, z];
 }
 
 function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number): SoundObject {
@@ -518,11 +531,12 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     const hasTokens = tokens.length > 0;
     aggregates.forEach((event, index) => {
       const offsetSign = index % 2 === 0 ? 1 : -1;
-      const position = aggregatePositionAlongPath(event.time, skeletonPath, offsetSign, terrain, hasTokens, index, aggregates.length);
+      const position = aggregatePositionAlongPath(event, skeletonPath, offsetSign, terrain, hasTokens, index, aggregates.length);
       const object = buildAggregateSoundObject(event, position, index);
       aggregateObjects.push(object);
       objectsCollected.push(object);
-      waypoints.push({ t: event.time, p: [position[0], position[1] + 1.2, position[2]], source: "aggregate", refId: event.id });
+      // Path waypoint is at the field centre so the player traverses straight through the audio zone.
+      waypoints.push({ t: event.time, p: [position[0], position[1], position[2]], source: "aggregate", refId: event.id });
     });
     steps.push({
       index: steps.length,
