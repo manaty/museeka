@@ -26,15 +26,17 @@ import { simulateParcours } from "./scoreSimulator";
 import { compareProduced } from "./scoreCompare";
 
 const PITCH_CLASS_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-const OCTAVE_HEIGHT_M = 6;
-const ANCHOR_BASE_RADIUS = 18;
+// Tighter spatial layout so the path's max travel between consecutive
+// waypoints stays low → bounded firefly peak speed without slowing the
+// music. The trade-off is denser fields, so ANCHOR_FIELD_RADIUS shrinks
+// proportionally to keep adjacent pitch classes from bleeding.
+const OCTAVE_HEIGHT_M = 4;
+const ANCHOR_BASE_RADIUS = 13;
 const ANCHOR_RING_STEP = 4;
-const ANCHOR_FIELD_RADIUS = 3.2;
-// Field Y radius is small (2.5 m) so vertically-stacked octave anchors
-// (separated by OCTAVE_HEIGHT_M) don't bleed intensity into each other.
-const ANCHOR_FIELD_ALTITUDE = 2.5;
+const ANCHOR_FIELD_RADIUS = 2.4;
+const ANCHOR_FIELD_ALTITUDE = 1.6;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
-const AGGREGATE_OFFSET = 7;
+const AGGREGATE_OFFSET = 4;
 const AGGREGATE_ANGLE_SEQUENCE = [
   Math.PI / 2,
   -Math.PI / 2,
@@ -604,9 +606,7 @@ function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: stri
     name: scoreName,
     duration,
     mode: "flying",
-    // Halved so the firefly moves at a calmer pace through the island —
-    // fewer fast brushes, easier to follow musically, less tunneling.
-    speedScale: 0.5,
+    speedScale: 1,
     constraints: { maxSpeed: MAX_PATH_SPEED, maxAcceleration: 18, maxCurvature: 1.6, minGroundClearance: 1.5, maxGroundClearance: 60 },
     points,
     interpolation: "catmull-rom",
