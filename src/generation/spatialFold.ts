@@ -114,7 +114,7 @@ export type SpatialFoldOptions = {
 type Waypoint = {
   t: number;
   p: Vec3;
-  source: "entry" | "exit" | "anchor" | "aggregate" | "release";
+  source: "entry" | "exit" | "anchor" | "aggregate" | "release" | "deflection";
   refId?: string;
   anchorId?: string;
 };
@@ -574,6 +574,7 @@ function insertAggregateReleases(waypoints: Waypoint[], aggregateObjects: SoundO
 const SOURCE_PRIORITY: Record<string, number> = {
   anchor: 10,
   aggregate: 8,
+  deflection: 7,
   release: 5,
   entry: 2,
   exit: 2
@@ -634,6 +635,107 @@ function liftAboveTerrain(path: Path3D, terrain: IslandScene["terrain"]): Path3D
     return { ...point, p: [point.p[0], desiredY, point.p[2]] as Vec3 };
   });
   return { ...path, points: lifted };
+}
+
+/**
+ * Iteratively re-route the path around objects that fire as extras. For each
+ * extra (an unintended trigger), insert a "deflection" waypoint at that time
+ * that pushes the path outside the offending object's field. The Catmull-Rom
+ * curve re-shapes to pass through the deflection, avoiding the brush.
+ *
+ * Falls back to MOVING the object (if exclusive to this path) when path
+ * deflection alone can't clear the extra after a few attempts.
+ */
+function deflectAndMoveForExtras(
+  waypoints: Waypoint[],
+  score: MusicScore,
+  scoreId: string,
+  scoreName: string,
+  duration: number,
+  terrain: IslandScene["terrain"],
+  idSuffix: string,
+  objects: SoundObject[]
+): { waypoints: Waypoint[]; objects: SoundObject[] } {
+  const MAX_ITER = 8;
+  const DEFLECT_MARGIN = 2.0;
+  let current = [...waypoints];
+  let currentObjects = [...objects];
+  const objectMoveAttempts = new Map<string, number>();
+
+  for (let iter = 0; iter < MAX_ITER; iter += 1) {
+    let path = waypointsToPath(current, scoreId, scoreName, duration, idSuffix);
+    path = liftAboveTerrain(path, terrain);
+    const sim = simulateParcours(path, currentObjects);
+    const cmp = compareProduced(score, sim.produced);
+    if (cmp.extra.length === 0) return { waypoints: current, objects: currentObjects };
+
+    // Group extras into visit episodes per object (notes within 0.5 s are one visit).
+    const visitsByObject = new Map<string, number[]>();
+    for (const extra of cmp.extra) {
+      const arr = visitsByObject.get(extra.sourceObjectId) ?? [];
+      arr.push(extra.time);
+      visitsByObject.set(extra.sourceObjectId, arr);
+    }
+    const episodes: Array<{ objectId: string; time: number }> = [];
+    for (const [objId, times] of visitsByObject) {
+      times.sort((a, b) => a - b);
+      let lastT = -Infinity;
+      for (const t of times) {
+        if (t - lastT > 0.5) episodes.push({ objectId: objId, time: t });
+        lastT = t;
+      }
+    }
+
+    let modified = false;
+    const moved = new Set<string>();
+    for (const episode of episodes) {
+      const obj = currentObjects.find((o) => o.id === episode.objectId);
+      if (!obj) continue;
+      const pathState = samplePathAtTime(path, episode.time);
+      const objPos = obj.transform.position;
+      let dx = pathState[0] - objPos[0];
+      let dz = pathState[2] - objPos[2];
+      const len = Math.hypot(dx, dz);
+      const ux = len > 0.001 ? dx / len : 1;
+      const uz = len > 0.001 ? dz / len : 0;
+      const fieldR = fieldRadiusXZ(obj.field);
+      const dist = fieldR + DEFLECT_MARGIN;
+      const px = objPos[0] + ux * dist;
+      const pz = objPos[2] + uz * dist;
+      const ground = terrainGroundY(px, pz, terrain);
+      const py = Math.max(pathState[1], ground + 1.8);
+
+      const attempts = objectMoveAttempts.get(episode.objectId) ?? 0;
+      // First few rounds: try deflecting the PATH. If that fails repeatedly,
+      // MOVE the object itself (we know it belongs to this score only because
+      // every object id carries the per-score suffix).
+      if (attempts < 2) {
+        current.push({
+          t: episode.time,
+          p: [px, py, pz],
+          source: "deflection",
+          refId: `deflect_${episode.objectId}_${episode.time.toFixed(2)}`
+        });
+        objectMoveAttempts.set(episode.objectId, attempts + 1);
+        modified = true;
+      } else if (!moved.has(episode.objectId)) {
+        // Move the object away from where the path naturally crosses now.
+        const movePx = objPos[0] + ux * (fieldR * 3 + DEFLECT_MARGIN);
+        const movePz = objPos[2] + uz * (fieldR * 3 + DEFLECT_MARGIN);
+        const moveGround = terrainGroundY(movePx, movePz, terrain);
+        const movePy = Math.max(objPos[1], moveGround + 2);
+        currentObjects = currentObjects.map((o) =>
+          o.id === episode.objectId
+            ? { ...o, transform: { ...o.transform, position: [movePx, movePy, movePz] as Vec3 } }
+            : o
+        );
+        moved.add(episode.objectId);
+        modified = true;
+      }
+    }
+    if (!modified) break;
+  }
+  return { waypoints: current, objects: currentObjects };
 }
 
 function fieldRadiusXZ(field: SoundField): number {
@@ -877,6 +979,26 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     const withAggReleases = insertAggregateReleases(waypoints, aggregateObjects);
     waypoints.length = 0;
     waypoints.push(...withAggReleases);
+  }
+
+  // Re-route the path around any object that the simulator says fires as an
+  // extra. Tries waypoint deflection first; falls back to moving the object
+  // when deflection doesn't clear the brush.
+  const deflected = deflectAndMoveForExtras(
+    waypoints,
+    score,
+    score.id,
+    score.name,
+    score.duration,
+    terrain,
+    idSuffix,
+    objectsCollected
+  );
+  waypoints.length = 0;
+  waypoints.push(...deflected.waypoints);
+  if (deflected.objects !== objectsCollected) {
+    objectsCollected.length = 0;
+    objectsCollected.push(...deflected.objects);
   }
 
   let path = waypointsToPath(waypoints, score.id, score.name, score.duration, idSuffix);
