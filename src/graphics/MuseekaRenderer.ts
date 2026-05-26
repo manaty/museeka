@@ -422,8 +422,11 @@ export class MuseekaRenderer {
   }
 
   private createSea() {
-    const seaRadius = this.scene.terrain.radius * 4.5;
-    const geometry = this.buildSeaDiskGeometry(seaRadius, 28, 96);
+    // Sea disk extends well past the fog band (fog ends at 260 m) so its edge
+    // never enters the player's view; what they see is always sea fading into
+    // sky via the fog blend.
+    const seaRadius = Math.max(800, this.scene.terrain.radius * 12);
+    const geometry = this.buildSeaDiskGeometry(seaRadius, 32, 128);
     const sea = new THREE.Mesh(
       geometry,
       new THREE.MeshStandardMaterial({ color: "#1f7fb8", roughness: 0.36, metalness: 0.18, transparent: true, opacity: 0.92 })
