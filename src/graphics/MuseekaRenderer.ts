@@ -429,7 +429,7 @@ export class MuseekaRenderer {
     const geometry = this.buildSeaDiskGeometry(seaRadius, 32, 128);
     const sea = new THREE.Mesh(
       geometry,
-      new THREE.MeshStandardMaterial({ color: "#1f7fb8", roughness: 0.36, metalness: 0.18, transparent: true, opacity: 0.92 })
+      new THREE.MeshStandardMaterial({ color: "#1f7fb8", roughness: 0.36, metalness: 0.18 })
     );
     sea.position.y = -0.42;
     this.scene3d.add(sea);
