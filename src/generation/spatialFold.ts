@@ -390,13 +390,16 @@ function aggregateFieldRadiusY(event: MusicEvent): number {
 }
 
 function triggerForAggregate(event: MusicEvent) {
-  // Cooldown derived from the event's own duration so a retrigger never fires
-  // exactly on the natural interval between successive events of the same kind.
-  const cooldown = clampCooldown(event.duration * COOLDOWN_DURATION_FACTOR);
-  if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown, retrigger: true };
-  if (event.kind === "percussion") return { mode: "peak" as const, threshold: 0.5, cooldown, retrigger: true };
-  if (event.kind === "phrase") return { mode: "peak" as const, threshold: 0.42, cooldown, retrigger: true };
-  return { mode: "peak" as const, threshold: 0.42, cooldown, retrigger: true };
+  // Percussion cooldown is short (events are tiny). For sustained events
+  // (chord, drone, phrase) the cooldown must cover the full natural duration
+  // so the path stationing inside the field doesn't trigger many re-fires.
+  if (event.kind === "percussion") {
+    return { mode: "peak" as const, threshold: 0.5, cooldown: clampCooldown(event.duration * COOLDOWN_DURATION_FACTOR), retrigger: true };
+  }
+  const sustainCooldown = Math.max(MIN_COOLDOWN, event.duration);
+  if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown: sustainCooldown, retrigger: true };
+  if (event.kind === "phrase") return { mode: "peak" as const, threshold: 0.42, cooldown: sustainCooldown, retrigger: true };
+  return { mode: "peak" as const, threshold: 0.42, cooldown: sustainCooldown, retrigger: true };
 }
 
 function colorForAggregate(event: MusicEvent): string {

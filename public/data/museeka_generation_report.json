@@ -58,239 +58,70 @@
       "pathId": "path-pachelbel-canon",
       "clusters": [
         {
-          "clusterId": "pc_D_cello",
-          "objectId": "pc_D_cello",
+          "clusterId": "pc_Fs_piano",
+          "objectId": "pc_Fs_piano",
           "eventIds": [],
           "anchor": [
-            27.000000000000007,
-            7.148237017028766,
-            46.76537180435968
+            -46,
+            11.356376381656816,
+            5.633375276077825e-15
           ],
-          "reuseScore": 8
+          "reuseScore": 1
         },
         {
-          "clusterId": "pc_A_cello",
-          "objectId": "pc_A_cello",
+          "clusterId": "pc_G_piano",
+          "objectId": "pc_G_piano",
           "eventIds": [],
           "anchor": [
-            -9.91963907309356e-15,
-            7.142325266146664,
-            -54
+            -39.837168574084174,
+            9.606026994650048,
+            -23.000000000000004
           ],
-          "reuseScore": 7
+          "reuseScore": 1
         },
         {
-          "clusterId": "pc_B_cello",
-          "objectId": "pc_B_cello",
+          "clusterId": "pc_D_piano",
+          "objectId": "pc_D_piano",
           "eventIds": [],
           "anchor": [
-            46.765371804359674,
-            7.384790522644196,
-            -27.000000000000025
+            23.000000000000004,
+            8.986623705366245,
+            39.837168574084174
           ],
-          "reuseScore": 4
+          "reuseScore": 1
         },
         {
-          "clusterId": "pc_Fs_cello",
-          "objectId": "pc_Fs_cello",
+          "clusterId": "pc_E_piano",
+          "objectId": "pc_E_piano",
           "eventIds": [],
           "anchor": [
-            -54,
-            7.266967221165852,
-            6.6130927153957075e-15
+            -22.99999999999999,
+            9.438615496890652,
+            39.83716857408418
           ],
-          "reuseScore": 4
+          "reuseScore": 1
         },
         {
-          "clusterId": "pc_G_cello",
-          "objectId": "pc_G_cello",
+          "clusterId": "pc_B_piano",
+          "objectId": "pc_B_piano",
           "eventIds": [],
           "anchor": [
-            -46.76537180435968,
-            7.112712460504619,
-            -27.000000000000007
+            39.83716857408417,
+            12.175568870190949,
+            -23.00000000000002
           ],
-          "reuseScore": 8
+          "reuseScore": 2
         },
         {
-          "clusterId": "pc_Fs_violin",
-          "objectId": "pc_Fs_violin",
+          "clusterId": "pc_A_piano",
+          "objectId": "pc_A_piano",
           "eventIds": [],
           "anchor": [
-            -50,
-            8.833227295465626,
-            6.123233995736766e-15
+            -8.450062914116736e-15,
+            9.201435996006595,
+            -46
           ],
-          "reuseScore": 8
-        },
-        {
-          "clusterId": "pc_E_violin",
-          "objectId": "pc_E_violin",
-          "eventIds": [],
-          "anchor": [
-            -24.99999999999999,
-            7.994081709327683,
-            43.30127018922194
-          ],
-          "reuseScore": 5
-        },
-        {
-          "clusterId": "pc_D_violin",
-          "objectId": "pc_D_violin",
-          "eventIds": [],
-          "anchor": [
-            25.000000000000007,
-            7.920359016411476,
-            43.30127018922193
-          ],
-          "reuseScore": 9
-        },
-        {
-          "clusterId": "pc_Cs_violin",
-          "objectId": "pc_Cs_violin",
-          "eventIds": [],
-          "anchor": [
-            43.30127018922194,
-            7.800674357217061,
-            24.999999999999996
-          ],
-          "reuseScore": 7
-        },
-        {
-          "clusterId": "pc_B_violin",
-          "objectId": "pc_B_violin",
-          "eventIds": [],
-          "anchor": [
-            43.30127018922192,
-            9.505574782174588,
-            -25.00000000000002
-          ],
-          "reuseScore": 10
-        },
-        {
-          "clusterId": "pc_A_violin",
-          "objectId": "pc_A_violin",
-          "eventIds": [],
-          "anchor": [
-            -9.184850993605149e-15,
-            7.916228400318784,
-            -50
-          ],
-          "reuseScore": 7
-        },
-        {
-          "clusterId": "pc_G_violin",
-          "objectId": "pc_G_violin",
-          "eventIds": [],
-          "anchor": [
-            -43.30127018922193,
-            7.899043722946414,
-            -25.000000000000007
-          ],
-          "reuseScore": 6
-        },
-        {
-          "clusterId": "motif_1",
-          "objectId": "motif_1",
-          "eventIds": [
-            "note_0_D3",
-            "note_1_A2",
-            "note_2_B2",
-            "note_3_F#2",
-            "note_4_G2",
-            "note_5_D2",
-            "note_6_G2",
-            "note_8_D3",
-            "note_9_A2",
-            "note_10_B2",
-            "note_11_F#2",
-            "note_12_G2",
-            "note_13_D2",
-            "note_14_G2",
-            "note_16_D3",
-            "note_17_A2",
-            "note_18_B2",
-            "note_19_F#2",
-            "note_20_G2",
-            "note_21_D2",
-            "note_22_G2",
-            "note_24_D3",
-            "note_25_A2",
-            "note_26_B2",
-            "note_27_F#2",
-            "note_28_G2",
-            "note_29_D2",
-            "note_30_G2"
-          ],
-          "anchor": [
-            0,
-            0,
-            0
-          ],
-          "reuseScore": 21
-        },
-        {
-          "clusterId": "motif_2",
-          "objectId": "motif_2",
-          "eventIds": [
-            "note_8_D5",
-            "note_0_F#5",
-            "note_17_F#4",
-            "note_18_A4",
-            "note_9_C#5",
-            "note_1_E5",
-            "note_12_G4",
-            "note_4_B4",
-            "note_25_B3",
-            "note_26_D4",
-            "note_13_F#4",
-            "note_5_A4"
-          ],
-          "anchor": [
-            0,
-            0,
-            0
-          ],
-          "reuseScore": 6
-        },
-        {
-          "clusterId": "motif_3",
-          "objectId": "motif_3",
-          "eventIds": [
-            "note_0_F#5",
-            "note_9_C#5",
-            "note_1_E5",
-            "note_1_E5",
-            "note_10_B4",
-            "note_2_D5",
-            "note_4_B4",
-            "note_13_F#4",
-            "note_5_A4"
-          ],
-          "anchor": [
-            0,
-            0,
-            0
-          ],
-          "reuseScore": 6
-        },
-        {
-          "clusterId": "motif_4",
-          "objectId": "motif_4",
-          "eventIds": [
-            "note_0_F#5",
-            "note_1_E5",
-            "note_2_D5",
-            "note_3_C#5",
-            "note_4_B4",
-            "note_5_A4"
-          ],
-          "anchor": [
-            0,
-            0,
-            0
-          ],
-          "reuseScore": 3
+          "reuseScore": 1
         }
       ]
     },

@@ -67,6 +67,7 @@ type TriggerState = {
   lastTriggeredAt: number;
   peakIntensity: number;
   rising: boolean;
+  everTriggered: boolean;
 };
 
 type ContinuousVoice = {
@@ -410,7 +411,7 @@ export class AudioEngine {
   }
 
   private updateTriggered(object: SoundObject, encounter: Encounter, elapsed: number) {
-    const state = this.triggerStates.get(object.id) ?? { lastIntensity: 0, lastTriggeredAt: -Infinity, peakIntensity: 0, rising: false };
+    const state = this.triggerStates.get(object.id) ?? { lastIntensity: 0, lastTriggeredAt: -Infinity, peakIntensity: 0, rising: false, everTriggered: false };
     const intensity = encounter.field.intensity;
     const threshold = object.trigger.threshold;
     const cooledDown = elapsed - state.lastTriggeredAt >= object.trigger.cooldown;
@@ -424,11 +425,9 @@ export class AudioEngine {
           this.playGenerator(object.audio, this.mappedParams(object, encounter));
           state.lastTriggeredAt = elapsed;
           state.rising = false;
-          // Reset peak baseline so the next visit at the same intensity magnitude re-triggers.
           state.peakIntensity = intensity;
         }
       } else if (intensity < threshold * 0.3) {
-        // Deep exit: full state cleanup so re-entry starts completely fresh.
         state.peakIntensity = 0;
         state.rising = false;
       }

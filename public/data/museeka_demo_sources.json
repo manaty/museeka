@@ -3260,409 +3260,211 @@
       "ppq": 960,
       "events": [
         {
-          "id": "note_0_D3",
+          "id": "chord_0_A3_D3_D3_D5_F#4",
           "time": 0,
           "duration": 1.4568448010416666,
-          "kind": "note",
-          "notes": [
-            "D3"
-          ],
-          "velocity": 0.6141732283464567,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_0_A3_D3_D5_F#4",
-          "time": 0,
-          "duration": 1.2886900895833333,
           "kind": "chord",
           "notes": [
             "A3",
             "D3",
+            "D3",
             "D5",
             "F#4"
           ],
-          "velocity": 0.4330708661417323,
+          "velocity": 0.6141732283464567,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_1_A2",
+          "id": "chord_1_A2_A2_A4_C#5_E3",
           "time": 1.428571,
           "duration": 1.4568448010416668,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.6535433070866141,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_1_A2_A4_C#5_E3",
-          "time": 1.428571,
-          "duration": 1.2886900895833333,
           "kind": "chord",
           "notes": [
+            "A2",
             "A2",
             "A4",
             "C#5",
             "E3"
           ],
-          "velocity": 0.47244094488188976,
+          "velocity": 0.6535433070866141,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_2_B2",
+          "id": "chord_2_B2_B2_B4_D4_F#3",
           "time": 2.857142,
           "duration": 1.4568448010416666,
-          "kind": "note",
-          "notes": [
-            "B2"
-          ],
-          "velocity": 0.7244094488188977,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_2_B2_B4_D4_F#3",
-          "time": 2.857142,
-          "duration": 1.288690089583333,
           "kind": "chord",
           "notes": [
+            "B2",
             "B2",
             "B4",
             "D4",
             "F#3"
           ],
-          "velocity": 0.47244094488188976,
+          "velocity": 0.7244094488188977,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_3_F#2",
+          "id": "chord_3_A4_C#3_F#2_F#2_F#4",
           "time": 4.285713,
           "duration": 1.4568448010416661,
-          "kind": "note",
-          "notes": [
-            "F#2"
-          ],
-          "velocity": 0.7559055118110236,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_3_A4_C#3_F#2_F#4",
-          "time": 4.285713,
-          "duration": 1.2886900895833326,
           "kind": "chord",
           "notes": [
             "A4",
             "C#3",
             "F#2",
-            "F#4"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_4_G2",
-          "time": 5.714284,
-          "duration": 1.4568448010416661,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.7952755905511811,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_4_B3_D3_G2_G4",
-          "time": 5.714284,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B3",
-            "D3",
-            "G2",
-            "G4"
-          ],
-          "velocity": 0.4881889763779528,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_5_D2",
-          "time": 7.142855,
-          "duration": 1.4568448010416661,
-          "kind": "note",
-          "notes": [
-            "D2"
-          ],
-          "velocity": 0.6456692913385826,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_5_A4_D2_D3_F#4",
-          "time": 7.142855,
-          "duration": 1.2886900895833344,
-          "kind": "chord",
-          "notes": [
-            "A4",
-            "D2",
-            "D3",
-            "F#4"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_6_G2",
-          "time": 8.571426,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.6062992125984252,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_6_B4_D4_G2_G3",
-          "time": 8.571426,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B4",
-            "D4",
-            "G2",
-            "G3"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_7_A2",
-          "time": 9.999997,
-          "duration": 1.3556543552083333,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_7_A2_A3_C#5_E4",
-          "time": 9.999997,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A2",
-            "A3",
-            "C#5",
-            "E4"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_0_F#5",
-          "time": 11.428568,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "F#5"
-          ],
-          "velocity": 0.4409448818897638,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_8_D3",
-          "time": 11.428568,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "D3"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_8_A4_D3_D5_F#4",
-          "time": 11.428568,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A4",
-            "D3",
-            "D5",
-            "F#4"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_1_E5",
-          "time": 12.857139,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "E5"
-          ],
-          "velocity": 0.41732283464566927,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_9_A2",
-          "time": 12.857139,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_9_A2_A4_C#5_E4",
-          "time": 12.857139,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A2",
-            "A4",
-            "C#5",
-            "E4"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_2_D5",
-          "time": 14.28571,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "D5"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_10_B2",
-          "time": 14.28571,
-          "duration": 1.456844801041667,
-          "kind": "note",
-          "notes": [
-            "B2"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_10_B2_B4_D4_F#4",
-          "time": 14.28571,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B2",
-            "B4",
-            "D4",
-            "F#4"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_3_C#5",
-          "time": 15.714281,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_11_F#2",
-          "time": 15.714281,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "F#2"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_11_A4_C#4_F#2_F#4",
-          "time": 15.714281,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A4",
-            "C#4",
             "F#2",
             "F#4"
           ],
-          "velocity": 0.4645669291338583,
+          "velocity": 0.7559055118110236,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_4_B4",
-          "time": 17.142852,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_12_G2",
-          "time": 17.142852,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.4881889763779528,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_12_B3_D4_G2_G4",
-          "time": 17.142852,
-          "duration": 1.2886900895833335,
+          "id": "chord_4_B3_D3_G2_G2_G4",
+          "time": 5.714284,
+          "duration": 1.4568448010416661,
           "kind": "chord",
           "notes": [
             "B3",
+            "D3",
+            "G2",
+            "G2",
+            "G4"
+          ],
+          "velocity": 0.7952755905511811,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_5_A4_D2_D2_D3_F#4",
+          "time": 7.142855,
+          "duration": 1.4568448010416661,
+          "kind": "chord",
+          "notes": [
+            "A4",
+            "D2",
+            "D2",
+            "D3",
+            "F#4"
+          ],
+          "velocity": 0.6456692913385826,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_6_B4_D4_G2_G2_G3",
+          "time": 8.571426,
+          "duration": 1.4568448010416652,
+          "kind": "chord",
+          "notes": [
+            "B4",
             "D4",
+            "G2",
+            "G2",
+            "G3"
+          ],
+          "velocity": 0.6062992125984252,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_7_A2_A2_A3_C#5_E4",
+          "time": 9.999997,
+          "duration": 1.3556543552083333,
+          "kind": "chord",
+          "notes": [
+            "A2",
+            "A2",
+            "A3",
+            "C#5",
+            "E4"
+          ],
+          "velocity": 0.5039370078740157,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_8_A4_D3_D3_D5_F#4_F#5",
+          "time": 11.428568,
+          "duration": 1.456844801041667,
+          "kind": "chord",
+          "notes": [
+            "A4",
+            "D3",
+            "D3",
+            "D5",
+            "F#4",
+            "F#5"
+          ],
+          "velocity": 0.49606299212598426,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_9_A2_A2_A4_C#5_E4_E5",
+          "time": 12.857139,
+          "duration": 1.456844801041667,
+          "kind": "chord",
+          "notes": [
+            "A2",
+            "A2",
+            "A4",
+            "C#5",
+            "E4",
+            "E5"
+          ],
+          "velocity": 0.47244094488188976,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_10_B2_B2_B4_D4_D5_F#4",
+          "time": 14.28571,
+          "duration": 1.456844801041667,
+          "kind": "chord",
+          "notes": [
+            "B2",
+            "B2",
+            "B4",
+            "D4",
+            "D5",
+            "F#4"
+          ],
+          "velocity": 0.49606299212598426,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_11_A4_C#4_C#5_F#2_F#2_F#4",
+          "time": 15.714281,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "A4",
+            "C#4",
+            "C#5",
+            "F#2",
+            "F#2",
+            "F#4"
+          ],
+          "velocity": 0.48031496062992124,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "chord_12_B3_B4_D4_G2_G2_G4",
+          "time": 17.142852,
+          "duration": 1.4568448010416652,
+          "kind": "chord",
+          "notes": [
+            "B3",
+            "B4",
+            "D4",
+            "G2",
             "G2",
             "G4"
           ],
@@ -3671,36 +3473,14 @@
           "instrument": "piano"
         },
         {
-          "id": "note_5_A4",
+          "id": "chord_13_A3_A4_D2_D2_D4_F#4",
           "time": 18.571423,
           "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.4409448818897638,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_13_D2",
-          "time": 18.571423,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "D2"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_13_A3_D2_D4_F#4",
-          "time": 18.571423,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "A3",
+            "A4",
+            "D2",
             "D2",
             "D4",
             "F#4"
@@ -3710,37 +3490,15 @@
           "instrument": "piano"
         },
         {
-          "id": "note_6_B4",
+          "id": "chord_14_B3_B4_D4_G2_G2_G4",
           "time": 19.999994,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_14_G2",
-          "time": 19.999994,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_14_B3_D4_G2_G4",
-          "time": 19.999994,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "B3",
+            "B4",
             "D4",
+            "G2",
             "G2",
             "G4"
           ],
@@ -3749,88 +3507,33 @@
           "instrument": "piano"
         },
         {
-          "id": "note_7_C#5",
+          "id": "chord_15_A2_A2_A4_C#4_C#5_E4",
           "time": 21.428565,
           "duration": 1.3556543552083369,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.5354330708661418,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_15_A2",
-          "time": 21.428565,
-          "duration": 1.3556543552083369,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.5354330708661418,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_15_A2_A4_C#4_E4",
-          "time": 21.428565,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
+            "A2",
             "A2",
             "A4",
             "C#4",
+            "C#5",
             "E4"
           ],
-          "velocity": 0.49606299212598426,
+          "velocity": 0.5354330708661418,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_8_D5",
-          "time": 22.857136,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "D5"
-          ],
-          "velocity": 0.4881889763779528,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_0_F#5",
+          "id": "chord_16_D3_D3_D5_F#4_F#5_F#5",
           "time": 22.857136,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "F#5"
-          ],
-          "velocity": 0.44881889763779526,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_16_D3",
-          "time": 22.857136,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "D3"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_16_D3_F#4_F#5",
-          "time": 22.857136,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "D3",
+            "D3",
+            "D5",
             "F#4",
+            "F#5",
             "F#5"
           ],
           "velocity": 0.5354330708661418,
@@ -3838,149 +3541,50 @@
           "instrument": "piano"
         },
         {
-          "id": "note_9_C#5",
-          "time": 24.285707000000002,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_1_E5",
+          "id": "chord_17_A2_A2_C#5_E4_E5_E5",
           "time": 24.285707000000002,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "E5"
-          ],
-          "velocity": 0.4251968503937008,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_17_A2",
-          "time": 24.285707000000002,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_17_A2_E4_E5",
-          "time": 24.285707000000002,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "A2",
+            "A2",
+            "C#5",
             "E4",
+            "E5",
             "E5"
           ],
-          "velocity": 0.48031496062992124,
+          "velocity": 0.5039370078740157,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_10_B4",
-          "time": 25.714278,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_2_D5",
+          "id": "chord_18_B2_B2_B4_D4_D5_D5",
           "time": 25.714278,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "D5"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_18_B2",
-          "time": 25.714278,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "B2"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_18_B2_D4_D5",
-          "time": 25.714278,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "B2",
+            "B2",
+            "B4",
             "D4",
+            "D5",
             "D5"
           ],
-          "velocity": 0.48031496062992124,
+          "velocity": 0.5039370078740157,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_11_A4",
-          "time": 27.142849000000002,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_3_C#5",
+          "id": "chord_19_A4_C#4_C#5_C#5_F#2_F#2",
           "time": 27.142849000000002,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.44881889763779526,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_19_F#2",
-          "time": 27.142849000000002,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "F#2"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_19_C#4_C#5_F#2",
-          "time": 27.142849000000002,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
+            "A4",
             "C#4",
             "C#5",
+            "C#5",
+            "F#2",
             "F#2"
           ],
           "velocity": 0.48031496062992124,
@@ -3988,269 +3592,93 @@
           "instrument": "piano"
         },
         {
-          "id": "note_12_G4",
-          "time": 28.57142,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "G4"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_4_B4",
+          "id": "chord_20_B3_B4_B4_G2_G2_G4",
           "time": 28.57142,
           "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_20_G2",
-          "time": 28.57142,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_20_B3_B4_G2",
-          "time": 28.57142,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "B3",
             "B4",
-            "G2"
+            "B4",
+            "G2",
+            "G2",
+            "G4"
           ],
           "velocity": 0.5039370078740157,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_13_F#4",
-          "time": 29.999991,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "F#4"
-          ],
-          "velocity": 0.41732283464566927,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_5_A4",
+          "id": "chord_21_A3_A4_A4_D2_D2_F#4",
           "time": 29.999991,
           "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.4409448818897638,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_21_D2",
-          "time": 29.999991,
-          "duration": 1.4568448010416652,
-          "kind": "note",
-          "notes": [
-            "D2"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_21_A3_A4_D2",
-          "time": 29.999991,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "A3",
             "A4",
-            "D2"
+            "A4",
+            "D2",
+            "D2",
+            "F#4"
           ],
-          "velocity": 0.4645669291338583,
+          "velocity": 0.47244094488188976,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_14_G4",
-          "time": 31.428562,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "G4"
-          ],
-          "velocity": 0.36220472440944884,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_6_B4",
+          "id": "chord_22_B3_B4_B4_G2_G2_G4",
           "time": 31.428562,
           "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.4881889763779528,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_22_G2",
-          "time": 31.428562,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_22_B3_B4_G2",
-          "time": 31.428562,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "B3",
             "B4",
-            "G2"
+            "B4",
+            "G2",
+            "G2",
+            "G4"
           ],
           "velocity": 0.49606299212598426,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_15_E4",
-          "time": 32.857133,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "E4"
-          ],
-          "velocity": 0.2992125984251969,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_7_C#5",
+          "id": "chord_23_A2_A2_C#4_C#5_C#5_E4",
           "time": 32.857133,
           "duration": 1.3556543552083369,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.5275590551181102,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_23_A2",
-          "time": 32.857133,
-          "duration": 1.3556543552083369,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_23_A2_C#4_C#5",
-          "time": 32.857133,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "A2",
+            "A2",
             "C#4",
-            "C#5"
+            "C#5",
+            "C#5",
+            "E4"
           ],
-          "velocity": 0.5118110236220472,
+          "velocity": 0.5275590551181102,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_16_D4",
-          "time": 34.285704,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "D4"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_8_D5",
-          "time": 34.285704,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "D5"
-          ],
-          "velocity": 0.4881889763779528,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_0_F#5",
+          "id": "chord_24_D3_D3_D4_D5_D5_F#5_F#5",
           "time": 34.285704,
           "duration": 1.4568448010416617,
-          "kind": "note",
-          "notes": [
-            "F#5"
-          ],
-          "velocity": 0.4330708661417323,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_24_D3",
-          "time": 34.285704,
-          "duration": 1.4568448010416617,
-          "kind": "note",
-          "notes": [
-            "D3"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_24_D3_D5_F#5",
-          "time": 34.285704,
-          "duration": 1.2886900895833335,
           "kind": "chord",
           "notes": [
             "D3",
+            "D3",
+            "D4",
             "D5",
+            "D5",
+            "F#5",
             "F#5"
           ],
-          "velocity": 0.5039370078740157,
+          "velocity": 0.5433070866141733,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_17_F#4",
+          "id": "note_25_F#4",
           "time": 34.9999895,
           "duration": 0.67559503541667,
           "kind": "note",
@@ -4258,73 +3686,29 @@
             "F#4"
           ],
           "velocity": 0.5748031496062992,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_18_A4",
-          "time": 35.714275,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_9_C#5",
-          "time": 35.714275,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_1_E5",
-          "time": 35.714275,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "E5"
-          ],
-          "velocity": 0.3937007874015748,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_25_A2",
-          "time": 35.714275,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "A2"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_25_A2_C#5_E5",
-          "time": 35.714275,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A2",
-            "C#5",
-            "E5"
-          ],
-          "velocity": 0.49606299212598426,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_19_G4",
+          "id": "chord_26_A2_A2_A4_C#5_C#5_E5_E5",
+          "time": 35.714275,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "A2",
+            "A2",
+            "A4",
+            "C#5",
+            "C#5",
+            "E5",
+            "E5"
+          ],
+          "velocity": 0.5826771653543307,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_27_G4",
           "time": 36.4285605,
           "duration": 0.6755950354166629,
           "kind": "note",
@@ -4332,73 +3716,29 @@
             "G4"
           ],
           "velocity": 0.5826771653543307,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_20_F#4",
-          "time": 37.142846,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "F#4"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_10_B4",
-          "time": 37.142846,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.44881889763779526,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_2_D5",
-          "time": 37.142846,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "D5"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_26_B2",
-          "time": 37.142846,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "B2"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_26_B2_B4_D5",
-          "time": 37.142846,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B2",
-            "B4",
-            "D5"
-          ],
-          "velocity": 0.4881889763779528,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_21_D4",
+          "id": "chord_28_B2_B2_B4_B4_D5_D5_F#4",
+          "time": 37.142846,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "B2",
+            "B2",
+            "B4",
+            "B4",
+            "D5",
+            "D5",
+            "F#4"
+          ],
+          "velocity": 0.5433070866141733,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_29_D4",
           "time": 37.8571315,
           "duration": 0.6755950354166629,
           "kind": "note",
@@ -4406,73 +3746,29 @@
             "D4"
           ],
           "velocity": 0.5275590551181102,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_22_F#4",
-          "time": 38.571417000000004,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "F#4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_11_A4",
-          "time": 38.571417000000004,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_3_C#5",
-          "time": 38.571417000000004,
-          "duration": 1.4568448010416617,
-          "kind": "note",
-          "notes": [
-            "C#5"
-          ],
-          "velocity": 0.4566929133858268,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_27_F#2",
-          "time": 38.571417000000004,
-          "duration": 1.4568448010416617,
-          "kind": "note",
-          "notes": [
-            "F#2"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_27_A4_C#5_F#2",
-          "time": 38.571417000000004,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A4",
-            "C#5",
-            "F#2"
-          ],
-          "velocity": 0.4645669291338583,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_23_E4",
+          "id": "chord_30_A4_A4_C#5_C#5_F#2_F#2_F#4",
+          "time": 38.571417000000004,
+          "duration": 1.4568448010416617,
+          "kind": "chord",
+          "notes": [
+            "A4",
+            "A4",
+            "C#5",
+            "C#5",
+            "F#2",
+            "F#2",
+            "F#4"
+          ],
+          "velocity": 0.5826771653543307,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_31_E4",
           "time": 39.2857025,
           "duration": 0.67559503541667,
           "kind": "note",
@@ -4480,73 +3776,29 @@
             "E4"
           ],
           "velocity": 0.5511811023622047,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_24_D4",
-          "time": 39.999988,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "D4"
-          ],
-          "velocity": 0.5196850393700787,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_12_G4",
-          "time": 39.999988,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "G4"
-          ],
-          "velocity": 0.47244094488188976,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_4_B4",
-          "time": 39.999988,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.4645669291338583,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_28_G2",
-          "time": 39.999988,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_28_B4_G2_G4",
-          "time": 39.999988,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B4",
-            "G2",
-            "G4"
-          ],
-          "velocity": 0.4881889763779528,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_25_B3",
+          "id": "chord_32_B4_B4_D4_G2_G2_G4_G4",
+          "time": 39.999988,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "B4",
+            "B4",
+            "D4",
+            "G2",
+            "G2",
+            "G4",
+            "G4"
+          ],
+          "velocity": 0.5196850393700787,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_33_B3",
           "time": 40.714273500000004,
           "duration": 0.6755950354166629,
           "kind": "note",
@@ -4554,73 +3806,29 @@
             "B3"
           ],
           "velocity": 0.5196850393700787,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_26_D4",
-          "time": 41.428559,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "D4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_13_F#4",
-          "time": 41.428559,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "F#4"
-          ],
-          "velocity": 0.4094488188976378,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_5_A4",
-          "time": 41.428559,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "A4"
-          ],
-          "velocity": 0.44881889763779526,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_29_D2",
-          "time": 41.428559,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "D2"
-          ],
-          "velocity": 0.48031496062992124,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_29_A4_D2_F#4",
-          "time": 41.428559,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "A4",
-            "D2",
-            "F#4"
-          ],
-          "velocity": 0.48031496062992124,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_27_A4",
+          "id": "chord_34_A4_A4_D2_D2_D4_F#4_F#4",
+          "time": 41.428559,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "A4",
+            "A4",
+            "D2",
+            "D2",
+            "D4",
+            "F#4",
+            "F#4"
+          ],
+          "velocity": 0.5826771653543307,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_35_A4",
           "time": 42.1428445,
           "duration": 0.6755950354166629,
           "kind": "note",
@@ -4628,73 +3836,29 @@
             "A4"
           ],
           "velocity": 0.6456692913385826,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_28_G4",
-          "time": 42.85713,
-          "duration": 0.7261902583333324,
-          "kind": "note",
-          "notes": [
-            "G4"
-          ],
-          "velocity": 0.5354330708661418,
-          "channel": 2,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_14_G4",
-          "time": 42.85713,
-          "duration": 1.2886900895833335,
-          "kind": "note",
-          "notes": [
-            "G4"
-          ],
-          "velocity": 0.3858267716535433,
-          "channel": 3,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_6_B4",
-          "time": 42.85713,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "B4"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 4,
-          "instrument": "violin"
-        },
-        {
-          "id": "note_30_G2",
-          "time": 42.85713,
-          "duration": 1.4568448010416688,
-          "kind": "note",
-          "notes": [
-            "G2"
-          ],
-          "velocity": 0.49606299212598426,
-          "channel": 1,
-          "instrument": "cello"
-        },
-        {
-          "id": "chord_30_B4_G2_G4",
-          "time": 42.85713,
-          "duration": 1.2886900895833335,
-          "kind": "chord",
-          "notes": [
-            "B4",
-            "G2",
-            "G4"
-          ],
-          "velocity": 0.5039370078740157,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_29_B4",
+          "id": "chord_36_B4_B4_G2_G2_G4_G4_G4",
+          "time": 42.85713,
+          "duration": 1.4568448010416688,
+          "kind": "chord",
+          "notes": [
+            "B4",
+            "B4",
+            "G2",
+            "G2",
+            "G4",
+            "G4",
+            "G4"
+          ],
+          "velocity": 0.5354330708661418,
+          "channel": 0,
+          "instrument": "piano"
+        },
+        {
+          "id": "note_37_B4",
           "time": 43.5714155,
           "duration": 0.67559503541667,
           "kind": "note",
@@ -4702,712 +3866,15 @@
             "B4"
           ],
           "velocity": 0.5511811023622047,
-          "channel": 2,
-          "instrument": "violin"
+          "channel": 0,
+          "instrument": "piano"
         }
       ],
       "tracks": [
         {
-          "id": "midi_track_0",
-          "name": "Violin 1",
-          "channel": 2,
-          "notes": [
-            {
-              "id": "midi_0_7680_0",
-              "time": 11.428568,
-              "duration": 1.456844801041667,
-              "note": "F#5",
-              "midi": 78,
-              "ticks": 7680,
-              "durationTicks": 979,
-              "velocity": 0.4409448818897638,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_8640_1",
-              "time": 12.857139,
-              "duration": 1.456844801041667,
-              "note": "E5",
-              "midi": 76,
-              "ticks": 8640,
-              "durationTicks": 979,
-              "velocity": 0.41732283464566927,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_9600_2",
-              "time": 14.28571,
-              "duration": 1.456844801041667,
-              "note": "D5",
-              "midi": 74,
-              "ticks": 9600,
-              "durationTicks": 979,
-              "velocity": 0.47244094488188976,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_10560_3",
-              "time": 15.714281,
-              "duration": 1.4568448010416688,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 10560,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_11520_4",
-              "time": 17.142852,
-              "duration": 1.4568448010416652,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 11520,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_12480_5",
-              "time": 18.571423,
-              "duration": 1.4568448010416688,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 12480,
-              "durationTicks": 979,
-              "velocity": 0.4409448818897638,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_13440_6",
-              "time": 19.999994,
-              "duration": 1.4568448010416652,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 13440,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_14400_7",
-              "time": 21.428565,
-              "duration": 1.3556543552083369,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 14400,
-              "durationTicks": 911,
-              "velocity": 0.5354330708661418,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_15360_8",
-              "time": 22.857136,
-              "duration": 1.2886900895833335,
-              "note": "D5",
-              "midi": 74,
-              "ticks": 15360,
-              "durationTicks": 866,
-              "velocity": 0.4881889763779528,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_16320_9",
-              "time": 24.285707000000002,
-              "duration": 1.2886900895833335,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 16320,
-              "durationTicks": 866,
-              "velocity": 0.4566929133858268,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_17280_10",
-              "time": 25.714278,
-              "duration": 1.2886900895833335,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 17280,
-              "durationTicks": 866,
-              "velocity": 0.4566929133858268,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_18240_11",
-              "time": 27.142849000000002,
-              "duration": 1.2886900895833335,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 18240,
-              "durationTicks": 866,
-              "velocity": 0.4645669291338583,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_19200_12",
-              "time": 28.57142,
-              "duration": 1.2886900895833335,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 19200,
-              "durationTicks": 866,
-              "velocity": 0.47244094488188976,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_20160_13",
-              "time": 29.999991,
-              "duration": 1.2886900895833335,
-              "note": "F#4",
-              "midi": 66,
-              "ticks": 20160,
-              "durationTicks": 866,
-              "velocity": 0.41732283464566927,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_21120_14",
-              "time": 31.428562,
-              "duration": 1.2886900895833335,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 21120,
-              "durationTicks": 866,
-              "velocity": 0.36220472440944884,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_22080_15",
-              "time": 32.857133,
-              "duration": 1.2886900895833335,
-              "note": "E4",
-              "midi": 64,
-              "ticks": 22080,
-              "durationTicks": 866,
-              "velocity": 0.2992125984251969,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_23040_16",
-              "time": 34.285704,
-              "duration": 0.7261902583333324,
-              "note": "D4",
-              "midi": 62,
-              "ticks": 23040,
-              "durationTicks": 488,
-              "velocity": 0.5433070866141733,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_23520_17",
-              "time": 34.9999895,
-              "duration": 0.67559503541667,
-              "note": "F#4",
-              "midi": 66,
-              "ticks": 23520,
-              "durationTicks": 454,
-              "velocity": 0.5748031496062992,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_24000_18",
-              "time": 35.714275,
-              "duration": 0.7261902583333324,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 24000,
-              "durationTicks": 488,
-              "velocity": 0.5826771653543307,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_24480_19",
-              "time": 36.4285605,
-              "duration": 0.6755950354166629,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 24480,
-              "durationTicks": 454,
-              "velocity": 0.5826771653543307,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_24960_20",
-              "time": 37.142846,
-              "duration": 0.7261902583333324,
-              "note": "F#4",
-              "midi": 66,
-              "ticks": 24960,
-              "durationTicks": 488,
-              "velocity": 0.5433070866141733,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_25440_21",
-              "time": 37.8571315,
-              "duration": 0.6755950354166629,
-              "note": "D4",
-              "midi": 62,
-              "ticks": 25440,
-              "durationTicks": 454,
-              "velocity": 0.5275590551181102,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_25920_22",
-              "time": 38.571417000000004,
-              "duration": 0.7261902583333324,
-              "note": "F#4",
-              "midi": 66,
-              "ticks": 25920,
-              "durationTicks": 488,
-              "velocity": 0.5826771653543307,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_26400_23",
-              "time": 39.2857025,
-              "duration": 0.67559503541667,
-              "note": "E4",
-              "midi": 64,
-              "ticks": 26400,
-              "durationTicks": 454,
-              "velocity": 0.5511811023622047,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_26880_24",
-              "time": 39.999988,
-              "duration": 0.7261902583333324,
-              "note": "D4",
-              "midi": 62,
-              "ticks": 26880,
-              "durationTicks": 488,
-              "velocity": 0.5196850393700787,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_27360_25",
-              "time": 40.714273500000004,
-              "duration": 0.6755950354166629,
-              "note": "B3",
-              "midi": 59,
-              "ticks": 27360,
-              "durationTicks": 454,
-              "velocity": 0.5196850393700787,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_27840_26",
-              "time": 41.428559,
-              "duration": 0.7261902583333324,
-              "note": "D4",
-              "midi": 62,
-              "ticks": 27840,
-              "durationTicks": 488,
-              "velocity": 0.5826771653543307,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_28320_27",
-              "time": 42.1428445,
-              "duration": 0.6755950354166629,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 28320,
-              "durationTicks": 454,
-              "velocity": 0.6456692913385826,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_28800_28",
-              "time": 42.85713,
-              "duration": 0.7261902583333324,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 28800,
-              "durationTicks": 488,
-              "velocity": 0.5354330708661418,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            },
-            {
-              "id": "midi_0_29280_29",
-              "time": 43.5714155,
-              "duration": 0.67559503541667,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 29280,
-              "durationTicks": 454,
-              "velocity": 0.5511811023622047,
-              "channel": 2,
-              "trackIndex": 0,
-              "trackName": "Violin 1"
-            }
-          ]
-        },
-        {
-          "id": "midi_track_1",
-          "name": "Violin 2",
-          "channel": 3,
-          "notes": [
-            {
-              "id": "midi_1_15360_0",
-              "time": 22.857136,
-              "duration": 1.4568448010416652,
-              "note": "F#5",
-              "midi": 78,
-              "ticks": 15360,
-              "durationTicks": 979,
-              "velocity": 0.44881889763779526,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_16320_1",
-              "time": 24.285707000000002,
-              "duration": 1.4568448010416652,
-              "note": "E5",
-              "midi": 76,
-              "ticks": 16320,
-              "durationTicks": 979,
-              "velocity": 0.4251968503937008,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_17280_2",
-              "time": 25.714278,
-              "duration": 1.4568448010416652,
-              "note": "D5",
-              "midi": 74,
-              "ticks": 17280,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_18240_3",
-              "time": 27.142849000000002,
-              "duration": 1.4568448010416652,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 18240,
-              "durationTicks": 979,
-              "velocity": 0.44881889763779526,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_19200_4",
-              "time": 28.57142,
-              "duration": 1.4568448010416688,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 19200,
-              "durationTicks": 979,
-              "velocity": 0.4566929133858268,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_20160_5",
-              "time": 29.999991,
-              "duration": 1.4568448010416652,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 20160,
-              "durationTicks": 979,
-              "velocity": 0.4409448818897638,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_21120_6",
-              "time": 31.428562,
-              "duration": 1.4568448010416688,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 21120,
-              "durationTicks": 979,
-              "velocity": 0.4881889763779528,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_22080_7",
-              "time": 32.857133,
-              "duration": 1.3556543552083369,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 22080,
-              "durationTicks": 911,
-              "velocity": 0.5275590551181102,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_23040_8",
-              "time": 34.285704,
-              "duration": 1.2886900895833335,
-              "note": "D5",
-              "midi": 74,
-              "ticks": 23040,
-              "durationTicks": 866,
-              "velocity": 0.4881889763779528,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_24000_9",
-              "time": 35.714275,
-              "duration": 1.2886900895833335,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 24000,
-              "durationTicks": 866,
-              "velocity": 0.4566929133858268,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_24960_10",
-              "time": 37.142846,
-              "duration": 1.2886900895833335,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 24960,
-              "durationTicks": 866,
-              "velocity": 0.44881889763779526,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_25920_11",
-              "time": 38.571417000000004,
-              "duration": 1.2886900895833335,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 25920,
-              "durationTicks": 866,
-              "velocity": 0.47244094488188976,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_26880_12",
-              "time": 39.999988,
-              "duration": 1.2886900895833335,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 26880,
-              "durationTicks": 866,
-              "velocity": 0.47244094488188976,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_27840_13",
-              "time": 41.428559,
-              "duration": 1.2886900895833335,
-              "note": "F#4",
-              "midi": 66,
-              "ticks": 27840,
-              "durationTicks": 866,
-              "velocity": 0.4094488188976378,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            },
-            {
-              "id": "midi_1_28800_14",
-              "time": 42.85713,
-              "duration": 1.2886900895833335,
-              "note": "G4",
-              "midi": 67,
-              "ticks": 28800,
-              "durationTicks": 866,
-              "velocity": 0.3858267716535433,
-              "channel": 3,
-              "trackIndex": 1,
-              "trackName": "Violin 2"
-            }
-          ]
-        },
-        {
-          "id": "midi_track_2",
-          "name": "Violin 3",
-          "channel": 4,
-          "notes": [
-            {
-              "id": "midi_2_23040_0",
-              "time": 34.285704,
-              "duration": 1.4568448010416617,
-              "note": "F#5",
-              "midi": 78,
-              "ticks": 23040,
-              "durationTicks": 979,
-              "velocity": 0.4330708661417323,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_24000_1",
-              "time": 35.714275,
-              "duration": 1.4568448010416688,
-              "note": "E5",
-              "midi": 76,
-              "ticks": 24000,
-              "durationTicks": 979,
-              "velocity": 0.3937007874015748,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_24960_2",
-              "time": 37.142846,
-              "duration": 1.4568448010416688,
-              "note": "D5",
-              "midi": 74,
-              "ticks": 24960,
-              "durationTicks": 979,
-              "velocity": 0.4566929133858268,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_25920_3",
-              "time": 38.571417000000004,
-              "duration": 1.4568448010416617,
-              "note": "C#5",
-              "midi": 73,
-              "ticks": 25920,
-              "durationTicks": 979,
-              "velocity": 0.4566929133858268,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_26880_4",
-              "time": 39.999988,
-              "duration": 1.4568448010416688,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 26880,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_27840_5",
-              "time": 41.428559,
-              "duration": 1.4568448010416688,
-              "note": "A4",
-              "midi": 69,
-              "ticks": 27840,
-              "durationTicks": 979,
-              "velocity": 0.44881889763779526,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            },
-            {
-              "id": "midi_2_28800_6",
-              "time": 42.85713,
-              "duration": 1.4568448010416688,
-              "note": "B4",
-              "midi": 71,
-              "ticks": 28800,
-              "durationTicks": 979,
-              "velocity": 0.5039370078740157,
-              "channel": 4,
-              "trackIndex": 2,
-              "trackName": "Violin 3"
-            }
-          ]
-        },
-        {
-          "id": "midi_track_3",
-          "name": "Cello",
-          "channel": 1,
+          "id": "merged",
+          "name": "Piano",
+          "channel": 0,
           "notes": [
             {
               "id": "midi_3_0_0",
@@ -5422,403 +3889,6 @@
               "trackIndex": 3,
               "trackName": "Cello"
             },
-            {
-              "id": "midi_3_960_1",
-              "time": 1.428571,
-              "duration": 1.4568448010416668,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 960,
-              "durationTicks": 979,
-              "velocity": 0.6535433070866141,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_1920_2",
-              "time": 2.857142,
-              "duration": 1.4568448010416666,
-              "note": "B2",
-              "midi": 47,
-              "ticks": 1920,
-              "durationTicks": 979,
-              "velocity": 0.7244094488188977,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_2880_3",
-              "time": 4.285713,
-              "duration": 1.4568448010416661,
-              "note": "F#2",
-              "midi": 42,
-              "ticks": 2880,
-              "durationTicks": 979,
-              "velocity": 0.7559055118110236,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_3840_4",
-              "time": 5.714284,
-              "duration": 1.4568448010416661,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 3840,
-              "durationTicks": 979,
-              "velocity": 0.7952755905511811,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_4800_5",
-              "time": 7.142855,
-              "duration": 1.4568448010416661,
-              "note": "D2",
-              "midi": 38,
-              "ticks": 4800,
-              "durationTicks": 979,
-              "velocity": 0.6456692913385826,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_5760_6",
-              "time": 8.571426,
-              "duration": 1.4568448010416652,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 5760,
-              "durationTicks": 979,
-              "velocity": 0.6062992125984252,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_6720_7",
-              "time": 9.999997,
-              "duration": 1.3556543552083333,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 6720,
-              "durationTicks": 911,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_7680_8",
-              "time": 11.428568,
-              "duration": 1.456844801041667,
-              "note": "D3",
-              "midi": 50,
-              "ticks": 7680,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_8640_9",
-              "time": 12.857139,
-              "duration": 1.456844801041667,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 8640,
-              "durationTicks": 979,
-              "velocity": 0.47244094488188976,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_9600_10",
-              "time": 14.28571,
-              "duration": 1.456844801041667,
-              "note": "B2",
-              "midi": 47,
-              "ticks": 9600,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_10560_11",
-              "time": 15.714281,
-              "duration": 1.4568448010416688,
-              "note": "F#2",
-              "midi": 42,
-              "ticks": 10560,
-              "durationTicks": 979,
-              "velocity": 0.48031496062992124,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_11520_12",
-              "time": 17.142852,
-              "duration": 1.4568448010416652,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 11520,
-              "durationTicks": 979,
-              "velocity": 0.4881889763779528,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_12480_13",
-              "time": 18.571423,
-              "duration": 1.4568448010416688,
-              "note": "D2",
-              "midi": 38,
-              "ticks": 12480,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_13440_14",
-              "time": 19.999994,
-              "duration": 1.4568448010416652,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 13440,
-              "durationTicks": 979,
-              "velocity": 0.5039370078740157,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_14400_15",
-              "time": 21.428565,
-              "duration": 1.3556543552083369,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 14400,
-              "durationTicks": 911,
-              "velocity": 0.5354330708661418,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_15360_16",
-              "time": 22.857136,
-              "duration": 1.4568448010416652,
-              "note": "D3",
-              "midi": 50,
-              "ticks": 15360,
-              "durationTicks": 979,
-              "velocity": 0.5039370078740157,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_16320_17",
-              "time": 24.285707000000002,
-              "duration": 1.4568448010416652,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 16320,
-              "durationTicks": 979,
-              "velocity": 0.5039370078740157,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_17280_18",
-              "time": 25.714278,
-              "duration": 1.4568448010416652,
-              "note": "B2",
-              "midi": 47,
-              "ticks": 17280,
-              "durationTicks": 979,
-              "velocity": 0.5039370078740157,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_18240_19",
-              "time": 27.142849000000002,
-              "duration": 1.4568448010416652,
-              "note": "F#2",
-              "midi": 42,
-              "ticks": 18240,
-              "durationTicks": 979,
-              "velocity": 0.48031496062992124,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_19200_20",
-              "time": 28.57142,
-              "duration": 1.4568448010416688,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 19200,
-              "durationTicks": 979,
-              "velocity": 0.48031496062992124,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_20160_21",
-              "time": 29.999991,
-              "duration": 1.4568448010416652,
-              "note": "D2",
-              "midi": 38,
-              "ticks": 20160,
-              "durationTicks": 979,
-              "velocity": 0.47244094488188976,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_21120_22",
-              "time": 31.428562,
-              "duration": 1.4568448010416688,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 21120,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_22080_23",
-              "time": 32.857133,
-              "duration": 1.3556543552083369,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 22080,
-              "durationTicks": 911,
-              "velocity": 0.5039370078740157,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_23040_24",
-              "time": 34.285704,
-              "duration": 1.4568448010416617,
-              "note": "D3",
-              "midi": 50,
-              "ticks": 23040,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_24000_25",
-              "time": 35.714275,
-              "duration": 1.4568448010416688,
-              "note": "A2",
-              "midi": 45,
-              "ticks": 24000,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_24960_26",
-              "time": 37.142846,
-              "duration": 1.4568448010416688,
-              "note": "B2",
-              "midi": 47,
-              "ticks": 24960,
-              "durationTicks": 979,
-              "velocity": 0.48031496062992124,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_25920_27",
-              "time": 38.571417000000004,
-              "duration": 1.4568448010416617,
-              "note": "F#2",
-              "midi": 42,
-              "ticks": 25920,
-              "durationTicks": 979,
-              "velocity": 0.4645669291338583,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_26880_28",
-              "time": 39.999988,
-              "duration": 1.4568448010416688,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 26880,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_27840_29",
-              "time": 41.428559,
-              "duration": 1.4568448010416688,
-              "note": "D2",
-              "midi": 38,
-              "ticks": 27840,
-              "durationTicks": 979,
-              "velocity": 0.48031496062992124,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            },
-            {
-              "id": "midi_3_28800_30",
-              "time": 42.85713,
-              "duration": 1.4568448010416688,
-              "note": "G2",
-              "midi": 43,
-              "ticks": 28800,
-              "durationTicks": 979,
-              "velocity": 0.49606299212598426,
-              "channel": 1,
-              "trackIndex": 3,
-              "trackName": "Cello"
-            }
-          ]
-        },
-        {
-          "id": "midi_track_4",
-          "name": "Keyboard",
-          "channel": 0,
-          "notes": [
             {
               "id": "midi_4_0_0",
               "time": 0,
@@ -5870,6 +3940,19 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_3_960_1",
+              "time": 1.428571,
+              "duration": 1.4568448010416668,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 960,
+              "durationTicks": 979,
+              "velocity": 0.6535433070866141,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_960_4",
@@ -5924,6 +4007,19 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_3_1920_2",
+              "time": 2.857142,
+              "duration": 1.4568448010416666,
+              "note": "B2",
+              "midi": 47,
+              "ticks": 1920,
+              "durationTicks": 979,
+              "velocity": 0.7244094488188977,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_1920_8",
               "time": 2.857142,
               "duration": 1.288690089583333,
@@ -5974,6 +4070,19 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_3_2880_3",
+              "time": 4.285713,
+              "duration": 1.4568448010416661,
+              "note": "F#2",
+              "midi": 42,
+              "ticks": 2880,
+              "durationTicks": 979,
+              "velocity": 0.7559055118110236,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_2880_12",
@@ -6028,6 +4137,19 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_3_3840_4",
+              "time": 5.714284,
+              "duration": 1.4568448010416661,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 3840,
+              "durationTicks": 979,
+              "velocity": 0.7952755905511811,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_3840_16",
               "time": 5.714284,
               "duration": 1.2886900895833335,
@@ -6078,6 +4200,19 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_3_4800_5",
+              "time": 7.142855,
+              "duration": 1.4568448010416661,
+              "note": "D2",
+              "midi": 38,
+              "ticks": 4800,
+              "durationTicks": 979,
+              "velocity": 0.6456692913385826,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_4800_20",
@@ -6132,6 +4267,19 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_3_5760_6",
+              "time": 8.571426,
+              "duration": 1.4568448010416652,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 5760,
+              "durationTicks": 979,
+              "velocity": 0.6062992125984252,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_5760_24",
               "time": 8.571426,
               "duration": 1.2886900895833335,
@@ -6182,6 +4330,19 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_3_6720_7",
+              "time": 9.999997,
+              "duration": 1.3556543552083333,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 6720,
+              "durationTicks": 911,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_6720_28",
@@ -6236,6 +4397,32 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_7680_0",
+              "time": 11.428568,
+              "duration": 1.456844801041667,
+              "note": "F#5",
+              "midi": 78,
+              "ticks": 7680,
+              "durationTicks": 979,
+              "velocity": 0.4409448818897638,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_7680_8",
+              "time": 11.428568,
+              "duration": 1.456844801041667,
+              "note": "D3",
+              "midi": 50,
+              "ticks": 7680,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_7680_32",
               "time": 11.428568,
               "duration": 1.2886900895833335,
@@ -6286,6 +4473,32 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_8640_1",
+              "time": 12.857139,
+              "duration": 1.456844801041667,
+              "note": "E5",
+              "midi": 76,
+              "ticks": 8640,
+              "durationTicks": 979,
+              "velocity": 0.41732283464566927,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_8640_9",
+              "time": 12.857139,
+              "duration": 1.456844801041667,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 8640,
+              "durationTicks": 979,
+              "velocity": 0.47244094488188976,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_8640_36",
@@ -6340,6 +4553,32 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_9600_2",
+              "time": 14.28571,
+              "duration": 1.456844801041667,
+              "note": "D5",
+              "midi": 74,
+              "ticks": 9600,
+              "durationTicks": 979,
+              "velocity": 0.47244094488188976,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_9600_10",
+              "time": 14.28571,
+              "duration": 1.456844801041667,
+              "note": "B2",
+              "midi": 47,
+              "ticks": 9600,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_9600_40",
               "time": 14.28571,
               "duration": 1.2886900895833335,
@@ -6390,6 +4629,32 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_10560_3",
+              "time": 15.714281,
+              "duration": 1.4568448010416688,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 10560,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_10560_11",
+              "time": 15.714281,
+              "duration": 1.4568448010416688,
+              "note": "F#2",
+              "midi": 42,
+              "ticks": 10560,
+              "durationTicks": 979,
+              "velocity": 0.48031496062992124,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_10560_44",
@@ -6444,6 +4709,32 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_11520_4",
+              "time": 17.142852,
+              "duration": 1.4568448010416652,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 11520,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_11520_12",
+              "time": 17.142852,
+              "duration": 1.4568448010416652,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 11520,
+              "durationTicks": 979,
+              "velocity": 0.4881889763779528,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_11520_48",
               "time": 17.142852,
               "duration": 1.2886900895833335,
@@ -6494,6 +4785,32 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_12480_5",
+              "time": 18.571423,
+              "duration": 1.4568448010416688,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 12480,
+              "durationTicks": 979,
+              "velocity": 0.4409448818897638,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_12480_13",
+              "time": 18.571423,
+              "duration": 1.4568448010416688,
+              "note": "D2",
+              "midi": 38,
+              "ticks": 12480,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_12480_52",
@@ -6548,6 +4865,32 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_13440_6",
+              "time": 19.999994,
+              "duration": 1.4568448010416652,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 13440,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_13440_14",
+              "time": 19.999994,
+              "duration": 1.4568448010416652,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 13440,
+              "durationTicks": 979,
+              "velocity": 0.5039370078740157,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_13440_56",
               "time": 19.999994,
               "duration": 1.2886900895833335,
@@ -6598,6 +4941,32 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_14400_7",
+              "time": 21.428565,
+              "duration": 1.3556543552083369,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 14400,
+              "durationTicks": 911,
+              "velocity": 0.5354330708661418,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_3_14400_15",
+              "time": 21.428565,
+              "duration": 1.3556543552083369,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 14400,
+              "durationTicks": 911,
+              "velocity": 0.5354330708661418,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_14400_60",
@@ -6652,6 +5021,45 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_15360_8",
+              "time": 22.857136,
+              "duration": 1.2886900895833335,
+              "note": "D5",
+              "midi": 74,
+              "ticks": 15360,
+              "durationTicks": 866,
+              "velocity": 0.4881889763779528,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_15360_0",
+              "time": 22.857136,
+              "duration": 1.4568448010416652,
+              "note": "F#5",
+              "midi": 78,
+              "ticks": 15360,
+              "durationTicks": 979,
+              "velocity": 0.44881889763779526,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_15360_16",
+              "time": 22.857136,
+              "duration": 1.4568448010416652,
+              "note": "D3",
+              "midi": 50,
+              "ticks": 15360,
+              "durationTicks": 979,
+              "velocity": 0.5039370078740157,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_15360_64",
               "time": 22.857136,
               "duration": 1.2886900895833335,
@@ -6689,6 +5097,45 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_16320_9",
+              "time": 24.285707000000002,
+              "duration": 1.2886900895833335,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 16320,
+              "durationTicks": 866,
+              "velocity": 0.4566929133858268,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_16320_1",
+              "time": 24.285707000000002,
+              "duration": 1.4568448010416652,
+              "note": "E5",
+              "midi": 76,
+              "ticks": 16320,
+              "durationTicks": 979,
+              "velocity": 0.4251968503937008,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_16320_17",
+              "time": 24.285707000000002,
+              "duration": 1.4568448010416652,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 16320,
+              "durationTicks": 979,
+              "velocity": 0.5039370078740157,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_16320_67",
@@ -6730,6 +5177,45 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_17280_10",
+              "time": 25.714278,
+              "duration": 1.2886900895833335,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 17280,
+              "durationTicks": 866,
+              "velocity": 0.4566929133858268,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_17280_2",
+              "time": 25.714278,
+              "duration": 1.4568448010416652,
+              "note": "D5",
+              "midi": 74,
+              "ticks": 17280,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_17280_18",
+              "time": 25.714278,
+              "duration": 1.4568448010416652,
+              "note": "B2",
+              "midi": 47,
+              "ticks": 17280,
+              "durationTicks": 979,
+              "velocity": 0.5039370078740157,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_17280_70",
               "time": 25.714278,
               "duration": 1.2886900895833335,
@@ -6767,6 +5253,45 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_18240_11",
+              "time": 27.142849000000002,
+              "duration": 1.2886900895833335,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 18240,
+              "durationTicks": 866,
+              "velocity": 0.4645669291338583,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_18240_3",
+              "time": 27.142849000000002,
+              "duration": 1.4568448010416652,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 18240,
+              "durationTicks": 979,
+              "velocity": 0.44881889763779526,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_18240_19",
+              "time": 27.142849000000002,
+              "duration": 1.4568448010416652,
+              "note": "F#2",
+              "midi": 42,
+              "ticks": 18240,
+              "durationTicks": 979,
+              "velocity": 0.48031496062992124,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_18240_73",
@@ -6808,6 +5333,45 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_19200_12",
+              "time": 28.57142,
+              "duration": 1.2886900895833335,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 19200,
+              "durationTicks": 866,
+              "velocity": 0.47244094488188976,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_19200_4",
+              "time": 28.57142,
+              "duration": 1.4568448010416688,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 19200,
+              "durationTicks": 979,
+              "velocity": 0.4566929133858268,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_19200_20",
+              "time": 28.57142,
+              "duration": 1.4568448010416688,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 19200,
+              "durationTicks": 979,
+              "velocity": 0.48031496062992124,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_19200_76",
               "time": 28.57142,
               "duration": 1.2886900895833335,
@@ -6845,6 +5409,45 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_20160_13",
+              "time": 29.999991,
+              "duration": 1.2886900895833335,
+              "note": "F#4",
+              "midi": 66,
+              "ticks": 20160,
+              "durationTicks": 866,
+              "velocity": 0.41732283464566927,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_20160_5",
+              "time": 29.999991,
+              "duration": 1.4568448010416652,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 20160,
+              "durationTicks": 979,
+              "velocity": 0.4409448818897638,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_20160_21",
+              "time": 29.999991,
+              "duration": 1.4568448010416652,
+              "note": "D2",
+              "midi": 38,
+              "ticks": 20160,
+              "durationTicks": 979,
+              "velocity": 0.47244094488188976,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_20160_79",
@@ -6886,6 +5489,45 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_21120_14",
+              "time": 31.428562,
+              "duration": 1.2886900895833335,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 21120,
+              "durationTicks": 866,
+              "velocity": 0.36220472440944884,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_21120_6",
+              "time": 31.428562,
+              "duration": 1.4568448010416688,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 21120,
+              "durationTicks": 979,
+              "velocity": 0.4881889763779528,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_21120_22",
+              "time": 31.428562,
+              "duration": 1.4568448010416688,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 21120,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_21120_82",
               "time": 31.428562,
               "duration": 1.2886900895833335,
@@ -6923,6 +5565,45 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_22080_15",
+              "time": 32.857133,
+              "duration": 1.2886900895833335,
+              "note": "E4",
+              "midi": 64,
+              "ticks": 22080,
+              "durationTicks": 866,
+              "velocity": 0.2992125984251969,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_22080_7",
+              "time": 32.857133,
+              "duration": 1.3556543552083369,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 22080,
+              "durationTicks": 911,
+              "velocity": 0.5275590551181102,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_3_22080_23",
+              "time": 32.857133,
+              "duration": 1.3556543552083369,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 22080,
+              "durationTicks": 911,
+              "velocity": 0.5039370078740157,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_22080_85",
@@ -6964,6 +5645,58 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_23040_16",
+              "time": 34.285704,
+              "duration": 0.7261902583333324,
+              "note": "D4",
+              "midi": 62,
+              "ticks": 23040,
+              "durationTicks": 488,
+              "velocity": 0.5433070866141733,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_23040_8",
+              "time": 34.285704,
+              "duration": 1.2886900895833335,
+              "note": "D5",
+              "midi": 74,
+              "ticks": 23040,
+              "durationTicks": 866,
+              "velocity": 0.4881889763779528,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_23040_0",
+              "time": 34.285704,
+              "duration": 1.4568448010416617,
+              "note": "F#5",
+              "midi": 78,
+              "ticks": 23040,
+              "durationTicks": 979,
+              "velocity": 0.4330708661417323,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_23040_24",
+              "time": 34.285704,
+              "duration": 1.4568448010416617,
+              "note": "D3",
+              "midi": 50,
+              "ticks": 23040,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_23040_88",
               "time": 34.285704,
               "duration": 1.2886900895833335,
@@ -7001,6 +5734,71 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_23520_17",
+              "time": 34.9999895,
+              "duration": 0.67559503541667,
+              "note": "F#4",
+              "midi": 66,
+              "ticks": 23520,
+              "durationTicks": 454,
+              "velocity": 0.5748031496062992,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_24000_18",
+              "time": 35.714275,
+              "duration": 0.7261902583333324,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 24000,
+              "durationTicks": 488,
+              "velocity": 0.5826771653543307,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_24000_9",
+              "time": 35.714275,
+              "duration": 1.2886900895833335,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 24000,
+              "durationTicks": 866,
+              "velocity": 0.4566929133858268,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_24000_1",
+              "time": 35.714275,
+              "duration": 1.4568448010416688,
+              "note": "E5",
+              "midi": 76,
+              "ticks": 24000,
+              "durationTicks": 979,
+              "velocity": 0.3937007874015748,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_24000_25",
+              "time": 35.714275,
+              "duration": 1.4568448010416688,
+              "note": "A2",
+              "midi": 45,
+              "ticks": 24000,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_24000_91",
@@ -7042,6 +5840,71 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_24480_19",
+              "time": 36.4285605,
+              "duration": 0.6755950354166629,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 24480,
+              "durationTicks": 454,
+              "velocity": 0.5826771653543307,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_24960_20",
+              "time": 37.142846,
+              "duration": 0.7261902583333324,
+              "note": "F#4",
+              "midi": 66,
+              "ticks": 24960,
+              "durationTicks": 488,
+              "velocity": 0.5433070866141733,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_24960_10",
+              "time": 37.142846,
+              "duration": 1.2886900895833335,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 24960,
+              "durationTicks": 866,
+              "velocity": 0.44881889763779526,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_24960_2",
+              "time": 37.142846,
+              "duration": 1.4568448010416688,
+              "note": "D5",
+              "midi": 74,
+              "ticks": 24960,
+              "durationTicks": 979,
+              "velocity": 0.4566929133858268,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_24960_26",
+              "time": 37.142846,
+              "duration": 1.4568448010416688,
+              "note": "B2",
+              "midi": 47,
+              "ticks": 24960,
+              "durationTicks": 979,
+              "velocity": 0.48031496062992124,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_24960_94",
               "time": 37.142846,
               "duration": 1.2886900895833335,
@@ -7079,6 +5942,71 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_25440_21",
+              "time": 37.8571315,
+              "duration": 0.6755950354166629,
+              "note": "D4",
+              "midi": 62,
+              "ticks": 25440,
+              "durationTicks": 454,
+              "velocity": 0.5275590551181102,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_25920_22",
+              "time": 38.571417000000004,
+              "duration": 0.7261902583333324,
+              "note": "F#4",
+              "midi": 66,
+              "ticks": 25920,
+              "durationTicks": 488,
+              "velocity": 0.5826771653543307,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_25920_11",
+              "time": 38.571417000000004,
+              "duration": 1.2886900895833335,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 25920,
+              "durationTicks": 866,
+              "velocity": 0.47244094488188976,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_25920_3",
+              "time": 38.571417000000004,
+              "duration": 1.4568448010416617,
+              "note": "C#5",
+              "midi": 73,
+              "ticks": 25920,
+              "durationTicks": 979,
+              "velocity": 0.4566929133858268,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_25920_27",
+              "time": 38.571417000000004,
+              "duration": 1.4568448010416617,
+              "note": "F#2",
+              "midi": 42,
+              "ticks": 25920,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_25920_97",
@@ -7120,6 +6048,71 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_26400_23",
+              "time": 39.2857025,
+              "duration": 0.67559503541667,
+              "note": "E4",
+              "midi": 64,
+              "ticks": 26400,
+              "durationTicks": 454,
+              "velocity": 0.5511811023622047,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_26880_24",
+              "time": 39.999988,
+              "duration": 0.7261902583333324,
+              "note": "D4",
+              "midi": 62,
+              "ticks": 26880,
+              "durationTicks": 488,
+              "velocity": 0.5196850393700787,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_26880_12",
+              "time": 39.999988,
+              "duration": 1.2886900895833335,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 26880,
+              "durationTicks": 866,
+              "velocity": 0.47244094488188976,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_26880_4",
+              "time": 39.999988,
+              "duration": 1.4568448010416688,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 26880,
+              "durationTicks": 979,
+              "velocity": 0.4645669291338583,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_26880_28",
+              "time": 39.999988,
+              "duration": 1.4568448010416688,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 26880,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_26880_100",
               "time": 39.999988,
               "duration": 1.2886900895833335,
@@ -7157,6 +6150,71 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_27360_25",
+              "time": 40.714273500000004,
+              "duration": 0.6755950354166629,
+              "note": "B3",
+              "midi": 59,
+              "ticks": 27360,
+              "durationTicks": 454,
+              "velocity": 0.5196850393700787,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_27840_26",
+              "time": 41.428559,
+              "duration": 0.7261902583333324,
+              "note": "D4",
+              "midi": 62,
+              "ticks": 27840,
+              "durationTicks": 488,
+              "velocity": 0.5826771653543307,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_27840_13",
+              "time": 41.428559,
+              "duration": 1.2886900895833335,
+              "note": "F#4",
+              "midi": 66,
+              "ticks": 27840,
+              "durationTicks": 866,
+              "velocity": 0.4094488188976378,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_27840_5",
+              "time": 41.428559,
+              "duration": 1.4568448010416688,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 27840,
+              "durationTicks": 979,
+              "velocity": 0.44881889763779526,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_27840_29",
+              "time": 41.428559,
+              "duration": 1.4568448010416688,
+              "note": "D2",
+              "midi": 38,
+              "ticks": 27840,
+              "durationTicks": 979,
+              "velocity": 0.48031496062992124,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
             },
             {
               "id": "midi_4_27840_103",
@@ -7198,6 +6256,71 @@
               "trackName": "Keyboard"
             },
             {
+              "id": "midi_0_28320_27",
+              "time": 42.1428445,
+              "duration": 0.6755950354166629,
+              "note": "A4",
+              "midi": 69,
+              "ticks": 28320,
+              "durationTicks": 454,
+              "velocity": 0.6456692913385826,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_0_28800_28",
+              "time": 42.85713,
+              "duration": 0.7261902583333324,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 28800,
+              "durationTicks": 488,
+              "velocity": 0.5354330708661418,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
+            },
+            {
+              "id": "midi_1_28800_14",
+              "time": 42.85713,
+              "duration": 1.2886900895833335,
+              "note": "G4",
+              "midi": 67,
+              "ticks": 28800,
+              "durationTicks": 866,
+              "velocity": 0.3858267716535433,
+              "channel": 3,
+              "trackIndex": 1,
+              "trackName": "Violin 2"
+            },
+            {
+              "id": "midi_2_28800_6",
+              "time": 42.85713,
+              "duration": 1.4568448010416688,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 28800,
+              "durationTicks": 979,
+              "velocity": 0.5039370078740157,
+              "channel": 4,
+              "trackIndex": 2,
+              "trackName": "Violin 3"
+            },
+            {
+              "id": "midi_3_28800_30",
+              "time": 42.85713,
+              "duration": 1.4568448010416688,
+              "note": "G2",
+              "midi": 43,
+              "ticks": 28800,
+              "durationTicks": 979,
+              "velocity": 0.49606299212598426,
+              "channel": 1,
+              "trackIndex": 3,
+              "trackName": "Cello"
+            },
+            {
               "id": "midi_4_28800_106",
               "time": 42.85713,
               "duration": 1.2886900895833335,
@@ -7235,6 +6358,19 @@
               "channel": 0,
               "trackIndex": 4,
               "trackName": "Keyboard"
+            },
+            {
+              "id": "midi_0_29280_29",
+              "time": 43.5714155,
+              "duration": 0.67559503541667,
+              "note": "B4",
+              "midi": 71,
+              "ticks": 29280,
+              "durationTicks": 454,
+              "velocity": 0.5511811023622047,
+              "channel": 2,
+              "trackIndex": 0,
+              "trackName": "Violin 1"
             }
           ]
         }
