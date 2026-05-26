@@ -424,8 +424,11 @@ export class AudioEngine {
           this.playGenerator(object.audio, this.mappedParams(object, encounter));
           state.lastTriggeredAt = elapsed;
           state.rising = false;
+          // Reset peak baseline so the next visit at the same intensity magnitude re-triggers.
+          state.peakIntensity = intensity;
         }
-      } else if (state.peakIntensity > 0) {
+      } else if (intensity < threshold * 0.3) {
+        // Deep exit: full state cleanup so re-entry starts completely fresh.
         state.peakIntensity = 0;
         state.rising = false;
       }

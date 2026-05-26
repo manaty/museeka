@@ -23,23 +23,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_1_D4",
+          "id": "chord_1_D4_F#4",
           "time": 0.483869,
           "duration": 0.483869,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5669291338582677,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_2_F#4",
-          "time": 0.483869,
-          "duration": 0.483869,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.5669291338582677,
@@ -47,7 +36,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_3_D3",
+          "id": "note_2_D3",
           "time": 0.7258035,
           "duration": 0.24193449999999994,
           "kind": "note",
@@ -59,7 +48,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_4_D3_E4_G4",
+          "id": "chord_3_D3_E4_G4",
           "time": 0.967738,
           "duration": 0.4838690000000001,
           "kind": "chord",
@@ -73,23 +62,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_5_A4",
+          "id": "chord_4_A4_F#4",
           "time": 1.451607,
           "duration": 0.4838689999999999,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A4"
-          ],
-          "velocity": 0.5748031496062992,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_6_F#4",
-          "time": 1.451607,
-          "duration": 0.4838689999999999,
-          "kind": "note",
-          "notes": [
+            "A4",
             "F#4"
           ],
           "velocity": 0.5748031496062992,
@@ -97,7 +75,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_7_D3",
+          "id": "note_5_D3",
           "time": 1.6935415,
           "duration": 0.24193449999999994,
           "kind": "note",
@@ -109,7 +87,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_8_A2_A4_F#4",
+          "id": "chord_6_A2_A4_F#4",
           "time": 1.935476,
           "duration": 0.4838689999999999,
           "kind": "chord",
@@ -123,23 +101,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_9_E4",
+          "id": "chord_7_E4_G4",
           "time": 2.419345,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "E4"
-          ],
-          "velocity": 0.5511811023622047,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_10_G4",
-          "time": 2.419345,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "E4",
             "G4"
           ],
           "velocity": 0.5511811023622047,
@@ -147,7 +114,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_11_A2",
+          "id": "note_8_A2",
           "time": 2.6612795,
           "duration": 0.24193450000000016,
           "kind": "note",
@@ -159,7 +126,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_12_A2_D4_F#4",
+          "id": "chord_9_A2_D4_F#4",
           "time": 2.903214,
           "duration": 0.4838689999999999,
           "kind": "chord",
@@ -173,23 +140,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_13_A3",
+          "id": "chord_10_A3_E4",
           "time": 3.387083,
           "duration": 0.4838689999999999,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_14_E4",
-          "time": 3.387083,
-          "duration": 0.4838689999999999,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5433070866141733,
@@ -197,7 +153,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_15_A2",
+          "id": "note_11_A2",
           "time": 3.6290175,
           "duration": 0.24193450000000016,
           "kind": "note",
@@ -209,7 +165,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_16_D3_D4_F#3",
+          "id": "chord_12_D3_D4_F#3",
           "time": 3.870952,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -223,23 +179,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_17_D4",
+          "id": "chord_13_D4_F#3",
           "time": 4.354821,
           "duration": 0.48386899999999944,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_18_F#3",
-          "time": 4.354821,
-          "duration": 0.48386899999999944,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#3"
           ],
           "velocity": 0.5433070866141733,
@@ -247,23 +192,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_19_A3",
+          "id": "chord_14_A3_E4",
           "time": 4.83869,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_20_E4",
-          "time": 4.83869,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5826771653543307,
@@ -271,7 +205,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_21_D3_D4_F#4",
+          "id": "chord_15_D3_D4_F#4",
           "time": 5.322559,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -285,7 +219,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_22_A2_D4_F#4",
+          "id": "chord_16_A2_D4_F#4",
           "time": 5.806428,
           "duration": 0.7258034999999996,
           "kind": "chord",
@@ -299,23 +233,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_23_A3",
+          "id": "chord_17_A3_E4",
           "time": 6.5322315,
           "duration": 0.24193450000000016,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5354330708661418,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_24_E4",
-          "time": 6.5322315,
-          "duration": 0.24193450000000016,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5354330708661418,
@@ -323,7 +246,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_25_A2_A3_E4",
+          "id": "chord_18_A2_A3_E4",
           "time": 6.774166,
           "duration": 0.9677379999999998,
           "kind": "chord",
@@ -337,7 +260,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_26_D3_D4_F#4",
+          "id": "chord_19_D3_D4_F#4",
           "time": 7.741904,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -351,23 +274,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_27_D4",
+          "id": "chord_20_D4_F#4",
           "time": 8.225773,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_28_F#4",
-          "time": 8.225773,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.5590551181102362,
@@ -375,7 +287,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_29_D3",
+          "id": "note_21_D3",
           "time": 8.4677075,
           "duration": 0.24193450000000105,
           "kind": "note",
@@ -387,7 +299,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_30_D3_E4_G4",
+          "id": "chord_22_D3_E4_G4",
           "time": 8.709642,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -401,23 +313,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_31_A4",
+          "id": "chord_23_A4_F#4",
           "time": 9.193510999999999,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_32_F#4",
-          "time": 9.193510999999999,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "A4",
             "F#4"
           ],
           "velocity": 0.5826771653543307,
@@ -425,7 +326,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_33_D3",
+          "id": "note_24_D3",
           "time": 9.4354455,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -437,7 +338,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_34_A2_A4_F#4",
+          "id": "chord_25_A2_A4_F#4",
           "time": 9.67738,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -451,23 +352,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_35_E4",
+          "id": "chord_26_E4_G4",
           "time": 10.161249,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "E4"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_36_G4",
-          "time": 10.161249,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "E4",
             "G4"
           ],
           "velocity": 0.5433070866141733,
@@ -475,7 +365,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_37_A2",
+          "id": "note_27_A2",
           "time": 10.403183499999999,
           "duration": 0.24193450000000105,
           "kind": "note",
@@ -487,7 +377,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_38_A2_D4_F#4",
+          "id": "chord_28_A2_D4_F#4",
           "time": 10.645118,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -501,23 +391,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_39_A3",
+          "id": "chord_29_A3_E4",
           "time": 11.128987,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_40_E4",
-          "time": 11.128987,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5433070866141733,
@@ -525,7 +404,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_41_A2",
+          "id": "note_30_A2",
           "time": 11.3709215,
           "duration": 0.24193450000000105,
           "kind": "note",
@@ -537,7 +416,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_42_D3_D4_F#3",
+          "id": "chord_31_D3_D4_F#3",
           "time": 11.612856,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -551,23 +430,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_43_D4",
+          "id": "chord_32_D4_F#3",
           "time": 12.096725,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5669291338582677,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_44_F#3",
-          "time": 12.096725,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#3"
           ],
           "velocity": 0.5669291338582677,
@@ -575,23 +443,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_45_A3",
+          "id": "chord_33_A3_E4",
           "time": 12.580594,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_46_E4",
-          "time": 12.580594,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5826771653543307,
@@ -599,7 +456,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_47_D3_D4_F#4",
+          "id": "chord_34_D3_D4_F#4",
           "time": 13.064463,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -613,7 +470,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_48_A2_A3_E4",
+          "id": "chord_35_A2_A3_E4",
           "time": 13.548332,
           "duration": 0.7258034999999996,
           "kind": "chord",
@@ -627,23 +484,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_49_D4",
+          "id": "chord_36_D4_F#3",
           "time": 14.2741355,
           "duration": 0.24193449999999928,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5354330708661418,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_50_F#3",
-          "time": 14.2741355,
-          "duration": 0.24193449999999928,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#3"
           ],
           "velocity": 0.5354330708661418,
@@ -651,7 +497,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_51_D3_D4_F#3",
+          "id": "chord_37_D3_D4_F#3",
           "time": 14.51607,
           "duration": 0.9677380000000007,
           "kind": "chord",
@@ -665,7 +511,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_52_A2_C#4_E4",
+          "id": "chord_38_A2_C#4_E4",
           "time": 15.483808,
           "duration": 0.4838690000000003,
           "kind": "chord",
@@ -679,23 +525,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_53_C#4",
+          "id": "chord_39_C#4_E4",
           "time": 15.967677,
           "duration": 0.4838690000000003,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "C#4"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_54_E4",
-          "time": 15.967677,
-          "duration": 0.4838690000000003,
-          "kind": "note",
-          "notes": [
+            "C#4",
             "E4"
           ],
           "velocity": 0.5590551181102362,
@@ -703,7 +538,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_55_A2",
+          "id": "note_40_A2",
           "time": 16.2096115,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -715,7 +550,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_56_A2_D4_F#4",
+          "id": "chord_41_A2_D4_F#4",
           "time": 16.451546,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -729,7 +564,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_57_A3_D3_D4",
+          "id": "chord_42_A3_D3_D4",
           "time": 16.935415,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -743,7 +578,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_58_A2_C#4_E4",
+          "id": "chord_43_A2_C#4_E4",
           "time": 17.419284,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -757,23 +592,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_59_D4",
+          "id": "chord_44_D4_F#4",
           "time": 17.903153,
           "duration": 0.24193449999999928,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_60_F#4",
-          "time": 17.903153,
-          "duration": 0.24193449999999928,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.5826771653543307,
@@ -781,7 +605,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_61_A2_E4_G4",
+          "id": "chord_45_A2_E4_G4",
           "time": 18.1450875,
           "duration": 0.24193449999999928,
           "kind": "chord",
@@ -795,7 +619,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_62_A2_D4_F#4",
+          "id": "chord_46_A2_D4_F#4",
           "time": 18.387021999999998,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -809,7 +633,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_63_A3_D3_D4",
+          "id": "chord_47_A3_D3_D4",
           "time": 18.870891,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -823,7 +647,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_64_A2_C#4_E4",
+          "id": "chord_48_A2_C#4_E4",
           "time": 19.35476,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -837,23 +661,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_65_D4",
+          "id": "chord_49_D4_F#4",
           "time": 19.838629,
           "duration": 0.24193449999999928,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_66_F#4",
-          "time": 19.838629,
-          "duration": 0.24193449999999928,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.5826771653543307,
@@ -861,7 +674,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_67_A2_E4_G4",
+          "id": "chord_50_A2_E4_G4",
           "time": 20.0805635,
           "duration": 0.24193449999999928,
           "kind": "chord",
@@ -875,7 +688,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_68_A#2_C#4_F#4",
+          "id": "chord_51_A#2_C#4_F#4",
           "time": 20.322498,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -889,7 +702,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_69_C#4_E4_F#3",
+          "id": "chord_52_C#4_E4_F#3",
           "time": 20.806366999999998,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -903,7 +716,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_70_B2_B3_D4",
+          "id": "chord_53_B2_B3_D4",
           "time": 21.290236,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -917,7 +730,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_71_E3_E4_G#3",
+          "id": "chord_54_E3_E4_G#3",
           "time": 21.774105,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -931,7 +744,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_72_A2_A3_E3",
+          "id": "chord_55_A2_A3_E3",
           "time": 22.257974,
           "duration": 0.9677380000000007,
           "kind": "chord",
@@ -945,23 +758,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_73_D4",
+          "id": "chord_56_D4_F#4",
           "time": 22.741843,
           "duration": 0.9677380000000007,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.6220472440944882,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_74_F#4",
-          "time": 22.741843,
-          "duration": 0.9677380000000007,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.6220472440944882,
@@ -969,7 +771,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_75_D3",
+          "id": "note_57_D3",
           "time": 23.225712,
           "duration": 0.48386899999999855,
           "kind": "note",
@@ -981,23 +783,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_76_D4",
+          "id": "chord_58_D4_F#4",
           "time": 23.709581,
           "duration": 0.48386899999999855,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_77_F#4",
-          "time": 23.709581,
-          "duration": 0.48386899999999855,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#4"
           ],
           "velocity": 0.5590551181102362,
@@ -1005,7 +796,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_78_D3",
+          "id": "note_59_D3",
           "time": 23.9515155,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -1017,7 +808,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_79_D3_E4_G4",
+          "id": "chord_60_D3_E4_G4",
           "time": 24.19345,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -1031,23 +822,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_80_A4",
+          "id": "chord_61_A4_F#4",
           "time": 24.677319,
           "duration": 0.48386899999999855,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A4"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_81_F#4",
-          "time": 24.677319,
-          "duration": 0.48386899999999855,
-          "kind": "note",
-          "notes": [
+            "A4",
             "F#4"
           ],
           "velocity": 0.5590551181102362,
@@ -1055,7 +835,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_82_D3",
+          "id": "note_62_D3",
           "time": 24.9192535,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -1067,7 +847,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_83_A2_A4_F#4",
+          "id": "chord_63_A2_A4_F#4",
           "time": 25.161188,
           "duration": 0.4838690000000021,
           "kind": "chord",
@@ -1081,23 +861,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_84_E4",
+          "id": "chord_64_E4_G4",
           "time": 25.645057,
           "duration": 0.48386899999999855,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "E4"
-          ],
-          "velocity": 0.5511811023622047,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_85_G4",
-          "time": 25.645057,
-          "duration": 0.48386899999999855,
-          "kind": "note",
-          "notes": [
+            "E4",
             "G4"
           ],
           "velocity": 0.5511811023622047,
@@ -1105,7 +874,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_86_A2",
+          "id": "note_65_A2",
           "time": 25.8869915,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -1117,7 +886,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_87_A2_D4_F#4",
+          "id": "chord_66_A2_D4_F#4",
           "time": 26.128926,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -1131,23 +900,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_88_A3",
+          "id": "chord_67_A3_E4",
           "time": 26.612795,
           "duration": 0.4838690000000021,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_89_E4",
-          "time": 26.612795,
-          "duration": 0.4838690000000021,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5433070866141733,
@@ -1155,7 +913,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_90_A2",
+          "id": "note_68_A2",
           "time": 26.8547295,
           "duration": 0.24193449999999928,
           "kind": "note",
@@ -1167,7 +925,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_91_D3_D4_F#3",
+          "id": "chord_69_D3_D4_F#3",
           "time": 27.096664,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -1181,23 +939,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_92_D4",
+          "id": "chord_70_D4_F#3",
           "time": 27.580533,
           "duration": 0.4838690000000021,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_93_F#3",
-          "time": 27.580533,
-          "duration": 0.4838690000000021,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#3"
           ],
           "velocity": 0.5433070866141733,
@@ -1205,23 +952,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_94_A3",
+          "id": "chord_71_A3_E4",
           "time": 28.064402,
           "duration": 0.48386899999999855,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "A3"
-          ],
-          "velocity": 0.5748031496062992,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_95_E4",
-          "time": 28.064402,
-          "duration": 0.48386899999999855,
-          "kind": "note",
-          "notes": [
+            "A3",
             "E4"
           ],
           "velocity": 0.5748031496062992,
@@ -1229,7 +965,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_96_D3_D4_F#4",
+          "id": "chord_72_D3_D4_F#4",
           "time": 28.548271,
           "duration": 0.48386899999999855,
           "kind": "chord",
@@ -1243,7 +979,7 @@
           "instrument": "piano"
         },
         {
-          "id": "chord_97_A2_A3_E4",
+          "id": "chord_73_A2_A3_E4",
           "time": 29.03214,
           "duration": 0.7258035000000014,
           "kind": "chord",
@@ -1257,23 +993,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_98_D4",
+          "id": "chord_74_D4_F#3",
           "time": 29.7579435,
           "duration": 0.24193449999999928,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "D4"
-          ],
-          "velocity": 0.5511811023622047,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_99_F#3",
-          "time": 29.7579435,
-          "duration": 0.24193449999999928,
-          "kind": "note",
-          "notes": [
+            "D4",
             "F#3"
           ],
           "velocity": 0.5511811023622047,
@@ -7518,28 +7243,17 @@
     {
       "id": "path_frere_jacques",
       "name": "Frère Jacques",
-      "duration": 17.97441384375,
+      "duration": 17.4012610078125,
       "tempo": 110.00011000011,
       "ppq": 256,
       "events": [
         {
-          "id": "note_0_F3",
+          "id": "chord_0_F3_F4",
           "time": 0,
           "duration": 2.0731513359375,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "F3"
-          ],
-          "velocity": 0.5039370078740157,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_1_F4",
-          "time": 0,
-          "duration": 0.51988584375,
-          "kind": "note",
-          "notes": [
+            "F3",
             "F4"
           ],
           "velocity": 0.6062992125984252,
@@ -7547,7 +7261,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_2_G4",
+          "id": "note_1_G4",
           "time": 0.545454,
           "duration": 0.5198858437499999,
           "kind": "note",
@@ -7559,7 +7273,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_3_A4",
+          "id": "note_2_A4",
           "time": 1.090908,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7571,7 +7285,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_4_F4",
+          "id": "note_3_F4",
           "time": 1.636362,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7583,23 +7297,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_5_F3",
+          "id": "chord_4_F3_F4",
           "time": 2.181816,
           "duration": 2.0731513359375,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "F3"
-          ],
-          "velocity": 0.5511811023622047,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_6_F4",
-          "time": 2.181816,
-          "duration": 0.51988584375,
-          "kind": "note",
-          "notes": [
+            "F3",
             "F4"
           ],
           "velocity": 0.6535433070866141,
@@ -7607,7 +7310,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_7_G4",
+          "id": "note_5_G4",
           "time": 2.72727,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7619,7 +7322,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_8_A4",
+          "id": "note_6_A4",
           "time": 3.272724,
           "duration": 0.5198858437499996,
           "kind": "note",
@@ -7631,7 +7334,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_9_F4",
+          "id": "note_7_F4",
           "time": 3.818178,
           "duration": 0.5198858437499996,
           "kind": "note",
@@ -7643,31 +7346,20 @@
           "instrument": "piano"
         },
         {
-          "id": "note_10_A4",
+          "id": "chord_8_A4_F3",
           "time": 4.363632,
-          "duration": 0.51988584375,
-          "kind": "note",
+          "duration": 2.0731513359375002,
+          "kind": "chord",
           "notes": [
-            "A4"
+            "A4",
+            "F3"
           ],
           "velocity": 0.6929133858267716,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_11_F3",
-          "time": 4.363632,
-          "duration": 2.0731513359375002,
-          "kind": "note",
-          "notes": [
-            "F3"
-          ],
-          "velocity": 0.5511811023622047,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_12_A#4",
+          "id": "note_9_A#4",
           "time": 4.909086,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7679,7 +7371,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_13_C5",
+          "id": "note_10_C5",
           "time": 5.45454,
           "duration": 1.0376410078124998,
           "kind": "note",
@@ -7691,31 +7383,20 @@
           "instrument": "piano"
         },
         {
-          "id": "note_14_A4",
+          "id": "chord_11_A4_F3",
           "time": 6.545448,
-          "duration": 0.5198858437499991,
-          "kind": "note",
+          "duration": 2.0731513359374993,
+          "kind": "chord",
           "notes": [
-            "A4"
+            "A4",
+            "F3"
           ],
           "velocity": 0.6299212598425197,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_15_F3",
-          "time": 6.545448,
-          "duration": 2.0731513359374993,
-          "kind": "note",
-          "notes": [
-            "F3"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_16_A#4",
+          "id": "note_12_A#4",
           "time": 7.090902,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7727,7 +7408,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_17_C5",
+          "id": "note_13_C5",
           "time": 7.636356,
           "duration": 1.037641007812499,
           "kind": "note",
@@ -7739,23 +7420,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_18_C3",
+          "id": "chord_14_C3_C5",
           "time": 8.727264,
           "duration": 1.0376410078124998,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "C3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_19_C5",
-          "time": 8.727264,
-          "duration": 0.259942921875,
-          "kind": "note",
-          "notes": [
+            "C3",
             "C5"
           ],
           "velocity": 0.6614173228346457,
@@ -7763,7 +7433,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_20_D5",
+          "id": "note_15_D5",
           "time": 8.999991,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7775,7 +7445,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_21_C5",
+          "id": "note_16_C5",
           "time": 9.272718,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7787,7 +7457,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_22_A#4",
+          "id": "note_17_A#4",
           "time": 9.545444999999999,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7799,31 +7469,20 @@
           "instrument": "piano"
         },
         {
-          "id": "note_23_A4",
+          "id": "chord_18_A4_F3",
           "time": 9.818172,
-          "duration": 0.51988584375,
-          "kind": "note",
+          "duration": 1.0376410078124998,
+          "kind": "chord",
           "notes": [
-            "A4"
+            "A4",
+            "F3"
           ],
           "velocity": 0.6456692913385826,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_24_F3",
-          "time": 9.818172,
-          "duration": 1.0376410078124998,
-          "kind": "note",
-          "notes": [
-            "F3"
-          ],
-          "velocity": 0.5826771653543307,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_25_F4",
+          "id": "note_19_F4",
           "time": 10.363626,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7835,23 +7494,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_26_C3",
+          "id": "chord_20_C3_C5",
           "time": 10.90908,
           "duration": 1.0376410078124998,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "C3"
-          ],
-          "velocity": 0.5275590551181102,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_27_C5",
-          "time": 10.90908,
-          "duration": 0.259942921875,
-          "kind": "note",
-          "notes": [
+            "C3",
             "C5"
           ],
           "velocity": 0.7165354330708661,
@@ -7859,7 +7507,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_28_D5",
+          "id": "note_21_D5",
           "time": 11.181807,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7871,7 +7519,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_29_C5",
+          "id": "note_22_C5",
           "time": 11.454534,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7883,7 +7531,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_30_A#4",
+          "id": "note_23_A#4",
           "time": 11.727261,
           "duration": 0.259942921875,
           "kind": "note",
@@ -7895,31 +7543,20 @@
           "instrument": "piano"
         },
         {
-          "id": "note_31_A4",
+          "id": "chord_24_A4_F3",
           "time": 11.999988,
-          "duration": 0.51988584375,
-          "kind": "note",
+          "duration": 1.0376410078124998,
+          "kind": "chord",
           "notes": [
-            "A4"
+            "A4",
+            "F3"
           ],
           "velocity": 0.6692913385826772,
           "channel": 0,
           "instrument": "piano"
         },
         {
-          "id": "note_32_F3",
-          "time": 11.999988,
-          "duration": 1.0376410078124998,
-          "kind": "note",
-          "notes": [
-            "F3"
-          ],
-          "velocity": 0.5590551181102362,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_33_F4",
+          "id": "note_25_F4",
           "time": 12.545442,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7931,23 +7568,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_34_C3",
+          "id": "chord_26_C3_G4",
           "time": 13.090896,
           "duration": 1.0376410078124998,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "C3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_35_G4",
-          "time": 13.090896,
-          "duration": 0.5198858437499982,
-          "kind": "note",
-          "notes": [
+            "C3",
             "G4"
           ],
           "velocity": 0.6692913385826772,
@@ -7955,7 +7581,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_36_C4",
+          "id": "note_27_C4",
           "time": 13.63635,
           "duration": 0.51988584375,
           "kind": "note",
@@ -7967,23 +7593,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_37_F3",
+          "id": "chord_28_F3_F4",
           "time": 14.181804,
           "duration": 1.0376410078124998,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "F3"
-          ],
-          "velocity": 0.5905511811023622,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_38_F4",
-          "time": 14.181804,
-          "duration": 1.0376410078124998,
-          "kind": "note",
-          "notes": [
+            "F3",
             "F4"
           ],
           "velocity": 0.7007874015748031,
@@ -7991,23 +7606,12 @@
           "instrument": "piano"
         },
         {
-          "id": "note_39_C3",
+          "id": "chord_29_C3_G4",
           "time": 15.272712,
           "duration": 1.037641007812498,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "C3"
-          ],
-          "velocity": 0.5433070866141733,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_40_G4",
-          "time": 15.272712,
-          "duration": 0.51988584375,
-          "kind": "note",
-          "notes": [
+            "C3",
             "G4"
           ],
           "velocity": 0.6771653543307087,
@@ -8015,7 +7619,7 @@
           "instrument": "piano"
         },
         {
-          "id": "note_41_C4",
+          "id": "note_30_C4",
           "time": 15.818166,
           "duration": 0.5198858437500018,
           "kind": "note",
@@ -8027,38 +7631,15 @@
           "instrument": "piano"
         },
         {
-          "id": "note_42_F3",
+          "id": "chord_31_F3_F4",
           "time": 16.36362,
           "duration": 1.0376410078124998,
-          "kind": "note",
+          "kind": "chord",
           "notes": [
-            "F3"
-          ],
-          "velocity": 0.5905511811023622,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_43_F4",
-          "time": 16.36362,
-          "duration": 1.0376410078124998,
-          "kind": "note",
-          "notes": [
+            "F3",
             "F4"
           ],
           "velocity": 0.7007874015748031,
-          "channel": 0,
-          "instrument": "piano"
-        },
-        {
-          "id": "note_45_F4",
-          "time": 17.454528,
-          "duration": 0.51988584375,
-          "kind": "note",
-          "notes": [
-            "F4"
-          ],
-          "velocity": 0.6614173228346457,
           "channel": 0,
           "instrument": "piano"
         }

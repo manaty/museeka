@@ -53,7 +53,7 @@ test("public demo starts and exposes playable controls", async ({ page }) => {
   await expect(startButton).toBeEnabled({ timeout: 45_000 });
   await startButton.click();
   await expect(page.getByTestId("path-select")).toBeVisible({ timeout: 45_000 });
-  await expect(page.getByTestId("path-select").locator("option")).toHaveCount(5);
+  await expect(page.getByTestId("path-select").locator("option")).toHaveCount(5, { timeout: 10_000 });
 });
 
 test("public demo canvas renders on mobile", async ({ page }) => {

@@ -152,7 +152,7 @@ export function groupMidiNotes(notes: MusicEvent[], chordWindow = 0.045, phraseG
       cursor += 1;
     }
 
-    if (chord.length >= 3) {
+    if (chord.length >= 2) {
       grouped.push({
         ...current,
         id: `chord_${current.id}`,

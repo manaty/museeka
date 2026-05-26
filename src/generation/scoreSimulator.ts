@@ -209,8 +209,12 @@ export function simulateParcours(path: Path3D, objects: SoundObject[]): Simulati
             emitFromGenerator(object.audio, pitchSemitones, volume, brightness, time, object.id, produced);
             state.lastTriggeredAt = time;
             state.rising = false;
+            // Reset peak baseline so the NEXT visit (even at the same intensity magnitude)
+            // can register a fresh rising → falling pattern and re-trigger.
+            state.peakIntensity = intensity;
           }
-        } else if (state.peakIntensity > 0) {
+        } else if (intensity < threshold * 0.3) {
+          // Deep exit: full state cleanup so re-entry starts completely fresh.
           state.peakIntensity = 0;
           state.rising = false;
         }

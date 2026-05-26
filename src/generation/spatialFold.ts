@@ -32,7 +32,7 @@ const ANCHOR_RING_STEP = 4;
 const ANCHOR_FIELD_RADIUS = 3.2;
 const ANCHOR_FIELD_ALTITUDE = 7;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
-const AGGREGATE_OFFSET = 10;
+const AGGREGATE_OFFSET = 8;
 const AGGREGATE_ANGLE_SEQUENCE = [
   Math.PI / 2,
   -Math.PI / 2,
@@ -480,7 +480,6 @@ function insertReleaseWaypoints(waypoints: Waypoint[], anchorMap: Map<string, Pi
     if (!anchor) continue;
     const gap = next.t - wp.t;
     if (gap < 0.001) continue;
-    // Mid-time release just outside the field (radial direction = away from origin)
     const tRelease = (wp.t + next.t) / 2;
     const radial = Math.hypot(anchor.position[0], anchor.position[2]);
     const ux = radial > 0.0001 ? anchor.position[0] / radial : 1;
@@ -600,6 +599,7 @@ function distance2D(a: Vec3, b: Vec3): number {
 }
 
 type PlacedAggregate = { position: Vec3; field: SoundField };
+type PlacedAnchor = { position: Vec3; radius: number };
 
 function aggregatePositionAlongPath(
   event: MusicEvent,
@@ -608,7 +608,8 @@ function aggregatePositionAlongPath(
   hasTokens: boolean,
   aggregateIndex: number,
   aggregateCount: number,
-  placed: PlacedAggregate[]
+  placed: PlacedAggregate[],
+  anchors: PlacedAnchor[]
 ): Vec3 {
   const fieldRy = aggregateFieldRadiusY(event);
   const ownField = fieldForAggregate(event);
@@ -655,6 +656,16 @@ function aggregatePositionAlongPath(
       const dist = distance2D(pos, p.position);
       const minDist = ownRadius + fieldRadiusXZ(p.field) + 1;
       clearance = Math.min(clearance, dist - (ownRadius + fieldRadiusXZ(p.field)));
+      if (dist < minDist) {
+        collides = true;
+      }
+    }
+    // Also avoid pitch-class anchors: aggregate firing too close to one masks
+    // the anchor's intensity peak (intensity bleed-over).
+    for (const a of anchors) {
+      const dist = distance2D(pos, a.position);
+      const minDist = ownRadius + a.radius + 1.5;
+      clearance = Math.min(clearance, dist - (ownRadius + a.radius));
       if (dist < minDist) {
         collides = true;
       }
@@ -784,8 +795,12 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     const skeletonPath = waypointsToPath(waypoints, score.id, score.name, score.duration);
     const hasTokens = tokens.length > 0;
     const placed: PlacedAggregate[] = [];
+    const placedAnchors: PlacedAnchor[] = anchorObjects.map((a) => ({
+      position: a.transform.position,
+      radius: fieldRadiusXZ(a.field)
+    }));
     aggregates.forEach((event, index) => {
-      const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed);
+      const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed, placedAnchors);
       const objectId = `aggregate_${event.id}_${index}`;
       const position = overrides.get(objectId) ?? naturalPos;
       const object = buildAggregateSoundObject(event, position, index);
