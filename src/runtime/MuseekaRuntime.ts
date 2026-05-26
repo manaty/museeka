@@ -5,7 +5,7 @@ import { AudioEngine, type SampleLoadProgress } from "../audio/AudioEngine";
 import { PlaybackController } from "./PlaybackController";
 import { FreeFlyController, type FreeFlyInput } from "./FreeFlyController";
 
-const MIN_GROUND_CLEARANCE = 1.2;
+const MIN_GROUND_CLEARANCE = 1.8;
 
 export type RuntimeMode = "path" | "freefly";
 

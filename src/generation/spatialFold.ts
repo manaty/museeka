@@ -604,7 +604,9 @@ function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: stri
     name: scoreName,
     duration,
     mode: "flying",
-    speedScale: 1,
+    // Halved so the firefly moves at a calmer pace through the island —
+    // fewer fast brushes, easier to follow musically, less tunneling.
+    speedScale: 0.5,
     constraints: { maxSpeed: MAX_PATH_SPEED, maxAcceleration: 18, maxCurvature: 1.6, minGroundClearance: 1.5, maxGroundClearance: 60 },
     points,
     interpolation: "catmull-rom",
@@ -656,8 +658,8 @@ function deflectAndMoveForExtras(
   idSuffix: string,
   objects: SoundObject[]
 ): { waypoints: Waypoint[]; objects: SoundObject[] } {
-  const MAX_ITER = 8;
-  const DEFLECT_MARGIN = 2.0;
+  const MAX_ITER = 10;
+  const DEFLECT_MARGIN = 3.5;
   let current = [...waypoints];
   let currentObjects = [...objects];
   const objectMoveAttempts = new Map<string, number>();
@@ -710,12 +712,18 @@ function deflectAndMoveForExtras(
       // MOVE the object itself (we know it belongs to this score only because
       // every object id carries the per-score suffix).
       if (attempts < 2) {
-        current.push({
-          t: episode.time,
-          p: [px, py, pz],
-          source: "deflection",
-          refId: `deflect_${episode.objectId}_${episode.time.toFixed(2)}`
-        });
+        // Insert FIVE deflection waypoints clustered around the brush moment
+        // so Catmull-Rom can't curve back into the field on either side.
+        const window = 0.25;
+        for (const dt of [-window, -window / 2, 0, window / 2, window]) {
+          const t = Math.max(0.001, Math.min(duration - 0.001, episode.time + dt));
+          current.push({
+            t,
+            p: [px, py, pz],
+            source: "deflection",
+            refId: `deflect_${episode.objectId}_${t.toFixed(3)}`
+          });
+        }
         objectMoveAttempts.set(episode.objectId, attempts + 1);
         modified = true;
       } else if (!moved.has(episode.objectId)) {
