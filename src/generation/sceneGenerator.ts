@@ -12,7 +12,7 @@ export type SceneGenerationResult = {
 export function generateSceneFromScores(scores: MusicScore[], seed = 12345): SceneGenerationResult {
   const terrain: IslandScene["terrain"] = {
     type: "simple_island",
-    radius: 64,
+    radius: 96,
     heightScale: 10,
     seed
   };

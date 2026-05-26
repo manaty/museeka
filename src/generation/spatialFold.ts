@@ -32,7 +32,7 @@ const ANCHOR_RING_STEP = 4;
 const ANCHOR_FIELD_RADIUS = 3.2;
 const ANCHOR_FIELD_ALTITUDE = 7;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
-const AGGREGATE_OFFSET = 8;
+const AGGREGATE_OFFSET = 11;
 const AGGREGATE_ANGLE_SEQUENCE = [
   Math.PI / 2,
   -Math.PI / 2,
@@ -640,45 +640,45 @@ function aggregatePositionAlongPath(
   const tx = tangent[0] / tangentLen;
   const tz = tangent[2] / tangentLen;
 
-  // Try the angle rotation sequence anchored at this aggregate's index, then fall back
-  // to the candidate furthest from any already-placed aggregate if all collide.
+  // Try the angle rotation sequence at increasing distances. Separation between
+  // field boundaries prevents the path entering one aggregate from grazing a
+  // neighbour's and firing extras.
+  const AGG_SEPARATION = 2.5;
+  const distanceMultipliers = [1.0, 1.3, 1.6, 2.0];
   let bestPos: Vec3 | null = null;
   let bestClearance = -Infinity;
-  for (let i = 0; i < AGGREGATE_ANGLE_SEQUENCE.length; i += 1) {
-    const angle = AGGREGATE_ANGLE_SEQUENCE[(aggregateIndex + i) % AGGREGATE_ANGLE_SEQUENCE.length];
-    const dx = tx * Math.cos(angle) + (-tz) * Math.sin(angle);
-    const dz = tz * Math.cos(angle) + tx * Math.sin(angle);
-    const x = baseX + dx * AGGREGATE_OFFSET;
-    const z = baseZ + dz * AGGREGATE_OFFSET;
-    const ground = terrainGroundY(x, z, terrain);
-    const pos: Vec3 = [x, ground + fieldRy, z];
+  for (const distMult of distanceMultipliers) {
+    for (let i = 0; i < AGGREGATE_ANGLE_SEQUENCE.length; i += 1) {
+      const angle = AGGREGATE_ANGLE_SEQUENCE[(aggregateIndex + i) % AGGREGATE_ANGLE_SEQUENCE.length];
+      const dx = tx * Math.cos(angle) + (-tz) * Math.sin(angle);
+      const dz = tz * Math.cos(angle) + tx * Math.sin(angle);
+      const x = baseX + dx * AGGREGATE_OFFSET * distMult;
+      const z = baseZ + dz * AGGREGATE_OFFSET * distMult;
+      // Keep position inside the playable island (terrain radius - safety margin).
+      const distFromCenter = Math.hypot(x, z);
+      if (distFromCenter > terrain.radius * 0.85) continue;
+      const ground = terrainGroundY(x, z, terrain);
+      const pos: Vec3 = [x, ground + fieldRy, z];
 
-    let clearance = Infinity;
-    let collides = false;
-    for (const p of placed) {
-      const dist = distance2D(pos, p.position);
-      const minDist = ownRadius + fieldRadiusXZ(p.field) + 1;
-      clearance = Math.min(clearance, dist - (ownRadius + fieldRadiusXZ(p.field)));
-      if (dist < minDist) {
-        collides = true;
+      let clearance = Infinity;
+      let collides = false;
+      for (const p of placed) {
+        const dist = distance2D(pos, p.position);
+        const minDist = ownRadius + fieldRadiusXZ(p.field) + AGG_SEPARATION;
+        clearance = Math.min(clearance, dist - (ownRadius + fieldRadiusXZ(p.field)));
+        if (dist < minDist) collides = true;
       }
-    }
-    // Also avoid pitch-class anchors: aggregate firing too close to one masks
-    // the anchor's intensity peak (intensity bleed-over).
-    for (const a of anchors) {
-      const dist = distance2D(pos, a.position);
-      const minDist = ownRadius + a.radius + 1.5;
-      clearance = Math.min(clearance, dist - (ownRadius + a.radius));
-      if (dist < minDist) {
-        collides = true;
+      for (const a of anchors) {
+        const dist = distance2D(pos, a.position);
+        const minDist = ownRadius + a.radius + 2;
+        clearance = Math.min(clearance, dist - (ownRadius + a.radius));
+        if (dist < minDist) collides = true;
       }
-    }
-    if (!collides) {
-      return pos;
-    }
-    if (clearance > bestClearance) {
-      bestClearance = clearance;
-      bestPos = pos;
+      if (!collides) return pos;
+      if (clearance > bestClearance) {
+        bestClearance = clearance;
+        bestPos = pos;
+      }
     }
   }
   return bestPos!;
