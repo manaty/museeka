@@ -2,8 +2,10 @@ import type { InstrumentId, MusicScore } from "../core/types";
 import type { ProducedNote } from "./scoreSimulator";
 import { noteNameToMidi } from "./spatialFold";
 
-const TIME_TOLERANCE = 0.35;
+const TIME_TOLERANCE = 0.6;
 const PITCH_TOLERANCE_SEMITONES = 0;
+const PITCH_MISMATCH_PENALTY = 100;
+const INF_COST = 1e9;
 
 export type ExpectedNote = {
   id: string;
@@ -121,60 +123,155 @@ function producedKindMatches(expectedKind: ExpectedNote["kind"], producedKind: P
   return producedKind === "note" || producedKind === "phrase";
 }
 
-export function compareProduced(score: MusicScore, produced: ProducedNote[]): ComparisonResult {
-  const expected = buildExpectedNotes(score);
-  const consumed = new Set<number>();
-  const matches: NoteMatch[] = [];
-  const missing: ExpectedNote[] = [];
+function pairCost(exp: ExpectedNote, prod: ProducedNote): number {
+  if (prod.instrument !== exp.instrument) return INF_COST;
+  if (!producedKindMatches(exp.kind, prod.kind)) return INF_COST;
+  const timeDelta = Math.abs(prod.time - exp.time);
+  if (timeDelta > TIME_TOLERANCE) return INF_COST;
+  const midiDelta = Math.abs(prod.midi - exp.midi);
+  const pitchOk = exp.kind === "percussion" || midiDelta <= PITCH_TOLERANCE_SEMITONES;
+  return timeDelta + (pitchOk ? 0 : PITCH_MISMATCH_PENALTY + midiDelta);
+}
 
-  for (const exp of expected) {
-    let bestIndex = -1;
-    let bestScore = Infinity;
-    let bestPitchOk = false;
+/**
+ * Jonker-Volgenant assignment. Returns assignment[row] = col or -1 if unassigned.
+ * Handles rectangular matrices by padding with INF on dummy columns.
+ * O(n^2 m) where n = rows, m = max(rows, cols).
+ */
+function hungarian(cost: number[][]): number[] {
+  const n = cost.length;
+  if (n === 0) return [];
+  const origM = cost[0].length;
+  if (origM === 0) return new Array(n).fill(-1);
 
-    for (let i = 0; i < produced.length; i += 1) {
-      if (consumed.has(i)) continue;
-      const prod = produced[i];
-      if (prod.instrument !== exp.instrument) continue;
-      if (!producedKindMatches(exp.kind, prod.kind)) continue;
+  const m = Math.max(n, origM);
+  const padded: number[][] = cost.map((row) => {
+    if (row.length === m) return row;
+    const r = [...row];
+    while (r.length < m) r.push(INF_COST);
+    return r;
+  });
+  while (padded.length < m) {
+    padded.push(new Array(m).fill(INF_COST));
+  }
+  const dim = padded.length;
 
-      const timeDelta = Math.abs(prod.time - exp.time);
-      if (timeDelta > TIME_TOLERANCE) continue;
+  const u = new Array<number>(dim + 1).fill(0);
+  const v = new Array<number>(dim + 1).fill(0);
+  const p = new Array<number>(dim + 1).fill(0);
+  const way = new Array<number>(dim + 1).fill(0);
 
-      const midiDelta = Math.abs(prod.midi - exp.midi);
-      const pitchOk = exp.kind === "percussion" || midiDelta <= PITCH_TOLERANCE_SEMITONES;
-      // Prefer correct pitch over closer time
-      const score = (pitchOk ? 0 : 100 + midiDelta) + timeDelta;
+  for (let i = 1; i <= dim; i += 1) {
+    p[0] = i;
+    let j0 = 0;
+    const minv = new Array<number>(dim + 1).fill(Number.POSITIVE_INFINITY);
+    const used = new Array<boolean>(dim + 1).fill(false);
 
-      if (score < bestScore) {
-        bestScore = score;
-        bestIndex = i;
-        bestPitchOk = pitchOk;
+    do {
+      used[j0] = true;
+      const i0 = p[j0];
+      let delta = Number.POSITIVE_INFINITY;
+      let j1 = 0;
+
+      for (let j = 1; j <= dim; j += 1) {
+        if (used[j]) continue;
+        const cur = padded[i0 - 1][j - 1] - u[i0] - v[j];
+        if (cur < minv[j]) {
+          minv[j] = cur;
+          way[j] = j0;
+        }
+        if (minv[j] < delta) {
+          delta = minv[j];
+          j1 = j;
+        }
+      }
+
+      for (let j = 0; j <= dim; j += 1) {
+        if (used[j]) {
+          u[p[j]] += delta;
+          v[j] -= delta;
+        } else {
+          minv[j] -= delta;
+        }
+      }
+
+      j0 = j1;
+    } while (p[j0] !== 0);
+
+    do {
+      const j1 = way[j0];
+      p[j0] = p[j1];
+      j0 = j1;
+    } while (j0);
+  }
+
+  const assignment = new Array<number>(n).fill(-1);
+  for (let j = 1; j <= dim; j += 1) {
+    const row = p[j];
+    if (row >= 1 && row <= n) {
+      const col = j - 1;
+      if (col < origM && padded[row - 1][col] < INF_COST) {
+        assignment[row - 1] = col;
       }
     }
+  }
+  return assignment;
+}
 
-    if (bestIndex === -1) {
-      missing.push(exp);
+export function compareProduced(score: MusicScore, produced: ProducedNote[]): ComparisonResult {
+  const expected = buildExpectedNotes(score);
+
+  if (expected.length === 0) {
+    return {
+      expected,
+      matches: [],
+      missing: [],
+      extra: produced.filter((p) => p.kind !== "drone-off"),
+      counts: { expected: 0, produced: produced.length, matched: 0, wrongPitch: 0, missing: 0, extra: produced.length },
+      accuracy: 0
+    };
+  }
+
+  const N = expected.length;
+  const M = produced.length;
+
+  let assignment: number[];
+  if (M === 0) {
+    assignment = new Array(N).fill(-1);
+  } else {
+    const cost: number[][] = expected.map((exp) => produced.map((prod) => pairCost(exp, prod)));
+    assignment = hungarian(cost);
+  }
+
+  const matches: NoteMatch[] = [];
+  const missing: ExpectedNote[] = [];
+  const consumed = new Set<number>();
+
+  for (let i = 0; i < N; i += 1) {
+    const j = assignment[i];
+    if (j < 0) {
+      missing.push(expected[i]);
       continue;
     }
-
-    consumed.add(bestIndex);
-    const prod = produced[bestIndex];
+    consumed.add(j);
+    const prod = produced[j];
+    const exp = expected[i];
     const midiDelta = prod.midi - exp.midi;
     const timeDelta = prod.time - exp.time;
+    const pitchOk = exp.kind === "percussion" || prod.midi === exp.midi;
     matches.push({
       expected: exp,
       produced: prod,
       midiDelta,
       timeDelta,
-      status: bestPitchOk ? "matched" : "wrong-pitch"
+      status: pitchOk ? "matched" : "wrong-pitch"
     });
   }
 
   const extra: ProducedNote[] = [];
-  for (let i = 0; i < produced.length; i += 1) {
-    if (!consumed.has(i) && produced[i].kind !== "drone-off") {
-      extra.push(produced[i]);
+  for (let j = 0; j < M; j += 1) {
+    if (!consumed.has(j) && produced[j].kind !== "drone-off") {
+      extra.push(produced[j]);
     }
   }
 

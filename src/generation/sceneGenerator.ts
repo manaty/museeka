@@ -1,6 +1,7 @@
 import type { FoldingPlan, GenerationReport, IslandScene, MusicScore, SoundObject, Vec3 } from "../core/types";
 import { terrainGroundY } from "../core/terrain";
 import { spatialFold, spatialFoldReport } from "./spatialFold";
+import { relaxScenes } from "./sceneRelaxer";
 
 export type SceneGenerationResult = {
   scene: IslandScene;
@@ -16,7 +17,8 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     seed
   };
 
-  const generated = scores.map((score) => spatialFold(score, terrain, { seed }));
+  const initial = scores.map((score) => ({ score, ...spatialFold(score, terrain, { seed }) }));
+  const generated = relaxScenes(initial, terrain);
 
   const scene: IslandScene = {
     version: "0.1",

@@ -1,19 +1,30 @@
 import { demoScores } from "../src/generation/demoScores";
-import { spatialFold } from "../src/generation/spatialFold";
+import { generateSceneFromScores } from "../src/generation/sceneGenerator";
 
-const TERRAIN = { type: "simple_island" as const, radius: 64, heightScale: 10, seed: 12345 };
+const { plans } = generateSceneFromScores(demoScores, 12345);
 
-for (const score of demoScores) {
-  const { plan } = spatialFold(score, TERRAIN);
+let totalExpected = 0;
+let totalMatched = 0;
+let totalExtras = 0;
+let failingScores = 0;
+
+for (const plan of plans) {
+  const score = demoScores.find((s) => s.id === plan.scoreId);
   const a = plan.analysis;
-  if (!a) continue;
+  if (!a || !score) continue;
   const expected = a.counts.expected;
   const matched = a.counts.matched;
   const wrong = a.counts.wrongPitch;
   const missing = a.counts.missing;
   const extra = a.counts.extra;
+  const acc = (matched / expected * 100).toFixed(1);
+  totalExpected += expected;
+  totalMatched += matched;
+  totalExtras += extra;
+  if (extra > 0 || matched < expected) failingScores += 1;
+
   console.log(`\n=== ${score.id} (${score.name}) ===`);
-  console.log(`expected: ${expected}  produced: ${a.counts.produced}  matched: ${matched} (${(matched/expected*100).toFixed(1)}%)  wrong-pitch: ${wrong}  missing: ${missing}  extra: ${extra}`);
+  console.log(`expected: ${expected}  produced: ${a.counts.produced}  matched: ${matched} (${acc}%)  wrong-pitch: ${wrong}  missing: ${missing}  extra: ${extra}`);
   if (missing > 0) {
     console.log("  missing examples:");
     for (const m of a.missing.slice(0, 5)) {
@@ -32,4 +43,13 @@ for (const score of demoScores) {
       console.log(`    t=${e.time.toFixed(2)} kind=${e.kind} midi=${e.midi} from=${e.sourceObjectId}`);
     }
   }
+}
+
+const aggregateAcc = (totalMatched / totalExpected * 100).toFixed(2);
+console.log(`\n=== AGGREGATE ===`);
+console.log(`matched ${totalMatched}/${totalExpected} (${aggregateAcc}%)  extras: ${totalExtras}  failing: ${failingScores}/${plans.length}`);
+
+if (failingScores > 0) {
+  console.error(`\nFAIL: ${failingScores} score(s) below 100% matched / 0 extras`);
+  process.exit(1);
 }

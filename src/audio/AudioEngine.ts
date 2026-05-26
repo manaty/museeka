@@ -50,6 +50,7 @@ type ContinuousVoice = {
   notes: string[];
   activeNotes: string[];
   active: boolean;
+  everTriggered: boolean;
 };
 
 type MappedParams = Partial<Record<MappingOutput, number>>;
@@ -246,6 +247,7 @@ export class AudioEngine {
     for (const voice of this.continuousVoices.values()) {
       voice.synth.releaseAll();
       voice.active = false;
+      voice.everTriggered = false;
     }
     this.triggerStates.clear();
   }
@@ -320,16 +322,18 @@ export class AudioEngine {
     let voice = this.continuousVoices.get(object.id);
 
     if (!voice) {
-      voice = { synth: createInstrument(object.audio.instrument, this.output), notes: this.notesForGenerator(object.audio), activeNotes: [], active: false };
+      voice = { synth: createInstrument(object.audio.instrument, this.output), notes: this.notesForGenerator(object.audio), activeNotes: [], active: false, everTriggered: false };
       this.continuousVoices.set(object.id, voice);
     }
 
     voice.synth.volume.value = Tone.gainToDb(Math.max(0.0001, volume * 0.28));
 
-    if (encounter.field.intensity >= object.trigger.threshold && !voice.active) {
+    // Drone-on fires once per session (matches simulator semantics).
+    if (encounter.field.intensity >= object.trigger.threshold && !voice.active && !voice.everTriggered) {
       voice.activeNotes = voice.notes.map((note) => transposeNote(note, params.pitchSemitones ?? 0));
       voice.synth.triggerAttack(voice.activeNotes, Tone.now(), 0.45);
       voice.active = true;
+      voice.everTriggered = true;
     }
 
     if (encounter.field.intensity < object.trigger.threshold * 0.5 && voice.active) {
@@ -350,7 +354,7 @@ export class AudioEngine {
         if (intensity > state.peakIntensity + 0.001) {
           state.peakIntensity = intensity;
           state.rising = true;
-        } else if (state.rising && intensity < state.peakIntensity - 0.02 && cooledDown) {
+        } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown) {
           this.playGenerator(object.audio, this.mappedParams(object, encounter));
           state.lastTriggeredAt = elapsed;
           state.rising = false;

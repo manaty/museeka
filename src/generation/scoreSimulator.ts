@@ -31,6 +31,7 @@ type TriggerSimState = {
   peakIntensity: number;
   rising: boolean;
   continuousActive: boolean;
+  everTriggered: boolean;
 };
 
 function mappedParams(object: SoundObject, encounter: Encounter): Partial<Record<MappingOutput, number>> {
@@ -161,7 +162,7 @@ function emitDroneOff(object: SoundObject, time: number, produced: ProducedNote[
 export function simulateParcours(path: Path3D, objects: SoundObject[]): SimulationResult {
   const states = new Map<string, TriggerSimState>();
   for (const object of objects) {
-    states.set(object.id, { lastIntensity: 0, lastTriggeredAt: -Infinity, peakIntensity: 0, rising: false, continuousActive: false });
+    states.set(object.id, { lastIntensity: 0, lastTriggeredAt: -Infinity, peakIntensity: 0, rising: false, continuousActive: false, everTriggered: false });
   }
 
   const produced: ProducedNote[] = [];
@@ -189,9 +190,12 @@ export function simulateParcours(path: Path3D, objects: SoundObject[]): Simulati
       const pitchSemitones = params.pitchSemitones ?? 0;
 
       if (object.trigger.mode === "continuous") {
-        if (intensity >= threshold && !state.continuousActive) {
+        // Drone-on fires exactly once per session (first spatial encounter).
+        // Subsequent re-entries do not re-trigger, preventing duplicate drone-on extras.
+        if (intensity >= threshold && !state.continuousActive && !state.everTriggered) {
           emitFromGenerator(object.audio, pitchSemitones, Math.max(volume, 0.3), brightness, time, object.id, produced);
           state.continuousActive = true;
+          state.everTriggered = true;
         } else if (intensity < threshold * 0.5 && state.continuousActive) {
           emitDroneOff(object, time, produced);
           state.continuousActive = false;
@@ -201,7 +205,7 @@ export function simulateParcours(path: Path3D, objects: SoundObject[]): Simulati
           if (intensity > state.peakIntensity + 0.001) {
             state.peakIntensity = intensity;
             state.rising = true;
-          } else if (state.rising && intensity < state.peakIntensity - 0.02 && cooledDown) {
+          } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown) {
             emitFromGenerator(object.audio, pitchSemitones, volume, brightness, time, object.id, produced);
             state.lastTriggeredAt = time;
             state.rising = false;

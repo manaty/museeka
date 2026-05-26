@@ -32,9 +32,23 @@ const ANCHOR_RING_STEP = 4;
 const ANCHOR_FIELD_RADIUS = 3.2;
 const ANCHOR_FIELD_ALTITUDE = 7;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
-const AGGREGATE_OFFSET = 4;
+const AGGREGATE_OFFSET = 10;
+const AGGREGATE_ANGLE_SEQUENCE = [
+  Math.PI / 2,
+  -Math.PI / 2,
+  Math.PI / 3,
+  -Math.PI / 3,
+  (Math.PI * 2) / 3,
+  -(Math.PI * 2) / 3
+];
 const MIN_SEGMENT_DURATION = 0.05;
 const MAX_PATH_SPEED = 26;
+const MIN_COOLDOWN = 0.12;
+const MAX_COOLDOWN = 0.8;
+const COOLDOWN_DURATION_FACTOR = 0.4;
+const COOLDOWN_GAP_FACTOR = 0.45;
+const DENSE_PHRASE_GAP = 0.5;
+const PHRASE_FEASIBLE_MARGIN = 0.6;
 
 const VISUAL_BY_INSTRUMENT: Record<InstrumentId, SoundObjectVisual["model"]> = {
   glass_bell: "flower",
@@ -69,18 +83,22 @@ const INSTRUMENT_RING_INDEX: Record<InstrumentId, number> = {
 const AGGREGATE_VISUAL_BY_KIND: Record<string, SoundObjectVisual["model"]> = {
   chord: "arch",
   drone: "temple",
-  percussion: "rock"
+  percussion: "rock",
+  phrase: "crystal"
 };
 
 export type SpatialFoldOptions = {
   seed?: number;
+  /** Optional override of object positions, keyed by object id. Used by the relaxer. */
+  positionOverrides?: Map<string, Vec3>;
 };
 
 type Waypoint = {
   t: number;
   p: Vec3;
-  source: "entry" | "exit" | "anchor" | "aggregate";
+  source: "entry" | "exit" | "anchor" | "aggregate" | "release";
   refId?: string;
+  anchorId?: string;
 };
 
 function pitchClassName(pc: number): string {
@@ -112,7 +130,30 @@ function median(values: number[]): number {
   return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
-export function tokenizeScore(score: MusicScore): { tokens: NoteToken[]; aggregates: MusicEvent[] } {
+function estimatePhrasePathDistance(event: MusicEvent, terrain: IslandScene["terrain"]): number {
+  let total = 0;
+  for (let i = 1; i < event.notes.length; i += 1) {
+    const prevMidi = noteNameToMidi(event.notes[i - 1]);
+    const curMidi = noteNameToMidi(event.notes[i]);
+    const prevPc = ((prevMidi % 12) + 12) % 12;
+    const curPc = ((curMidi % 12) + 12) % 12;
+    const a = placeAnchorPosition(prevPc, event.instrument, 0, terrain);
+    const b = placeAnchorPosition(curPc, event.instrument, 0, terrain);
+    total += Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
+  }
+  return total;
+}
+
+function shouldCompactPhrase(event: MusicEvent, terrain: IslandScene["terrain"]): boolean {
+  if (event.notes.length < 2) return false;
+  const step = event.duration / event.notes.length;
+  if (step >= DENSE_PHRASE_GAP) return false;
+  const required = estimatePhrasePathDistance(event, terrain);
+  const feasible = MAX_PATH_SPEED * step * (event.notes.length - 1) * PHRASE_FEASIBLE_MARGIN;
+  return required > feasible;
+}
+
+export function tokenizeScore(score: MusicScore, terrain?: IslandScene["terrain"]): { tokens: NoteToken[]; aggregates: MusicEvent[] } {
   const tokens: NoteToken[] = [];
   const aggregates: MusicEvent[] = [];
 
@@ -135,6 +176,12 @@ export function tokenizeScore(score: MusicScore): { tokens: NoteToken[]; aggrega
     }
 
     if (event.kind === "phrase") {
+      // Compact dense phrases the path could never reach in time: emit as a single
+      // aggregate whose generator schedules all notes when the player enters its field.
+      if (terrain && shouldCompactPhrase(event, terrain)) {
+        aggregates.push(event);
+        continue;
+      }
       const step = event.notes.length > 1 ? event.duration / event.notes.length : event.duration;
       const noteDuration = Math.max(0.08, step * 0.85);
       event.notes.forEach((noteName, index) => {
@@ -180,7 +227,7 @@ function placeAnchorPosition(pitchClass: number, instrument: InstrumentId, _base
   return [x, y, z];
 }
 
-export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene["terrain"]): PitchClassAnchor[] {
+export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene["terrain"]): { anchors: PitchClassAnchor[]; minGapById: Map<string, number> } {
   const groups = new Map<string, NoteToken[]>();
   for (const token of tokens) {
     const key = `${token.instrument}_${token.pitchClass}`;
@@ -190,20 +237,29 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
   }
 
   const anchors: PitchClassAnchor[] = [];
+  const minGapById = new Map<string, number>();
   for (const [, list] of groups) {
+    list.sort((a, b) => a.time - b.time);
     const first = list[0];
     const baseOctave = Math.round(median(list.map((token) => token.octave)));
+    const id = `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}`;
+    let minGap = Number.POSITIVE_INFINITY;
+    for (let i = 1; i < list.length; i += 1) {
+      const gap = list[i].time - list[i - 1].time;
+      if (gap < minGap) minGap = gap;
+    }
     anchors.push({
-      id: `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}`,
+      id,
       pitchClass: first.pitchClass,
       instrument: first.instrument,
       position: placeAnchorPosition(first.pitchClass, first.instrument, baseOctave, terrain),
       baseOctave,
       visits: list.length
     });
+    minGapById.set(id, Number.isFinite(minGap) ? minGap : 0);
   }
 
-  return anchors;
+  return { anchors, minGapById };
 }
 
 function anchorIdFor(token: NoteToken): string {
@@ -215,7 +271,11 @@ function altitudeForToken(token: NoteToken, anchor: PitchClassAnchor): number {
   return anchor.position[1] + octaveDelta * OCTAVE_HEIGHT_M;
 }
 
-function buildAnchorSoundObject(anchor: PitchClassAnchor): SoundObject {
+function clampCooldown(value: number): number {
+  return Math.max(MIN_COOLDOWN, Math.min(MAX_COOLDOWN, value));
+}
+
+function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): SoundObject {
   const noteName = `${pitchClassName(anchor.pitchClass)}${anchor.baseOctave}`;
   const audio: AudioGenerator = {
     generator: "note",
@@ -235,12 +295,17 @@ function buildAnchorSoundObject(anchor: PitchClassAnchor): SoundObject {
     falloff: { distance: { type: "smoothstep" }, altitude: { type: "linear" } }
   };
 
+  // Cooldown must be SHORTER than the shortest gap between visits to this anchor,
+  // otherwise back-to-back same-pitch notes get dropped. Derived from minGap so the
+  // rule is purely structural — independent of any specific demo MIDI.
+  const cooldown = clampCooldown(minGap > 0 ? minGap * COOLDOWN_GAP_FACTOR : MIN_COOLDOWN);
+
   return {
     id: anchor.id,
     kind: `pitch_${pitchClassName(anchor.pitchClass)}`,
     transform: { position: anchor.position, rotation: [0, (anchor.pitchClass * 30) % 360, 0], scale: [1, 1, 1] },
     field,
-    trigger: { mode: "peak", threshold: 0.42, cooldown: 0.18, retrigger: true },
+    trigger: { mode: "peak", threshold: 0.42, cooldown, retrigger: true },
     audio,
     mappings,
     visual: {
@@ -259,13 +324,23 @@ function audioForAggregate(event: MusicEvent): AudioGenerator {
   if (event.kind === "drone") {
     return { generator: "drone", instrument: event.instrument, notes: event.notes, continuous: true, velocity: event.velocity };
   }
+  if (event.kind === "phrase") {
+    const step = event.notes.length > 1 ? event.duration / event.notes.length : event.duration;
+    return {
+      generator: "phrase",
+      instrument: event.instrument,
+      notes: event.notes.map((note, index) => ({
+        dt: index * step,
+        note,
+        duration: Math.max(0.08, step * 0.85),
+        velocity: event.velocity
+      }))
+    };
+  }
   return {
     generator: "percussion",
     instrument: event.instrument,
-    pattern: [
-      { dt: 0, velocity: event.velocity },
-      { dt: 0.14, velocity: event.velocity * 0.55 }
-    ]
+    pattern: [{ dt: 0, velocity: event.velocity }]
   };
 }
 
@@ -280,32 +355,45 @@ function fieldForAggregate(event: MusicEvent): SoundField {
   if (event.kind === "chord") {
     return {
       shape: "sphere",
-      params: { radius: 5.5 },
+      params: { radius: 4.5 },
+      falloff: { distance: { type: "smoothstep" } }
+    };
+  }
+  if (event.kind === "phrase") {
+    return {
+      shape: "ellipsoid",
+      params: { radius: [Math.max(5, event.duration * 0.8), 5, Math.max(5, event.duration * 0.8)] },
       falloff: { distance: { type: "smoothstep" } }
     };
   }
   return {
     shape: "sphere",
-    params: { radius: 3.8 },
+    params: { radius: 3.0 },
     falloff: { distance: { type: "smoothstep" } }
   };
 }
 
 function aggregateFieldRadiusY(event: MusicEvent): number {
   if (event.kind === "drone") return 5;
-  if (event.kind === "chord") return 5.5;
-  return 3.8;
+  if (event.kind === "chord") return 4.5;
+  if (event.kind === "phrase") return 5;
+  return 3.0;
 }
 
 function triggerForAggregate(event: MusicEvent) {
-  if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown: 0.5, retrigger: true };
-  if (event.kind === "percussion") return { mode: "peak" as const, threshold: 0.5, cooldown: 0.35, retrigger: true };
-  return { mode: "peak" as const, threshold: 0.42, cooldown: 0.6, retrigger: true };
+  // Cooldown derived from the event's own duration so a retrigger never fires
+  // exactly on the natural interval between successive events of the same kind.
+  const cooldown = clampCooldown(event.duration * COOLDOWN_DURATION_FACTOR);
+  if (event.kind === "drone") return { mode: "continuous" as const, threshold: 0.3, cooldown, retrigger: true };
+  if (event.kind === "percussion") return { mode: "peak" as const, threshold: 0.5, cooldown, retrigger: true };
+  if (event.kind === "phrase") return { mode: "peak" as const, threshold: 0.42, cooldown, retrigger: true };
+  return { mode: "peak" as const, threshold: 0.42, cooldown, retrigger: true };
 }
 
 function colorForAggregate(event: MusicEvent): string {
   if (event.kind === "drone") return "#7e6bff";
   if (event.kind === "percussion") return "#ff9d8d";
+  if (event.kind === "phrase") return "#9be9ff";
   return "#a4b0ff";
 }
 
@@ -350,8 +438,97 @@ function waypointForToken(token: NoteToken, anchors: Map<string, PitchClassAncho
     t: token.time,
     p: [anchor.position[0], altitudeForToken(token, anchor), anchor.position[2]],
     source: "anchor",
-    refId: token.id
+    refId: token.id,
+    anchorId: anchor.id
   };
+}
+
+/**
+ * Insert "release" waypoints between consecutive visits to the same anchor so
+ * the path physically leaves the field and re-enters. Without this, two
+ * back-to-back same-pitch notes don't re-trigger because intensity stays high.
+ */
+function insertReleaseWaypoints(waypoints: Waypoint[], anchorMap: Map<string, PitchClassAnchor>): Waypoint[] {
+  const sorted = [...waypoints].sort((a, b) => a.t - b.t);
+  const result: Waypoint[] = [];
+
+  for (let i = 0; i < sorted.length; i += 1) {
+    const wp = sorted[i];
+    result.push(wp);
+    if (wp.source !== "anchor" || !wp.anchorId) continue;
+    // Find the next anchor waypoint
+    let nextIdx = -1;
+    for (let j = i + 1; j < sorted.length; j += 1) {
+      if (sorted[j].source === "anchor") {
+        nextIdx = j;
+        break;
+      }
+    }
+    if (nextIdx < 0) continue;
+    const next = sorted[nextIdx];
+    if (next.anchorId !== wp.anchorId) continue;
+    const anchor = anchorMap.get(wp.anchorId);
+    if (!anchor) continue;
+    const gap = next.t - wp.t;
+    if (gap < 0.001) continue;
+    // Mid-time release just outside the field (radial direction = away from origin)
+    const tRelease = (wp.t + next.t) / 2;
+    const radial = Math.hypot(anchor.position[0], anchor.position[2]);
+    const ux = radial > 0.0001 ? anchor.position[0] / radial : 1;
+    const uz = radial > 0.0001 ? anchor.position[2] / radial : 0;
+    const dist = ANCHOR_FIELD_RADIUS + 1.2;
+    const rx = anchor.position[0] + ux * dist;
+    const rz = anchor.position[2] + uz * dist;
+    const ry = anchor.position[1] + ANCHOR_FIELD_ALTITUDE + 1.5;
+    result.push({ t: tRelease, p: [rx, ry, rz], source: "release", anchorId: anchor.id });
+  }
+
+  return result;
+}
+
+/**
+ * Insert release waypoints between aggregate visits placed close in time, so the
+ * path leaves each aggregate's field cleanly before entering the next one's.
+ * Prevents intensity bleed-over from causing premature triggers.
+ */
+function insertAggregateReleases(waypoints: Waypoint[], aggregateObjects: SoundObject[]): Waypoint[] {
+  if (aggregateObjects.length === 0) return waypoints;
+  const fieldById = new Map(aggregateObjects.map((object) => [object.id, object.field]));
+  const sorted = [...waypoints].sort((a, b) => a.t - b.t);
+  const result: Waypoint[] = [];
+
+  for (let i = 0; i < sorted.length; i += 1) {
+    const wp = sorted[i];
+    result.push(wp);
+    if (wp.source !== "aggregate" || !wp.refId) continue;
+    let nextIdx = -1;
+    for (let j = i + 1; j < sorted.length; j += 1) {
+      if (sorted[j].source === "aggregate") {
+        nextIdx = j;
+        break;
+      }
+    }
+    if (nextIdx < 0) continue;
+    const next = sorted[nextIdx];
+    const gap = next.t - wp.t;
+    if (gap < 0.001 || gap > 3.0) continue;
+    // Place release between the two aggregate positions, lifted up and pushed
+    // outward from the origin to leave both fields cleanly.
+    const tRelease = (wp.t + next.t) / 2;
+    const midX = (wp.p[0] + next.p[0]) / 2;
+    const midZ = (wp.p[2] + next.p[2]) / 2;
+    const radial = Math.hypot(midX, midZ);
+    const ux = radial > 0.0001 ? midX / radial : 1;
+    const uz = radial > 0.0001 ? midZ / radial : 0;
+    const field = fieldById.get(wp.refId.startsWith("aggregate_") ? wp.refId : `aggregate_${wp.refId}`);
+    const fallbackRadius = field ? fieldRadiusXZ(field) + 2 : 6;
+    const releaseX = midX + ux * fallbackRadius;
+    const releaseZ = midZ + uz * fallbackRadius;
+    const releaseY = Math.max(wp.p[1], next.p[1]) + 3.5;
+    result.push({ t: tRelease, p: [releaseX, releaseY, releaseZ], source: "release", refId: `release_agg_${wp.refId}` });
+  }
+
+  return result;
 }
 
 function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: string, duration: number): Path3D {
@@ -402,29 +579,86 @@ function liftAboveTerrain(path: Path3D, terrain: IslandScene["terrain"]): Path3D
   return { ...path, points: lifted };
 }
 
-function aggregatePositionAlongPath(event: MusicEvent, basePath: Path3D, offsetSign: number, terrain: IslandScene["terrain"], hasTokens: boolean, aggregateIndex: number, aggregateCount: number): Vec3 {
+function fieldRadiusXZ(field: SoundField): number {
+  if (field.shape === "sphere") return field.params.radius;
+  if (field.shape === "ellipsoid") return Math.max(field.params.radius[0], field.params.radius[2]);
+  if (field.shape === "cone") return field.params.range;
+  return field.params.centerRadius;
+}
+
+function distance2D(a: Vec3, b: Vec3): number {
+  return Math.hypot(a[0] - b[0], a[2] - b[2]);
+}
+
+type PlacedAggregate = { position: Vec3; field: SoundField };
+
+function aggregatePositionAlongPath(
+  event: MusicEvent,
+  basePath: Path3D,
+  terrain: IslandScene["terrain"],
+  hasTokens: boolean,
+  aggregateIndex: number,
+  aggregateCount: number,
+  placed: PlacedAggregate[]
+): Vec3 {
   const fieldRy = aggregateFieldRadiusY(event);
+  const ownField = fieldForAggregate(event);
+  const ownRadius = fieldRadiusXZ(ownField);
+
+  // Build base anchor (sampled along path, or ring fallback)
+  let baseX: number;
+  let baseZ: number;
+  let tangent: Vec3 = [1, 0, 0];
   if (!hasTokens || basePath.points.length < 3) {
-    // No melody to follow: distribute aggregates on a wide ring so they don't pile up on the entry.
     const angle = aggregateCount > 0 ? (aggregateIndex / aggregateCount) * Math.PI * 1.6 - Math.PI * 0.8 : 0;
     const radius = 22 + (aggregateIndex % 3) * 4;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
-    const ground = terrainGroundY(x, z, terrain);
-    return [x, ground + fieldRy, z];
+    baseX = Math.cos(angle) * radius;
+    baseZ = Math.sin(angle) * radius;
+    tangent = [-Math.sin(angle), 0, Math.cos(angle)];
+  } else {
+    const sample = samplePathAtTime(basePath, event.time);
+    const next = samplePathAtTime(basePath, Math.min(basePath.duration, event.time + 0.4));
+    const previous = samplePathAtTime(basePath, Math.max(0, event.time - 0.4));
+    baseX = sample[0];
+    baseZ = sample[2];
+    tangent = [next[0] - previous[0], 0, next[2] - previous[2]];
   }
-  const sample = samplePathAtTime(basePath, event.time);
-  const next = samplePathAtTime(basePath, Math.min(basePath.duration, event.time + 0.4));
-  const previous = samplePathAtTime(basePath, Math.max(0, event.time - 0.4));
-  const tangent: Vec3 = [next[0] - previous[0], 0, next[2] - previous[2]];
   const tangentLen = Math.hypot(tangent[0], tangent[2]) || 1;
-  const lateral: Vec3 = [-tangent[2] / tangentLen, 0, tangent[0] / tangentLen];
-  const x = sample[0] + lateral[0] * AGGREGATE_OFFSET * offsetSign;
-  const z = sample[2] + lateral[2] * AGGREGATE_OFFSET * offsetSign;
-  const ground = terrainGroundY(x, z, terrain);
-  // Center the audio field one Y-radius above the ground so its bottom touches the
-  // visual (which is grounded by the renderer) — the object now sits inside its zone.
-  return [x, ground + fieldRy, z];
+  const tx = tangent[0] / tangentLen;
+  const tz = tangent[2] / tangentLen;
+
+  // Try the angle rotation sequence anchored at this aggregate's index, then fall back
+  // to the candidate furthest from any already-placed aggregate if all collide.
+  let bestPos: Vec3 | null = null;
+  let bestClearance = -Infinity;
+  for (let i = 0; i < AGGREGATE_ANGLE_SEQUENCE.length; i += 1) {
+    const angle = AGGREGATE_ANGLE_SEQUENCE[(aggregateIndex + i) % AGGREGATE_ANGLE_SEQUENCE.length];
+    const dx = tx * Math.cos(angle) + (-tz) * Math.sin(angle);
+    const dz = tz * Math.cos(angle) + tx * Math.sin(angle);
+    const x = baseX + dx * AGGREGATE_OFFSET;
+    const z = baseZ + dz * AGGREGATE_OFFSET;
+    const ground = terrainGroundY(x, z, terrain);
+    const pos: Vec3 = [x, ground + fieldRy, z];
+
+    let clearance = Infinity;
+    let collides = false;
+    for (const p of placed) {
+      const dist = distance2D(pos, p.position);
+      const minDist = ownRadius + fieldRadiusXZ(p.field) + 1;
+      clearance = Math.min(clearance, dist - (ownRadius + fieldRadiusXZ(p.field)));
+      if (dist < minDist) {
+        collides = true;
+      }
+    }
+    if (!collides) {
+      return pos;
+    }
+    if (clearance > bestClearance) {
+      bestClearance = clearance;
+      bestPos = pos;
+    }
+  }
+  return bestPos!;
 }
 
 function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number): SoundObject {
@@ -457,14 +691,19 @@ function snapshotObjects(objects: SoundObject[]): SoundObject[] {
   }));
 }
 
-export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], _options: SpatialFoldOptions = {}): { path: Path3D; objects: SoundObject[]; plan: FoldingPlan } {
-  const { tokens, aggregates } = tokenizeScore(score);
-  const anchors = buildPitchClassAnchors(tokens, terrain);
+export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], options: SpatialFoldOptions = {}): { path: Path3D; objects: SoundObject[]; plan: FoldingPlan } {
+  const overrides = options.positionOverrides ?? new Map<string, Vec3>();
+  const { tokens, aggregates } = tokenizeScore(score, terrain);
+  const { anchors: rawAnchors, minGapById } = buildPitchClassAnchors(tokens, terrain);
+  const anchors = rawAnchors.map((anchor) => {
+    const override = overrides.get(anchor.id);
+    return override ? { ...anchor, position: override } : anchor;
+  });
   const anchorMap = new Map(anchors.map((anchor) => [anchor.id, anchor]));
   const motifs = detectMotifs(tokens);
   const coveredIds = tokensCoveredByMotifs(motifs);
 
-  const anchorObjects = anchors.map(buildAnchorSoundObject);
+  const anchorObjects = anchors.map((anchor) => buildAnchorSoundObject(anchor, minGapById.get(anchor.id) ?? 0));
   const objectsCollected: SoundObject[] = [...anchorObjects];
 
   const firstToken = tokens[0] ?? null;
@@ -525,14 +764,23 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
     });
   }
 
+  // Insert release waypoints between same-anchor visits so the path leaves
+  // the field briefly and re-triggers on the next visit.
+  const withReleases = insertReleaseWaypoints(waypoints, anchorMap);
+  waypoints.length = 0;
+  waypoints.push(...withReleases);
+
   const aggregateObjects: SoundObject[] = [];
   if (aggregates.length > 0) {
     const skeletonPath = waypointsToPath(waypoints, score.id, score.name, score.duration);
     const hasTokens = tokens.length > 0;
+    const placed: PlacedAggregate[] = [];
     aggregates.forEach((event, index) => {
-      const offsetSign = index % 2 === 0 ? 1 : -1;
-      const position = aggregatePositionAlongPath(event, skeletonPath, offsetSign, terrain, hasTokens, index, aggregates.length);
+      const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed);
+      const objectId = `aggregate_${event.id}_${index}`;
+      const position = overrides.get(objectId) ?? naturalPos;
       const object = buildAggregateSoundObject(event, position, index);
+      placed.push({ position, field: object.field });
       aggregateObjects.push(object);
       objectsCollected.push(object);
       // Path waypoint is at the field centre so the player traverses straight through the audio zone.
@@ -546,6 +794,11 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
       objectsAfter: snapshotObjects(objectsCollected),
       highlightObjectIds: aggregateObjects.map((object) => object.id)
     });
+
+    // Force the path to leave each aggregate cleanly before the next.
+    const withAggReleases = insertAggregateReleases(waypoints, aggregateObjects);
+    waypoints.length = 0;
+    waypoints.push(...withAggReleases);
   }
 
   let path = waypointsToPath(waypoints, score.id, score.name, score.duration);

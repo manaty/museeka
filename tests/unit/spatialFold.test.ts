@@ -51,7 +51,7 @@ describe("spatial fold pipeline", () => {
     const { path, plan } = spatialFold(ode, TEST_TERRAIN);
     const anchorMap = new Map(plan.anchors.map((anchor) => [anchor.id, anchor]));
 
-    const { tokens } = tokenizeScore(ode);
+    const { tokens } = tokenizeScore(ode, TEST_TERRAIN);
     for (const token of tokens) {
       const anchor = anchorMap.get(anchorIdFor(token));
       expect(anchor, `anchor for ${token.id}`).toBeDefined();
@@ -73,9 +73,9 @@ describe("spatial fold pipeline", () => {
     expect(plan.steps.length).toBeGreaterThanOrEqual(4);
   });
 
-  it("creates one pitch-class anchor per (instrument, pitch class) used in melody", () => {
+  it("creates one pitch-class anchor per (instrument, pitch class) of non-compacted melodic tokens", () => {
     const score = demoScores[0];
-    const { tokens } = tokenizeScore(score);
+    const { tokens } = tokenizeScore(score, TEST_TERRAIN);
     const expected = new Set(tokens.map((token) => `${token.instrument}_${token.pitchClass}`));
     const { plan } = spatialFold(score, TEST_TERRAIN);
     const actual = new Set(plan.anchors.map((anchor) => `${anchor.instrument}_${anchor.pitchClass}`));
@@ -89,7 +89,7 @@ describe("spatial fold pipeline", () => {
 
     const { plan, path } = spatialFold(score, TEST_TERRAIN);
     const anchorMap = new Map(plan.anchors.map((anchor) => [anchor.id, anchor]));
-    const { tokens } = tokenizeScore(score);
+    const { tokens } = tokenizeScore(score, TEST_TERRAIN);
 
     for (const token of tokens) {
       const anchor = anchorMap.get(anchorIdFor(token));
