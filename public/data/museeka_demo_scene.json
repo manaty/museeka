@@ -4059,8 +4059,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "D3",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -4142,8 +4142,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "A2",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9019,8 +9019,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "F#4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9102,8 +9102,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "G4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9185,8 +9185,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "D4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9268,8 +9268,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "E4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9351,8 +9351,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "B3",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9434,8 +9434,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "A4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -9517,8 +9517,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "B4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12141,8 +12141,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "G4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12224,8 +12224,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "A4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12307,8 +12307,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "F4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12390,8 +12390,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "A#4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12473,8 +12473,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "C5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12556,8 +12556,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "D5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -12639,8 +12639,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "C4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -19598,8 +19598,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "A4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -19681,8 +19681,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "D5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -19764,8 +19764,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "E5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -19847,8 +19847,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "F5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -19930,8 +19930,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "B4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20013,8 +20013,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "G4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20096,8 +20096,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "E4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20179,8 +20179,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "F#4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20262,8 +20262,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "G#4",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20345,8 +20345,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "G5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {
@@ -20428,8 +20428,8 @@
         "generator": "note",
         "instrument": "piano",
         "baseNote": "F#5",
-        "duration": 0.5,
-        "velocity": 0.8
+        "duration": 1.2,
+        "velocity": 0.85
       },
       "mappings": [
         {

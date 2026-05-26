@@ -1,8 +1,11 @@
 import type { Encounter, IslandScene, Path3D, SoundObject } from "../core/types";
 import { computeEncounters } from "../core/encounter";
+import { terrainGroundY } from "../core/terrain";
 import { AudioEngine, type SampleLoadProgress } from "../audio/AudioEngine";
 import { PlaybackController } from "./PlaybackController";
 import { FreeFlyController, type FreeFlyInput } from "./FreeFlyController";
+
+const MIN_GROUND_CLEARANCE = 1.2;
 
 export type RuntimeMode = "path" | "freefly";
 
@@ -112,6 +115,14 @@ export class MuseekaRuntime {
       time = this.playback.getTime();
       duration = this.currentPath().duration;
       playing = this.playback.isPlaying();
+    }
+
+    // Clamp player Y so the firefly can't tunnel into hills when the
+    // Catmull-Rom curve dips below terrain between waypoints.
+    const groundY = terrainGroundY(player.position[0], player.position[2], this.scene.terrain);
+    const minY = groundY + MIN_GROUND_CLEARANCE;
+    if (player.position[1] < minY) {
+      player = { ...player, position: [player.position[0], minY, player.position[2]] as [number, number, number] };
     }
 
     // In parcours mode, restrict audible objects to the active path's suffix

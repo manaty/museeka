@@ -313,9 +313,11 @@ function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): Sound
   const audio: AudioGenerator = {
     generator: "note",
     instrument: anchor.instrument,
+    // Longer note duration so notes ring through the gap between triggers
+    // when the firefly travels fast — keeps perceived volume up.
     baseNote: noteName,
-    duration: 0.5,
-    velocity: 0.8
+    duration: 1.2,
+    velocity: 0.85
   };
   // pitchSemitones is no longer derived from altitude — each (pitch class, octave)
   // pair is its own anchor with the exact baseNote, so altitude doesn't shift pitch.
