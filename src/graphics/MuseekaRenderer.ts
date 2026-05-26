@@ -460,13 +460,15 @@ export class MuseekaRenderer {
         positions.push(Math.cos(angle) * ringRadius, 0, Math.sin(angle) * ringRadius);
       }
     }
-    // Inner fan: centre → first ring
+    // Inner fan: centre → first ring. Winding is reversed (0, b, a) so the
+    // triangle normal points +Y (up); otherwise the sea is back-face-culled
+    // when viewed from above and the underwater terrain shows through.
     for (let s = 0; s < sectors; s += 1) {
       const a = 1 + s;
       const b = 1 + ((s + 1) % sectors);
-      indices.push(0, a, b);
+      indices.push(0, b, a);
     }
-    // Outer rings: quads between consecutive rings
+    // Outer rings: quads between consecutive rings (same flipped winding).
     for (let r = 2; r <= rings; r += 1) {
       const prevStart = 1 + (r - 2) * sectors;
       const currStart = 1 + (r - 1) * sectors;
@@ -475,8 +477,8 @@ export class MuseekaRenderer {
         const b = prevStart + ((s + 1) % sectors);
         const c = currStart + s;
         const d = currStart + ((s + 1) % sectors);
-        indices.push(a, c, d);
-        indices.push(a, d, b);
+        indices.push(a, d, c);
+        indices.push(a, b, d);
       }
     }
     const geom = new THREE.BufferGeometry();
