@@ -6,12 +6,11 @@ import { parseMidiArrayBuffer, groupMidiNotes } from "../src/music/midi";
 import type { MusicEvent, MusicScore } from "../src/core/types";
 
 const MIDI_SOURCES: Array<{ id: string; name: string; file: string; maxDuration?: number }> = [
-  // Single-piece tuning mode: only Pachelbel for now.
-  // { id: "ode_to_joy", name: "Ode to Joy", file: "public/data/midi/01-ode-to-joy.mid", maxDuration: 30 },
-  { id: "pachelbel_canon", name: "Canon in D", file: "public/data/midi/02-pachelbel-canon.mid", maxDuration: 45 }
-  // { id: "frere_jacques", name: "Frère Jacques", file: "public/data/midi/03-frere-jacques.mid", maxDuration: 18 },
-  // { id: "bach_prelude_c", name: "Prelude in C (BWV 846)", file: "public/data/midi/04-bach-prelude-c.mid", maxDuration: 45 },
-  // { id: "greensleeves", name: "Greensleeves", file: "public/data/midi/05-greensleeves.mid", maxDuration: 45 }
+  { id: "ode_to_joy", name: "Ode to Joy", file: "public/data/midi/01-ode-to-joy.mid", maxDuration: 30 },
+  { id: "pachelbel_canon", name: "Canon in D", file: "public/data/midi/02-pachelbel-canon.mid", maxDuration: 45 },
+  { id: "frere_jacques", name: "Frère Jacques", file: "public/data/midi/03-frere-jacques.mid", maxDuration: 18 },
+  { id: "bach_prelude_c", name: "Prelude in C (BWV 846)", file: "public/data/midi/04-bach-prelude-c.mid", maxDuration: 45 },
+  { id: "greensleeves", name: "Greensleeves", file: "public/data/midi/05-greensleeves.mid", maxDuration: 45 }
 ];
 
 /**
