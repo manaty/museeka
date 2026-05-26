@@ -201,21 +201,35 @@ export function simulateParcours(path: Path3D, objects: SoundObject[]): Simulati
           state.continuousActive = false;
         }
       } else if (object.trigger.mode === "peak") {
+        // Intentional visits land the path exactly on the field centre (peak ≈ 1.0
+        // when sampling catches it, but only 0.6–0.8 when the path zooms through
+        // between samples). Brushes through neighbouring fields are filtered by
+        // the aggregate-placement anchor-avoidance margin, so this guard only
+        // needs to filter low-energy edge encounters (≥ 1.5 × threshold).
+        const peakGuard = threshold * 1.5;
         if (intensity >= threshold) {
           if (intensity > state.peakIntensity + 0.001) {
             state.peakIntensity = intensity;
             state.rising = true;
-          } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown) {
+          } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown && state.peakIntensity >= peakGuard) {
             emitFromGenerator(object.audio, pitchSemitones, volume, brightness, time, object.id, produced);
             state.lastTriggeredAt = time;
             state.rising = false;
-            // Reset peak baseline so the NEXT visit can register a fresh
-            // rising → falling pattern at the same intensity magnitude.
             state.peakIntensity = intensity;
           }
-        } else if (intensity < threshold * 0.3) {
-          state.peakIntensity = 0;
-          state.rising = false;
+        } else {
+          // Fast traversal: path may jump from "above threshold, rising" to
+          // "below threshold" in one sample, skipping the intra-field falling
+          // detection. Fire on the exit transition with the same peak guard.
+          if (state.rising && state.peakIntensity >= peakGuard && cooledDown) {
+            emitFromGenerator(object.audio, pitchSemitones, Math.max(volume, state.peakIntensity), brightness, time, object.id, produced);
+            state.lastTriggeredAt = time;
+            state.rising = false;
+          }
+          if (intensity < threshold * 0.3) {
+            state.peakIntensity = 0;
+            state.rising = false;
+          }
         }
       } else {
         const entered = intensity >= threshold && state.lastIntensity < threshold;

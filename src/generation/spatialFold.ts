@@ -30,7 +30,9 @@ const OCTAVE_HEIGHT_M = 6;
 const ANCHOR_BASE_RADIUS = 18;
 const ANCHOR_RING_STEP = 4;
 const ANCHOR_FIELD_RADIUS = 3.2;
-const ANCHOR_FIELD_ALTITUDE = 7;
+// Field Y radius is small (2.5 m) so vertically-stacked octave anchors
+// (separated by OCTAVE_HEIGHT_M) don't bleed intensity into each other.
+const ANCHOR_FIELD_ALTITUDE = 2.5;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
 const AGGREGATE_OFFSET = 7;
 const AGGREGATE_ANGLE_SEQUENCE = [
@@ -146,8 +148,8 @@ function estimatePhrasePathDistance(event: MusicEvent, terrain: IslandScene["ter
     const curMidi = noteNameToMidi(event.notes[i]);
     const prevPc = ((prevMidi % 12) + 12) % 12;
     const curPc = ((curMidi % 12) + 12) % 12;
-    const a = placeAnchorPosition(prevPc, event.instrument, 0, terrain);
-    const b = placeAnchorPosition(curPc, event.instrument, 0, terrain);
+    const a = placeAnchorPosition(prevPc, event.instrument, 4, 4, terrain);
+    const b = placeAnchorPosition(curPc, event.instrument, 4, 4, terrain);
     total += Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
   }
   return total;
@@ -223,35 +225,44 @@ function ringRadiusFor(instrument: InstrumentId): number {
   return ANCHOR_BASE_RADIUS + (INSTRUMENT_RING_INDEX[instrument] ?? 0) * ANCHOR_RING_STEP;
 }
 
-function placeAnchorPosition(pitchClass: number, instrument: InstrumentId, _baseOctave: number, terrain: IslandScene["terrain"]): Vec3 {
+function placeAnchorPosition(
+  pitchClass: number,
+  instrument: InstrumentId,
+  octave: number,
+  lowestOctave: number,
+  terrain: IslandScene["terrain"]
+): Vec3 {
   const ringRadius = ringRadiusFor(instrument);
   const angle = (pitchClass / 12) * Math.PI * 2;
   const x = Math.cos(angle) * ringRadius;
   const z = Math.sin(angle) * ringRadius;
   const ground = terrainGroundY(x, z, terrain);
-  // Place the field centre one Y-radius above the ground so the bottom of the audio
-  // ellipsoid exactly touches the visual (which is rendered on the terrain). The
-  // base note is encoded by `baseNote` directly, so we no longer offset Y per octave.
-  const y = ground + ANCHOR_FIELD_ALTITUDE;
+  // Stack octaves vertically — lowest octave at ground+base altitude, each
+  // successive octave OCTAVE_HEIGHT_M above. Each (pc, octave) has its own
+  // physical anchor with its own exact baseNote.
+  const y = ground + ANCHOR_FIELD_ALTITUDE + (octave - lowestOctave) * OCTAVE_HEIGHT_M;
   return [x, y, z];
 }
 
 export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene["terrain"]): { anchors: PitchClassAnchor[]; minGapById: Map<string, number> } {
   const groups = new Map<string, NoteToken[]>();
+  let lowestOctave = Number.POSITIVE_INFINITY;
   for (const token of tokens) {
-    const key = `${token.instrument}_${token.pitchClass}`;
+    const key = `${token.instrument}_${token.pitchClass}_${token.octave}`;
     const list = groups.get(key) ?? [];
     list.push(token);
     groups.set(key, list);
+    if (token.octave < lowestOctave) lowestOctave = token.octave;
   }
+  if (!Number.isFinite(lowestOctave)) lowestOctave = 4;
 
   const anchors: PitchClassAnchor[] = [];
   const minGapById = new Map<string, number>();
   for (const [, list] of groups) {
     list.sort((a, b) => a.time - b.time);
     const first = list[0];
-    const baseOctave = Math.round(median(list.map((token) => token.octave)));
-    const id = `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}`;
+    const octave = first.octave;
+    const id = `pc_${pitchClassName(first.pitchClass).replace("#", "s")}_${first.instrument}_o${octave}`;
     let minGap = Number.POSITIVE_INFINITY;
     for (let i = 1; i < list.length; i += 1) {
       const gap = list[i].time - list[i - 1].time;
@@ -260,9 +271,10 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
     anchors.push({
       id,
       pitchClass: first.pitchClass,
+      octave,
       instrument: first.instrument,
-      position: placeAnchorPosition(first.pitchClass, first.instrument, baseOctave, terrain),
-      baseOctave,
+      position: placeAnchorPosition(first.pitchClass, first.instrument, octave, lowestOctave, terrain),
+      baseOctave: octave,
       visits: list.length
     });
     minGapById.set(id, Number.isFinite(minGap) ? minGap : 0);
@@ -272,12 +284,11 @@ export function buildPitchClassAnchors(tokens: NoteToken[], terrain: IslandScene
 }
 
 function anchorIdFor(token: NoteToken): string {
-  return `pc_${pitchClassName(token.pitchClass).replace("#", "s")}_${token.instrument}`;
+  return `pc_${pitchClassName(token.pitchClass).replace("#", "s")}_${token.instrument}_o${token.octave}`;
 }
 
-function altitudeForToken(token: NoteToken, anchor: PitchClassAnchor): number {
-  const octaveDelta = token.octave - anchor.baseOctave;
-  return anchor.position[1] + octaveDelta * OCTAVE_HEIGHT_M;
+function altitudeForToken(_token: NoteToken, anchor: PitchClassAnchor): number {
+  return anchor.position[1];
 }
 
 function clampCooldown(value: number): number {
@@ -285,7 +296,7 @@ function clampCooldown(value: number): number {
 }
 
 function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): SoundObject {
-  const noteName = `${pitchClassName(anchor.pitchClass)}${anchor.baseOctave}`;
+  const noteName = `${pitchClassName(anchor.pitchClass)}${anchor.octave}`;
   const audio: AudioGenerator = {
     generator: "note",
     instrument: anchor.instrument,
@@ -293,9 +304,10 @@ function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): Sound
     duration: 0.5,
     velocity: 0.8
   };
+  // pitchSemitones is no longer derived from altitude — each (pitch class, octave)
+  // pair is its own anchor with the exact baseNote, so altitude doesn't shift pitch.
   const mappings: Mapping[] = [
     { input: "field.intensity", output: "volume", curve: { type: "smoothstep" }, range: [0, 1] },
-    { input: "encounter.altitudeRelative", output: "pitchSemitones", curve: { type: "linear" }, range: [-12, 12], clampInput: [-6, 6] },
     { input: "encounter.approachSpeed", output: "brightness", curve: { type: "exponential", k: 1.4 }, range: [0.3, 1] }
   ];
   const field: SoundField = {
@@ -542,12 +554,28 @@ function insertAggregateReleases(waypoints: Waypoint[], aggregateObjects: SoundO
   return result;
 }
 
+const SOURCE_PRIORITY: Record<string, number> = {
+  anchor: 10,
+  aggregate: 8,
+  release: 5,
+  entry: 2,
+  exit: 2
+};
+
 function waypointsToPath(waypoints: Waypoint[], scoreId: string, scoreName: string, duration: number): Path3D {
   const sorted = [...waypoints].sort((a, b) => a.t - b.t);
   const dedup: Waypoint[] = [];
   for (const wp of sorted) {
     const previous = dedup[dedup.length - 1];
-    if (previous && Math.abs(previous.t - wp.t) < 0.001 && distance(previous.p, wp.p) < 0.05) continue;
+    if (previous && Math.abs(previous.t - wp.t) < 0.001) {
+      // Same time — keep the higher-priority waypoint. The path can't be at
+      // two distinct positions at one instant; without this, Catmull-Rom
+      // interpolation goes haywire and a real anchor visit may be skipped.
+      const prevPriority = SOURCE_PRIORITY[previous.source] ?? 0;
+      const wpPriority = SOURCE_PRIORITY[wp.source] ?? 0;
+      if (wpPriority > prevPriority) dedup[dedup.length - 1] = wp;
+      continue;
+    }
     dedup.push(wp);
   }
 
@@ -670,7 +698,10 @@ function aggregatePositionAlongPath(
       }
       for (const a of anchors) {
         const dist = distance2D(pos, a.position);
-        const minDist = ownRadius + a.radius + 2;
+        // Margin includes ANCHOR_FIELD_RADIUS so the Catmull-Rom curve
+        // joining the aggregate to neighbouring waypoints can't overshoot
+        // through the anchor field and trigger an unintended note.
+        const minDist = ownRadius + a.radius + ANCHOR_FIELD_RADIUS + 2;
         clearance = Math.min(clearance, dist - (ownRadius + a.radius));
         if (dist < minDist) collides = true;
       }

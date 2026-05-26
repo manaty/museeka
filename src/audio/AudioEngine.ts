@@ -417,19 +417,30 @@ export class AudioEngine {
     const cooledDown = elapsed - state.lastTriggeredAt >= object.trigger.cooldown;
 
     if (object.trigger.mode === "peak") {
+      // Mirror scoreSimulator: a 1.5 × threshold peak guard plus
+      // aggregate-placement anchor avoidance suppresses brushes without
+      // dropping legitimate fast-traversal centre-visits.
+      const peakGuard = threshold * 1.5;
       if (intensity >= threshold) {
         if (intensity > state.peakIntensity + 0.001) {
           state.peakIntensity = intensity;
           state.rising = true;
-        } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown) {
+        } else if (state.rising && intensity < state.peakIntensity - 0.005 && cooledDown && state.peakIntensity >= peakGuard) {
           this.playGenerator(object.audio, this.mappedParams(object, encounter));
           state.lastTriggeredAt = elapsed;
           state.rising = false;
           state.peakIntensity = intensity;
         }
-      } else if (intensity < threshold * 0.3) {
-        state.peakIntensity = 0;
-        state.rising = false;
+      } else {
+        if (state.rising && state.peakIntensity >= peakGuard && cooledDown) {
+          this.playGenerator(object.audio, this.mappedParams(object, encounter));
+          state.lastTriggeredAt = elapsed;
+          state.rising = false;
+        }
+        if (intensity < threshold * 0.3) {
+          state.peakIntensity = 0;
+          state.rising = false;
+        }
       }
     } else {
       const entered = intensity >= threshold && state.lastIntensity < threshold;

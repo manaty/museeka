@@ -343,6 +343,7 @@ export type Motif = {
 export type PitchClassAnchor = {
   id: string;
   pitchClass: number;
+  octave: number;
   instrument: InstrumentId;
   position: Vec3;
   baseOctave: number;
