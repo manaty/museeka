@@ -114,6 +114,10 @@ export type SpatialFoldOptions = {
   /** V2 hook: skip the per-score deflection pass so the V2 orchestrator
    * can run one global pass against the shared object pool instead. */
   skipDeflection?: boolean;
+  /** V2 hook: 2D circles aggregates must avoid. Used to keep this score's
+   * new aggregates away from earlier scores' path trajectories so playing
+   * an earlier parcours doesn't brush through a later-score's aggregate. */
+  forbiddenZones?: Array<{ position: Vec3; radius: number }>;
 };
 
 type Waypoint = {
@@ -853,7 +857,8 @@ function aggregatePositionAlongPath(
   aggregateIndex: number,
   aggregateCount: number,
   placed: PlacedAggregate[],
-  anchors: PlacedAnchor[]
+  anchors: PlacedAnchor[],
+  forbiddenZones: Array<{ position: Vec3; radius: number }> = []
 ): Vec3 {
   const fieldRy = aggregateFieldRadiusY(event);
   const ownField = fieldForAggregate(event);
@@ -916,6 +921,12 @@ function aggregatePositionAlongPath(
         // through the anchor field and trigger an unintended note.
         const minDist = ownRadius + a.radius + ANCHOR_FIELD_RADIUS + 2;
         clearance = Math.min(clearance, dist - (ownRadius + a.radius));
+        if (dist < minDist) collides = true;
+      }
+      for (const zone of forbiddenZones) {
+        const dist = distance2D(pos, zone.position);
+        const minDist = ownRadius + zone.radius;
+        clearance = Math.min(clearance, dist - minDist);
         if (dist < minDist) collides = true;
       }
       if (!collides) return pos;
@@ -1048,8 +1059,9 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
       position: a.transform.position,
       radius: fieldRadiusXZ(a.field)
     }));
+    const forbiddenZones = options.forbiddenZones ?? [];
     aggregates.forEach((event, index) => {
-      const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed, placedAnchors);
+      const naturalPos = aggregatePositionAlongPath(event, skeletonPath, terrain, hasTokens, index, aggregates.length, placed, placedAnchors, forbiddenZones);
       const objectId = `aggregate_${event.id}_${index}${idSuffix}`;
       const position = overrides.get(objectId) ?? naturalPos;
       const object = buildAggregateSoundObject(event, position, index, idSuffix);
