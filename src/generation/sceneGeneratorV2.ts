@@ -11,19 +11,20 @@ export type SceneGenerationResult = {
 };
 
 /**
- * Algorithm V2 — "shared-space, no runtime filter".
+ * Algorithm V2 — "shared-space".
  *
- * Differences vs V1:
- *   • No runtime filter — every sound object is always live; music truly
- *     emerges from spatial encounters regardless of which parcours plays.
- *   • Each parcours still owns its anchors and aggregates (with a per-score
- *     id suffix so they remain distinct objects). The "sharing" happens via
- *     a global deflection pass that, for each path, steers around brushes
- *     into any other score's objects.
+ * Differences vs V1 made visible in the scene file:
+ *   • No per-score id suffix on ANCHORS. Two scores that both need C4 piano
+ *     reference the SAME physical anchor (same id, same position). Total
+ *     anchor count drops; the island looks less crowded.
+ *   • A globally shared "lowest octave" forces matching (pitchClass, octave)
+ *     pairs to land at the same altitude across all scores — required for
+ *     the dedup to be musically valid.
+ *   • Aggregates keep per-score uniqueness (their content differs per event)
+ *     but are still placed at standard positions.
+ *   • Path's audibleSuffix is dropped so the runtime fires every object.
  *
- * The algorithm runs each score through V1 with deflection disabled, then
- * runs a multi-path deflection pass against the merged object pool until
- * no path has extras, or convergence stalls.
+ * Multi-path deflection runs against the merged pool to reduce extras.
  */
 export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): SceneGenerationResult {
   const terrain: IslandScene["terrain"] = {
@@ -32,6 +33,22 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
     heightScale: 10,
     seed
   };
+
+  // Global lowest octave so cross-score anchor positions are consistent.
+  let globalLowestOctave = Number.POSITIVE_INFINITY;
+  for (const score of scores) {
+    for (const event of score.events) {
+      for (const noteName of event.notes) {
+        const match = noteName.match(/^[A-G]#?(-?\d+)$/);
+        if (match) {
+          const oct = parseInt(match[1], 10);
+          if (oct < globalLowestOctave) globalLowestOctave = oct;
+        }
+      }
+    }
+  }
+  if (!Number.isFinite(globalLowestOctave)) globalLowestOctave = 4;
+  console.log(`  [v2] global lowestOctave = ${globalLowestOctave}`);
 
   type ScoreState = {
     score: MusicScore;
@@ -49,33 +66,55 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
     const result = spatialFold(score, terrain, {
       seed,
       anchorIdSuffix: `_s${index}`,
-      skipDeflection: true
+      skipDeflection: true,
+      lowestOctaveOverride: globalLowestOctave
     });
-    // Drop audibleSuffix so the runtime plays every object, not just this
-    // path's. The per-score suffix in object ids stays for uniqueness.
     const { audibleSuffix: _drop, ...pathRest } = result.path;
     const path = pathRest as Path3D;
+
+    // Strip per-score suffix from ANCHOR ids only, so anchors with matching
+    // (pitch class, octave, instrument) deduplicate to one shared physical
+    // anchor across scores. Aggregates keep their per-score suffix because
+    // each one represents a specific score event with its own content.
+    const suffix = `_s${index}`;
+    const renamedObjects = result.objects.map((object) =>
+      object.id.startsWith("pc_") && object.id.endsWith(suffix)
+        ? { ...object, id: object.id.slice(0, -suffix.length) }
+        : object
+    );
+
     console.log(`  [v2] spatialFold ${score.id}: ${((Date.now() - t) / 1000).toFixed(1)}s`);
-    states.push({ score, index, path, plan: result.plan, ownObjects: result.objects });
+    states.push({ score, index, path, plan: result.plan, ownObjects: renamedObjects });
   }
 
-  const allObjects = (): SoundObject[] => states.flatMap((s) => s.ownObjects);
+  // Dedup: anchors with same canonical id (different scores requested the
+  // same pitch) collapse to ONE physical anchor; aggregates always stay
+  // distinct (per-score suffixes guarantee unique ids).
+  const sharedObjects = (() => {
+    const byId = new Map<string, SoundObject>();
+    for (const state of states) {
+      for (const object of state.ownObjects) {
+        if (!byId.has(object.id)) byId.set(object.id, object);
+      }
+    }
+    return [...byId.values()];
+  })();
 
   // Multi-path deflection: each path is re-routed to dodge brushes from
-  // every other score's objects. Iterate until no path improves.
+  // every other score's objects. Object positions stay fixed.
   const MAX_GLOBAL_ITER = 4;
   for (let pass = 0; pass < MAX_GLOBAL_ITER; pass += 1) {
     let anyChanged = false;
     for (const state of states) {
-      const before = countExtras(state.path, state.score, allObjects());
+      const before = countExtras(state.path, state.score, sharedObjects);
       if (before === 0) continue;
       const deflected = runDeflectionPass({
         path: state.path,
         score: state.score,
         terrain,
-        objects: allObjects()
+        objects: sharedObjects
       });
-      const after = countExtras(deflected, state.score, allObjects());
+      const after = countExtras(deflected, state.score, sharedObjects);
       if (after < before) {
         state.path = deflected;
         anyChanged = true;
@@ -85,18 +124,17 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
     if (!anyChanged) break;
   }
 
-  const sceneObjects = allObjects();
   const scene: IslandScene = {
     version: "0.1",
     meta: {
       name: "Museeka Demo Island (V2)",
       author: "Museeka",
-      description: "Algo V2 — espace partagé, aucun filtre runtime.",
+      description: "Algo V2 — ancres partagées, espace réellement commun, aucun filtre runtime.",
       generatedAt: new Date(0).toISOString()
     },
     terrain,
     paths: states.map((s) => s.path),
-    soundObjects: sceneObjects,
+    soundObjects: sharedObjects,
     visualObjects: [
       {
         id: "central_temple",
@@ -121,7 +159,7 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
   };
 
   for (const state of states) {
-    const sim = simulateParcours(state.path, sceneObjects);
+    const sim = simulateParcours(state.path, sharedObjects);
     const cmp = compareProduced(state.score, sim.produced);
     state.plan.analysis = {
       produced: sim.produced,

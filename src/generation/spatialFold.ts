@@ -118,6 +118,11 @@ export type SpatialFoldOptions = {
    * new aggregates away from earlier scores' path trajectories so playing
    * an earlier parcours doesn't brush through a later-score's aggregate. */
   forbiddenZones?: Array<{ position: Vec3; radius: number }>;
+  /** V2 hook: forces a specific "lowest octave" reference instead of
+   * deriving it per score. With a shared reference, the same (pitchClass,
+   * octave) anchor lands at the same altitude across all scores — enabling
+   * cross-score anchor sharing. */
+  lowestOctaveOverride?: number;
 };
 
 type Waypoint = {
@@ -265,7 +270,8 @@ export function buildPitchClassAnchors(
   tokens: NoteToken[],
   terrain: IslandScene["terrain"],
   ringOffset = 0,
-  idSuffix = ""
+  idSuffix = "",
+  lowestOctaveOverride?: number
 ): { anchors: PitchClassAnchor[]; minGapById: Map<string, number> } {
   const groups = new Map<string, NoteToken[]>();
   let lowestOctave = Number.POSITIVE_INFINITY;
@@ -277,6 +283,10 @@ export function buildPitchClassAnchors(
     if (token.octave < lowestOctave) lowestOctave = token.octave;
   }
   if (!Number.isFinite(lowestOctave)) lowestOctave = 4;
+  // V2 passes a shared lowestOctave across all scores so the SAME (pitch class,
+  // octave) anchor always lands at the SAME altitude — required for cross-score
+  // anchor sharing.
+  if (typeof lowestOctaveOverride === "number") lowestOctave = lowestOctaveOverride;
 
   const anchors: PitchClassAnchor[] = [];
   const minGapById = new Map<string, number>();
@@ -974,7 +984,7 @@ export function spatialFold(score: MusicScore, terrain: IslandScene["terrain"], 
   const ringOffset = options.ringRadiusOffset ?? 0;
   const idSuffix = options.anchorIdSuffix ?? "";
   const { tokens, aggregates } = tokenizeScore(score, terrain);
-  const { anchors: rawAnchors, minGapById } = buildPitchClassAnchors(tokens, terrain, ringOffset, idSuffix);
+  const { anchors: rawAnchors, minGapById } = buildPitchClassAnchors(tokens, terrain, ringOffset, idSuffix, options.lowestOctaveOverride);
   const anchors = rawAnchors.map((anchor) => {
     const override = overrides.get(anchor.id);
     return override ? { ...anchor, position: override } : anchor;
