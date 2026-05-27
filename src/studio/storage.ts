@@ -30,17 +30,63 @@ export function listMidis(): StoredMidi[] {
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw) as StoredMidi[];
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    // Auto-migrate: strip the bloated `tracks` field from any legacy entry
+    // and rewrite the catalogue compacted (so quota errors don't keep firing).
+    let needsRewrite = false;
+    const compact = parsed.map((m) => {
+      if (m.score && (m.score as { tracks?: unknown }).tracks) {
+        needsRewrite = true;
+        return { ...m, score: trimScoreForStorage(m.score) };
+      }
+      return m;
+    });
+    if (needsRewrite) {
+      try {
+        window.localStorage?.setItem(MIDI_KEY, JSON.stringify(compact));
+      } catch {
+        // best-effort migration; ignore if even the slimmed version overflows
+      }
+    }
+    return compact;
   } catch {
     return [];
   }
 }
 
+/**
+ * Strip the redundant raw `tracks` field before persisting. `events` already
+ * contains everything the editor and the generator need; tracks doubles the
+ * size of the JSON for nothing in our use case. This drastically reduces
+ * the chance of hitting the localStorage quota.
+ */
+function trimScoreForStorage(score: MusicScore): MusicScore {
+  const { tracks: _tracks, ...rest } = score;
+  return rest as MusicScore;
+}
+
+export class MidiStorageQuotaError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "MidiStorageQuotaError";
+  }
+}
+
 export function saveMidi(entry: StoredMidi): void {
   if (typeof window === "undefined") return;
-  const items = listMidis().filter((m) => m.id !== entry.id);
-  items.push(entry);
-  window.localStorage?.setItem(MIDI_KEY, JSON.stringify(items));
+  const slim: StoredMidi = { ...entry, score: trimScoreForStorage(entry.score) };
+  const items = listMidis().filter((m) => m.id !== slim.id);
+  items.push(slim);
+  try {
+    window.localStorage?.setItem(MIDI_KEY, JSON.stringify(items));
+  } catch (err) {
+    if (err instanceof DOMException && (err.name === "QuotaExceededError" || err.code === 22)) {
+      throw new MidiStorageQuotaError(
+        "Stockage local saturé — supprime des MIDIs déjà importés pour faire de la place. Limite navigateur ~5 Mo."
+      );
+    }
+    throw err;
+  }
 }
 
 export function deleteMidi(id: string): void {
