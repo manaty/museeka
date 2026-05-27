@@ -30,11 +30,11 @@ const PITCH_CLASS_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A",
 // waypoints stays low → bounded firefly peak speed without slowing the
 // music. The trade-off is denser fields, so ANCHOR_FIELD_RADIUS shrinks
 // proportionally to keep adjacent pitch classes from bleeding.
-const OCTAVE_HEIGHT_M = 4;
+export const OCTAVE_HEIGHT_M = 4;
 const ANCHOR_BASE_RADIUS = 13;
 const ANCHOR_RING_STEP = 4;
-const ANCHOR_FIELD_RADIUS = 2.4;
-const ANCHOR_FIELD_ALTITUDE = 1.6;
+export const ANCHOR_FIELD_RADIUS = 2.4;
+export const ANCHOR_FIELD_ALTITUDE = 1.6;
 const ANCHOR_VISITS_BEFORE_SPLIT = 9;
 const AGGREGATE_OFFSET = 4;
 const AGGREGATE_ANGLE_SEQUENCE = [
@@ -46,7 +46,7 @@ const AGGREGATE_ANGLE_SEQUENCE = [
   -(Math.PI * 2) / 3
 ];
 const MIN_SEGMENT_DURATION = 0.05;
-const MAX_PATH_SPEED = 26;
+export const MAX_PATH_SPEED = 26;
 const MIN_COOLDOWN = 0.12;
 const MAX_COOLDOWN = 0.8;
 const COOLDOWN_DURATION_FACTOR = 0.4;
@@ -327,7 +327,7 @@ function clampCooldown(value: number): number {
   return Math.max(MIN_COOLDOWN, Math.min(MAX_COOLDOWN, value));
 }
 
-function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): SoundObject {
+export function buildAnchorSoundObject(anchor: PitchClassAnchor, minGap: number): SoundObject {
   const noteName = `${pitchClassName(anchor.pitchClass)}${anchor.octave}`;
   const audio: AudioGenerator = {
     generator: "note",
@@ -949,7 +949,7 @@ function aggregatePositionAlongPath(
   return bestPos!;
 }
 
-function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number, idSuffix = ""): SoundObject {
+export function buildAggregateSoundObject(event: MusicEvent, position: Vec3, index: number, idSuffix = ""): SoundObject {
   const visualModel = AGGREGATE_VISUAL_BY_KIND[event.kind] ?? "crystal";
   return {
     id: `aggregate_${event.id}_${index}${idSuffix}`,

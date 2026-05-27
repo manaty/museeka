@@ -125,15 +125,10 @@ export class MuseekaRuntime {
       player = { ...player, position: [player.position[0], minY, player.position[2]] as [number, number, number] };
     }
 
-    // In parcours mode, restrict audible objects to the active path's suffix
-    // — other scores' objects share the scene visually but can't fire while
-    // this parcours is playing. Free-fly keeps everything live so the user
-    // can interact with any object.
-    const activeObjects = this.mode === "path" && this.currentPath().audibleSuffix
-      ? this.scene.soundObjects.filter((o) => o.id.endsWith(this.currentPath().audibleSuffix!))
-      : this.scene.soundObjects;
-    const encounters = computeEncounters(player, activeObjects);
-    this.audio.update(activeObjects, encounters, time);
+    // Every object on the island is always live — music emerges from
+    // spatial encounters regardless of which parcours plays.
+    const encounters = computeEncounters(player, this.scene.soundObjects);
+    this.audio.update(this.scene.soundObjects, encounters, time);
 
     const currentActive = new Set(encounters.filter((encounter) => encounter.field.intensity >= 0.2).map((encounter) => encounter.objectId));
     this.activeObjects = [...currentActive];
