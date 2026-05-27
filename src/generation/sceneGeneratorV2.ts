@@ -20,6 +20,7 @@ import {
   noteNameToMidi,
   buildAnchorSoundObject,
   buildAggregateSoundObject,
+  runDeflectionPass,
   ANCHOR_FIELD_RADIUS,
   ANCHOR_FIELD_ALTITUDE,
   OCTAVE_HEIGHT_M,
@@ -116,7 +117,13 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
         const midi = noteNameToMidi(event.notes[0]);
         const key = `${midi}_${event.instrument}`;
         const existing = noteObjects.get(key);
-        if (existing && distance3D(prevPos, existing.transform.position) <= reach) {
+        if (existing) {
+          // ALWAYS reuse an existing same-note anchor — even if it's beyond
+          // the reach budget. Creating a duplicate at a closer position
+          // would mean the same musical note has two different physical
+          // homes, which breaks the perceptual mapping (cycles in a canon
+          // would visit different points each loop). The path may move
+          // faster than ideal between cycles, but the music stays right.
           chosen = existing;
           reusedAnchors += 1;
         } else {
@@ -182,6 +189,45 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
 
     builds.push({ score, index: scoreIndex, waypoints, samples });
     console.log(`  [v2-organic] ${score.id}: ${((Date.now() - t0) / 1000).toFixed(1)}s — ${createdAnchors} new anchors, ${reusedAnchors} reused, ${aggregateObjects.length} aggregates total`);
+  }
+
+  // Final deflection pass: each path may brush through OTHER scores'
+  // objects (because we reused anchors that other scores' paths placed
+  // far away, and the new path crosses where it shouldn't). Run the same
+  // deflection routine as V1's shared-anchor generator to clean those up.
+  const sceneObjectsForDeflection = allObjects();
+  const MAX_GLOBAL_ITER = 4;
+  for (let pass = 0; pass < MAX_GLOBAL_ITER; pass += 1) {
+    let anyChanged = false;
+    for (const build of builds) {
+      const currentPath: Path3D = {
+        id: build.score.id.replace(/_/g, "-"),
+        name: build.score.name,
+        duration: build.score.duration,
+        mode: "flying",
+        speedScale: 1,
+        constraints: { maxSpeed: MAX_PATH_SPEED, maxAcceleration: 18, maxCurvature: 1.6, minGroundClearance: 1.5, maxGroundClearance: 60 },
+        points: [...build.waypoints].sort((a, b) => a.t - b.t),
+        interpolation: "catmull-rom"
+      };
+      const beforeSim = simulateParcours(currentPath, sceneObjectsForDeflection);
+      const beforeCmp = compareProduced(build.score, beforeSim.produced);
+      if (beforeCmp.counts.extra === 0) continue;
+      const deflected = runDeflectionPass({
+        path: currentPath,
+        score: build.score,
+        terrain,
+        objects: sceneObjectsForDeflection
+      });
+      const afterSim = simulateParcours(deflected, sceneObjectsForDeflection);
+      const afterCmp = compareProduced(build.score, afterSim.produced);
+      if (afterCmp.counts.extra < beforeCmp.counts.extra) {
+        build.waypoints = deflected.points;
+        anyChanged = true;
+        console.log(`  [v2-organic] deflect pass ${pass + 1} on ${build.score.id}: ${beforeCmp.counts.extra} → ${afterCmp.counts.extra} extras`);
+      }
+    }
+    if (!anyChanged) break;
   }
 
   // Build Path3D objects.
@@ -330,65 +376,72 @@ type PickArgs = {
 function pickPosition(args: PickArgs): Vec3 {
   const { from, reach, terrain, globalLowestOctave, midi, priorBuilds, existingObjects, rng, isAggregate } = args;
   const ownRadius = isAggregate ? 2.5 : ANCHOR_FIELD_RADIUS;
-  const minClearance = 1.5;
   const islandBound = terrain.radius * 0.88;
-  const TRIES = 96;
+  const TRIES = 64;
 
-  let best: { pos: Vec3; score: number } | null = null;
-  for (let attempt = 0; attempt < TRIES; attempt += 1) {
-    const angle = rng() * Math.PI * 2;
-    // Bias toward placing within (3 m, reach) to keep the path moving but
-    // not always at max speed.
-    const radial = Math.min(reach, 3 + rng() * Math.max(2, reach - 3));
-    const x = from[0] + Math.cos(angle) * radial;
-    const z = from[2] + Math.sin(angle) * radial;
-    if (Math.hypot(x, z) > islandBound) continue;
-    const ground = terrainGroundY(x, z, terrain);
-    const y = midi !== null
-      ? anchorAltitude(midiOctave(midi), globalLowestOctave, ground)
-      : Math.max(ground + 3, from[1] + (rng() - 0.5) * 4);
-    const candidate: Vec3 = [x, y, z];
+  // Tiered constraint relaxation: try the strict criteria first; if no
+  // candidate satisfies, progressively loosen so we always place rather
+  // than dropping the event entirely.
+  const tiers = [
+    { minClearance: 1.5, priorMargin: 1.5, reachMul: 1.0 },
+    { minClearance: 0.5, priorMargin: 0.5, reachMul: 1.5 },
+    { minClearance: 0.0, priorMargin: 0.0, reachMul: 3.0 }
+  ];
 
-    let collides = false;
-    for (const o of existingObjects) {
-      const op = o.transform.position;
-      const horiz = Math.hypot(x - op[0], z - op[2]);
-      const vert = Math.abs(y - op[1]);
-      const otherR = fieldRadiusXZApprox(o.field);
-      if (horiz < ownRadius + otherR + minClearance && vert < ANCHOR_FIELD_ALTITUDE + 1) {
-        collides = true;
-        break;
-      }
-    }
-    if (collides) continue;
+  for (const tier of tiers) {
+    let best: { pos: Vec3; score: number } | null = null;
+    const effectiveReach = reach * tier.reachMul;
+    for (let attempt = 0; attempt < TRIES; attempt += 1) {
+      const angle = rng() * Math.PI * 2;
+      const radial = Math.min(effectiveReach, 3 + rng() * Math.max(2, effectiveReach - 3));
+      const x = from[0] + Math.cos(angle) * radial;
+      const z = from[2] + Math.sin(angle) * radial;
+      if (Math.hypot(x, z) > islandBound) continue;
+      const ground = terrainGroundY(x, z, terrain);
+      const y = midi !== null
+        ? anchorAltitude(midiOctave(midi), globalLowestOctave, ground)
+        : Math.max(ground + 3, from[1] + (rng() - 0.5) * 4);
+      const candidate: Vec3 = [x, y, z];
 
-    let intrudes = false;
-    for (const build of priorBuilds) {
-      for (const sample of build.samples) {
-        const horiz = Math.hypot(x - sample[0], z - sample[2]);
-        const vert = Math.abs(y - sample[1]);
-        if (horiz < ownRadius + 1.5 && vert < ANCHOR_FIELD_ALTITUDE + 0.5) {
-          intrudes = true;
+      let collides = false;
+      for (const o of existingObjects) {
+        const op = o.transform.position;
+        const horiz = Math.hypot(x - op[0], z - op[2]);
+        const vert = Math.abs(y - op[1]);
+        const otherR = fieldRadiusXZApprox(o.field);
+        if (horiz < ownRadius + otherR + tier.minClearance && vert < ANCHOR_FIELD_ALTITUDE + 1) {
+          collides = true;
           break;
         }
       }
-      if (intrudes) break;
-    }
-    if (intrudes) continue;
+      if (collides) continue;
 
-    const dist = Math.hypot(x - from[0], z - from[2]);
-    const edgePenalty = Math.max(0, Math.hypot(x, z) - islandBound * 0.7);
-    const score = -dist - edgePenalty * 0.5;
-    if (!best || score > best.score) best = { pos: candidate, score };
+      let intrudes = false;
+      for (const build of priorBuilds) {
+        for (const sample of build.samples) {
+          const horiz = Math.hypot(x - sample[0], z - sample[2]);
+          const vert = Math.abs(y - sample[1]);
+          if (horiz < ownRadius + tier.priorMargin && vert < ANCHOR_FIELD_ALTITUDE + 0.5) {
+            intrudes = true;
+            break;
+          }
+        }
+        if (intrudes) break;
+      }
+      if (intrudes) continue;
+
+      const dist = Math.hypot(x - from[0], z - from[2]);
+      const edgePenalty = Math.max(0, Math.hypot(x, z) - islandBound * 0.7);
+      const score = -dist - edgePenalty * 0.5;
+      if (!best || score > best.score) best = { pos: candidate, score };
+    }
+    if (best) return best.pos;
   }
 
-  if (best) return best.pos;
-
-  // Last-resort fallback: take a position as close as the reach allows
-  // ignoring constraints. May produce extras; the user sees what the algo
-  // had to compromise on.
+  // True last resort: a position immediately next to `from`, ignoring
+  // every constraint. Should be extremely rare.
   const fallbackAngle = rng() * Math.PI * 2;
-  const fallbackDist = Math.min(reach, 4);
+  const fallbackDist = Math.min(reach * 2, 4);
   const fx = from[0] + Math.cos(fallbackAngle) * fallbackDist;
   const fz = from[2] + Math.sin(fallbackAngle) * fallbackDist;
   const fg = terrainGroundY(fx, fz, terrain);
