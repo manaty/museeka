@@ -807,12 +807,21 @@ export class MuseekaRenderer {
 
     const velocity = snapshot.player.velocity;
     const cameraTarget = new THREE.Vector3(position[0], position[1], position[2]);
-    const offset = new THREE.Vector3(-velocity[0] * 0.45, 7, -velocity[2] * 0.45);
-    if (offset.length() < 10) {
-      offset.set(12, 8, 14);
+    // Camera trails behind & above the firefly, pulled back a bit more
+    // than before so the scene reads better.
+    const offset = new THREE.Vector3(-velocity[0] * 0.5, 10, -velocity[2] * 0.5);
+    if (offset.length() < 14) {
+      offset.set(15, 11, 18);
     }
-    offset.clampLength(12, 22);
-    this.camera.position.lerp(cameraTarget.clone().add(offset), 0.08);
+    offset.clampLength(16, 28);
+    const desired = cameraTarget.clone().add(offset);
+    // Ensure the camera stays well clear of the terrain at its own XZ —
+    // hills shouldn't poke into or above the camera. Min clearance accounts
+    // for the tallest objects (anchor visuals + sphere top ≈ 4 m).
+    const camGround = groundY(desired.x, desired.z, this.scene);
+    const minCamY = camGround + 8;
+    if (desired.y < minCamY) desired.y = minCamY;
+    this.camera.position.lerp(desired, 0.08);
     this.camera.lookAt(cameraTarget);
   }
 }

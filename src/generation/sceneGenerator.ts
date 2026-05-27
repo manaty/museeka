@@ -104,11 +104,14 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     const events = [...score.events].sort((a, b) => a.time - b.time);
     if (events.length === 0) continue;
 
-    const startGround = terrainGroundY(0, -28, terrain);
-    const waypoints: PathPoint[] = [{ t: 0, p: [0, Math.max(startGround + 12, 14), -28] }];
+    // Entry waypoint is initially a placeholder; we'll rewrite it after the
+    // first event so it sits just above the first anchor (avoids a long
+    // initial dash across the island).
+    const waypoints: PathPoint[] = [{ t: 0, p: [0, 14, 0] }];
     let prevPos: Vec3 = waypoints[0].p;
     let prevT = 0;
     let prevObjectId: string | null = null;
+    let firstEventPlaced = false;
 
     let createdAnchors = 0;
     let reusedAnchors = 0;
@@ -187,13 +190,27 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
       }
 
       waypoints.push({ t: event.time, p: chosen.transform.position });
+      // Rewrite the entry waypoint to be just above the first chosen anchor
+      // so the firefly starts close to where it needs to play first.
+      if (!firstEventPlaced) {
+        const ground = terrainGroundY(chosen.transform.position[0], chosen.transform.position[2], terrain);
+        waypoints[0] = {
+          t: 0,
+          p: [chosen.transform.position[0], Math.max(chosen.transform.position[1] + 8, ground + 10), chosen.transform.position[2]]
+        };
+        firstEventPlaced = true;
+      }
       prevPos = chosen.transform.position;
       prevT = event.time;
       prevObjectId = chosen.id;
     }
 
-    const exitGround = terrainGroundY(0, 28, terrain);
-    waypoints.push({ t: score.duration, p: [0, Math.max(prevPos[1], exitGround + 8), 28] });
+    // End of the score: the firefly just rises above its last position
+    // instead of flying back to a fixed exit point on the other side of the
+    // island (which used to cause a long final dash). The path naturally
+    // tapers to a small upward glide.
+    const exitGround = terrainGroundY(prevPos[0], prevPos[2], terrain);
+    waypoints.push({ t: score.duration, p: [prevPos[0], Math.max(prevPos[1] + 8, exitGround + 10), prevPos[2]] });
 
     // Sample the path so later scores avoid placing new objects on it.
     const samples: Vec3[] = [];
