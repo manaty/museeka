@@ -11,6 +11,46 @@
   let selectedId: string | null = null;
   let importing = false;
   let error = "";
+  let sourcesOpen = false;
+
+  type MidiSource = {
+    name: string;
+    url: string;
+    description: string;
+    license: "PD" | "CC" | "Mixed" | "User";
+  };
+
+  /** Curated list of MIDI download sites — royalty-free / public-domain
+   * sources highlighted first. */
+  const MIDI_SOURCES_LIST: MidiSource[] = [
+    { name: "Mutopia Project",   url: "https://www.mutopiaproject.org/",     description: "Partitions et MIDIs classiques, domaine public.",        license: "PD" },
+    { name: "IMSLP / Petrucci",   url: "https://imslp.org/",                  description: "Vaste bibliothèque libre de droits (classique).",       license: "PD" },
+    { name: "Kunst der Fuge",     url: "https://www.kunstderfuge.com/",       description: "Bach, baroque, classique — MIDIs très complets.",        license: "PD" },
+    { name: "Classical Midi",     url: "https://classicalmidi.co.uk/",        description: "Catalogue classique anglais, téléchargements libres.",  license: "PD" },
+    { name: "8notes",             url: "https://www.8notes.com/midi/",        description: "Partitions + MIDIs, sections libres et premium.",       license: "Mixed" },
+    { name: "MidiWorld",          url: "https://www.midiworld.com/",          description: "Pop, rock, classique — vieux site mais riche.",         license: "Mixed" },
+    { name: "FreeMidi",           url: "https://freemidi.org/",                description: "Sélection populaire, varié.",                            license: "User" },
+    { name: "BitMidi",            url: "https://bitmidi.com/",                description: "Recherche rapide, 100k+ fichiers utilisateurs.",        license: "User" },
+    { name: "MuseScore",          url: "https://musescore.com/",              description: "Communauté de partitions, export MIDI souvent dispo.",  license: "CC" },
+    { name: "VGMusic",            url: "https://www.vgmusic.com/",            description: "Musiques de jeux vidéo (fan-made, vérifier la licence).", license: "Mixed" }
+  ];
+
+  function licenseLabel(license: MidiSource["license"]): { text: string; color: string } {
+    switch (license) {
+      case "PD":    return { text: "Domaine public", color: "#8ff0d2" };
+      case "CC":    return { text: "Creative Commons", color: "#a4b0ff" };
+      case "Mixed": return { text: "Mixte", color: "#ffd770" };
+      case "User":  return { text: "User-submitted", color: "#f6c98f" };
+    }
+  }
+
+  function toggleSources() {
+    sourcesOpen = !sourcesOpen;
+  }
+
+  function closeSources() {
+    sourcesOpen = false;
+  }
 
   onMount(async () => {
     midis = await listAllMidis();
@@ -250,6 +290,34 @@
       📁 Importer un MIDI
       <input type="file" accept=".mid,.midi,audio/midi,audio/x-midi" multiple on:change={onFileChange} hidden />
     </label>
+
+    <div class="midi-sources" class:open={sourcesOpen}>
+      <button type="button" class="sources-trigger" on:click={toggleSources}>
+        🌐 Où trouver des MIDI ? <span class="caret">▾</span>
+      </button>
+      {#if sourcesOpen}
+        <div class="sources-dropdown" role="menu">
+          <p class="sources-hint">Sites externes — favoris : domaine public.</p>
+          {#each MIDI_SOURCES_LIST as source}
+            {@const lic = licenseLabel(source.license)}
+            <a
+              class="source-link"
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              on:click={closeSources}
+            >
+              <div class="source-main">
+                <strong>{source.name}</strong>
+                <span class="lic" style="background: {lic.color}22; color: {lic.color}; border-color: {lic.color}55;">{lic.text}</span>
+              </div>
+              <span class="source-desc">{source.description}</span>
+            </a>
+          {/each}
+        </div>
+      {/if}
+    </div>
+
     {#if importing}<span class="info">Import…</span>{/if}
     {#if error}<span class="error">{error}</span>{/if}
   </div>
@@ -307,19 +375,35 @@
         </section>
 
         <section class="roll-block">
+          <div class="player-bar">
+            <button class="player-play" on:click={play} disabled={!samplesReady} title={playing ? "Pause" : "Play"}>
+              {playing ? "⏸" : "▶"}
+            </button>
+            <button class="player-restart" on:click={restart} disabled={!samplesReady} title="Restart">↻</button>
+            <button
+              type="button"
+              class="player-progress"
+              aria-label="Seek"
+              on:click={(e) => {
+                if (!selected) return;
+                const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
+                const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                playTime = ratio * selected.score.duration;
+                nextIndex = selected.score.events.findIndex((ev) => ev.time > playTime);
+                if (nextIndex === -1) nextIndex = selected.score.events.length;
+                currentEventIndex = nextIndex - 1;
+                playStart = performance.now() - playTime * 1000;
+              }}
+            >
+              <span class="player-progress-fill" style="width: {Math.min(100, (playTime / Math.max(0.001, durationVisible)) * 100)}%"></span>
+            </button>
+            <span class="player-time">
+              {playTime.toFixed(1)} / {durationVisible.toFixed(1)} s
+            </span>
+            {#if !samplesReady}<span class="info">Samples · {samplePercent}%</span>{/if}
+          </div>
           <div class="roll-header">
-            <h3>Piano roll <span class="muted">(jusqu'à 800 notes affichées)</span></h3>
-            <div class="player-controls">
-              <button on:click={play} disabled={!samplesReady}>
-                {playing ? "⏸ Pause" : "▶ Play"}
-              </button>
-              <button on:click={restart} disabled={!samplesReady}>↻</button>
-              {#if !samplesReady}
-                <span class="info">Samples · {samplePercent}%</span>
-              {:else}
-                <span class="time">{playTime.toFixed(1)} / {durationVisible.toFixed(1)} s</span>
-              {/if}
-            </div>
+            <h3>Piano roll</h3>
           </div>
           <div class="piano-roll">
             {#each notes as note}

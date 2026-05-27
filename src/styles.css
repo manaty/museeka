@@ -2278,3 +2278,168 @@ h2 {
   outline: 1px solid rgba(255, 241, 168, 0.35);
 }
 .raw-block tbody tr.playing td { color: #fff; }
+
+/* MIDI editor — prominent player bar */
+.player-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 241, 168, 0.2);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.player-bar .player-play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff1a8;
+  border-color: #fff1a8;
+  color: #17201d;
+  font-size: 18px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  min-height: 0;
+  flex-shrink: 0;
+}
+.player-bar .player-play:hover { background: #ffe680; }
+.player-bar .player-play:disabled { background: rgba(255, 241, 168, 0.3); border-color: rgba(255, 241, 168, 0.3); }
+
+.player-bar .player-restart {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  min-height: 0;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.player-bar .player-progress {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-bar .player-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fff1a8, #ffd770);
+  border-radius: inherit;
+  transition: width 80ms linear;
+}
+
+.player-bar .player-time {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: rgba(238, 248, 240, 0.75);
+  white-space: nowrap;
+}
+
+.player-bar .info {
+  font-size: 12px;
+  color: rgba(255, 241, 168, 0.85);
+  white-space: nowrap;
+}
+
+.roll-header { margin-bottom: 8px; }
+.roll-header h3 { margin: 0; }
+
+/* MIDI sources dropdown */
+.midi-sources {
+  position: relative;
+  display: inline-block;
+}
+.sources-trigger {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef8f0;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.sources-trigger:hover { background: rgba(255, 241, 168, 0.12); border-color: rgba(255, 241, 168, 0.3); }
+.midi-sources.open .sources-trigger { background: rgba(255, 241, 168, 0.18); border-color: rgba(255, 241, 168, 0.4); }
+.sources-trigger .caret { font-size: 12px; opacity: 0.7; }
+
+.sources-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 340px;
+  max-width: 480px;
+  background: #1a2229;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  z-index: 30;
+  display: grid;
+  gap: 2px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.sources-hint {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(238, 248, 240, 0.5);
+}
+
+.source-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 120ms;
+}
+.source-link:hover {
+  background: rgba(255, 241, 168, 0.08);
+  border-color: rgba(255, 241, 168, 0.2);
+}
+
+.source-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.source-main strong { font-size: 14px; color: #fff; }
+
+.lic {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.source-desc {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.65);
+  line-height: 1.4;
+}
