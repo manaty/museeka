@@ -1540,3 +1540,263 @@ h2 {
   .studio-header { padding: 12px 16px; gap: 12px; }
   .studio-header .breadcrumb { display: none; }
 }
+
+/* ────────────────────────────────────────────────────────────
+   Studio v2: editor pages (Instruments / Objects / Scene)
+   ──────────────────────────────────────────────────────────── */
+
+.instruments-editor,
+.objects-editor,
+.scene-editor {
+  display: grid;
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.instruments-editor > header h1,
+.objects-editor > header h1,
+.scene-editor > header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.instruments-editor > header .lead,
+.objects-editor > header .lead,
+.scene-editor > header .lead {
+  margin: 0;
+  color: rgba(238, 248, 240, 0.72);
+}
+
+.loading, .error {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+.loading { color: rgba(255, 241, 168, 0.85); }
+.error   { color: #ff8a8a; }
+
+/* ─── Instruments grid ─── */
+.instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.instrument-card {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  transition: border-color 200ms ease, background 200ms ease, transform 160ms ease;
+}
+
+.instrument-card:hover { border-color: var(--accent, #fff1a8); }
+.instrument-card.active {
+  border-color: var(--accent, #fff1a8);
+  background: rgba(255, 241, 168, 0.10);
+  transform: translateY(-1px);
+}
+
+.instrument-card .swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent, #fff1a8) 30%, transparent);
+}
+
+.instrument-card .meta h3 { margin: 0; font-size: 15px; }
+.instrument-card .meta .id {
+  margin: 2px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.5);
+}
+.instrument-card .meta .desc {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.65);
+}
+
+.instrument-card .preview {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 241, 168, 0.15);
+  border-color: rgba(255, 241, 168, 0.35);
+  color: #fff1a8;
+  font-weight: 700;
+  min-width: 60px;
+}
+.instrument-card .preview:hover:not(:disabled) {
+  background: rgba(255, 241, 168, 0.3);
+}
+
+/* ─── Objects editor ─── */
+.preset-grid h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: rgba(238, 248, 240, 0.85);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.preset-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.preset-card {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--accent, #fff1a8);
+  border-radius: 12px;
+}
+
+.preset-card .swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.preset-card .meta strong { display: block; font-size: 14px; }
+.preset-card .meta .line {
+  font-size: 11px;
+  color: rgba(238, 248, 240, 0.55);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.preset-card .actions {
+  display: flex;
+  gap: 6px;
+}
+.preset-card .actions button {
+  font-size: 12px;
+  padding: 4px 10px;
+  min-height: 28px;
+}
+.preset-card .actions button.danger {
+  background: rgba(255, 138, 138, 0.18);
+  color: #ff8a8a;
+  border-color: rgba(255, 138, 138, 0.3);
+}
+
+.preset-grid p.empty {
+  color: rgba(238, 248, 240, 0.5);
+  font-size: 13px;
+  margin: 0;
+}
+
+.preset-form {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+.preset-form h2 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.85);
+}
+.preset-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.preset-form input[type="color"] {
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(10, 17, 19, 0.85);
+  cursor: pointer;
+}
+.preset-form .form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ─── Scene editor ─── */
+.scene-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.scene-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #050709;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scene-preview canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.scene-controls {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.scene-controls .row {
+  display: flex;
+  gap: 8px;
+}
+
+.scene-controls .hint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.5);
+  line-height: 1.45;
+}
+
+/* Shared back button (also used by placeholders) */
+.instruments-editor .back,
+.objects-editor .back,
+.scene-editor .back {
+  justify-self: start;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef8f0;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.instruments-editor .back:hover,
+.objects-editor .back:hover,
+.scene-editor .back:hover {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.35);
+}
+
+@media (max-width: 800px) {
+  .scene-editor-grid { grid-template-columns: 1fr; }
+}
