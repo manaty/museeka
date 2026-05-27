@@ -130,6 +130,6 @@ export class TouchJoystickDriver implements InputDriver {
   }
 
   needsUiHint(): string {
-    return "Pouce gauche : voler · pouce droit : regarder · vise vers le haut pour monter";
+    return "hint_joystick";
   }
 }

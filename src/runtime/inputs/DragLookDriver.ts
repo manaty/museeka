@@ -83,6 +83,6 @@ export class DragLookDriver implements InputDriver {
   }
 
   needsUiHint(): string {
-    return "Clique-glisse pour orienter · WASD/ZQSD : déplacer · Espace : monter · Ctrl : descendre";
+    return "hint_drag";
   }
 }

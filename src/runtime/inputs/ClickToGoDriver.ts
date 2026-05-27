@@ -50,6 +50,6 @@ export class ClickToGoDriver implements InputDriver {
   }
 
   needsUiHint(): string {
-    return "Clique sur l'île pour t'y rendre · ▲/▼ pour monter/descendre";
+    return "hint_click";
   }
 }

@@ -9,6 +9,10 @@
   import { DragLookDriver } from "../runtime/inputs/DragLookDriver";
   import { ClickToGoDriver } from "../runtime/inputs/ClickToGoDriver";
   import { TouchJoystickDriver } from "../runtime/inputs/TouchJoystickDriver";
+  import { t, locale, type StringKey } from "./i18n";
+
+  // Set HTML lang so screen readers and CSS selectors get the right locale.
+  if (typeof document !== "undefined") document.documentElement.lang = locale;
 
   type DriverKey = "pointerlock" | "drag" | "click" | "joystick";
 
@@ -32,7 +36,7 @@
   let started = false;
   let samplesReady = false;
   let sampleProgress = 0;
-  let loadingMessage = "Chargement des instruments";
+  let loadingMessage = t("loading_samples");
   let debug = false;
   let speed = 1;
   let volume = 0.78;
@@ -56,7 +60,7 @@
         .prepareAudioSamples((progress) => {
           sampleProgress = progress.percent;
           samplesReady = progress.ready;
-          loadingMessage = progress.ready ? "Instruments prêts" : `Chargement des instruments ${progress.loaded}/${progress.total}`;
+          loadingMessage = progress.ready ? t("samples_ready") : `${t("loading_samples")} ${progress.loaded}/${progress.total}`;
         })
         .catch((caught) => {
           error = caught instanceof Error ? caught.message : String(caught);
@@ -186,40 +190,40 @@
   {:else if !started}
     <section class="start-screen">
       <div>
-        <p class="kicker">Museeka</p>
-        <h1>Une île-instrument</h1>
-        <div class="load-block" aria-label="Chargement audio">
+        <p class="kicker">{t("brand")}</p>
+        <h1>{t("app_subtitle")}</h1>
+        <div class="load-block" aria-label={t("loading_short")}>
           <div class="progress-track">
             <div class="progress-fill" style={`width: ${sampleProgress}%`}></div>
           </div>
           <span>{loadingMessage} · {sampleProgress}%</span>
         </div>
         <button class="primary" on:click={start} disabled={!samplesReady} data-testid="start-button">
-          {samplesReady ? "Start Museeka" : "Loading samples"}
+          {samplesReady ? t("start_button") : t("start_button_wait")}
         </button>
       </div>
     </section>
   {/if}
 
-  {#if scene && runtime && samplesReady}
-    <section class="hud" class:collapsed={hudCollapsed} aria-label="Contrôles Museeka">
-      <button class="hud-toggle" on:click={() => (hudCollapsed = !hudCollapsed)} aria-label={hudCollapsed ? "Déployer le menu" : "Replier le menu"} data-testid="hud-toggle">
+  {#if scene && runtime && samplesReady && started}
+    <section class="hud" class:collapsed={hudCollapsed} aria-label={t("brand")}>
+      <button class="hud-toggle" on:click={() => (hudCollapsed = !hudCollapsed)} aria-label={hudCollapsed ? t("hud_expand") : t("hud_collapse")} data-testid="hud-toggle">
         {hudCollapsed ? "≡" : "×"}
       </button>
 
       <div class="brand">
-        <span>Museeka</span>
-        <small>{mode === "freefly" ? "Mode libre" : scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
+        <span>{t("brand")}</span>
+        <small>{mode === "freefly" ? t("mode_freefly_label") : scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
       </div>
 
       <div class="mode-switch">
-        <button class:active={mode === "path"} on:click={exitFreeFly} data-testid="mode-path">Parcours</button>
-        <button class:active={mode === "freefly"} on:click={enterFreeFly} data-testid="mode-freefly">Vol libre</button>
+        <button class:active={mode === "path"} on:click={exitFreeFly} data-testid="mode-path">{t("mode_path")}</button>
+        <button class:active={mode === "freefly"} on:click={enterFreeFly} data-testid="mode-freefly">{t("mode_freefly")}</button>
       </div>
 
       {#if mode === "path"}
         <label>
-          Parcours
+          {t("parcours_label")}
           <select bind:value={selectedPathId} on:change={changePath} data-testid="path-select">
             {#each scene.paths as path}
               <option value={path.id}>{path.name}</option>
@@ -228,22 +232,22 @@
         </label>
 
         <div class="button-row">
-          <button on:click={togglePlay} disabled={!started}>{snapshot?.playing ? "Pause" : "Play"}</button>
-          <button on:click={restart} disabled={!started}>Restart</button>
+          <button on:click={togglePlay} disabled={!started}>{snapshot?.playing ? t("pause") : t("play")}</button>
+          <button on:click={restart} disabled={!started}>{t("restart")}</button>
         </div>
 
         <label>
-          Vitesse
+          {t("speed")}
           <input type="range" min="0.35" max="2" step="0.05" bind:value={speed} on:input={changeSpeed} />
         </label>
       {:else}
         <label>
-          Contrôles
+          {t("controls_label")}
           <select bind:value={driverKey} on:change={changeDriver} data-testid="driver-select">
-            <option value="pointerlock">Souris + clavier (FPS)</option>
-            <option value="drag">Clic-glisser + clavier</option>
-            <option value="joystick">Joysticks tactiles</option>
-            <option value="click">Tap-pour-aller</option>
+            <option value="pointerlock">{t("driver_fps")}</option>
+            <option value="drag">{t("driver_drag")}</option>
+            <option value="joystick">{t("driver_joystick")}</option>
+            <option value="click">{t("driver_click")}</option>
           </select>
         </label>
 
@@ -255,23 +259,23 @@
         {/if}
 
         {#if driverHint}
-          <p class="driver-hint" data-testid="driver-hint">{driverHint}</p>
+          <p class="driver-hint" data-testid="driver-hint">{t(driverHint as StringKey)}</p>
         {/if}
       {/if}
 
       <label>
-        Volume
+        {t("volume")}
         <input type="range" min="0" max="1" step="0.01" bind:value={volume} on:input={changeVolume} />
       </label>
 
       <label class="inline">
         <input type="checkbox" bind:checked={debug} on:change={changeDebug} data-testid="debug-toggle" />
-        Debug
+        {t("debug")}
       </label>
 
       <div class="hud-links">
-        <a href="studio/" data-testid="studio-link">Ouvrir le Studio →</a>
-        <a href="https://github.com/manaty/museeka" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="studio/" data-testid="studio-link">{t("open_studio")}</a>
+        <a href="https://github.com/manaty/museeka" target="_blank" rel="noopener noreferrer">{t("github")}</a>
       </div>
     </section>
 

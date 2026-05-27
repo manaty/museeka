@@ -75,8 +75,6 @@ export class PointerLockDriver implements InputDriver {
   }
 
   needsUiHint(): string {
-    return this.locked
-      ? "Souris : regarder · WASD/ZQSD : se déplacer · Espace : monter · Ctrl : descendre · Maj : sprint · Esc : libérer"
-      : "Clique sur la scène pour verrouiller la souris (Esc pour libérer)";
+    return this.locked ? "hint_pointerlock_locked" : "hint_pointerlock_unlocked";
   }
 }
