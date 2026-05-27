@@ -2480,3 +2480,188 @@ button.player-progress {
   background: linear-gradient(180deg, rgba(255, 241, 168, 0.85), rgba(255, 241, 168, 0.35));
   transform: translateX(-1px);
 }
+
+/* Scene editor v2 — heightmap + gradient */
+.scene-editor-v2 {
+  display: grid;
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.scene-editor-v2 > header h1 { margin: 0 0 6px; font-size: clamp(28px, 4vw, 40px); }
+.scene-editor-v2 > header .lead { margin: 0; color: rgba(238, 248, 240, 0.72); }
+
+.scene-editor-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.scene-preview-3d {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #050709;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.scene-preview-3d canvas { display: block; width: 100% !important; height: 100% !important; }
+
+.scene-tools {
+  display: grid;
+  gap: 14px;
+}
+
+.map-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+.map-block h3 {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.75);
+}
+.heightmap-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 10px;
+  background: #050709;
+  touch-action: none;
+  cursor: crosshair;
+}
+.map-block .hint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.55);
+}
+
+.brush-block,
+.terrain-params,
+.gradient-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+.brush-block h3,
+.terrain-params h3,
+.gradient-block h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.75);
+}
+
+.brush-block .row,
+.terrain-params .row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.seg-group {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.seg-group button {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: 12px;
+}
+.seg-group button.active {
+  background: rgba(255, 241, 168, 0.18);
+  color: #fff1a8;
+}
+
+.scene-bottom {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 18px;
+}
+
+.gradient-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.gradient-strip {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  min-height: 180px;
+}
+.gradient-stops {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.stop {
+  display: grid;
+  grid-template-columns: 36px 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+}
+.stop input[type="color"] {
+  width: 36px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.stop .t {
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.7);
+  font-variant-numeric: tabular-nums;
+  min-width: 36px;
+  text-align: right;
+}
+.stop button.danger {
+  background: rgba(255, 138, 138, 0.16);
+  color: #ff8a8a;
+  border-color: rgba(255, 138, 138, 0.3);
+  width: 28px;
+  padding: 0;
+  min-height: 28px;
+}
+.gradient-block .hint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.55);
+}
+
+.scene-editor-v2 .back {
+  justify-self: start;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef8f0;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.scene-editor-v2 .back:hover {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.35);
+}
+
+@media (max-width: 900px) {
+  .scene-editor-layout { grid-template-columns: 1fr; }
+  .scene-bottom { grid-template-columns: 1fr; }
+  .gradient-row { grid-template-columns: 40px 1fr; }
+}
