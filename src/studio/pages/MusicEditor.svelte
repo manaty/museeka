@@ -2,7 +2,7 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { t } from "../../ui/i18n";
   import { navigate } from "../router";
-  import { listMidis, getMidi, type StoredMidi } from "../storage";
+  import { listAllMidis, findMidi, type StoredMidi } from "../storage";
   import { MuseekaRenderer } from "../../graphics/MuseekaRenderer";
   import { MuseekaRuntime, type RuntimeSnapshot } from "../../runtime/MuseekaRuntime";
   import { generateSceneFromScores } from "../../generation/sceneGenerator";
@@ -25,8 +25,8 @@
   let samplesReady = false;
   let selectedObjectId: string | null = null;
 
-  onMount(() => {
-    midis = listMidis();
+  onMount(async () => {
+    midis = await listAllMidis();
     if (midis.length > 0) selectedMidiId = midis[0].id;
   });
 
@@ -38,7 +38,7 @@
 
   async function generate() {
     if (!selectedMidiId) return;
-    const entry = getMidi(selectedMidiId);
+    const entry = await findMidi(selectedMidiId);
     if (!entry) return;
     busy = true;
     error = "";

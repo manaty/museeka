@@ -3,7 +3,7 @@
   import { t } from "../../ui/i18n";
   import { navigate } from "../router";
   import { parseMidiFile } from "../../music/midi";
-  import { listMidis, saveMidi, deleteMidi, getMidi, makeMidiId, type StoredMidi } from "../storage";
+  import { listAllMidis, saveMidi, deleteMidi, makeMidiId, type StoredMidi } from "../storage";
   import type { MusicEvent } from "../../core/types";
 
   let midis: StoredMidi[] = [];
@@ -11,10 +11,14 @@
   let importing = false;
   let error = "";
 
-  onMount(() => {
-    midis = listMidis();
+  onMount(async () => {
+    midis = await listAllMidis();
     if (midis.length > 0 && !selectedId) selectedId = midis[0].id;
   });
+
+  async function refresh() {
+    midis = await listAllMidis();
+  }
 
   async function onFileChange(ev: Event) {
     const input = ev.target as HTMLInputElement;
@@ -33,7 +37,7 @@
         };
         saveMidi(entry);
       }
-      midis = listMidis();
+      await refresh();
       if (!selectedId && midis.length > 0) selectedId = midis[0].id;
     } catch (caught) {
       error = caught instanceof Error ? caught.message : String(caught);
@@ -47,13 +51,13 @@
     selectedId = id;
   }
 
-  function onDelete(id: string) {
+  async function onDelete(id: string) {
     deleteMidi(id);
-    midis = listMidis();
+    await refresh();
     if (selectedId === id) selectedId = midis[0]?.id ?? null;
   }
 
-  $: selected = selectedId ? getMidi(selectedId) ?? null : null;
+  $: selected = midis.find((m) => m.id === selectedId) ?? null;
 
   /* ─── Derived analysis ──────────────────────────────────────────── */
 
@@ -141,13 +145,18 @@
           {#each midis as midi}
             <li class:active={midi.id === selectedId}>
               <button class="select" on:click={() => selectMidi(midi.id)}>
-                <strong>{midi.score.name || midi.fileName}</strong>
+                <strong>
+                  {midi.score.name || midi.fileName}
+                  {#if midi.builtin}<span class="builtin-badge">livré</span>{/if}
+                </strong>
                 <span class="sub">
                   {midi.score.events.length} évts · {midi.score.duration.toFixed(1)} s
                 </span>
-                <span class="ts">{formatDate(midi.importedAt)}</span>
+                {#if !midi.builtin}<span class="ts">{formatDate(midi.importedAt)}</span>{/if}
               </button>
-              <button class="danger" title="Supprimer" on:click={() => onDelete(midi.id)}>×</button>
+              {#if !midi.builtin}
+                <button class="danger" title="Supprimer" on:click={() => onDelete(midi.id)}>×</button>
+              {/if}
             </li>
           {/each}
         </ul>

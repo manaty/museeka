@@ -2204,3 +2204,17 @@ h2 {
   .midi-grid { grid-template-columns: 1fr; }
   .music-grid { grid-template-columns: 1fr; }
 }
+
+.builtin-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(143, 240, 210, 0.22);
+  color: #8ff0d2;
+  vertical-align: middle;
+}

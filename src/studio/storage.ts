@@ -9,7 +9,20 @@ export type StoredMidi = {
   fileName: string;
   importedAt: number;
   score: MusicScore;
+  /** When true, the MIDI is part of the default catalogue shipped with the
+   * app (loaded from /data/midi/*). Such items can't be deleted by the user. */
+  builtin?: boolean;
 };
+
+/** Default MIDIs shipped in public/data/midi/. Available everywhere as
+ * builtin items merged with localStorage entries. */
+export const BUILTIN_MIDIS: Array<{ id: string; fileName: string; displayName: string }> = [
+  { id: "builtin_ode_to_joy",    fileName: "01-ode-to-joy.mid",     displayName: "Ode to Joy" },
+  { id: "builtin_pachelbel",     fileName: "02-pachelbel-canon.mid", displayName: "Canon in D" },
+  { id: "builtin_frere_jacques", fileName: "03-frere-jacques.mid",   displayName: "Frère Jacques" },
+  { id: "builtin_bach_prelude",  fileName: "04-bach-prelude-c.mid",  displayName: "Prelude in C (BWV 846)" },
+  { id: "builtin_greensleeves",  fileName: "05-greensleeves.mid",    displayName: "Greensleeves" }
+];
 
 export function listMidis(): StoredMidi[] {
   if (typeof window === "undefined") return [];
@@ -42,6 +55,49 @@ export function getMidi(id: string): StoredMidi | undefined {
 
 export function makeMidiId(): string {
   return `midi_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`;
+}
+
+// In-memory cache so we don't refetch the builtin MIDIs every time the
+// MIDI / Music editor mounts.
+let builtinCache: StoredMidi[] | null = null;
+let builtinPromise: Promise<StoredMidi[]> | null = null;
+
+export async function fetchBuiltinMidis(): Promise<StoredMidi[]> {
+  if (builtinCache) return builtinCache;
+  if (builtinPromise) return builtinPromise;
+  const base = (import.meta as ImportMeta & { env: { BASE_URL: string } }).env.BASE_URL;
+  const { parseMidiArrayBuffer } = await import("../music/midi");
+  builtinPromise = Promise.all(
+    BUILTIN_MIDIS.map(async (entry) => {
+      const response = await fetch(`${base}data/midi/${entry.fileName}`);
+      if (!response.ok) throw new Error(`Cannot load ${entry.fileName}: ${response.status}`);
+      const buffer = await response.arrayBuffer();
+      const score = parseMidiArrayBuffer(buffer, entry.displayName);
+      return {
+        id: entry.id,
+        fileName: entry.fileName,
+        importedAt: 0,
+        score,
+        builtin: true
+      } satisfies StoredMidi;
+    })
+  ).then((items) => {
+    builtinCache = items;
+    return items;
+  });
+  return builtinPromise;
+}
+
+/** Merge built-in MIDIs (first) with user-imported MIDIs from localStorage. */
+export async function listAllMidis(): Promise<StoredMidi[]> {
+  const builtins = await fetchBuiltinMidis();
+  return [...builtins, ...listMidis()];
+}
+
+/** Lookup a MIDI by id, searching both built-in cache and localStorage. */
+export async function findMidi(id: string): Promise<StoredMidi | undefined> {
+  const builtins = await fetchBuiltinMidis();
+  return builtins.find((m) => m.id === id) ?? getMidi(id);
 }
 
 export function saveStudioScene(scene: IslandScene) {
