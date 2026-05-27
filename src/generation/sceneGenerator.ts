@@ -82,7 +82,8 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     ((oct - globalLowestOctave) / octaveSpread) * 2 - 1; // → [-1, +1]
 
   const rng = mulberry32(seed);
-  const noteObjects = new Map<string, SoundObject>(); // key = `${midi}_${instr}`
+  const noteObjects: SoundObject[] = []; // every created note anchor (incl. duplicates)
+  const latestByNote = new Map<string, SoundObject>(); // key = `${midi}_${instr}` → most recent anchor for reuse
   const aggregateObjects: SoundObject[] = [];
 
   type PathBuild = {
@@ -94,7 +95,7 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
   const builds: PathBuild[] = [];
 
   function allObjects(): SoundObject[] {
-    return [...noteObjects.values(), ...aggregateObjects];
+    return [...noteObjects, ...aggregateObjects];
   }
 
   for (let scoreIndex = 0; scoreIndex < scores.length; scoreIndex += 1) {
@@ -121,15 +122,24 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
       if (event.kind === "note") {
         const midi = noteNameToMidi(event.notes[0]);
         const key = `${midi}_${event.instrument}`;
-        const existing = noteObjects.get(key);
-        if (existing) {
-          // ALWAYS reuse an existing same-note anchor — even if it's beyond
-          // the reach budget. Creating a duplicate at a closer position
-          // would mean the same musical note has two different physical
-          // homes, which breaks the perceptual mapping (cycles in a canon
-          // would visit different points each loop). The path may move
-          // faster than ideal between cycles, but the music stays right.
-          chosen = existing;
+        const existing = latestByNote.get(key);
+        // Pick the closest already-placed anchor for this note that's within
+        // the speed budget. If none is reachable, CREATE a new duplicate
+        // close to the current path position — the music's note stays
+        // correct (same baseNote played), the firefly never teleports.
+        const candidates = noteObjects.filter((o) => o.id.startsWith(`note_${midi}_${event.instrument}`));
+        let bestReusable: SoundObject | null = null;
+        let bestDist = Infinity;
+        for (const c of candidates) {
+          const d = distance3D(prevPos, c.transform.position);
+          if (d <= reach && d < bestDist) {
+            bestDist = d;
+            bestReusable = c;
+          }
+        }
+        if (bestReusable) {
+          chosen = bestReusable;
+          latestByNote.set(key, bestReusable);
           reusedAnchors += 1;
         } else {
           const pos = pickPosition({
@@ -142,8 +152,12 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
             rng,
             isAggregate: false
           });
-          chosen = createNoteObject(midi, event.instrument, pos, tintForOctave(midiOctave(midi)));
-          noteObjects.set(key, chosen);
+          // Make ids unique across duplicates of the same note so all stay
+          // present in the scene with distinct identities.
+          const dupSuffix = existing ? `_dup${noteObjects.filter((o) => o.id.startsWith(`note_${midi}_${event.instrument}`)).length}` : "";
+          chosen = createNoteObject(midi, event.instrument, pos, tintForOctave(midiOctave(midi)), dupSuffix);
+          noteObjects.push(chosen);
+          latestByNote.set(key, chosen);
           createdAnchors += 1;
         }
       } else {
@@ -260,7 +274,7 @@ export function generateSceneFromScores(scores: MusicScore[], seed = 12345): Sce
     const path = paths[i];
     const sim = simulateParcours(path, sceneObjects);
     const cmp = compareProduced(build.score, sim.produced);
-    const anchors: PitchClassAnchor[] = [...noteObjects.values()].map(anchorMetaFromObject);
+    const anchors: PitchClassAnchor[] = noteObjects.map(anchorMetaFromObject);
     return {
       scoreId: build.score.id,
       pathId: path.id,
@@ -362,12 +376,13 @@ function createNoteObject(
   midi: number,
   instrument: InstrumentId,
   position: Vec3,
-  octaveTint: number // -1 (darkest = low octave) … +1 (lightest = high octave)
+  octaveTint: number, // -1 (darkest = low octave) … +1 (lightest = high octave)
+  idSuffix = ""
 ): SoundObject {
   const pitchClass = midiPitchClass(midi);
   const octave = midiOctave(midi);
   const anchor: PitchClassAnchor = {
-    id: `note_${midi}_${instrument}`,
+    id: `note_${midi}_${instrument}${idSuffix}`,
     pitchClass,
     octave,
     instrument,
