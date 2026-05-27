@@ -23,7 +23,6 @@ import {
   runDeflectionPass,
   ANCHOR_FIELD_RADIUS,
   ANCHOR_FIELD_ALTITUDE,
-  OCTAVE_HEIGHT_M,
   MAX_PATH_SPEED
 } from "./spatialFold";
 
@@ -63,6 +62,7 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
   };
 
   let globalLowestOctave = Number.POSITIVE_INFINITY;
+  let globalHighestOctave = Number.NEGATIVE_INFINITY;
   for (const score of scores) {
     for (const event of score.events) {
       for (const noteName of event.notes) {
@@ -70,11 +70,16 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
         if (m) {
           const oct = parseInt(m[1], 10);
           if (oct < globalLowestOctave) globalLowestOctave = oct;
+          if (oct > globalHighestOctave) globalHighestOctave = oct;
         }
       }
     }
   }
   if (!Number.isFinite(globalLowestOctave)) globalLowestOctave = 4;
+  if (!Number.isFinite(globalHighestOctave)) globalHighestOctave = globalLowestOctave;
+  const octaveSpread = Math.max(1, globalHighestOctave - globalLowestOctave);
+  const tintForOctave = (oct: number): number =>
+    ((oct - globalLowestOctave) / octaveSpread) * 2 - 1; // → [-1, +1]
 
   const rng = mulberry32(seed);
   const noteObjects = new Map<string, SoundObject>(); // key = `${midi}_${instr}`
@@ -131,14 +136,13 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
             from: prevPos,
             reach,
             terrain,
-            globalLowestOctave,
             midi,
             priorBuilds: builds,
             existingObjects: allObjects(),
             rng,
             isAggregate: false
           });
-          chosen = createNoteObject(midi, event.instrument, pos);
+          chosen = createNoteObject(midi, event.instrument, pos, tintForOctave(midiOctave(midi)));
           noteObjects.set(key, chosen);
           createdAnchors += 1;
         }
@@ -147,7 +151,6 @@ export function generateSceneFromScoresV2(scores: MusicScore[], seed = 12345): S
           from: prevPos,
           reach,
           terrain,
-          globalLowestOctave,
           midi: null,
           priorBuilds: builds,
           existingObjects: allObjects(),
@@ -338,11 +341,25 @@ function midiPitchClass(midi: number): number {
   return ((midi % 12) + 12) % 12;
 }
 
-function anchorAltitude(octave: number, lowestOctave: number, ground: number): number {
-  return ground + ANCHOR_FIELD_ALTITUDE + (octave - lowestOctave) * OCTAVE_HEIGHT_M;
+/**
+ * V2 puts every note anchor at the SAME low altitude — the firefly walks
+ * THROUGH each arch instead of having to fly to a sphere floating in the
+ * sky. Each anchor has a unique XZ thanks to organic placement, so we
+ * don't need altitude to distinguish octaves. Octave is encoded by color
+ * (see `tintByOctave`) instead.
+ */
+const V2_ANCHOR_GROUND_OFFSET = 2.0; // sphere center 2 m above ground
+
+function anchorGroundAltitude(ground: number): number {
+  return ground + V2_ANCHOR_GROUND_OFFSET;
 }
 
-function createNoteObject(midi: number, instrument: InstrumentId, position: Vec3): SoundObject {
+function createNoteObject(
+  midi: number,
+  instrument: InstrumentId,
+  position: Vec3,
+  octaveTint: number // -1 (darkest = low octave) … +1 (lightest = high octave)
+): SoundObject {
   const pitchClass = midiPitchClass(midi);
   const octave = midiOctave(midi);
   const anchor: PitchClassAnchor = {
@@ -354,7 +371,23 @@ function createNoteObject(midi: number, instrument: InstrumentId, position: Vec3
     baseOctave: octave,
     visits: 1
   };
-  return buildAnchorSoundObject(anchor, 0.5);
+  const obj = buildAnchorSoundObject(anchor, 0.5);
+  // Tint the visual color by octave so visually-distinct arches still
+  // communicate their pitch register.
+  obj.visual = { ...obj.visual, color: tintByOctave(obj.visual.color, octaveTint) };
+  return obj;
+}
+
+function tintByOctave(hex: string, t: number): string {
+  // t in [-1, 1]. Negative → mix with black (darken). Positive → mix with white.
+  const clean = hex.replace("#", "");
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+  const target = t >= 0 ? 255 : 0;
+  const amount = Math.min(1, Math.abs(t)) * 0.55;
+  const mix = (c: number) => Math.round(c + (target - c) * amount);
+  return `#${[mix(r), mix(g), mix(b)].map((c) => c.toString(16).padStart(2, "0")).join("")}`;
 }
 
 function createAggregateObjectFor(event: MusicEvent, position: Vec3, scoreIndex: number, indexInScene: number): SoundObject {
@@ -365,7 +398,6 @@ type PickArgs = {
   from: Vec3;
   reach: number;
   terrain: IslandScene["terrain"];
-  globalLowestOctave: number;
   midi: number | null;
   priorBuilds: { samples: Vec3[] }[];
   existingObjects: SoundObject[];
@@ -374,7 +406,7 @@ type PickArgs = {
 };
 
 function pickPosition(args: PickArgs): Vec3 {
-  const { from, reach, terrain, globalLowestOctave, midi, priorBuilds, existingObjects, rng, isAggregate } = args;
+  const { from, reach, terrain, midi, priorBuilds, existingObjects, rng, isAggregate } = args;
   const ownRadius = isAggregate ? 2.5 : ANCHOR_FIELD_RADIUS;
   const islandBound = terrain.radius * 0.88;
   const TRIES = 64;
@@ -398,8 +430,11 @@ function pickPosition(args: PickArgs): Vec3 {
       const z = from[2] + Math.sin(angle) * radial;
       if (Math.hypot(x, z) > islandBound) continue;
       const ground = terrainGroundY(x, z, terrain);
+      // Note anchors sit just above ground (V2: octave is encoded via color
+      // tint, not altitude, so the firefly can walk through every arch).
+      // Aggregates float a bit higher to stand out visually.
       const y = midi !== null
-        ? anchorAltitude(midiOctave(midi), globalLowestOctave, ground)
+        ? anchorGroundAltitude(ground)
         : Math.max(ground + 3, from[1] + (rng() - 0.5) * 4);
       const candidate: Vec3 = [x, y, z];
 
@@ -446,7 +481,7 @@ function pickPosition(args: PickArgs): Vec3 {
   const fz = from[2] + Math.sin(fallbackAngle) * fallbackDist;
   const fg = terrainGroundY(fx, fz, terrain);
   const fy = midi !== null
-    ? anchorAltitude(midiOctave(midi), globalLowestOctave, fg)
+    ? anchorGroundAltitude(fg)
     : fg + 3;
   return [fx, fy, fz];
 }
