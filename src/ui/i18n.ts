@@ -15,6 +15,7 @@ const STRINGS = {
   loading_short:      { fr: "Chargement",                                              en: "Loading" },
   start_button:       { fr: "Lancer Museeka",                                          en: "Start Museeka" },
   start_button_wait:  { fr: "Chargement des samples",                                  en: "Loading samples" },
+  manaty_logo_alt:    { fr: "Manaty Games",                                            en: "Manaty Games" },
 
   // HUD
   brand:              { fr: "Museeka",                                                 en: "Museeka" },

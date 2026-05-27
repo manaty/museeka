@@ -115,14 +115,189 @@ label.inline {
   place-items: center;
   background: linear-gradient(180deg, rgba(13, 21, 24, 0.26), rgba(13, 21, 24, 0.72));
   pointer-events: none;
+  overflow: hidden;
+  transition: opacity 500ms ease-out;
 }
 
-.start-screen > div {
+/* Vignette */
+.start-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+}
+
+/* Subtle film grain — inline SVG noise */
+.start-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.start-screen.fading-out {
+  opacity: 0;
+}
+
+.start-screen.behind-splash > .intro-content {
+  /* Hidden under the Manaty splash, but rendered so animations start
+     warming up; the splash overlay sits visually on top with z-index 10. */
+  opacity: 0;
+}
+
+.start-screen > .intro-content {
   display: grid;
   gap: 14px;
   justify-items: start;
   width: min(560px, calc(100vw - 40px));
   pointer-events: auto;
+  position: relative;
+  z-index: 3;
+  transition: opacity 600ms ease-out;
+}
+
+/* Intro title + kicker entrance animation */
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intro-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.start-screen .kicker {
+  animation: intro-fade 900ms ease-out both;
+  animation-delay: 100ms;
+}
+
+.start-screen h1 {
+  animation: intro-rise 1100ms cubic-bezier(0.16, 0.84, 0.32, 1) both;
+  animation-delay: 250ms;
+}
+
+.start-screen .load-block {
+  animation: intro-fade 700ms ease-out both;
+  animation-delay: 700ms;
+}
+
+.start-screen button.primary {
+  animation: intro-fade 700ms ease-out both;
+  animation-delay: 900ms;
+}
+
+/* "Breathing" pulse on the start button once samples are ready */
+@keyframes breathing {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 241, 168, 0.4); }
+  50%      { transform: scale(1.035); box-shadow: 0 0 0 14px rgba(255, 241, 168, 0); }
+}
+
+button.primary.breathing {
+  animation: breathing 2.2s ease-in-out infinite, intro-fade 700ms ease-out both;
+  animation-delay: 0s, 900ms;
+}
+
+/* Floating fireflies */
+.firefly-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.firefly {
+  position: absolute;
+  top: 100%;
+  left: var(--x, 50vw);
+  width: var(--size, 8px);
+  height: var(--size, 8px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff1a8 0%, rgba(255, 241, 168, 0.4) 40%, transparent 70%);
+  box-shadow: 0 0 12px rgba(255, 241, 168, 0.75), 0 0 28px rgba(255, 241, 168, 0.35);
+  opacity: 0;
+  animation: firefly-drift var(--duration, 16s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes firefly-drift {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  30%  { transform: translate3d(2vw, -28vh, 0); opacity: 0.9; }
+  60%  { transform: translate3d(-1vw, -55vh, 0); opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translate3d(3vw, -90vh, 0); opacity: 0; }
+}
+
+/* Manaty Games splash */
+.manaty-splash {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: #050709;
+  animation: manaty-splash 1800ms ease-out both;
+  pointer-events: none;
+}
+
+.manaty-splash img {
+  width: min(280px, 50vw);
+  height: auto;
+  animation: manaty-logo 1800ms ease-out both;
+}
+
+@keyframes manaty-splash {
+  0%   { opacity: 0; }
+  18%  { opacity: 1; }
+  78%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes manaty-logo {
+  0%   { transform: scale(0.94); opacity: 0; }
+  18%  { transform: scale(1.0);  opacity: 1; }
+  78%  { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 0; }
+}
+
+.splash-progress {
+  position: absolute;
+  bottom: clamp(28px, 6vh, 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(360px, calc(100vw - 40px));
+  display: grid;
+  gap: 8px;
+}
+
+.splash-progress span {
+  text-align: center;
+  color: rgba(238, 248, 240, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Respect reduced-motion: skip splash + fireflies, no breathing, instant
+   transitions. The intro UI is shown immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .manaty-splash,
+  .firefly-field { display: none; }
+  .start-screen,
+  .start-screen .kicker,
+  .start-screen h1,
+  .start-screen .load-block,
+  .start-screen button.primary,
+  button.primary.breathing {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .kicker {

@@ -44,6 +44,10 @@ export class MuseekaRenderer {
   // Smoothed offset between camera and player. Prevents the camera from
   // snapping when the firefly makes a sharp turn.
   private smoothedCameraOffset = new THREE.Vector3(15, 11, 18);
+  // Intro cinematic mode: orbital sweep around the island centre before
+  // the user clicks "Start Museeka".
+  private introMode = true;
+  private introStartTime = performance.now();
   private readonly scene: IslandScene;
   private readonly objects = new Map<string, ObjectRecord>();
   private readonly pathGroup = new THREE.Group();
@@ -794,7 +798,28 @@ export class MuseekaRenderer {
     }
   }
 
+  setIntroCamera(active: boolean) {
+    this.introMode = active;
+  }
+
+  private updateIntroCamera() {
+    const t = (performance.now() - this.introStartTime) / 1000;
+    const angularSpeed = 0.06; // rad/s — full revolution in ~105 s
+    const angle = t * angularSpeed;
+    const radius = 80;
+    const height = 35;
+    const x = Math.cos(angle) * radius;
+    const z = Math.sin(angle) * radius;
+    this.camera.position.set(x, height, z);
+    this.camera.lookAt(new THREE.Vector3(0, 4, 0));
+  }
+
   private updateCamera(snapshot: RuntimeSnapshot) {
+    if (this.introMode) {
+      this.updateIntroCamera();
+      return;
+    }
+
     const position = snapshot.player.position;
 
     if (snapshot.mode === "freefly") {

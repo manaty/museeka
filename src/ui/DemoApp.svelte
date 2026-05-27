@@ -14,6 +14,20 @@
   // Set HTML lang so screen readers and CSS selectors get the right locale.
   if (typeof document !== "undefined") document.documentElement.lang = locale;
 
+  const prefersReducedMotion =
+    typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+  // Asset base for static URLs (matches Vite's BASE_URL).
+  const baseUrl = (import.meta as ImportMeta & { env: { BASE_URL: string } }).env.BASE_URL;
+
+  // 10 random firefly positions / delays / durations — generated once.
+  const fireflies = Array.from({ length: 10 }, (_, i) => ({
+    x: Math.round((i / 9) * 110 - 5 + (Math.random() - 0.5) * 8),
+    delay: -Math.random() * 14,
+    duration: 14 + Math.random() * 8,
+    size: 6 + Math.random() * 4
+  }));
+
   type DriverKey = "pointerlock" | "drag" | "click" | "joystick";
 
   function isTouchPrimary(): boolean {
@@ -47,6 +61,8 @@
   let activeDriver: InputDriver | null = null;
   let driverHint = "";
   let hudCollapsed = isNarrowViewport();
+  let showSplash = !prefersReducedMotion;
+  let startScreenFadingOut = false;
 
   onMount(async () => {
     try {
@@ -66,6 +82,7 @@
           error = caught instanceof Error ? caught.message : String(caught);
         });
       loop(lastTime);
+      if (showSplash) setTimeout(() => (showSplash = false), 1850);
     } catch (caught) {
       error = caught instanceof Error ? caught.message : String(caught);
     }
@@ -95,10 +112,20 @@
   }
 
   async function start() {
-    if (!runtime || !samplesReady) return;
+    if (!runtime || !samplesReady || startScreenFadingOut) return;
     await runtime.unlockAudio();
     runtime.setPlaying(true);
-    started = true;
+    // Hand the camera over from the orbital intro to gameplay-trail mode
+    // (the renderer's existing smoothing lerps from the current intro
+    // position into the trail target over ~1 s — no visible jump).
+    renderer?.setIntroCamera(false);
+    // Fade the start-screen out before swapping in the HUD.
+    if (prefersReducedMotion) {
+      started = true;
+      return;
+    }
+    startScreenFadingOut = true;
+    setTimeout(() => (started = true), 520);
   }
 
   function togglePlay() {
@@ -188,8 +215,27 @@
       <p>{error}</p>
     </section>
   {:else if !started}
-    <section class="start-screen">
-      <div>
+    {#if showSplash}
+      <section class="manaty-splash" aria-hidden="true">
+        <img src="{baseUrl}images/manaty_games.png" alt={t("manaty_logo_alt")} />
+        <div class="splash-progress" aria-label={t("loading_short")}>
+          <div class="progress-track">
+            <div class="progress-fill" style={`width: ${sampleProgress}%`}></div>
+          </div>
+          <span>{loadingMessage} · {sampleProgress}%</span>
+        </div>
+      </section>
+    {/if}
+    <section class="start-screen" class:fading-out={startScreenFadingOut} class:behind-splash={showSplash}>
+      <div class="firefly-field" aria-hidden="true">
+        {#each fireflies as ff}
+          <span
+            class="firefly"
+            style="--x: {ff.x}vw; --delay: {ff.delay}s; --duration: {ff.duration}s; --size: {ff.size}px;"
+          ></span>
+        {/each}
+      </div>
+      <div class="intro-content">
         <p class="kicker">{t("brand")}</p>
         <h1>{t("app_subtitle")}</h1>
         <div class="load-block" aria-label={t("loading_short")}>
@@ -198,7 +244,13 @@
           </div>
           <span>{loadingMessage} · {sampleProgress}%</span>
         </div>
-        <button class="primary" on:click={start} disabled={!samplesReady} data-testid="start-button">
+        <button
+          class="primary"
+          class:breathing={samplesReady}
+          on:click={start}
+          disabled={!samplesReady}
+          data-testid="start-button"
+        >
           {samplesReady ? t("start_button") : t("start_button_wait")}
         </button>
       </div>
