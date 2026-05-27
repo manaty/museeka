@@ -22,18 +22,6 @@
     return window.innerWidth < 900;
   }
 
-  type AlgoVersion = "v1" | "v2";
-
-  function readStoredAlgo(): AlgoVersion {
-    if (typeof window === "undefined") return "v1";
-    return window.localStorage?.getItem("museeka.algo") === "v2" ? "v2" : "v1";
-  }
-
-  function sceneUrlFor(a: AlgoVersion): string {
-    const base = (import.meta as ImportMeta & { env: { BASE_URL: string } }).env.BASE_URL;
-    return a === "v2" ? `${base}data/museeka_demo_scene_v2.json` : `${base}data/museeka_demo_scene.json`;
-  }
-
   let host: HTMLDivElement;
   let scene: IslandScene | null = null;
   let runtime: MuseekaRuntime | null = null;
@@ -55,11 +43,10 @@
   let activeDriver: InputDriver | null = null;
   let driverHint = "";
   let hudCollapsed = isNarrowViewport();
-  let algo: AlgoVersion = readStoredAlgo();
 
   onMount(async () => {
     try {
-      scene = await loadScene(sceneUrlFor(algo));
+      scene = await loadScene();
       selectedPathId = scene.settings.defaultPathId;
       volume = scene.settings.audio.masterVolume;
       runtime = new MuseekaRuntime(scene);
@@ -135,43 +122,6 @@
 
   function changeDebug() {
     renderer?.setDebug(debug);
-  }
-
-  async function switchAlgo(next: AlgoVersion) {
-    if (next === algo) return;
-    algo = next;
-    if (typeof window !== "undefined") window.localStorage?.setItem("museeka.algo", next);
-    cancelAnimationFrame(frame);
-    detachDriver();
-    renderer?.dispose();
-    runtime?.dispose();
-    runtime = null;
-    renderer = null;
-    snapshot = null;
-    started = false;
-    samplesReady = false;
-    loadingMessage = "Chargement de la scène";
-    try {
-      scene = await loadScene(sceneUrlFor(algo));
-      selectedPathId = scene.settings.defaultPathId;
-      volume = scene.settings.audio.masterVolume;
-      runtime = new MuseekaRuntime(scene);
-      renderer = new MuseekaRenderer(host, scene);
-      renderer.setDebug(debug);
-      void runtime
-        .prepareAudioSamples((progress) => {
-          sampleProgress = progress.percent;
-          samplesReady = progress.ready;
-          loadingMessage = progress.ready ? "Instruments prêts" : `Chargement des instruments ${progress.loaded}/${progress.total}`;
-        })
-        .catch((caught) => {
-          error = caught instanceof Error ? caught.message : String(caught);
-        });
-      lastTime = performance.now();
-      loop(lastTime);
-    } catch (caught) {
-      error = caught instanceof Error ? caught.message : String(caught);
-    }
   }
 
   function buildDriver(key: DriverKey): InputDriver {
@@ -260,11 +210,6 @@
       <div class="brand">
         <span>Museeka</span>
         <small>{mode === "freefly" ? "Mode libre" : scene.paths.find((path) => path.id === selectedPathId)?.name}</small>
-      </div>
-
-      <div class="mode-switch" aria-label="Algorithme">
-        <button class:active={algo === "v1"} on:click={() => switchAlgo("v1")} data-testid="algo-v1" title="V1 — ancres partagées sur l'anneau chromatique">V1</button>
-        <button class:active={algo === "v2"} on:click={() => switchAlgo("v2")} data-testid="algo-v2" title="V2 — placement organique incrémental">V2</button>
       </div>
 
       <div class="mode-switch">
