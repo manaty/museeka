@@ -1251,3 +1251,292 @@ h2 {
   background: rgba(178, 132, 255, 0.22);
   color: #e1ccff;
 }
+
+/* ────────────────────────────────────────────────────────────
+   Studio v2: shell, home, cards, placeholders
+   ──────────────────────────────────────────────────────────── */
+
+.studio-shell-v2 {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: radial-gradient(ellipse at top, #1a2a30 0%, #0a1216 70%);
+  color: #eef8f0;
+}
+
+.studio-shell-v2.fullbleed > .studio-main {
+  padding: 0;
+}
+
+.studio-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 28px;
+  background: rgba(8, 14, 17, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.studio-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff1a8;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.studio-header .brand .logo {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #fff1a8;
+  box-shadow: 0 0 12px rgba(255, 241, 168, 0.8);
+  font-size: 0;
+}
+
+.studio-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(238, 248, 240, 0.7);
+}
+
+.studio-header .breadcrumb a {
+  color: rgba(238, 248, 240, 0.7);
+  text-decoration: none;
+}
+
+.studio-header .breadcrumb a:hover {
+  color: #fff;
+}
+
+.studio-header .breadcrumb .sep {
+  color: rgba(238, 248, 240, 0.35);
+}
+
+.studio-header .breadcrumb .current {
+  color: #fff;
+  font-weight: 700;
+}
+
+.studio-header .header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.studio-header .demo-link {
+  color: rgba(238, 248, 240, 0.72);
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.studio-header .demo-link:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.studio-main {
+  padding: 48px 28px 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Home page */
+.studio-home {
+  display: grid;
+  gap: 36px;
+}
+
+.studio-home .hero {
+  text-align: center;
+  display: grid;
+  gap: 8px;
+}
+
+.studio-home .hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.studio-home .hero p {
+  margin: 0;
+  font-size: clamp(15px, 2vw, 18px);
+  color: rgba(238, 248, 240, 0.7);
+}
+
+.studio-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.studio-card {
+  position: relative;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px 22px 24px;
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  display: grid;
+  gap: 10px;
+}
+
+.studio-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent, #fff1a8);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.studio-card .icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent, #fff1a8) 18%, transparent);
+  color: var(--accent, #fff1a8);
+  margin-bottom: 8px;
+}
+
+.studio-card .icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.studio-card h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.studio-card p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(238, 248, 240, 0.7);
+  line-height: 1.45;
+}
+
+.studio-card .tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 241, 168, 0.16);
+  color: #fff1a8;
+}
+
+.legacy-link {
+  text-align: center;
+  color: rgba(238, 248, 240, 0.5);
+  font-size: 13px;
+  text-decoration: underline;
+  margin-top: 12px;
+}
+
+.legacy-link:hover {
+  color: #fff;
+}
+
+/* Placeholder editor pages */
+.studio-placeholder {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: grid;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 32px;
+}
+
+.studio-placeholder > header {
+  display: grid;
+  gap: 8px;
+  position: relative;
+}
+
+.studio-placeholder > header .tag {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 241, 168, 0.16);
+  color: #fff1a8;
+  width: max-content;
+}
+
+.studio-placeholder > header h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.01em;
+}
+
+.studio-placeholder > header .lead {
+  margin: 0;
+  color: rgba(238, 248, 240, 0.78);
+  font-size: 16px;
+}
+
+.studio-placeholder .planned p {
+  margin: 0 0 8px;
+  color: rgba(238, 248, 240, 0.68);
+}
+
+.studio-placeholder .planned ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: rgba(238, 248, 240, 0.85);
+}
+
+.studio-placeholder .back {
+  justify-self: start;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef8f0;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.studio-placeholder .back:hover {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.35);
+}
+
+@media (max-width: 700px) {
+  .studio-main { padding: 24px 16px 48px; }
+  .studio-header { padding: 12px 16px; gap: 12px; }
+  .studio-header .breadcrumb { display: none; }
+}
