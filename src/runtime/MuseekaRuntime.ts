@@ -5,7 +5,11 @@ import { AudioEngine, type SampleLoadProgress } from "../audio/AudioEngine";
 import { PlaybackController } from "./PlaybackController";
 import { FreeFlyController, type FreeFlyInput } from "./FreeFlyController";
 
-const MIN_GROUND_CLEARANCE = 1.8;
+// Just enough to clear the terrain mesh. The firefly is small; 1 m is
+// plenty. (Was 1.8 m to keep V1 anchors visible; V2 anchors sit much
+// closer to the ground so a lower clamp lets the firefly walk THROUGH
+// the arches at their natural visual height.)
+const MIN_GROUND_CLEARANCE = 1.0;
 
 export type RuntimeMode = "path" | "freefly";
 

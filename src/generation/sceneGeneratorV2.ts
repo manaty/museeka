@@ -348,7 +348,11 @@ function midiPitchClass(midi: number): number {
  * don't need altitude to distinguish octaves. Octave is encoded by color
  * (see `tintByOctave`) instead.
  */
-const V2_ANCHOR_GROUND_OFFSET = 2.0; // sphere center 2 m above ground
+// Sphere centred just above ground so the wireframe field sphere visibly
+// SITS INSIDE the arch — the firefly walks through the arch (and the
+// sphere) at walk-through height. Field Y radius 1.6 m → sphere spans
+// roughly 0 → 3.2 m, which is roughly the arch's height (~2.5 m).
+const V2_ANCHOR_GROUND_OFFSET = 1.6;
 
 function anchorGroundAltitude(ground: number): number {
   return ground + V2_ANCHOR_GROUND_OFFSET;
@@ -430,12 +434,10 @@ function pickPosition(args: PickArgs): Vec3 {
       const z = from[2] + Math.sin(angle) * radial;
       if (Math.hypot(x, z) > islandBound) continue;
       const ground = terrainGroundY(x, z, terrain);
-      // Note anchors sit just above ground (V2: octave is encoded via color
-      // tint, not altitude, so the firefly can walk through every arch).
-      // Aggregates float a bit higher to stand out visually.
-      const y = midi !== null
-        ? anchorGroundAltitude(ground)
-        : Math.max(ground + 3, from[1] + (rng() - 0.5) * 4);
+      // V2: every object (anchor + aggregate) sits just above ground so the
+      // firefly walks THROUGH the visual to trigger it. Octave is encoded
+      // via color tint on anchors, not altitude.
+      const y = anchorGroundAltitude(ground);
       const candidate: Vec3 = [x, y, z];
 
       let collides = false;
@@ -480,9 +482,7 @@ function pickPosition(args: PickArgs): Vec3 {
   const fx = from[0] + Math.cos(fallbackAngle) * fallbackDist;
   const fz = from[2] + Math.sin(fallbackAngle) * fallbackDist;
   const fg = terrainGroundY(fx, fz, terrain);
-  const fy = midi !== null
-    ? anchorGroundAltitude(fg)
-    : fg + 3;
+  const fy = anchorGroundAltitude(fg);
   return [fx, fy, fz];
 }
 

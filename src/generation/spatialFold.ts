@@ -650,7 +650,7 @@ function liftAboveTerrain(path: Path3D, terrain: IslandScene["terrain"]): Path3D
   const minClearance = path.constraints.minGroundClearance;
   const lifted = path.points.map((point) => {
     const ground = terrainGroundY(point.p[0], point.p[2], terrain);
-    const desiredY = Math.max(point.p[1], ground + minClearance + 0.6);
+    const desiredY = Math.max(point.p[1], ground + minClearance);
     return { ...point, p: [point.p[0], desiredY, point.p[2]] as Vec3 };
   });
   return { ...path, points: lifted };
