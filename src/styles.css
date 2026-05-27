@@ -2443,3 +2443,76 @@ h2 {
   color: rgba(238, 248, 240, 0.65);
   line-height: 1.4;
 }
+
+/* MIDI player + roll: vertical cursor that traverses player + piano roll */
+.player-with-roll {
+  position: relative;
+  display: grid;
+  gap: 0;
+}
+
+.player-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0 12px;
+}
+.player-controls-row .player-title {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.75);
+}
+.player-controls-row .player-time {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: rgba(238, 248, 240, 0.75);
+}
+.player-controls-row .info { font-size: 12px; color: rgba(255, 241, 168, 0.85); }
+
+/* Progress bar (full width, like the roll) */
+.player-progress {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0;
+  cursor: pointer;
+  overflow: visible;
+  min-height: 0;
+}
+.player-progress-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  background: linear-gradient(90deg, #fff1a8, #ffd770);
+  border-radius: inherit;
+  transition: width 80ms linear;
+  pointer-events: none;
+}
+.player-progress-cursor {
+  position: absolute;
+  top: -2px; bottom: -2px;
+  width: 2px;
+  background: #fff1a8;
+  box-shadow: 0 0 6px rgba(255, 241, 168, 0.8);
+  transform: translateX(-1px);
+  pointer-events: none;
+}
+
+/* Connector between player progress and piano roll */
+.player-roll-connector {
+  position: relative;
+  height: 18px;
+  pointer-events: none;
+}
+.player-roll-connector .connector-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(255, 241, 168, 0.85), rgba(255, 241, 168, 0.35));
+  transform: translateX(-1px);
+}

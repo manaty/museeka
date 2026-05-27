@@ -250,6 +250,7 @@
   }
 
   $: notes = selected ? flattenNotes(selected.score.events) : [];
+  $: ratio = Math.max(0, Math.min(1, playTime / Math.max(0.001, durationVisible)));
   $: stats = selected ? kindStats(selected.score.events) : [];
   $: pitchRange = (() => {
     if (notes.length === 0) return { min: 60, max: 72 };
@@ -375,11 +376,19 @@
         </section>
 
         <section class="roll-block">
-          <div class="player-bar">
-            <button class="player-play" on:click={play} disabled={!samplesReady} title={playing ? "Pause" : "Play"}>
-              {playing ? "⏸" : "▶"}
-            </button>
-            <button class="player-restart" on:click={restart} disabled={!samplesReady} title="Restart">↻</button>
+          <div class="player-with-roll">
+            <div class="player-controls-row">
+              <button class="player-play" on:click={play} disabled={!samplesReady} title={playing ? "Pause" : "Play"}>
+                {playing ? "⏸" : "▶"}
+              </button>
+              <button class="player-restart" on:click={restart} disabled={!samplesReady} title="Restart">↻</button>
+              <h3 class="player-title">Piano roll</h3>
+              <span class="player-time">
+                {playTime.toFixed(1)} / {durationVisible.toFixed(1)} s
+              </span>
+              {#if !samplesReady}<span class="info">Samples · {samplePercent}%</span>{/if}
+            </div>
+
             <button
               type="button"
               class="player-progress"
@@ -387,24 +396,21 @@
               on:click={(e) => {
                 if (!selected) return;
                 const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
-                const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                playTime = ratio * selected.score.duration;
+                const r = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                playTime = r * selected.score.duration;
                 nextIndex = selected.score.events.findIndex((ev) => ev.time > playTime);
                 if (nextIndex === -1) nextIndex = selected.score.events.length;
                 currentEventIndex = nextIndex - 1;
                 playStart = performance.now() - playTime * 1000;
               }}
             >
-              <span class="player-progress-fill" style="width: {Math.min(100, (playTime / Math.max(0.001, durationVisible)) * 100)}%"></span>
+              <span class="player-progress-fill" style="width: {ratio * 100}%"></span>
+              <span class="player-progress-cursor" style="left: {ratio * 100}%"></span>
             </button>
-            <span class="player-time">
-              {playTime.toFixed(1)} / {durationVisible.toFixed(1)} s
-            </span>
-            {#if !samplesReady}<span class="info">Samples · {samplePercent}%</span>{/if}
-          </div>
-          <div class="roll-header">
-            <h3>Piano roll</h3>
-          </div>
+
+            <div class="player-roll-connector" aria-hidden="true">
+              <span class="connector-line" style="left: {ratio * 100}%"></span>
+            </div>
           <div class="piano-roll">
             {#each notes as note}
               <div
@@ -419,12 +425,13 @@
                 title="{note.kind} · midi {note.midi} · t={note.time.toFixed(2)}s · dur={note.duration.toFixed(2)}s"
               ></div>
             {/each}
-            <div class="playhead" style="left: {Math.min(100, (playTime / durationVisible) * 100)}%"></div>
+            <div class="playhead" style="left: {ratio * 100}%"></div>
           </div>
           <div class="roll-axis">
             <span>0 s</span>
             <span>{(durationVisible / 2).toFixed(1)} s</span>
             <span>{durationVisible.toFixed(1)} s</span>
+          </div>
           </div>
         </section>
 
