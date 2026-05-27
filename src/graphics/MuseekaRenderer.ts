@@ -41,6 +41,9 @@ export class MuseekaRenderer {
   private readonly renderer: THREE.WebGLRenderer;
   private readonly scene3d = new THREE.Scene();
   private readonly camera = new THREE.PerspectiveCamera(58, 1, 0.1, 500);
+  // Smoothed offset between camera and player. Prevents the camera from
+  // snapping when the firefly makes a sharp turn.
+  private smoothedCameraOffset = new THREE.Vector3(15, 11, 18);
   private readonly scene: IslandScene;
   private readonly objects = new Map<string, ObjectRecord>();
   private readonly pathGroup = new THREE.Group();
@@ -807,17 +810,17 @@ export class MuseekaRenderer {
 
     const velocity = snapshot.player.velocity;
     const cameraTarget = new THREE.Vector3(position[0], position[1], position[2]);
-    // Camera trails behind & above the firefly, pulled back a bit more
-    // than before so the scene reads better.
-    const offset = new THREE.Vector3(-velocity[0] * 0.5, 10, -velocity[2] * 0.5);
-    if (offset.length() < 14) {
-      offset.set(15, 11, 18);
+    // Compute the IDEAL offset for current velocity, then smooth it slowly
+    // (3 % per frame). A sharp velocity flip no longer snaps the camera —
+    // it eases over ~1 s into the new direction.
+    const idealOffset = new THREE.Vector3(-velocity[0] * 0.5, 10, -velocity[2] * 0.5);
+    if (idealOffset.length() < 14) {
+      idealOffset.set(15, 11, 18);
     }
-    offset.clampLength(16, 28);
-    const desired = cameraTarget.clone().add(offset);
-    // Ensure the camera stays well clear of the terrain at its own XZ —
-    // hills shouldn't poke into or above the camera. Min clearance accounts
-    // for the tallest objects (anchor visuals + sphere top ≈ 4 m).
+    idealOffset.clampLength(16, 28);
+    this.smoothedCameraOffset.lerp(idealOffset, 0.03);
+    const desired = cameraTarget.clone().add(this.smoothedCameraOffset);
+    // Clamp camera Y above ground at its own XZ so hills can't intrude.
     const camGround = groundY(desired.x, desired.z, this.scene);
     const minCamY = camGround + 8;
     if (desired.y < minCamY) desired.y = minCamY;
