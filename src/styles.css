@@ -1800,3 +1800,407 @@ h2 {
 @media (max-width: 800px) {
   .scene-editor-grid { grid-template-columns: 1fr; }
 }
+
+/* ────────────────────────────────────────────────────────────
+   Studio v2: MIDI editor
+   ──────────────────────────────────────────────────────────── */
+
+.midi-editor,
+.music-editor {
+  display: grid;
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.midi-editor > header h1,
+.music-editor > header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.midi-editor > header .lead,
+.music-editor > header .lead {
+  margin: 0;
+  color: rgba(238, 248, 240, 0.72);
+}
+
+.midi-toolbar,
+.music-toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.midi-toolbar .info,
+.music-toolbar .info { color: rgba(255, 241, 168, 0.85); font-size: 13px; }
+.midi-toolbar .error,
+.music-toolbar .error { color: #ff8a8a; font-size: 13px; }
+
+.midi-toolbar .file-button {
+  display: inline-block;
+  padding: 10px 18px;
+  background: rgba(255, 241, 168, 0.18);
+  color: #fff1a8;
+  border-color: rgba(255, 241, 168, 0.35);
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.midi-toolbar .file-button:hover { background: rgba(255, 241, 168, 0.3); }
+
+.midi-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.midi-library {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.midi-library h2 {
+  margin: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(238, 248, 240, 0.7);
+}
+
+.midi-library .empty {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(238, 248, 240, 0.45);
+}
+
+.midi-library ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.midi-library li {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.midi-library li.active button.select {
+  background: rgba(255, 241, 168, 0.12);
+  border-color: rgba(255, 241, 168, 0.35);
+  color: #fff;
+}
+
+.midi-library button.select {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+  display: grid;
+  gap: 2px;
+  cursor: pointer;
+  color: inherit;
+}
+.midi-library button.select:hover { background: rgba(255, 255, 255, 0.07); }
+.midi-library button.select strong { font-size: 14px; }
+.midi-library button.select .sub { font-size: 12px; color: rgba(238, 248, 240, 0.6); }
+.midi-library button.select .ts { font-size: 10px; color: rgba(238, 248, 240, 0.4); margin-top: 2px; }
+
+.midi-library button.danger {
+  background: rgba(255, 138, 138, 0.16);
+  color: #ff8a8a;
+  border-color: rgba(255, 138, 138, 0.3);
+  width: 32px;
+  padding: 0;
+}
+
+.midi-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.placeholder-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 40px;
+  text-align: center;
+  color: rgba(238, 248, 240, 0.45);
+}
+
+.detail-header h2 { margin: 0; }
+.detail-header .sub {
+  margin: 4px 0 0;
+  color: rgba(238, 248, 240, 0.55);
+  font-size: 13px;
+}
+
+.analysis-block,
+.roll-block,
+.raw-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.analysis-block h3,
+.roll-block h3,
+.raw-block h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(238, 248, 240, 0.75);
+}
+.roll-block h3 .muted { color: rgba(238, 248, 240, 0.4); font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+.kind-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.kind-stats li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.kind-stats li .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.kind-stats li strong { color: var(--accent, #eef8f0); }
+
+.piano-roll {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.piano-roll .note {
+  position: absolute;
+  height: 4px;
+  border-radius: 2px;
+  opacity: 0.85;
+}
+.roll-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(238, 248, 240, 0.45);
+}
+
+.raw-block table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.raw-block th, .raw-block td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 8px;
+  text-align: left;
+}
+.raw-block th { color: rgba(238, 248, 240, 0.55); font-weight: 600; }
+.raw-block .kind-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #17201d;
+  font-weight: 700;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Studio v2: Music editor
+   ──────────────────────────────────────────────────────────── */
+
+.music-toolbar label {
+  display: grid;
+  gap: 4px;
+  min-width: 160px;
+}
+.music-toolbar label.seed { width: 110px; min-width: 0; }
+.music-toolbar .primary {
+  background: #fff1a8;
+  border-color: #fff1a8;
+  color: #17201d;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 9px 16px;
+}
+
+.inline-link {
+  background: transparent;
+  border: none;
+  color: #fff1a8;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  min-height: 0;
+  font: inherit;
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.music-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #050709;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.music-preview canvas { display: block; width: 100% !important; height: 100% !important; }
+
+.music-side {
+  display: grid;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.play-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.music-side .time {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(238, 248, 240, 0.7);
+}
+
+.accuracy {
+  background: rgba(143, 240, 210, 0.12);
+  border: 1px solid rgba(143, 240, 210, 0.3);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 2px;
+}
+.accuracy .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(143, 240, 210, 0.85); }
+.accuracy .value { font-size: 22px; font-weight: 800; color: #d1ffeb; }
+.accuracy .sub { font-size: 12px; color: rgba(238, 248, 240, 0.6); }
+
+.music-side details {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.music-side details summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: rgba(238, 248, 240, 0.85);
+  list-style: none;
+}
+.music-side details summary::-webkit-details-marker { display: none; }
+.music-side details summary::before {
+  content: "▸ ";
+  color: rgba(238, 248, 240, 0.5);
+}
+.music-side details[open] summary::before { content: "▾ "; }
+
+.object-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  display: grid;
+  gap: 2px;
+}
+.object-list li button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 11px;
+  font-family: ui-monospace, monospace;
+  color: rgba(238, 248, 240, 0.7);
+  padding: 4px 6px;
+  border-radius: 4px;
+  min-height: 0;
+  word-break: break-all;
+  cursor: pointer;
+}
+.object-list li.active button {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.35);
+  color: #fff;
+}
+
+.object-inspector {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+.object-inspector h3 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(238, 248, 240, 0.75); }
+.object-inspector .id { font-family: ui-monospace, monospace; font-size: 11px; word-break: break-all; margin: 0; color: rgba(238, 248, 240, 0.55); }
+.object-inspector .pos { margin: 0; font-size: 12px; color: rgba(238, 248, 240, 0.7); }
+.object-inspector .nudge {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(238, 248, 240, 0.7);
+}
+.object-inspector .nudge button { min-height: 28px; padding: 2px 8px; }
+.object-inspector button.danger {
+  background: rgba(255, 138, 138, 0.16);
+  color: #ff8a8a;
+  border-color: rgba(255, 138, 138, 0.3);
+}
+
+.hint {
+  color: rgba(238, 248, 240, 0.6);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Shared back */
+.midi-editor .back,
+.music-editor .back {
+  justify-self: start;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef8f0;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.midi-editor .back:hover,
+.music-editor .back:hover {
+  background: rgba(255, 241, 168, 0.18);
+  border-color: rgba(255, 241, 168, 0.35);
+}
+
+@media (max-width: 900px) {
+  .midi-grid { grid-template-columns: 1fr; }
+  .music-grid { grid-template-columns: 1fr; }
+}
