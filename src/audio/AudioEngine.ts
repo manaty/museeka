@@ -333,6 +333,15 @@ export class AudioEngine {
     this.instruments.clear();
   }
 
+  /** When true (free-fly mode), the trigger uses a lower peak guard so the
+   * user can brush an anchor with much more tolerance. In parcours mode the
+   * guard is strict to filter overshoot brushes from the deflection algo. */
+  private permissivePeakGuard = false;
+
+  setPermissivePeakGuard(value: boolean) {
+    this.permissivePeakGuard = value;
+  }
+
   update(objects: SoundObject[], encounters: Encounter[], elapsed: number) {
     if (!this.started) {
       return;
@@ -420,7 +429,7 @@ export class AudioEngine {
       // Mirror scoreSimulator: a 1.5 × threshold peak guard plus
       // aggregate-placement anchor avoidance suppresses brushes without
       // dropping legitimate fast-traversal centre-visits.
-      const peakGuard = threshold * 1.5;
+      const peakGuard = threshold * (this.permissivePeakGuard ? 1.0 : 1.5);
       if (intensity >= threshold) {
         if (intensity > state.peakIntensity + 0.001) {
           state.peakIntensity = intensity;

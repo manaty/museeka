@@ -51,6 +51,10 @@ export class MuseekaRuntime {
   setMode(mode: RuntimeMode) {
     if (mode === this.mode) return;
     this.mode = mode;
+    // Free-fly = user steering manually; loosen the peak guard so a near-
+    // miss still fires the note (parcours mode keeps the strict guard so
+    // overshoot brushes don't add extras).
+    this.audio.setPermissivePeakGuard(mode === "freefly");
     if (mode === "freefly") {
       const current = this.playback.getState();
       this.freeFly.initialize(current.position);
