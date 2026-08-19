@@ -7,7 +7,7 @@
     titleKey: StringKey;
     descKey: StringKey;
     color: string;
-    icon: string; // inline SVG path inside <svg viewBox="0 0 24 24">
+    icon: string;
   };
 
   const cards: Card[] = [
@@ -31,6 +31,13 @@
       descKey: "studio_corpus_desc",
       color: "#8ff0d2",
       icon: '<path d="M4 5h16v14H4Z" /><path d="M8 9h8M8 13h5" /><path d="M17 15l1.2 1.2L21 13.5" />'
+    },
+    {
+      route: "cloud",
+      titleKey: "studio_cloud_title",
+      descKey: "studio_cloud_desc",
+      color: "#7dd6ff",
+      icon: '<path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 7 18Z" /><path d="M12 10v6m-2-2 2 2 2-2" />'
     },
     {
       route: "scene",
