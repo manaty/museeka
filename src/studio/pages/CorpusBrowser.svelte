@@ -2,6 +2,7 @@
   import { onDestroy, onMount } from "svelte";
   import * as Tone from "tone";
   import { BUILTIN_MELODY_CORPUS, type CorpusMelodyRecord } from "../../melody/corpus/builtin";
+  import { listAllCorpusRecords } from "../../melody/corpus/storage";
   import { createAnalysisSnapshot } from "../../melody/analysis/snapshot";
   import { sortMelodyNotes } from "../../melody/types";
   import {
@@ -58,7 +59,8 @@
         license: "Licence",
         source: "Source",
         rating: "Classification",
-        structure: "Structure"
+        structure: "Structure",
+        imported: "importée"
       }
     : {
         intro: "Listen to, classify, and annotate the corpus. Analysis metrics stay hidden until the first saved rating to reduce experimental bias.",
@@ -100,15 +102,15 @@
         license: "License",
         source: "Source",
         rating: "Classification",
-        structure: "Structure"
+        structure: "Structure",
+        imported: "imported"
       };
 
-  const genres = Array.from(new Set(BUILTIN_MELODY_CORPUS.flatMap((item) => item.entry.genres))).sort();
-
+  let corpus: CorpusMelodyRecord[] = BUILTIN_MELODY_CORPUS;
   let query = "";
   let genre = "all";
   let status = "all";
-  let selectedId = BUILTIN_MELODY_CORPUS[0]?.entry.id ?? "";
+  let selectedId = corpus[0]?.entry.id ?? "";
   let annotations: MelodyAnnotation[] = [];
   let listenerId = "local-listener";
   let synth: Tone.PolySynth | null = null;
@@ -130,6 +132,8 @@
   let tenderness = false;
 
   onMount(() => {
+    corpus = listAllCorpusRecords();
+    if (!corpus.some((item) => item.entry.id === selectedId)) selectedId = corpus[0]?.entry.id ?? "";
     listenerId = getLocalListenerId();
     annotations = listAnnotations();
     loadDraft();
@@ -137,14 +141,15 @@
 
   onDestroy(() => synth?.dispose());
 
-  $: selected = BUILTIN_MELODY_CORPUS.find((item) => item.entry.id === selectedId) ?? BUILTIN_MELODY_CORPUS[0];
+  $: genres = Array.from(new Set(corpus.flatMap((item) => item.entry.genres))).sort();
+  $: selected = corpus.find((item) => item.entry.id === selectedId) ?? corpus[0];
   $: selectedStimulus = selected ? stimulusFor(selected) : null;
   $: selectedAnnotation = selectedStimulus
     ? annotations.find((item) => item.listenerId === listenerId && item.stimulusId === selectedStimulus.id)
     : undefined;
   $: snapshot = selected ? createAnalysisSnapshot(selected.melody) : null;
-  $: ratedCount = BUILTIN_MELODY_CORPUS.filter((item) => isRated(item)).length;
-  $: filtered = BUILTIN_MELODY_CORPUS.filter((item) => {
+  $: ratedCount = corpus.filter((item) => isRated(item)).length;
+  $: filtered = corpus.filter((item) => {
     const haystack = `${item.entry.title} ${item.entry.composer ?? ""} ${item.entry.artist ?? ""}`.toLowerCase();
     const queryOk = haystack.includes(query.trim().toLowerCase());
     const genreOk = genre === "all" || item.entry.genres.includes(genre);
@@ -183,7 +188,7 @@
   }
 
   function loadDraft() {
-    const record = BUILTIN_MELODY_CORPUS.find((item) => item.entry.id === selectedId);
+    const record = corpus.find((item) => item.entry.id === selectedId);
     if (!record) return;
     const stimulus = stimulusFor(record);
     const saved = annotations.find((item) => item.listenerId === listenerId && item.stimulusId === stimulus.id);
@@ -249,9 +254,10 @@
   }
 
   function nextUnrated() {
-    const currentIndex = BUILTIN_MELODY_CORPUS.findIndex((item) => item.entry.id === selectedId);
-    for (let offset = 1; offset <= BUILTIN_MELODY_CORPUS.length; offset += 1) {
-      const candidate = BUILTIN_MELODY_CORPUS[(currentIndex + offset) % BUILTIN_MELODY_CORPUS.length];
+    if (corpus.length === 0) return;
+    const currentIndex = corpus.findIndex((item) => item.entry.id === selectedId);
+    for (let offset = 1; offset <= corpus.length; offset += 1) {
+      const candidate = corpus[(Math.max(0, currentIndex) + offset) % corpus.length];
       if (!isRated(candidate)) {
         selectRecord(candidate.entry.id);
         return;
@@ -279,8 +285,8 @@
 
   <div class="progress-card">
     <span>{copy.progress}</span>
-    <strong>{ratedCount} / {BUILTIN_MELODY_CORPUS.length}</strong>
-    <div class="progress-track"><i style={`width:${BUILTIN_MELODY_CORPUS.length ? ratedCount / BUILTIN_MELODY_CORPUS.length * 100 : 0}%`}></i></div>
+    <strong>{ratedCount} / {corpus.length}</strong>
+    <div class="progress-track"><i style={`width:${corpus.length ? ratedCount / corpus.length * 100 : 0}%`}></i></div>
   </div>
 
   <div class="filters">
@@ -305,7 +311,10 @@
           <button class="corpus-item" class:active={item.entry.id === selectedId} on:click={() => selectRecord(item.entry.id)}>
             <span class="status-dot" class:rated={isRated(item)}></span>
             <span>
-              <strong>{item.entry.title}</strong>
+              <strong>
+                {item.entry.title}
+                {#if item.entry.sourceKind === "imported"}<b class="imported-badge">{copy.imported}</b>{/if}
+              </strong>
               <small>{item.entry.composer ?? item.entry.artist ?? "—"} · {item.entry.era ?? item.entry.year ?? "—"}</small>
             </span>
             <em>{index + 1}</em>
@@ -352,7 +361,7 @@
 
           <div class="save-row">
             <button class="primary" on:click={saveCurrent}>{copy.save}</button>
-            <button on:click={nextUnrated} disabled={ratedCount >= BUILTIN_MELODY_CORPUS.length}>{copy.next}</button>
+            <button on:click={nextUnrated} disabled={ratedCount >= corpus.length}>{copy.next}</button>
             {#if saveMessage}<span class="saved">✓ {saveMessage}</span>{/if}
           </div>
         </section>
@@ -376,6 +385,7 @@
         <footer class="meta">
           <span>{copy.license}: {selected.entry.license ?? "—"}</span>
           <span>{copy.source}: {selected.entry.sourceKind}</span>
+          {#if selected.entry.extraction?.extractorVersion}<span>extractor {selected.entry.extraction.extractorVersion}</span>{/if}
           <span>hash {selected.entry.melodyHash}</span>
         </footer>
       </main>
@@ -405,6 +415,7 @@
   .corpus-item:hover, .corpus-item.active { background:#24251f; border-color:#42433c; }
   .corpus-item strong { display:block; } .corpus-item small { display:block; margin-top:.15rem; color:#91928a; }
   .corpus-item em { color:#666860; font-style:normal; font-size:.8rem; }
+  .imported-badge { display:inline-block; margin-left:.35rem; padding:.08rem .35rem; border-radius:99px; background:#9be9ff1c; color:#9be9ff; font-size:.66rem; font-weight:700; vertical-align:middle; }
   .status-dot { width:8px; height:8px; border-radius:50%; background:#4e5048; } .status-dot.rated { background:#8ff0d2; box-shadow:0 0 9px #8ff0d277; }
   .classifier { display:grid; gap:1rem; }
   .identity-card, .rating-card, .analysis-card { border:1px solid #383934; border-radius:.8rem; background:#191a17; padding:1.1rem; }
