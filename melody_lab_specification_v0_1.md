@@ -4,20 +4,22 @@
 
 What structural properties make a melody recognizably itself, memorable, emotionally expressive, and pleasurable to a particular listener?
 
-The Melody Lab is both a composition tool and an experimental environment. It must keep musical source data, algorithmic analysis, human judgments, and learned models separate so that hypotheses remain testable as the algorithms evolve.
+The Melody Lab is both a composition tool and an experimental environment. It must keep musical source data, extracted melody, algorithmic analysis, exact playback stimulus, human judgments, and learned models separate so that hypotheses remain testable as the algorithms evolve.
 
 ## Core pipeline
 
 ```text
 source MIDI / hand-entered phrase
         ↓
-melody extraction / curation
+melody extraction / curation (extractor vN)
         ↓
 canonical Melody (immutable note attacks in ticks)
         ↓
 Analyzer vN
         ↓
 versioned compact AnalysisSnapshot
+        ↓
+controlled rendering → exact MelodyStimulus
         ↓
 listener annotations + pairwise judgments
         ↓
@@ -112,12 +114,46 @@ Candidate features include:
 
 No single scalar "melody quality" score should be introduced at this stage.
 
-## 3. Human annotation
+## 3. Exact experimental stimulus
+
+The listener does not rate an abstract data structure: they rate something they actually hear. Instrument, register, tempo, velocity and harmony can all influence the response.
+
+Therefore the rated object is an exact `MelodyStimulus`, distinct from the underlying melody:
+
+```ts
+type MelodyStimulus = {
+  id: string;
+  melodyId: string;
+  melodyHash: string;
+  transformId?: string;
+  renderingProfile: {
+    mode: "structural-normalized" | "contextual";
+    instrument: string;
+    tempo: number;
+    transposeSemitones?: number;
+    velocityScale?: number;
+    harmonyId?: string;
+  };
+};
+```
+
+Two complementary protocols are useful:
+
+### Structural-normalized mode
+
+Use the same timbre, loudness policy and controlled register/tempo rules across melodies. This is the preferred mode for asking whether a structural property of the melody itself affects preference or perception.
+
+### Contextual mode
+
+Preserve more of the original musical context. This measures the experience of the melody as normally encountered, but its results must not be mixed blindly with structural-normalized ratings.
+
+## 4. Human annotation
 
 Preference and perceived emotion are different targets and must be recorded separately.
 
 ```ts
 type MelodyAnnotation = {
+  stimulusId: string;
   melodyId: string;
   analysisVersion?: string;
   listenerId: string;
@@ -127,7 +163,7 @@ type MelodyAnnotation = {
   replayDesire?: number;    // 0 … 1
 
   emotion?: {
-    valence?: number;       // -1 sad/dark … +1 joyful/bright
+    valence?: number;       // -1 dark/sad … +1 bright/joyful
     arousal?: number;       // 0 calm … 1 activated
     tension?: number;       // 0 … 1
     labels?: Record<string, number>; // sadness, joy, nostalgia, unease, tenderness, etc.
@@ -144,7 +180,9 @@ type MelodyAnnotation = {
 
 Familiarity is especially important: liking a famous melody after hundreds of prior exposures is not the same signal as liking an unfamiliar generated phrase.
 
-## 4. Pairwise experiments
+The UI should avoid forcing every dimension on every listen. Short rating flows and targeted experiments will produce cleaner data than a long questionnaire after each melody.
+
+## 5. Pairwise experiments
 
 Absolute ratings are useful, but controlled A/B comparisons are often more informative.
 
@@ -160,8 +198,8 @@ Examples:
 ```ts
 type PairwiseJudgment = {
   listenerId: string;
-  leftMelodyId: string;
-  rightMelodyId: string;
+  leftStimulusId: string;
+  rightStimulusId: string;
   changedVariables: string[];
   preference: "left" | "right" | "equal";
   confidence?: number;
@@ -171,11 +209,11 @@ type PairwiseJudgment = {
 
 Pairwise tests let the Lab estimate causal effects more cleanly because only one or a few variables change.
 
-## 5. Learning strategy
+## 6. Learning strategy
 
 ### Phase A — interpretable models first
 
-Do not start with deep learning. Early data will be small and the scientific goal is understanding, not merely prediction.
+Do not start by training a deep network directly on a small set of personal likes/dislikes. Early labeled data will be small and the scientific goal is understanding, not merely prediction.
 
 Initial models can include:
 
@@ -193,27 +231,49 @@ or:
 
 > Does exact motif recurrence increase memorability but reduce surprise?
 
-### Phase B — learned representations
+### Phase B — self-supervised melody representation
 
-Once the corpus and annotation set are large enough, add learned symbolic-music representations.
+Deep learning becomes useful before we have huge numbers of preference labels if we separate representation learning from personalization.
 
-Possible direction:
+A large MIDI/melody corpus can train a sequence model without listener labels, for example through masked-note reconstruction, next-event prediction or contrastive learning between transformations expected to preserve identity.
 
 ```text
-MIDI note sequence → sequence encoder / transformer → melody embedding
-                                                 ↓
-                                       listener embedding
-                                                 ↓
-                           liking / emotion / memorability heads
+large melody corpus
+       ↓
+self-supervised sequence encoder
+       ↓
+melody embedding
 ```
 
-A two-tower or conditioning architecture can learn that two listeners prefer different regions of melody space.
+Useful identity-preserving or partially preserving augmentations can include controlled transposition, register shift and timing transformations. They must be explicit because some experiments intentionally study those same variables.
 
-Deep models should augment, not replace, the interpretable feature layer. Their predictions should always retain the analyzer version, model version and training-data manifest used to produce them.
+### Phase C — lightweight personalized head
 
-## 6. Static GitHub Pages constraint
+The user's relatively small set of ratings then trains a small model over both handcrafted features and the learned embedding:
 
-The public Studio can remain fully static.
+```text
+handcrafted analysis features ─┐
+                               ├─→ small personal preference model
+pretrained melody embedding ───┘
+```
+
+This is much more data-efficient than training a personalized deep network from scratch.
+
+### Phase D — multi-listener model
+
+If Museeka later collects consented annotations from many listeners, a conditioned model can learn a listener embedding as well:
+
+```text
+melody sequence → melody encoder → melody embedding ─┐
+                                                     ├→ liking / emotion / memorability
+listener history → listener encoder → user embedding ┘
+```
+
+Deep models should augment, not replace, the interpretable feature layer. Every prediction must retain the analyzer version, model version and training-data manifest used to produce it.
+
+## 7. Static GitHub Pages constraint
+
+The public Studio can remain fully static for the first research loop.
 
 In-browser responsibilities:
 
@@ -227,19 +287,22 @@ In-browser responsibilities:
 Offline/build-time responsibilities can later include:
 
 - bulk corpus analysis
-- model training
+- self-supervised representation training
+- preference/emotion model training
 - dataset validation
-- generating compact analysis manifests
+- generating compact analysis manifests and embeddings
 
 A future shared multi-user dataset would require a backend, but it is not required for the first research loop.
 
-## 7. First corpus
+## 8. First corpus
 
 The existing Museeka built-in MIDIs already provide a seed set (Ode to Joy, Pachelbel, Frère Jacques, Bach Prelude in C, Greensleeves). The corpus layer should be generalized rather than creating a second unrelated library.
 
 For research on melody, multi-track or strongly polyphonic works should either have a curated melody track or an explicit extraction snapshot. Whole-score statistics must not be silently treated as melody statistics.
 
-## 8. Immediate v0.1 experiments
+The corpus should intentionally span different periods and styles so the analyzer is not tuned only to the musical language that motivated the project.
+
+## 9. Immediate v0.1 experiments
 
 The first Melody Lab milestone should support:
 
@@ -248,7 +311,7 @@ The first Melody Lab milestone should support:
 3. contour and repeated-pitch analysis;
 4. recurring motif detection;
 5. A/B rearticulation experiment (`A A` vs sustained `A`);
-6. an annotation object model ready for later persistence;
+6. an annotation/stimulus object model ready for later persistence;
 7. versioned `AnalysisSnapshot` output.
 
 This gives Museeka a reproducible experimental loop before introducing any learned model.
