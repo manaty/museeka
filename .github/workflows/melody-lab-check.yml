@@ -3,6 +3,8 @@ name: Melody Lab branch check
 on:
   push:
     branches: [agent/melody-lab]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
