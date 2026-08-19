@@ -114,6 +114,8 @@ Candidate features include:
 
 No single scalar "melody quality" score should be introduced at this stage.
 
+At build time Museeka generates a compact JSON manifest whose filename includes both the analyzer version and feature-schema version. Old manifests can therefore remain available when a new analyzer is introduced.
+
 ## 3. Exact experimental stimulus
 
 The listener does not rate an abstract data structure: they rate something they actually hear. Instrument, register, tempo, velocity and harmony can all influence the response.
@@ -146,6 +148,8 @@ Use the same timbre, loudness policy and controlled register/tempo rules across 
 ### Contextual mode
 
 Preserve more of the original musical context. This measures the experience of the melody as normally encountered, but its results must not be mixed blindly with structural-normalized ratings.
+
+The first Corpus Browser uses structural-normalized stimuli: one synth, a fixed target tempo, and register recentering. This deliberately sacrifices original performance character in order to reduce confounding variables.
 
 ## 4. Human annotation
 
@@ -181,6 +185,8 @@ type MelodyAnnotation = {
 Familiarity is especially important: liking a famous melody after hundreds of prior exposures is not the same signal as liking an unfamiliar generated phrase.
 
 The UI should avoid forcing every dimension on every listen. Short rating flows and targeted experiments will produce cleaner data than a long questionnaire after each melody.
+
+The current classifier stores annotations locally under a pseudonymous browser-scoped listener id and can export the research dataset as JSON. Analysis metrics are hidden until the first rating is saved to reduce hypothesis-induced rating bias.
 
 ## 5. Pairwise experiments
 
@@ -278,6 +284,7 @@ The public Studio can remain fully static for the first research loop.
 In-browser responsibilities:
 
 - edit/play melodies
+- browse and filter the melody corpus
 - compute deterministic analysis features
 - collect local ratings and A/B judgments
 - run small personalized models
@@ -296,22 +303,28 @@ A future shared multi-user dataset would require a backend, but it is not requir
 
 ## 8. First corpus
 
-The existing Museeka built-in MIDIs already provide a seed set (Ode to Joy, Pachelbel, Frère Jacques, Bach Prelude in C, Greensleeves). The corpus layer should be generalized rather than creating a second unrelated library.
+The first curated seed corpus contains five public-domain melodies represented canonically in ticks: Frère Jacques, Ode to Joy, Ah! vous dirai-je maman, Au clair de la lune, and Für Elise.
 
-For research on melody, multi-track or strongly polyphonic works should either have a curated melody track or an explicit extraction snapshot. Whole-score statistics must not be silently treated as melody statistics.
+Museeka's existing built-in MIDIs remain another useful source set (including Pachelbel and Greensleeves), but multi-track or strongly polyphonic works should either have a curated melody track or an explicit extraction snapshot. Whole-score statistics must not be silently treated as melody statistics.
+
+Modern pop material should enter through licensed/user-supplied MIDI or external references rather than by silently redistributing copyrighted note data in the public repository.
 
 The corpus should intentionally span different periods and styles so the analyzer is not tuned only to the musical language that motivated the project.
 
-## 9. Immediate v0.1 experiments
+## 9. Immediate experiments
 
-The first Melody Lab milestone should support:
+The first Melody Lab milestone supports:
 
 1. canonical tick-based melody editing;
 2. playback of individual attacks;
 3. contour and repeated-pitch analysis;
 4. recurring motif detection;
 5. A/B rearticulation experiment (`A A` vs sustained `A`);
-6. an annotation/stimulus object model ready for later persistence;
-7. versioned `AnalysisSnapshot` output.
+6. an annotation/stimulus object model;
+7. versioned `AnalysisSnapshot` output;
+8. a public-domain corpus browser;
+9. normalized playback and multidimensional listener classification;
+10. browser-local persistence and JSON export;
+11. build-time generation of versioned compact corpus analysis manifests.
 
 This gives Museeka a reproducible experimental loop before introducing any learned model.
