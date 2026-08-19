@@ -15,9 +15,10 @@ export type CloudSession = {
   user: { id: string; email?: string };
 };
 
-type CloudMelodyRow = {
+export type CloudMelodyRow = {
   id: string;
   owner_id: string;
+  client_entry_id: string | null;
   title: string;
   composer: string | null;
   artist: string | null;
@@ -41,7 +42,7 @@ type CloudMelodyRow = {
   notes: Array<{ id?: string; midi: number; tick: number; durationTicks: number; velocity: number }>;
 };
 
-type CloudAnnotationRow = {
+export type CloudAnnotationRow = {
   stimulus_id: string;
   melody_id: string;
   analysis_version: string | null;
@@ -174,6 +175,7 @@ function ownerId(): string {
 function melodyPayload(record: CorpusMelodyRecord) {
   return {
     owner_id: ownerId(),
+    client_entry_id: record.entry.id,
     title: record.entry.title,
     composer: record.entry.composer ?? null,
     artist: record.entry.artist ?? null,
@@ -212,7 +214,8 @@ export async function listCloudMelodies(): Promise<CloudMelodyRow[]> {
 }
 
 export function cloudRowToRecord(row: CloudMelodyRow): CorpusMelodyRecord {
-  const melodyId = `cloud_${row.id}`;
+  const stableId = row.client_entry_id || `cloud_${row.id}`;
+  const melodyId = stableId.startsWith("cloud_") ? stableId : `melody_${stableId}`;
   return {
     melody: {
       id: melodyId,
@@ -228,7 +231,7 @@ export function cloudRowToRecord(row: CloudMelodyRow): CorpusMelodyRecord {
       }))
     },
     entry: {
-      id: `cloud_${row.id}`,
+      id: stableId,
       title: row.title,
       ...(row.composer ? { composer: row.composer } : {}),
       ...(row.artist ? { artist: row.artist } : {}),
