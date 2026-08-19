@@ -5,6 +5,7 @@
   import Home from "./pages/Home.svelte";
   import MidiEditor from "./pages/MidiEditor.svelte";
   import MelodyLab from "./pages/MelodyLab.svelte";
+  import CorpusBrowser from "./pages/CorpusBrowser.svelte";
   import SceneEditor from "./pages/SceneEditor.svelte";
   import InstrumentsEditor from "./pages/InstrumentsEditor.svelte";
   import ObjectsEditor from "./pages/ObjectsEditor.svelte";
@@ -26,6 +27,7 @@
     home: Home,
     midi: MidiEditor,
     melody: MelodyLab,
+    corpus: CorpusBrowser,
     scene: SceneEditor,
     instruments: InstrumentsEditor,
     objects: ObjectsEditor,
@@ -37,6 +39,7 @@
     home: null,
     midi: "studio_midi_title",
     melody: "studio_melody_title",
+    corpus: "studio_corpus_title",
     scene: "studio_scene_title",
     instruments: "studio_instruments_title",
     objects: "studio_objects_title",
