@@ -4,6 +4,7 @@
   import { navigate, readRoute, subscribe, type Route } from "./router";
   import Home from "./pages/Home.svelte";
   import MidiEditor from "./pages/MidiEditor.svelte";
+  import MelodyLab from "./pages/MelodyLab.svelte";
   import SceneEditor from "./pages/SceneEditor.svelte";
   import InstrumentsEditor from "./pages/InstrumentsEditor.svelte";
   import ObjectsEditor from "./pages/ObjectsEditor.svelte";
@@ -24,6 +25,7 @@
   const PAGES: Record<Route, typeof Home> = {
     home: Home,
     midi: MidiEditor,
+    melody: MelodyLab,
     scene: SceneEditor,
     instruments: InstrumentsEditor,
     objects: ObjectsEditor,
@@ -34,6 +36,7 @@
   const ROUTE_TITLES: Record<Route, StringKey | null> = {
     home: null,
     midi: "studio_midi_title",
+    melody: "studio_melody_title",
     scene: "studio_scene_title",
     instruments: "studio_instruments_title",
     objects: "studio_objects_title",
