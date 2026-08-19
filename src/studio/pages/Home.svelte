@@ -20,6 +20,14 @@
       icon: '<path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />'
     },
     {
+      route: "melody",
+      titleKey: "studio_melody_title",
+      descKey: "studio_melody_desc",
+      color: "#f0d477",
+      // Repeated notes forming a recognizable contour
+      icon: '<path d="M3 16h3v-3h3v3h3V9h3v3h3V6h3" /><circle cx="4.5" cy="16" r="1.4" /><circle cx="10.5" cy="16" r="1.4" /><circle cx="16.5" cy="12" r="1.4" />'
+    },
+    {
       route: "scene",
       titleKey: "studio_scene_title",
       descKey: "studio_scene_desc",
