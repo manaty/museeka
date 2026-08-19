@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "npm run generate:scene && vite build",
+    "build": "npm run generate:scene && npm run generate:melody-analysis && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "generate:scene": "tsx scripts/generate-demo-scene.ts",
+    "generate:melody-analysis": "tsx scripts/generate-melody-analysis.ts",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:e2e": "playwright test"
