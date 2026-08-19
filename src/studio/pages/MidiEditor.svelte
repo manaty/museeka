@@ -238,7 +238,8 @@
     for (const note of notes) {
       const offset = ((note.tick - origin) / candidate.melody.ppq) * beatSeconds;
       const duration = Math.max(0.035, (note.durationTicks / candidate.melody.ppq) * beatSeconds * 0.92);
-      candidateSynth.triggerAttackRelease(Tone.Frequency(note.midi, "midi"), duration, start + offset, note.velocity);
+      const frequency = Tone.Frequency(note.midi, "midi").toFrequency();
+      candidateSynth.triggerAttackRelease(frequency, duration, start + offset, note.velocity);
     }
   }
 
