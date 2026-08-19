@@ -19,7 +19,7 @@ const STRINGS = {
 
   // Studio shell
   studio_title:               { fr: "Museeka Studio",                                              en: "Museeka Studio" },
-  studio_subtitle:            { fr: "Cinq éditeurs pour composer ton île musicale",               en: "Five editors to compose your musical island" },
+  studio_subtitle:            { fr: "Huit outils pour analyser, composer et spatialiser la musique", en: "Eight tools to analyze, compose, and spatialize music" },
   studio_back_to_home:        { fr: "← Retour à l'accueil",                                       en: "← Back to home" },
   studio_legacy_link:         { fr: "Ouvrir le Studio classique →",                               en: "Open the classic Studio →" },
   studio_coming_soon:         { fr: "Bientôt",                                                    en: "Coming soon" },
@@ -29,6 +29,15 @@ const STRINGS = {
   studio_midi_title:          { fr: "MIDI",                                                       en: "MIDI" },
   studio_midi_desc:           { fr: "Importer, visualiser et analyser des fichiers MIDI.",        en: "Import, visualize, and analyse MIDI files." },
   studio_midi_planned:        { fr: "Import multi-fichiers · Piano roll interactif · Analyse événementielle · Édition note à note · Quantize / transpose · Export MIDI", en: "Multi-file import · Interactive piano roll · Event analysis · Note-by-note editing · Quantize / transpose · MIDI export" },
+
+  studio_melody_title:        { fr: "Melody Lab",                                                 en: "Melody Lab" },
+  studio_melody_desc:         { fr: "Créer, comparer et mesurer la structure perceptive des mélodies.", en: "Create, compare, and measure the perceptual structure of melodies." },
+
+  studio_corpus_title:        { fr: "Corpus & goûts",                                             en: "Corpus & taste" },
+  studio_corpus_desc:         { fr: "Écouter le corpus, noter préférence et émotions, puis constituer les données d’apprentissage.", en: "Listen to the corpus, rate preference and emotion, and build the learning dataset." },
+
+  studio_cloud_title:         { fr: "Cloud privé",                                                en: "Private cloud" },
+  studio_cloud_desc:          { fr: "Synchroniser corpus personnel et annotations avec Supabase pour les retrouver sur tous tes appareils.", en: "Sync your personal corpus and annotations with Supabase across devices." },
 
   studio_scene_title:         { fr: "Scène",                                                      en: "Scene" },
   studio_scene_desc:          { fr: "Sculpter la forme et le terrain de ton île.",                en: "Sculpt the shape and terrain of your island." },
@@ -93,7 +102,6 @@ export function t(key: StringKey): string {
   return entry[locale] ?? entry.en;
 }
 
-/** Convenience: split a translated string on " · " into list items. */
 export function tList(key: StringKey): string[] {
   return t(key).split(" · ").map((item) => item.trim()).filter(Boolean);
 }

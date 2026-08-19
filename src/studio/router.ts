@@ -6,13 +6,16 @@
 export type Route =
   | "home"
   | "midi"
+  | "melody"
+  | "corpus"
+  | "cloud"
   | "scene"
   | "instruments"
   | "objects"
   | "music"
   | "legacy";
 
-const ROUTES: readonly Route[] = ["home", "midi", "scene", "instruments", "objects", "music", "legacy"];
+const ROUTES: readonly Route[] = ["home", "midi", "melody", "corpus", "cloud", "scene", "instruments", "objects", "music", "legacy"];
 
 export function readRoute(): Route {
   if (typeof window === "undefined") return "home";

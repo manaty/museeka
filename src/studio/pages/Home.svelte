@@ -7,7 +7,7 @@
     titleKey: StringKey;
     descKey: StringKey;
     color: string;
-    icon: string; // inline SVG path inside <svg viewBox="0 0 24 24">
+    icon: string;
   };
 
   const cards: Card[] = [
@@ -16,15 +16,34 @@
       titleKey: "studio_midi_title",
       descKey: "studio_midi_desc",
       color: "#ffd770",
-      // Note + bars
       icon: '<path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />'
+    },
+    {
+      route: "melody",
+      titleKey: "studio_melody_title",
+      descKey: "studio_melody_desc",
+      color: "#f0d477",
+      icon: '<path d="M3 16h3v-3h3v3h3V9h3v3h3V6h3" /><circle cx="4.5" cy="16" r="1.4" /><circle cx="10.5" cy="16" r="1.4" /><circle cx="16.5" cy="12" r="1.4" />'
+    },
+    {
+      route: "corpus",
+      titleKey: "studio_corpus_title",
+      descKey: "studio_corpus_desc",
+      color: "#8ff0d2",
+      icon: '<path d="M4 5h16v14H4Z" /><path d="M8 9h8M8 13h5" /><path d="M17 15l1.2 1.2L21 13.5" />'
+    },
+    {
+      route: "cloud",
+      titleKey: "studio_cloud_title",
+      descKey: "studio_cloud_desc",
+      color: "#7dd6ff",
+      icon: '<path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 7 18Z" /><path d="M12 10v6m-2-2 2 2 2-2" />'
     },
     {
       route: "scene",
       titleKey: "studio_scene_title",
       descKey: "studio_scene_desc",
       color: "#9be9ff",
-      // Mountains over ground
       icon: '<path d="M3 20l5-8 4 5 3-3 6 6Z" /><path d="M3 20h18" />'
     },
     {
@@ -32,7 +51,6 @@
       titleKey: "studio_instruments_title",
       descKey: "studio_instruments_desc",
       color: "#ff9a5a",
-      // Guitar-like silhouette
       icon: '<path d="M14 4l6 6-2 2-1-1-2 2 1 1-2 2-6-6 2-2 1 1 2-2-1-1Z" /><circle cx="8" cy="16" r="3" />'
     },
     {
@@ -40,7 +58,6 @@
       titleKey: "studio_objects_title",
       descKey: "studio_objects_desc",
       color: "#a4b0ff",
-      // Cube + sphere
       icon: '<path d="M4 8l5-3 5 3v6l-5 3-5-3Z" /><circle cx="17" cy="16" r="4" />'
     },
     {
@@ -48,7 +65,6 @@
       titleKey: "studio_music_title",
       descKey: "studio_music_desc",
       color: "#8ff0d2",
-      // Sphere with orbit (parcours)
       icon: '<ellipse cx="12" cy="12" rx="9" ry="4" /><circle cx="12" cy="12" r="3" />'
     }
   ];

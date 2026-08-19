@@ -1,17 +1,23 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
+  import * as Tone from "tone";
   import { t } from "../../ui/i18n";
   import { navigate } from "../router";
   import { parseMidiFile } from "../../music/midi";
   import { listAllMidis, saveMidi, deleteMidi, makeMidiId, type StoredMidi } from "../storage";
   import { AudioEngine } from "../../audio/AudioEngine";
   import type { AudioGenerator, MusicEvent, SoundObject } from "../../core/types";
+  import { extractMelodyCandidates, type MelodyExtractionCandidate } from "../../melody/extraction/extractor";
+  import { melodyHash } from "../../melody/analysis/snapshot";
+  import { sortMelodyNotes } from "../../melody/types";
+  import { saveUserCorpusRecord } from "../../melody/corpus/storage";
 
   let midis: StoredMidi[] = [];
   let selectedId: string | null = null;
   let importing = false;
   let error = "";
   let sourcesOpen = false;
+  let corpusMessage = "";
 
   type MidiSource = {
     name: string;
@@ -20,8 +26,6 @@
     license: "PD" | "CC" | "Mixed" | "User";
   };
 
-  /** Curated list of MIDI download sites — royalty-free / public-domain
-   * sources highlighted first. */
   const MIDI_SOURCES_LIST: MidiSource[] = [
     { name: "Mutopia Project",   url: "https://www.mutopiaproject.org/",     description: "Partitions et MIDIs classiques, domaine public.",        license: "PD" },
     { name: "IMSLP / Petrucci",   url: "https://imslp.org/",                  description: "Vaste bibliothèque libre de droits (classique).",       license: "PD" },
@@ -67,14 +71,17 @@
     if (files.length === 0) return;
     importing = true;
     error = "";
+    corpusMessage = "";
     try {
       for (const file of files) {
+        const id = makeMidiId();
         const score = await parseMidiFile(file);
         const entry: StoredMidi = {
-          id: makeMidiId(),
+          id,
           fileName: file.name,
           importedAt: Date.now(),
-          score
+          score,
+          melodyCandidates: extractMelodyCandidates(score, id)
         };
         saveMidi(entry);
       }
@@ -90,6 +97,7 @@
 
   function selectMidi(id: string) {
     selectedId = id;
+    corpusMessage = "";
   }
 
   async function onDelete(id: string) {
@@ -101,18 +109,17 @@
   $: selected = midis.find((m) => m.id === selectedId) ?? null;
   $: if (selected) { stop(); }
 
-  /* ─── Player ────────────────────────────────────────────────────── */
-
   let engine: AudioEngine | null = null;
   let samplesReady = false;
   let samplePercent = 0;
   let playing = false;
-  let playTime = 0; // s, position within the selected score
-  let playStart = 0; // perf time when (re)started
+  let playTime = 0;
+  let playStart = 0;
   let nextIndex = 0;
-  let currentEventIndex = -1; // last triggered event index (for UI highlight)
+  let currentEventIndex = -1;
   let frame = 0;
   let rawTableRef: HTMLTableSectionElement | null = null;
+  let candidateSynth: Tone.PolySynth | null = null;
 
   onMount(async () => {
     try {
@@ -130,6 +137,7 @@
   onDestroy(() => {
     cancelAnimationFrame(frame);
     engine?.dispose();
+    candidateSynth?.dispose();
   });
 
   function eventToSoundObject(event: MusicEvent, idx: number): SoundObject {
@@ -206,7 +214,6 @@
       }
       currentEventIndex = nextIndex;
       nextIndex += 1;
-      // Auto-scroll the raw table to keep the playing row visible.
       if (rawTableRef) {
         const row = rawTableRef.querySelector(`tr[data-evt="${currentEventIndex}"]`) as HTMLElement | null;
         if (row) row.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -219,7 +226,47 @@
     if (playing) frame = requestAnimationFrame(tick);
   }
 
-  /* ─── Derived analysis ──────────────────────────────────────────── */
+  async function playCandidate(candidate: MelodyExtractionCandidate) {
+    await Tone.start();
+    if (!candidateSynth) candidateSynth = new Tone.PolySynth(Tone.Synth).toDestination();
+    candidateSynth.releaseAll(Tone.now());
+    const notes = sortMelodyNotes(candidate.melody.notes);
+    if (notes.length === 0) return;
+    const origin = notes[0].tick;
+    const beatSeconds = 60 / Math.max(1, candidate.melody.tempo);
+    const start = Tone.now() + 0.06;
+    for (const note of notes) {
+      const offset = ((note.tick - origin) / candidate.melody.ppq) * beatSeconds;
+      const duration = Math.max(0.035, (note.durationTicks / candidate.melody.ppq) * beatSeconds * 0.92);
+      const frequency = Tone.Frequency(note.midi, "midi").toFrequency();
+      candidateSynth.triggerAttackRelease(frequency, duration, start + offset, note.velocity);
+    }
+  }
+
+  function addCandidateToCorpus(candidate: MelodyExtractionCandidate) {
+    if (!selected) return;
+    const hash = melodyHash(candidate.melody);
+    const title = `${selected.score.name || selected.fileName} — ${candidate.trackName}`;
+    saveUserCorpusRecord({
+      melody: { ...candidate.melody, name: title },
+      entry: {
+        id: `imported_${selected.id}_track_${candidate.sourceTrackIndex}_${hash}`,
+        title,
+        genres: ["imported"],
+        sourceKind: "imported",
+        license: "User supplied — verify redistribution rights",
+        sourceHash: selected.id,
+        melodyId: candidate.melody.id,
+        melodyHash: hash,
+        extraction: {
+          method: "algorithm",
+          trackIndex: candidate.sourceTrackIndex,
+          extractorVersion: candidate.extractor.version
+        }
+      }
+    });
+    corpusMessage = `✓ ${candidate.trackName} ajouté au corpus`;
+  }
 
   type KindStat = { kind: MusicEvent["kind"]; count: number };
 
@@ -236,7 +283,6 @@
     return (parseInt(m[2], 10) + 1) * 12 + map[m[1]];
   }
 
-  /** A "piano roll" laid out as positioned div bars. We compute on-the-fly. */
   type Note = { time: number; duration: number; midi: number; kind: MusicEvent["kind"]; eventIndex: number };
 
   function flattenNotes(events: MusicEvent[]): Note[] {
@@ -339,6 +385,7 @@
                 </strong>
                 <span class="sub">
                   {midi.score.events.length} évts · {midi.score.duration.toFixed(1)} s
+                  {#if midi.melodyCandidates?.length} · {midi.melodyCandidates.length} candidats{/if}
                 </span>
                 {#if !midi.builtin}<span class="ts">{formatDate(midi.importedAt)}</span>{/if}
               </button>
@@ -361,6 +408,42 @@
             {selected.score.events.length} événements · {selected.score.tracks?.length ?? 0} pistes · {selected.score.duration.toFixed(2)} s
           </p>
         </div>
+
+        <section class="analysis-block extraction-block">
+          <div class="extraction-title">
+            <div>
+              <h3>Extraction de mélodie</h3>
+              <p>Les candidats sont calculés avant compactage du MIDI. Une piste polyphonique utilise une skyline explicite et versionnée.</p>
+            </div>
+            <button on:click={() => navigate("corpus")}>Ouvrir le corpus →</button>
+          </div>
+          {#if selected.melodyCandidates?.length}
+            <div class="candidate-list">
+              {#each selected.melodyCandidates.slice(0, 8) as candidate, rank}
+                <article class="candidate-card">
+                  <div class="candidate-rank">#{rank + 1}</div>
+                  <div class="candidate-main">
+                    <strong>{candidate.trackName}</strong>
+                    <span>
+                      confiance {Math.round(candidate.metrics.confidence * 100)}%
+                      · monophonie {Math.round(candidate.metrics.monophonyRatio * 100)}%
+                      · {candidate.metrics.extractedNotes} notes
+                      · ambitus {candidate.metrics.pitchRange} st
+                    </span>
+                    <small>{candidate.extractor.id} v{candidate.extractor.version} · track {candidate.sourceTrackIndex + 1}</small>
+                  </div>
+                  <div class="candidate-actions">
+                    <button on:click={() => playCandidate(candidate)}>▶ Isoler</button>
+                    <button class="candidate-add" on:click={() => addCandidateToCorpus(candidate)}>+ Corpus</button>
+                  </div>
+                </article>
+              {/each}
+            </div>
+          {:else}
+            <p class="empty">Aucun candidat mélodique compact n’est disponible pour ce MIDI. Les anciens imports déjà compactés peuvent devoir être réimportés.</p>
+          {/if}
+          {#if corpusMessage}<p class="corpus-message">{corpusMessage}</p>{/if}
+        </section>
 
         <section class="analysis-block">
           <h3>Analyse</h3>
@@ -464,3 +547,20 @@
 
   <button class="back" on:click={() => navigate("home")}>{t("studio_back_to_home")}</button>
 </section>
+
+<style>
+  .extraction-block { margin-bottom: 1rem; }
+  .extraction-title { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+  .extraction-title h3 { margin-bottom:.25rem; }
+  .extraction-title p { margin:0; color:#92948b; max-width:720px; font-size:.88rem; line-height:1.45; }
+  .candidate-list { display:grid; gap:.55rem; margin-top:.9rem; }
+  .candidate-card { display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:.7rem; align-items:center; padding:.7rem; background:#20211d; border:1px solid #3c3d37; border-radius:.6rem; }
+  .candidate-rank { color:#f0d477; font-weight:800; }
+  .candidate-main strong, .candidate-main span, .candidate-main small { display:block; }
+  .candidate-main span { color:#b4b5ad; font-size:.84rem; margin-top:.18rem; }
+  .candidate-main small { color:#71736b; margin-top:.15rem; }
+  .candidate-actions { display:flex; gap:.4rem; flex-wrap:wrap; justify-content:flex-end; }
+  .candidate-add { border-color:#8ff0d255; color:#bff5e5; }
+  .corpus-message { margin:.7rem 0 0; color:#8ff0d2; }
+  @media (max-width: 760px) { .candidate-card{grid-template-columns:28px 1fr}.candidate-actions{grid-column:2;justify-content:flex-start}.extraction-title{display:block}.extraction-title button{margin-top:.65rem} }
+</style>

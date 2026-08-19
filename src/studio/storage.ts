@@ -1,5 +1,6 @@
 import type { IslandScene, MusicScore } from "../core/types";
 import { parseIslandScene } from "../data/schema";
+import { extractMelodyCandidates, type MelodyExtractionCandidate } from "../melody/extraction/extractor";
 
 const STORAGE_KEY = "museeka.studio.scene.v1";
 const MIDI_KEY = "museeka.studio.midiCatalog.v1";
@@ -9,6 +10,7 @@ export type StoredMidi = {
   fileName: string;
   importedAt: number;
   score: MusicScore;
+  melodyCandidates?: MelodyExtractionCandidate[];
   /** When true, the MIDI is part of the default catalogue shipped with the
    * app (loaded from /data/midi/*). Such items can't be deleted by the user. */
   builtin?: boolean;
@@ -31,13 +33,16 @@ export function listMidis(): StoredMidi[] {
   try {
     const parsed = JSON.parse(raw) as StoredMidi[];
     if (!Array.isArray(parsed)) return [];
-    // Auto-migrate: strip the bloated `tracks` field from any legacy entry
-    // and rewrite the catalogue compacted (so quota errors don't keep firing).
+    // Auto-migrate legacy entries that still contain raw tracks: extract the
+    // compact melody candidates first, then strip the bulky tracks field.
     let needsRewrite = false;
     const compact = parsed.map((m) => {
       if (m.score && (m.score as { tracks?: unknown }).tracks) {
         needsRewrite = true;
-        return { ...m, score: trimScoreForStorage(m.score) };
+        const melodyCandidates = m.melodyCandidates?.length
+          ? m.melodyCandidates
+          : extractMelodyCandidates(m.score, m.id);
+        return { ...m, melodyCandidates, score: trimScoreForStorage(m.score) };
       }
       return m;
     });
@@ -55,10 +60,9 @@ export function listMidis(): StoredMidi[] {
 }
 
 /**
- * Strip the redundant raw `tracks` field before persisting. `events` already
- * contains everything the editor and the generator need; tracks doubles the
- * size of the JSON for nothing in our use case. This drastically reduces
- * the chance of hitting the localStorage quota.
+ * Strip the redundant raw `tracks` field before persisting. The Melody Lab
+ * stores compact extraction candidates separately, so detailed note attacks
+ * needed for melody research survive without retaining every raw track field.
  */
 function trimScoreForStorage(score: MusicScore): MusicScore {
   const { tracks: _tracks, ...rest } = score;
@@ -124,6 +128,7 @@ export async function fetchBuiltinMidis(): Promise<StoredMidi[]> {
         fileName: entry.fileName,
         importedAt: 0,
         score,
+        melodyCandidates: extractMelodyCandidates(score, entry.id),
         builtin: true
       } satisfies StoredMidi;
     })
