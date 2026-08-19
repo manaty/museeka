@@ -6,6 +6,7 @@
   import MidiEditor from "./pages/MidiEditor.svelte";
   import MelodyLab from "./pages/MelodyLab.svelte";
   import CorpusBrowser from "./pages/CorpusBrowser.svelte";
+  import CloudSync from "./pages/CloudSync.svelte";
   import SceneEditor from "./pages/SceneEditor.svelte";
   import InstrumentsEditor from "./pages/InstrumentsEditor.svelte";
   import ObjectsEditor from "./pages/ObjectsEditor.svelte";
@@ -28,6 +29,7 @@
     midi: MidiEditor,
     melody: MelodyLab,
     corpus: CorpusBrowser,
+    cloud: CloudSync,
     scene: SceneEditor,
     instruments: InstrumentsEditor,
     objects: ObjectsEditor,
@@ -40,6 +42,7 @@
     midi: "studio_midi_title",
     melody: "studio_melody_title",
     corpus: "studio_corpus_title",
+    cloud: "studio_cloud_title",
     scene: "studio_scene_title",
     instruments: "studio_instruments_title",
     objects: "studio_objects_title",
