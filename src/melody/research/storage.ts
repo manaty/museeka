@@ -1,4 +1,5 @@
 import type { MelodyAnnotation, PairwiseJudgment } from "./types";
+import { listUserCorpus } from "../corpus/storage";
 
 const ANNOTATION_KEY = "museeka.melody.annotations.v1";
 const PAIRWISE_KEY = "museeka.melody.pairwise.v1";
@@ -62,9 +63,10 @@ export function clearMelodyResearchData(): void {
 export function exportMelodyResearchData(): void {
   if (typeof window === "undefined") return;
   const data = {
-    schemaVersion: "1",
+    schemaVersion: "2",
     exportedAt: new Date().toISOString(),
     listenerId: getLocalListenerId(),
+    userCorpus: listUserCorpus(),
     annotations: listAnnotations(),
     pairwiseJudgments: listPairwiseJudgments()
   };
