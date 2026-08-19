@@ -13,4 +13,6 @@ Static 3D musical island for `museeka.com`. La musique émerge des rencontres en
 
 Le Melody Lab ajoute un domaine indépendant de la 3D pour éditer et analyser des mélodies, détecter des motifs, mener des expériences A/B et collecter localement des annotations de préférence, émotion et perception. Le build génère également des snapshots d'analyse compacts et versionnés pour le corpus.
 
+L'import MIDI calcule désormais des candidats mélodiques compacts avant suppression des pistes brutes : l'utilisateur peut écouter chaque candidat isolément, choisir la ligne pertinente et l'ajouter au corpus avec la version exacte de l'extracteur.
+
 La démo utilise du matériel musical traditionnel (domaine public) et des samples d'instruments. Voir `public/audio/ATTRIBUTION.md`.
