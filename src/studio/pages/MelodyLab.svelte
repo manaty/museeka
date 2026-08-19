@@ -194,7 +194,7 @@
       <div class="step-row">
         <span></span>
         {#each STEPS as step}
-          <span class:beat-number={step % 2 === 0}>{step % 2 === 0 ? step / 2 + 1 : "·"}</span>
+          <span class:beatNumber={step % 2 === 0}>{step % 2 === 0 ? step / 2 + 1 : "·"}</span>
         {/each}
       </div>
     </div>
@@ -244,14 +244,14 @@
     <div class="ab-grid">
       <article>
         <h3>{copy.current}</h3>
-        <strong>{analysis.attacks} attacks</strong>
-        <span>{pct(analysis.pitchChangeRatio)} pitch-change ratio</span>
+        <strong>{analysis.attacks} {copy.attacks.toLowerCase()}</strong>
+        <span>{pct(analysis.pitchChangeRatio)} · {copy.changeRatio.toLowerCase()}</span>
         <button class="primary" on:click={() => play(melody)}>{copy.play}</button>
       </article>
       <article>
         <h3>{copy.sustained}</h3>
-        <strong>{sustainedAnalysis.attacks} attacks</strong>
-        <span>{pct(sustainedAnalysis.pitchChangeRatio)} pitch-change ratio</span>
+        <strong>{sustainedAnalysis.attacks} {copy.attacks.toLowerCase()}</strong>
+        <span>{pct(sustainedAnalysis.pitchChangeRatio)} · {copy.changeRatio.toLowerCase()}</span>
         <button on:click={() => play(sustainedMelody)}>{copy.playSustained}</button>
       </article>
     </div>
@@ -278,7 +278,7 @@
   .cell.beat { border-left-color: #44453e; }
   .cell.active { background: #f0d477; box-shadow: inset 0 0 0 2px #151613; }
   .step-row span { color: #73756d; text-align: center; font: 11px/22px ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .step-row .beat-number { color: #c6c5ba; }
+  .step-row .beatNumber { color: #c6c5ba; }
   .sequence-card, .panel, .experiment { border: 1px solid #383934; background: #1a1b18; border-radius: .8rem; }
   .sequence-card { margin-top: 1rem; padding: 1rem 1.1rem; display: flex; gap: 1rem; align-items: baseline; overflow-x: auto; }
   .eyebrow { color: #f0d477; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 800; }
