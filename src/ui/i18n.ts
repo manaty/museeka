@@ -19,7 +19,7 @@ const STRINGS = {
 
   // Studio shell
   studio_title:               { fr: "Museeka Studio",                                              en: "Museeka Studio" },
-  studio_subtitle:            { fr: "Six outils pour analyser, composer et spatialiser la musique", en: "Six tools to analyze, compose, and spatialize music" },
+  studio_subtitle:            { fr: "Sept outils pour analyser, composer et spatialiser la musique", en: "Seven tools to analyze, compose, and spatialize music" },
   studio_back_to_home:        { fr: "← Retour à l'accueil",                                       en: "← Back to home" },
   studio_legacy_link:         { fr: "Ouvrir le Studio classique →",                               en: "Open the classic Studio →" },
   studio_coming_soon:         { fr: "Bientôt",                                                    en: "Coming soon" },
@@ -32,6 +32,9 @@ const STRINGS = {
 
   studio_melody_title:        { fr: "Melody Lab",                                                 en: "Melody Lab" },
   studio_melody_desc:         { fr: "Créer, comparer et mesurer la structure perceptive des mélodies.", en: "Create, compare, and measure the perceptual structure of melodies." },
+
+  studio_corpus_title:        { fr: "Corpus & goûts",                                             en: "Corpus & taste" },
+  studio_corpus_desc:         { fr: "Écouter le corpus, noter préférence et émotions, puis constituer les données d’apprentissage.", en: "Listen to the corpus, rate preference and emotion, and build the learning dataset." },
 
   studio_scene_title:         { fr: "Scène",                                                      en: "Scene" },
   studio_scene_desc:          { fr: "Sculpter la forme et le terrain de ton île.",                en: "Sculpt the shape and terrain of your island." },
