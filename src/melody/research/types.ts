@@ -44,7 +44,28 @@ export type AnalysisSnapshot = {
   };
 };
 
+/**
+ * What the listener actually hears in an experiment. A stimulus is distinct
+ * from the underlying melody so arrangement/register/tempo do not become
+ * invisible confounders in preference data.
+ */
+export type MelodyStimulus = {
+  id: string;
+  melodyId: string;
+  melodyHash: string;
+  transformId?: string;
+  renderingProfile: {
+    mode: "structural-normalized" | "contextual";
+    instrument: string;
+    tempo: number;
+    transposeSemitones?: number;
+    velocityScale?: number;
+    harmonyId?: string;
+  };
+};
+
 export type MelodyAnnotation = {
+  stimulusId: string;
   melodyId: string;
   analysisVersion?: string;
   listenerId: string;
@@ -67,8 +88,8 @@ export type MelodyAnnotation = {
 
 export type PairwiseJudgment = {
   listenerId: string;
-  leftMelodyId: string;
-  rightMelodyId: string;
+  leftStimulusId: string;
+  rightStimulusId: string;
   changedVariables: string[];
   preference: "left" | "right" | "equal";
   confidence?: number;
